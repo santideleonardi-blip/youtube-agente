@@ -46,7 +46,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: models
-          key: kokoro-v1.0
+          key: models-v2
 
       - name: Descargar modelo de voz si falta
         run: |
@@ -54,6 +54,9 @@ jobs:
           base=https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0
           [ -f models/kokoro-v1.0.onnx ] || curl -sSL -o models/kokoro-v1.0.onnx $base/kokoro-v1.0.onnx
           [ -f models/voices-v1.0.bin ] || curl -sSL -o models/voices-v1.0.bin $base/voices-v1.0.bin
+          [ -f models/depth_anything_v2_small.onnx ] || curl -sSL -o models/depth_anything_v2_small.onnx \
+            https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx || true
+          ls -la models
 
       - name: Correr los agentes
         env:
@@ -62,6 +65,8 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'private' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           FORCE_FORMAT: ${{ inputs.format }}

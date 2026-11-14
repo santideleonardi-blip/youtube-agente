@@ -143,10 +143,55 @@ def _fallback_image(path, w, h, seed):
 _IMG_FAILS = 0
 
 
+def _cloudflare_image(prompt, path, w, h, seed):
+    """FLUX en Cloudflare Workers AI (plan gratis: ~10.000 'neurons' por día, sin marca de agua)."""
+    acc, tok = os.getenv("CF_ACCOUNT_ID"), os.getenv("CF_API_TOKEN")
+    if not (acc and tok):
+        return None
+    import base64
+
+    base = f"https://api.cloudflare.com/client/v4/accounts/{acc}/ai/run/"
+    headers = {"Authorization": f"Bearer {tok}"}
+    gw, gh = (768, 1344) if h > w else (1344, 768)
+    attempts = [
+        # FLUX.2 klein (mejor calidad, acepta proporción vertical) — formato multipart
+        ("@cf/black-forest-labs/flux-2-klein-4b", dict(files={
+            "prompt": (None, prompt), "width": (None, str(gw)), "height": (None, str(gh)),
+            "seed": (None, str(seed % 2_000_000_000))})),
+        # FLUX.1 schnell (respaldo, imagen cuadrada) — formato JSON
+        ("@cf/black-forest-labs/flux-1-schnell", dict(json={"prompt": prompt, "steps": 8,
+                                                            "seed": seed % 2_000_000_000})),
+    ]
+    for model, kwargs in attempts:
+        if model in _CF_BAD:
+            continue
+        try:
+            r = requests.post(base + model, headers=headers, timeout=120, **kwargs)
+            data = r.json() if "json" in r.headers.get("content-type", "") else {}
+            img_b64 = (data.get("result") or {}).get("image")
+            if r.ok and img_b64:
+                with open(path, "wb") as f:
+                    f.write(base64.b64decode(img_b64))
+                Image.open(path).convert("RGB").save(path, "PNG")
+                print(f"[animador] imagen OK ({model.split('/')[-1]})")
+                return path
+            print(f"[animador] Cloudflare {model.split('/')[-1]} HTTP {r.status_code}: {str(data)[:200]}")
+            if r.status_code in (400, 404, 422):
+                _CF_BAD.add(model)  # formato/modelo no soportado: no reintentar en esta corrida
+        except Exception as e:  # noqa: BLE001
+            print(f"[animador] Cloudflare {model} falló: {e}")
+    return None
+
+
+_CF_BAD = set()
+
+
 def image(prompt, path, w, h, seed):
     if MOCK_IMAGES:
         return _fallback_image(path, w, h, seed)
     full = f"{prompt}, {config.IMAGE_STYLE}"
+    if _cloudflare_image(full, path, w, h, seed):
+        return path
     # Pollinations limita el tamaño: pedimos ~1MP con la proporción correcta y después escalamos.
     gw, gh = (768, 1344) if h > w else (1344, 768)
     url = (
@@ -188,10 +233,10 @@ def image(prompt, path, w, h, seed):
 
 
 def _cover(path, w, h):
-    """Recorta/escala la imagen al doble del tamaño final (margen para el zoom suave)."""
+    """Recorta/escala la imagen a 1.3x el tamaño final (margen para la cámara virtual)."""
     img = Image.open(path).convert("RGB")
     img = img.crop((0, 0, img.width, int(img.height * 0.93)))  # saca la marca de agua de abajo
-    tw, th = w * 2, h * 2
+    tw, th = int(w * 1.3), int(h * 1.3)
     scale = max(tw / img.width, th / img.height)
     img = img.resize((int(img.width * scale) + 1, int(img.height * scale) + 1), Image.LANCZOS)
     left, top = (img.width - tw) // 2, (img.height - th) // 2
@@ -199,36 +244,22 @@ def _cover(path, w, h):
 
 
 # ---------------- Escenas ----------------
-MOTIONS = [
-    # (zoom, x, y) expresiones de zoompan — se alternan para que no se vea repetitivo
-    ("min(zoom+0.0009,1.18)", "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"),                 # zoom in centro
-    ("if(eq(on,0),1.18,max(zoom-0.0009,1.0))", "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"),  # zoom out
-    ("1.12", "(iw-iw/zoom)*on/{f}", "ih/2-(ih/zoom/2)"),                                # paneo der
-    ("1.12", "(iw-iw/zoom)*(1-on/{f})", "ih/2-(ih/zoom/2)"),                            # paneo izq
-    ("min(zoom+0.0007,1.15)", "iw/2-(iw/zoom/2)", "(ih-ih/zoom)*0.3"),                 # zoom arriba
-    ("min(1.35+on*0.0008,1.45)", "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"),              # primer plano
-    ("1.3", "(iw-iw/zoom)*0.15", "(ih-ih/zoom)*(0.2+0.3*on/{f})"),                    # detalle izq bajando
-    ("min(1.25+on*0.0006,1.35)", "(iw-iw/zoom)*0.85", "(ih-ih/zoom)*0.4"),             # detalle der
-]
-
-
-def _shot(img, out, w, h, dur, motion_idx):
-    frames = int(dur * config.FPS) + 1
-    z, x, y = MOTIONS[motion_idx % len(MOTIONS)]
-    x, y = x.format(f=frames), y.format(f=frames)
-    vf = f"zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={w}x{h}:fps={config.FPS},format=yuv420p"
-    _run(["ffmpeg", "-y", "-loop", "1", "-i", img, "-vf", vf, "-t", f"{dur:.3f}",
-          "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-r", str(config.FPS), "-an", out])
 
 
 def _scene_clip(img, audio, out, w, h, dur, idx):
-    """Una escena = varias tomas cortas (cortes cada ~2.5 s) sobre la misma ilustración, para dar ritmo."""
+    """Una escena = varias tomas cortas (cortes cada ~2.5 s) con cámara 2.5D sobre la misma ilustración."""
+    import cv2
+
+    from agents import parallax
+
     shot_len = 2.5 if h > w else 4.0
     n = max(1, round(dur / shot_len))
+    src = cv2.imread(img)
+    depth = parallax.depth_map(src)
     shots = []
     for k in range(n):
         sp = out[:-4] + f"_k{k}.mp4"
-        _shot(img, sp, w, h, dur / n, idx * 3 + k)
+        parallax.render_shot(src, depth, sp, w, h, dur / n, idx * 3 + k)
         shots.append(sp)
     lst = out[:-4] + "_list.txt"
     with open(lst, "w") as f:
