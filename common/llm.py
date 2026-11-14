@@ -13,11 +13,13 @@ def _get_client():
     global _client
     if _client is None:
         from google import genai
+        from google.genai import types
 
         key = os.environ.get("GEMINI_API_KEY")
         if not key:
             raise RuntimeError("Falta la variable GEMINI_API_KEY")
-        _client = genai.Client(api_key=key)
+        # timeout de 2 minutos por consulta (en ms) para que nunca se quede colgado
+        _client = genai.Client(api_key=key, http_options=types.HttpOptions(timeout=120_000))
     return _client
 
 
@@ -89,6 +91,11 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                 print(f"[llm] {model} intento {attempt + 1} falló: {msg[:200]}")
                 if "404" in msg or "not found" in msg.lower():
                     break  # el modelo no existe: pasar al siguiente
+                if "503" in msg or "UNAVAILABLE" in msg or "disconnected" in msg.lower() or "timed out" in msg.lower():
+                    if attempt >= 1:
+                        break  # modelo saturado: probar el siguiente
+                    time.sleep(8)
+                    continue
                 if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
                     if attempt >= 1:
                         break  # cupo agotado en este modelo: probar el siguiente
