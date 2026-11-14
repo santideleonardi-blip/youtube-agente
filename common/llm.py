@@ -30,11 +30,44 @@ def _extract_json(text: str):
     return json.loads(text[start:])
 
 
+_models = None
+
+
+def _version(name):
+    m = re.search(r"gemini-(\d+(?:\.\d+)?)", name)
+    return float(m.group(1)) if m else 0.0
+
+
+def _available_models():
+    """Detecta los modelos Flash disponibles para esta clave (los nombres cambian seguido)."""
+    global _models
+    if _models is not None:
+        return _models
+    found = []
+    try:
+        for m in _get_client().models.list():
+            name = m.name.replace("models/", "")
+            actions = getattr(m, "supported_actions", None) or []
+            if actions and "generateContent" not in actions:
+                continue
+            if "flash" not in name or any(x in name for x in ("image", "tts", "live", "audio", "embed", "thinking-exp")):
+                continue
+            found.append(name)
+    except Exception as e:  # noqa: BLE001
+        print(f"[llm] no pude listar modelos: {e}")
+    # Primero los Flash más nuevos (no "lite"), después los "lite" como respaldo; estables antes que preview.
+    found.sort(key=lambda n: ("lite" in n, "preview" in n or "exp" in n, -_version(n)))
+    preferred = [config.GEMINI_MODEL] if os.getenv("GEMINI_MODEL") else []
+    _models = list(dict.fromkeys(preferred + found[:6] + config.GEMINI_FALLBACK_MODELS))
+    print(f"[llm] modelos a usar: {_models[:4]}")
+    return _models
+
+
 def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
-    """Pide una respuesta JSON. Prueba el modelo principal y luego los de respaldo."""
+    """Pide una respuesta JSON. Prueba el mejor modelo disponible y luego los de respaldo."""
     from google.genai import types
 
-    models = [config.GEMINI_MODEL] + [m for m in config.GEMINI_FALLBACK_MODELS if m != config.GEMINI_MODEL]
+    models = _available_models()
     last_err = None
     for model in models:
         for attempt in range(3):

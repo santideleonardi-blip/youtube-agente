@@ -19,7 +19,8 @@ TREND_QUERIES = [
 
 # ---------- Modelos / herramientas gratuitas ----------
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
-GEMINI_FALLBACK_MODELS = ["gemini-flash-lite-latest", "gemini-2.5-flash", "gemini-2.5-flash-lite"]
+# Se detectan solos los modelos disponibles; estos son solo respaldo si falla la detección.
+GEMINI_FALLBACK_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]
 TTS_VOICE = os.getenv("TTS_VOICE", "en-US-AndrewNeural")
 TTS_RATE = os.getenv("TTS_RATE", "+8%")
 
