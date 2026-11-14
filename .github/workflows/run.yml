@@ -2,10 +2,13 @@ name: Producir y subir video
 
 on:
   schedule:
-    # Producción 2 veces por día (UTC): 11:07 y 18:07 UTC = 08:07 y 15:07 en Argentina.
+    # 4 turnos por día (UTC): 11:07, 14:07, 18:07 y 22:07 UTC = 08:07, 11:07, 15:07 y 19:07 en Argentina.
+    # El agente Estratega decide cuántos se usan (1 a 4 videos por día); los demás salen al instante.
     # La PUBLICACIÓN no es a esta hora: el video queda programado para el mejor horario de EE.UU.
     - cron: "7 11 * * *"
+    - cron: "7 14 * * *"
     - cron: "7 18 * * *"
+    - cron: "7 22 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

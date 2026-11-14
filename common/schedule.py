@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 ET = ZoneInfo("America/New_York")
 CANDIDATE_HOURS_ET = [11, 13, 15, 17, 19, 21]
 DEFAULT_SLOTS_ET = [15, 19]      # 3 PM y 7 PM ET: tarde y prime time en EE.UU.
+SLOT_PRIORITY_ET = [15, 19, 17, 13, 21, 11]  # orden en que se suman horarios cuando sube la cadencia
 MIN_REVIEW_HOURS = 3             # tiempo mínimo para que puedas revisar antes de que salga
 
 
@@ -29,7 +30,9 @@ def next_publish_time(state, now=None):
 
 
 def best_slots(state):
-    """Elige 2 horarios según las vistas promedio de los videos ya publicados en cada horario."""
+    """Elige tantos horarios como videos por día decidió el estratega, según las vistas promedio
+    de los videos ya publicados en cada horario (probando uno nuevo de vez en cuando)."""
+    n = max(1, min(len(CANDIDATE_HOURS_ET), int((state.get("strategy") or {}).get("daily_target", 2))))
     perf = {}
     for v in state.get("videos", []):
         h = v.get("publish_hour_et")
@@ -41,10 +44,17 @@ def best_slots(state):
     if len(avg) < 2:
         ranked = list(current)
     else:
-        ranked = sorted(avg, key=avg.get, reverse=True)[:2]
+        ranked = sorted(avg, key=avg.get, reverse=True)
+    # completar (o recortar) hasta n horarios
+    for h in list(current) + SLOT_PRIORITY_ET:
+        if len(ranked) >= n:
+            break
+        if h not in ranked:
+            ranked.append(h)
+    ranked = ranked[:n]
     # exploración: cada 6 videos prueba un horario que todavía no tiene datos suficientes
-    n = len([v for v in state.get("videos", []) if v.get("youtube_id")])
+    total = len([v for v in state.get("videos", []) if v.get("youtube_id")])
     untested = [h for h in CANDIDATE_HOURS_ET if h not in avg and h not in ranked]
-    if untested and n and n % 6 == 0:
-        ranked = [ranked[0], untested[0]]
+    if untested and total and total % 6 == 0 and len(ranked) >= 2:
+        ranked = ranked[:-1] + [untested[0]]
     return sorted(ranked), avg

@@ -1,10 +1,13 @@
 # youtube-agente 🤖🎬
 
-Canal de YouTube automatizado con 5 agentes de IA. Nicho: **What If...?** (ciencia e historia, en inglés).
-Corre gratis en GitHub Actions, 2 veces por día.
+Canal de YouTube automatizado con 6 agentes de IA. Nicho: **What If...?** (ciencia e historia, en inglés).
+Corre gratis en GitHub Actions, en hasta 4 turnos por día (el Estratega decide cuántos se usan).
+
+📈 **Progreso del canal y camino a la monetización:** [`data/growth_report.md`](data/growth_report.md) (se actualiza solo una vez por día).
 
 | Agente | Archivo | Qué hace |
 |---|---|---|
+| 6. Estratega | `agents/strategist.py` | Una vez por día mide el canal y el avance hacia la monetización, decide cuántos videos por día (1 a 4, sube o baja de a 1 por semana según si las vistas por video aguantan), qué proporción de largos, y deja notas de foco y un experimento semanal |
 | 5. Analista | `agents/analyst.py` | Lee la retención de cada video, detecta dónde se va la gente, deja notas al guionista y decide si el próximo es Short o largo |
 | 1. Investigador | `agents/trends.py` | Busca lo que más vistas por hora saca en el nicho y elige un tema nuevo |
 | 2. Guionista | `agents/scriptwriter.py` | Escribe el guion escena por escena siguiendo las notas del analista |

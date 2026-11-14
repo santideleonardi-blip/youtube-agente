@@ -61,6 +61,27 @@ def _stats(ids):
     return {i["id"]: i["statistics"] for i in res.get("items", [])}
 
 
+def _enforce_mix(state, fmt, long_share, now):
+    """Mantiene la proporción de largos que pidió el estratega y como mucho 1 largo por día
+    (tardan mucho en renderizar y gastan el cupo diario de imágenes)."""
+    arg = dt.timezone(dt.timedelta(hours=-3))
+    today = now.astimezone(arg).date()
+    vids = [v for v in state["videos"] if v.get("youtube_id")]
+    long_today = any(v["format"] == "long" and dt.datetime.fromisoformat(v["uploaded_at"]).astimezone(arg).date() == today
+                     for v in vids)
+    if long_today:
+        return "short"
+    last = vids[-9:]
+    if len(last) >= 3:
+        actual = sum(v["format"] == "long" for v in last) / len(last)
+        if actual < long_share - 0.15:
+            print(f"[analista] pocos largos últimamente ({actual:.0%} vs objetivo {long_share:.0%}) -> largo")
+            return "long"
+        if actual > long_share + 0.15:
+            return "short"
+    return fmt
+
+
 def run(state):
     now = dt.datetime.now(dt.timezone.utc)
     uploaded = [v for v in state["videos"] if v.get("youtube_id")]
@@ -107,7 +128,10 @@ def run(state):
         print(f"[analista] horarios de publicación (ET): {slots} — vistas promedio por horario: {slot_avg}")
     state["publish_slots_et"] = slots
 
-    recent = [{"title": v["title"], "format": v["format"], "views": v.get("views", 0)} for v in uploaded[-12:]]
+    recent = [{"title": v["title"], "format": v["format"], "views": v.get("views", 0),
+               "avg_view_pct": v.get("avg_view_pct"), "subs_gained": v.get("subs_gained")} for v in uploaded[-12:]]
+    strat = state.get("strategy") or {}
+    long_share = float(strat.get("long_share", 0.33))
     decision = llm.ask_json(
         f"""You are the data analyst of a faceless YouTube channel.
 Channel niche: What If...? science & history hypotheticals (English, animated).
@@ -128,8 +152,8 @@ Tasks:
    Keep the useful previous insights unless the data contradicts them.
    Previous insights: {state.get("topic_insights", [])}
 3. Decide the format of the NEXT video: "short" or "long".
-   Rules: a new channel (<10 videos) should be mostly shorts, with a long video roughly every 3rd upload.
-   Later, favour the format with better views but keep at least 25% of the other format to keep testing.
+   The growth strategist set the target mix: about {long_share:.0%} long videos ({strat.get("long_share_reason", "default mix")}).
+   Follow that mix; deviate only if the data clearly says so.
 
 Return JSON: {{"notes": ["..."], "topic_insights": ["..."], "next_format": "short"|"long", "reason": "..."}}""",
         temperature=0.4,
@@ -139,6 +163,7 @@ Return JSON: {{"notes": ["..."], "topic_insights": ["..."], "next_format": "shor
     fmt = decision.get("next_format", "short")
     if fmt not in ("short", "long"):
         fmt = "short"
+    fmt = _enforce_mix(state, fmt, long_share, now)
     state["feedback"] = (state.get("feedback", []) + [{
         "date": now.isoformat(), "notes": decision.get("notes", []), "reason": decision.get("reason", "")
     }])[-20:]

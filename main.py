@@ -1,6 +1,9 @@
-"""Orquestador: corre los 5 agentes en cadena para producir y subir UN video.
+"""Orquestador: corre los agentes en cadena para producir y subir UN video.
 
-Orden: Analista (formato + notas) -> Investigador (tema) -> Guionista -> Animador -> Publicador
+Orden: Estratega (1 vez por día: cuántos videos por día y qué mezcla) -> Analista (formato + notas)
+       -> Investigador (tema) -> Guionista -> Animador -> Publicador
+
+El workflow se dispara en 4 turnos por día; el estratega decide cuántos se usan (1 a 4).
 """
 import datetime as dt
 import os
@@ -8,16 +11,48 @@ import sys
 import time
 import traceback
 
-from agents import analyst, animator, publisher, scriptwriter, trends
+from agents import analyst, animator, publisher, scriptwriter, strategist, trends
 from common import schedule
 from common import state as st
+
+
+ARG = dt.timezone(dt.timedelta(hours=-3))
+# Turnos de producción (hora Argentina) en el orden en que se van habilitando al subir la cadencia.
+# Tienen que coincidir con los cron de .github/workflows/run.yml (08:07, 11:07, 15:07, 19:07 ARG).
+TURNS_ARG = [8, 15, 11, 19]
+
+
+def should_produce(state, now=None):
+    """¿Le toca producir a este turno? Usa los primeros N turnos del día (N = videos/día del estratega)
+    y, si un turno anterior falló, el siguiente lo recupera."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    local = now.astimezone(ARG)
+    target = int((state.get("strategy") or {}).get("daily_target", 2))
+    allowed = sorted(TURNS_ARG[:target])
+    passed = [h for h in allowed if h <= local.hour]
+    done_today = len([v for v in state["videos"] if v.get("youtube_id")
+                      and dt.datetime.fromisoformat(v["uploaded_at"]).astimezone(ARG).date() == local.date()])
+    ok = done_today < len(passed)
+    print(f"[turno] {local:%H:%M} ARG — objetivo {target}/día, hechos hoy {done_today}, "
+          f"turnos habilitados {allowed} -> {'produzco' if ok else 'no toca, salgo'}")
+    return ok
 
 
 def main():
     state = st.load()
     job_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d_%H%M%S")
-    print(f"=== Nuevo video {job_id} ===")
+    manual = os.getenv("GITHUB_EVENT_NAME") == "workflow_dispatch" or os.getenv("DRY_RUN") == "1"
 
+    try:
+        strat = strategist.run(state)
+    except Exception as e:  # noqa: BLE001
+        print(f"[estratega] falló, sigo con el plan anterior: {e}")
+        strat = state.get("strategy") or {}
+    st.save(state)
+    if not manual and not should_produce(state):
+        return
+
+    print(f"=== Nuevo video {job_id} ===")
     forced = os.getenv("FORCE_FORMAT")
     try:
         decision = analyst.run(state)
@@ -26,11 +61,24 @@ def main():
         decision = {"format": "short", "notes": [], "topic_insights": state.get("topic_insights", [])}
     fmt = forced if forced in ("short", "long") else decision["format"]
     st.save(state)
+    focus = [f"[growth strategy] {n}" for n in strat.get("focus_notes", [])]
+    if strat.get("experiment"):
+        focus.append(f"[experiment this week] {strat['experiment']}")
+    notes = list(decision["notes"]) + focus
 
-    topic = trends.run(state, fmt, decision["notes"], decision.get("topic_insights"))
-    script = scriptwriter.run(topic, fmt, decision["notes"], state.get("feedback", []))
-    render = animator.run(script, fmt, job_id)
-    pub = publisher.run(topic, script, render, fmt, state, job_id)
+    try:
+        topic = trends.run(state, fmt, notes, decision.get("topic_insights"))
+        script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
+        render = animator.run(script, fmt, job_id)
+        pub = publisher.run(topic, script, render, fmt, state, job_id)
+    except Exception:
+        if not manual:
+            state["failures"] = (state.get("failures", []) + [dt.datetime.now(dt.timezone.utc).isoformat()])[-20:]
+            st.save(state)
+        raise
+    if not pub.get("youtube_id"):
+        print("=== Listo (prueba, no se subió) ===")
+        return
 
     state["videos"].append({
         "job_id": job_id,
