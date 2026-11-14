@@ -8,6 +8,7 @@ import asyncio
 import json
 import os
 import random
+import re
 import shutil
 import subprocess
 import time
@@ -158,7 +159,8 @@ def image(prompt, path, w, h, seed):
     headers = {}
     if os.getenv("POLLINATIONS_TOKEN"):
         headers["Authorization"] = f"Bearer {os.environ['POLLINATIONS_TOKEN']}"
-    for attempt in range(2):
+    attempt = 0
+    while attempt < 3:
         try:
             t0 = time.time()
             r = requests.get(url, timeout=90, headers=headers)
@@ -168,9 +170,17 @@ def image(prompt, path, w, h, seed):
                 Image.open(path).convert("RGB").save(path, "PNG")
                 print(f"[animador] imagen OK en {time.time() - t0:.0f}s")
                 return path
+            if r.status_code in (402, 429):
+                # Límite gratuito (1 imagen cada ~45 s): esperar lo que pide y reintentar sin contar como fallo
+                m = re.search(r"[Rr]etry after (\d+)", r.text)
+                wait = int(m.group(1)) + 2 if m else 46
+                print(f"[animador] límite gratuito de imágenes, espero {wait}s")
+                time.sleep(wait)
+                continue
             print(f"[animador] imagen HTTP {r.status_code}: {r.text[:200]}")
         except Exception as e:  # noqa: BLE001
             print(f"[animador] imagen intento {attempt + 1} falló: {e}")
+        attempt += 1
         time.sleep(5)
     _IMG_FAILS += 1
     print("[animador] uso imagen de respaldo")

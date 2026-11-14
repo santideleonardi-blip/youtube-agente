@@ -66,7 +66,8 @@ Our best performing videos so far: {[(v['title'], v['views']) for v in top] or "
 Topics we ALREADY covered (never repeat or closely rephrase these): {done or "none"}
 Analyst notes: {notes}
 
-Pick ONE topic with the highest viral potential for this format. Prefer topics that ride a current
+Pick ONE topic with the highest viral potential. Never copy another creator's exact title or
+premise word for word: if you take inspiration from a trending video, give it a clearly different twist for this format. Prefer topics that ride a current
 trend or are proven evergreen curiosities, and that can be explained visually. Avoid medical, financial
 or legal advice, real tragedies, gore or politics.
 
