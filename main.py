@@ -5,6 +5,7 @@ Orden: Analista (formato + notas) -> Investigador (tema) -> Guionista -> Animado
 import datetime as dt
 import os
 import sys
+import time
 import traceback
 
 from agents import analyst, animator, publisher, scriptwriter, trends

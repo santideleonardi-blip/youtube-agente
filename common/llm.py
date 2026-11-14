@@ -35,6 +35,28 @@ def _extract_json(text: str):
 _models = None
 
 
+def _with_timeout(fn, secs):
+    """Corre fn con un límite duro de tiempo (si la API se cuelga, no bloquea todo el sistema)."""
+    import threading
+
+    box = {}
+
+    def target():
+        try:
+            box["value"] = fn()
+        except BaseException as e:  # noqa: BLE001
+            box["error"] = e
+
+    th = threading.Thread(target=target, daemon=True)
+    th.start()
+    th.join(secs)
+    if th.is_alive():
+        raise TimeoutError(f"timed out after {secs}s")
+    if "error" in box:
+        raise box["error"]
+    return box["value"]
+
+
 def _version(name):
     m = re.search(r"gemini-(\d+(?:\.\d+)?)", name)
     return float(m.group(1)) if m else 0.0
@@ -47,7 +69,8 @@ def _available_models():
         return _models
     found = []
     try:
-        for m in _get_client().models.list():
+        listed = _with_timeout(lambda: list(_get_client().models.list()), 40)
+        for m in listed:
             name = m.name.replace("models/", "")
             actions = getattr(m, "supported_actions", None) or []
             if actions and "generateContent" not in actions:
@@ -74,15 +97,13 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
     for model in models:
         for attempt in range(3):
             try:
-                resp = _get_client().models.generate_content(
-                    model=model,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        system_instruction=system or None,
-                        temperature=temperature,
-                        response_mime_type="application/json",
-                    ),
+                cfg = types.GenerateContentConfig(
+                    system_instruction=system or None,
+                    temperature=temperature,
+                    response_mime_type="application/json",
                 )
+                resp = _with_timeout(lambda: _get_client().models.generate_content(
+                    model=model, contents=prompt, config=cfg), 150)
                 print(f"[llm] respuesta de {model}")
                 return _extract_json(resp.text)
             except Exception as e:  # noqa: BLE001

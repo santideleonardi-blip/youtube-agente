@@ -2,6 +2,8 @@
 import os
 
 from google.oauth2.credentials import Credentials
+import google_auth_httplib2
+import httplib2
 from googleapiclient.discovery import build
 
 SCOPES = [
@@ -31,9 +33,14 @@ def credentials():
     return _creds
 
 
+def _http():
+    # timeout de 5 minutos por request (las subidas van en partes de 8 MB)
+    return google_auth_httplib2.AuthorizedHttp(credentials(), http=httplib2.Http(timeout=300))
+
+
 def youtube():
-    return build("youtube", "v3", credentials=credentials(), cache_discovery=False)
+    return build("youtube", "v3", http=_http(), cache_discovery=False)
 
 
 def analytics():
-    return build("youtubeAnalytics", "v2", credentials=credentials(), cache_discovery=False)
+    return build("youtubeAnalytics", "v2", http=_http(), cache_discovery=False)

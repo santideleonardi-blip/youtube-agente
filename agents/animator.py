@@ -65,7 +65,7 @@ def tts(text, mp3_path):
         return [{"text": w, "start": i * step, "end": (i + 1) * step} for i, w in enumerate(text.split())]
     for attempt in range(4):
         try:
-            words = asyncio.run(_tts_async(text, mp3_path))
+            words = asyncio.run(asyncio.wait_for(_tts_async(text, mp3_path), timeout=120))
             if os.path.getsize(mp3_path) > 1000:
                 return words
         except Exception as e:  # noqa: BLE001

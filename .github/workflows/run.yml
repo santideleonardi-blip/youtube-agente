@@ -52,6 +52,7 @@ jobs:
           PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'private' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           FORCE_FORMAT: ${{ inputs.format }}
+        timeout-minutes: 60
         run: python -u main.py
 
       - name: Guardar el video como artifact (para revisarlo)
