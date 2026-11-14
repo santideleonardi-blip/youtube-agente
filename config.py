@@ -2,6 +2,7 @@
 import os
 
 # ---------- Canal ----------
+CHANNEL_NAME = "WhatWouldHappenIf?"
 NICHE = "What If...? — mind-blowing science & history hypotheticals"
 NICHE_DESCRIPTION = (
     "Animated explainers that answer fascinating hypothetical questions about science, "

@@ -29,7 +29,8 @@ Write packaging that maximises click-through WITHOUT lying about the content:
 - title: max 70 characters, curiosity-driven, usually starting with "What If" or a bold claim.
   {"Add #shorts at the end." if fmt == "short" else ""}
 - thumbnail_text: 2-4 punchy words in CAPS (complements the title, does not repeat it).
-- description: 2-3 engaging sentences + 3-5 relevant hashtags.
+- description: 2-3 engaging sentences, then "Subscribe to {config.CHANNEL_NAME} for a new mind-bending
+  hypothetical every day!", then 3-5 relevant hashtags.
 - tags: 10-15 SEO tags.
 
 Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "tags": ["..."]}}""",
