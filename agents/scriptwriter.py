@@ -66,28 +66,43 @@ def _words(script):
 
 
 def _expand(script, topic, fmt, wmin, wmax, smax):
-    words = _words(script)
+    """Amplía el guion por partes (de hasta 20 escenas): pedidos más chicos = el modelo respeta mejor el largo."""
+    scenes = script["scenes"]
     target = (wmin + wmax) // 2
-    out = llm.ask_json(
-        f"""This script for a {"YouTube Short" if fmt == "short" else "long-form YouTube video"} about
-"{topic['topic']}" is TOO SHORT: it has {words} words and needs {wmin}-{wmax} words (aim for {target}).
+    chunk = 20
+    parts = [scenes[i:i + chunk] for i in range(0, len(scenes), chunk)]
+    out_scenes = []
+    for n, part in enumerate(parts):
+        share = len(part) / len(scenes)
+        part_target = round(target * share)
+        part_words = sum(len(sc["narration"].split()) for sc in part)
+        per_scene = max(1, round(part_target / len(part)))
+        where = ("the BEGINNING" if n == 0 else "the END" if n == len(parts) - 1 else "the MIDDLE") if len(parts) > 1 else "the whole video"
+        res = llm.ask_json(
+            f"""You are expanding part {n + 1} of {len(parts)} ({where}) of a script for a
+{"YouTube Short" if fmt == "short" else "long-form YouTube video"} about "{topic['topic']}".
+This part has {part_words} words; it must have about {part_target} words (~{per_scene} words per scene).
 
-Rewrite it at full length. Keep the same hook, story arc, tone and ending, but go deeper: add more
-surprising facts, concrete numbers and comparisons, step-by-step consequences, mini open loops and
-light humour. Do NOT pad with filler or repeat yourself. Each existing scene should grow to roughly
-{max(1, round(target / max(len(script['scenes']), 1)))} words; you may add new scenes (max {smax} in total).
-Every scene keeps an "image_prompt" (ONE clear visual, no text; people = "Max, an adult explorer with
+Rewrite EACH scene longer, keeping its order, meaning and role in the story (keep the hook if this is
+the beginning, keep the ending if this is the end). Go deeper: surprising facts, concrete numbers and
+comparisons, step-by-step consequences, mini open loops, light humour. No filler, no repetition,
+no greetings, no "in this video". Keep the same number of scenes ({len(part)}).
+Each scene keeps its "image_prompt" (ONE clear visual, no text; people = "Max, an adult explorer with
 messy brown hair and an orange jumpsuit"; never children).
 
-Current script:
-{script['scenes']}
+Full video summary: {script.get('summary', '')}
+Scenes to expand:
+{part}
 
-Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}], "summary": "{script.get('summary', '')}"}}""",
-        temperature=0.7,
-    )
-    scenes = [sc for sc in out.get("scenes", []) if sc.get("narration")][:smax]
-    for sc in scenes:
-        sc.setdefault("image_prompt", sc["narration"])
-    if len(scenes) < 3:
-        raise RuntimeError("ampliación vacía")
-    return {"scenes": scenes, "summary": out.get("summary") or script.get("summary", "")}
+Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}]}}""",
+            temperature=0.7,
+        )
+        new = [sc for sc in res.get("scenes", []) if sc.get("narration")]
+        new_words = sum(len(sc["narration"].split()) for sc in new)
+        if len(new) >= max(1, len(part) // 2) and new_words > part_words:
+            for sc, old in zip(new, part + [{}] * len(new)):
+                sc.setdefault("image_prompt", old.get("image_prompt") or sc["narration"])
+            out_scenes += new
+        else:
+            out_scenes += part  # si esta parte salió mal, se queda la original
+    return {"scenes": out_scenes[:smax], "summary": script.get("summary", "")}

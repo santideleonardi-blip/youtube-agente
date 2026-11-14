@@ -34,6 +34,7 @@ def _extract_json(text: str):
 
 _models = None
 _exhausted = set()
+quota_hit = set()  # modelos que agotaron el cupo diario gratis en esta corrida (lo usa el estratega)
 
 
 def _with_timeout(fn, secs):
@@ -111,8 +112,9 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                 last_err = e
                 msg = str(e)
                 print(f"[llm] {model} intento {attempt + 1} falló: {msg[:200]}")
-                if "404" in msg or "not found" in msg.lower():
-                    break  # el modelo no existe: pasar al siguiente
+                if "404" in msg or "not found" in msg.lower() or "no longer available" in msg.lower():
+                    _exhausted.add(model)  # el modelo no existe: no volver a probarlo en esta corrida
+                    break
                 if "503" in msg or "UNAVAILABLE" in msg or "disconnected" in msg.lower() or "timed out" in msg.lower():
                     if attempt >= 1:
                         break  # modelo saturado: probar el siguiente
@@ -120,7 +122,8 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                     continue
                 if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
                     if "quota" in msg.lower():
-                        _exhausted.add(model)  # cupo diario agotado: no volver a probarlo en esta corrida
+                        _exhausted.add(model)
+                        quota_hit.add(model)  # cupo diario agotado: no volver a probarlo en esta corrida
                         break
                     if attempt >= 1:
                         break  # cupo agotado en este modelo: probar el siguiente

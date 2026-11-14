@@ -12,7 +12,7 @@ import time
 import traceback
 
 from agents import analyst, animator, publisher, scriptwriter, strategist, trends
-from common import schedule
+from common import llm, schedule
 from common import state as st
 
 
@@ -36,6 +36,14 @@ def should_produce(state, now=None):
     print(f"[turno] {local:%H:%M} ARG — objetivo {target}/día, hechos hoy {done_today}, "
           f"turnos habilitados {allowed} -> {'produzco' if ok else 'no toca, salgo'}")
     return ok
+
+
+def _note_quota(state, manual):
+    """Si algún modelo de Gemini agotó su cupo diario gratis, lo anota: el estratega no sube la cadencia."""
+    if llm.quota_hit and not manual:
+        print(f"[llm] cupo diario agotado en: {sorted(llm.quota_hit)}")
+        state["quota_hits"] = (state.get("quota_hits", []) + [dt.datetime.now(dt.timezone.utc).isoformat()])[-20:]
+        st.save(state)
 
 
 def main():
@@ -72,10 +80,12 @@ def main():
         render = animator.run(script, fmt, job_id)
         pub = publisher.run(topic, script, render, fmt, state, job_id)
     except Exception:
+        _note_quota(state, manual)
         if not manual:
             state["failures"] = (state.get("failures", []) + [dt.datetime.now(dt.timezone.utc).isoformat()])[-20:]
             st.save(state)
         raise
+    _note_quota(state, manual)
     if not pub.get("youtube_id"):
         print("=== Listo (prueba, no se subió) ===")
         return

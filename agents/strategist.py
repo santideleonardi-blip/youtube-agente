@@ -167,6 +167,11 @@ def decide_cadence(state, now):
     # aguantó bien la semana: las vistas por video no se cayeron (o todavía no hay semana previa para comparar)
     ratio = (med_recent / med_prev) if med_prev else 1.0
     failures = len([f for f in state.get("failures", []) if (now - _parse(f)).days < 7])
+    quota_hits = len([q for q in state.get("quota_hits", []) if (now - _parse(q)).days < 4])
+    if ratio >= 0.8 and cadence < MAX_DAILY and (failures > 1 or quota_hits):
+        why = ("el cupo gratis de Gemini se agotó en días recientes" if quota_hits
+               else f"hubo {failures} corridas fallidas esta semana")
+        return cadence, f"se mantiene en {cadence}/día: las vistas aguantan, pero {why}; primero hay que tener margen"
     if ratio >= 0.8 and failures <= 1 and cadence < MAX_DAILY:
         return cadence + 1, (f"sube a {cadence + 1}/día: la mediana de vistas por video se sostuvo "
                              f"({med_recent:.0f} vs {med_prev:.0f} la semana anterior), así que más volumen = más alcance")
