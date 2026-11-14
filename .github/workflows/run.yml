@@ -2,9 +2,10 @@ name: Producir y subir video
 
 on:
   schedule:
-    # 2 videos por día (horario UTC): 13:00 y 22:00 UTC = 10:00 y 19:00 en Argentina
-    - cron: "7 13 * * *"
-    - cron: "7 22 * * *"
+    # Producción 2 veces por día (UTC): 11:07 y 18:07 UTC = 08:07 y 15:07 en Argentina.
+    # La PUBLICACIÓN no es a esta hora: el video queda programado para el mejor horario de EE.UU.
+    - cron: "7 11 * * *"
+    - cron: "7 18 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

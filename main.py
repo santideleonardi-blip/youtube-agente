@@ -9,6 +9,7 @@ import time
 import traceback
 
 from agents import analyst, animator, publisher, scriptwriter, trends
+from common import schedule
 from common import state as st
 
 
@@ -40,6 +41,8 @@ def main():
         "duration": round(render["duration"], 2),
         "scenes": render["scenes"],
         "uploaded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "publish_at": pub["publish_at"].isoformat() if pub.get("publish_at") else None,
+        "publish_hour_et": pub["publish_at"].astimezone(schedule.ET).hour if pub.get("publish_at") else None,
     })
     st.save(state)
     print("=== Listo ===")

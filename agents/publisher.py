@@ -10,7 +10,7 @@ from googleapiclient.http import MediaFileUpload
 from PIL import Image, ImageDraw, ImageFont
 
 import config
-from common import llm
+from common import llm, schedule
 from common.youtube_auth import youtube
 
 
@@ -71,10 +71,13 @@ def run(topic, script, render, fmt, state, job_id):
     status = {"selfDeclaredMadeForKids": False, "embeddable": True}
     if config.PUBLISH_MODE == "public":
         status["privacyStatus"] = "public"
-    elif config.PUBLISH_MODE == "scheduled":
+    publish_at = None
+    if config.PUBLISH_MODE == "scheduled":
         status["privacyStatus"] = "private"
-        status["publishAt"] = (dt.datetime.now(dt.timezone.utc)
-                               + dt.timedelta(hours=config.SCHEDULE_DELAY_HOURS)).strftime("%Y-%m-%dT%H:%M:%S.0Z")
+        publish_at = schedule.next_publish_time(state)
+        status["publishAt"] = publish_at.strftime("%Y-%m-%dT%H:%M:%S.0Z")
+        print(f"[publicador] se publica: {publish_at.astimezone(schedule.ET):%a %d %H:%M} ET "
+              f"({publish_at.astimezone(dt.timezone(dt.timedelta(hours=-3))):%H:%M} Argentina)")
     else:
         status["privacyStatus"] = "private"
 
@@ -91,7 +94,7 @@ def run(topic, script, render, fmt, state, job_id):
     }
     if os.getenv("DRY_RUN") == "1":
         print(f"[publicador] DRY_RUN — no subo. Título: {title}")
-        return {"youtube_id": None, "title": title, "meta": meta}
+        return {"youtube_id": None, "title": title, "meta": meta, "publish_at": None}
 
     yt = youtube()
     req = yt.videos().insert(part="snippet,status", body=body,
@@ -109,4 +112,4 @@ def run(topic, script, render, fmt, state, job_id):
             yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(thumb)).execute()
         except Exception as e:  # noqa: BLE001
             print(f"[publicador] no pude poner la miniatura (¿canal sin verificar por teléfono?): {e}")
-    return {"youtube_id": vid, "title": title, "meta": meta}
+    return {"youtube_id": vid, "title": title, "meta": meta, "publish_at": publish_at}

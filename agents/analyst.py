@@ -7,7 +7,7 @@
 """
 import datetime as dt
 
-from common import llm
+from common import llm, schedule
 from common.youtube_auth import analytics, youtube
 
 MIN_AGE_HOURS = 48  # YouTube tarda ~2 días en tener datos de retención
@@ -76,7 +76,8 @@ def run(state):
         s = stats.get(v["youtube_id"], {})
         v["views"] = int(s.get("viewCount", v.get("views", 0)))
         v["likes"] = int(s.get("likeCount", v.get("likes", 0)))
-        age_h = (now - dt.datetime.fromisoformat(v["uploaded_at"])).total_seconds() / 3600
+        live_since = v.get("publish_at") or v["uploaded_at"]
+        age_h = (now - dt.datetime.fromisoformat(live_since)).total_seconds() / 3600
         if age_h < MIN_AGE_HOURS or v.get("analyzed"):
             continue
         try:
@@ -100,6 +101,11 @@ def run(state):
         fs[fmt] = {"count": len(vids),
                    "avg_views": round(sum(v.get("views", 0) for v in vids) / len(vids)) if vids else 0}
     state["format_stats"] = fs
+
+    slots, slot_avg = schedule.best_slots(state)
+    if slots != state.get("publish_slots_et"):
+        print(f"[analista] horarios de publicación (ET): {slots} — vistas promedio por horario: {slot_avg}")
+    state["publish_slots_et"] = slots
 
     recent = [{"title": v["title"], "format": v["format"], "views": v.get("views", 0)} for v in uploaded[-12:]]
     decision = llm.ask_json(
