@@ -21,6 +21,11 @@ TREND_QUERIES = [
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
 # Se detectan solos los modelos disponibles; estos son solo respaldo si falla la detección.
 GEMINI_FALLBACK_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]
+# Motor de voz: "kokoro" (local, gratis, confiable) o "edge" (Microsoft, a veces bloquea servidores)
+TTS_ENGINE = os.getenv("TTS_ENGINE", "kokoro")
+KOKORO_DIR = os.getenv("KOKORO_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "models"))
+KOKORO_VOICE = os.getenv("KOKORO_VOICE", "am_michael")
+KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.08"))
 TTS_VOICE = os.getenv("TTS_VOICE", "en-US-AndrewNeural")
 TTS_RATE = os.getenv("TTS_RATE", "+8%")
 

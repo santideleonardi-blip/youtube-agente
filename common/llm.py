@@ -33,6 +33,7 @@ def _extract_json(text: str):
 
 
 _models = None
+_exhausted = set()
 
 
 def _with_timeout(fn, secs):
@@ -92,7 +93,7 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
     """Pide una respuesta JSON. Prueba el mejor modelo disponible y luego los de respaldo."""
     from google.genai import types
 
-    models = _available_models()
+    models = [m for m in _available_models() if m not in _exhausted]
     last_err = None
     for model in models:
         for attempt in range(3):
@@ -118,6 +119,9 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                     time.sleep(8)
                     continue
                 if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+                    if "quota" in msg.lower():
+                        _exhausted.add(model)  # cupo diario agotado: no volver a probarlo en esta corrida
+                        break
                     if attempt >= 1:
                         break  # cupo agotado en este modelo: probar el siguiente
                     time.sleep(20)

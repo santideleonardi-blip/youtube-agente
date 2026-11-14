@@ -56,22 +56,69 @@ async def _tts_async(text, mp3_path):
     return words
 
 
+_kokoro = None
+
+
+def _estimate_words(text, dur, lead=0.05):
+    """Reparte la duración entre las palabras según su largo (para los subtítulos)."""
+    words = text.split()
+    weights = [len(w) + 2 for w in words]
+    total = sum(weights)
+    t, out = lead, []
+    usable = max(dur - lead - 0.1, 0.5)
+    for w, wt in zip(words, weights):
+        d = usable * wt / total
+        out.append({"text": w, "start": t, "end": t + d})
+        t += d
+    return out
+
+
+def _tts_kokoro(text, mp3_path):
+    """Voz local con Kokoro (gratis, sin internet, no la bloquea nadie)."""
+    global _kokoro
+    import soundfile as sf
+    from kokoro_onnx import Kokoro
+
+    if _kokoro is None:
+        _kokoro = Kokoro(os.path.join(config.KOKORO_DIR, "kokoro-v1.0.onnx"),
+                         os.path.join(config.KOKORO_DIR, "voices-v1.0.bin"))
+    samples, sr = _kokoro.create(text, voice=config.KOKORO_VOICE, speed=config.KOKORO_SPEED, lang="en-us")
+    wav = mp3_path[:-4] + ".wav"
+    sf.write(wav, samples, sr)
+    _run(["ffmpeg", "-y", "-i", wav, "-c:a", "libmp3lame", "-b:a", "192k", mp3_path])
+    return _estimate_words(text, len(samples) / sr)
+
+
 def tts(text, mp3_path):
     if MOCK_TTS:
         n = len(text.split())
         dur = max(n / 2.6, 1.5)
         _run(["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono", "-t", f"{dur:.2f}", mp3_path])
-        step = dur / n
-        return [{"text": w, "start": i * step, "end": (i + 1) * step} for i, w in enumerate(text.split())]
-    for attempt in range(4):
+        return _estimate_words(text, dur)
+    if config.TTS_ENGINE == "kokoro":
+        return _tts_kokoro(text, mp3_path)
+    for attempt in range(3):
         try:
             words = asyncio.run(asyncio.wait_for(_tts_async(text, mp3_path), timeout=120))
             if os.path.getsize(mp3_path) > 1000:
                 return words
         except Exception as e:  # noqa: BLE001
-            print(f"[animador] TTS intento {attempt + 1} falló: {e}")
-        time.sleep(5 * (attempt + 1))
-    raise RuntimeError("No se pudo generar la voz")
+            print(f"[animador] Edge TTS intento {attempt + 1} falló: {e}")
+        time.sleep(4 * (attempt + 1))
+    raise RuntimeError("Edge TTS no responde")
+
+
+def voices(scenes, wd):
+    """Genera la voz de TODAS las escenas con el mismo motor (para que no cambie la voz a mitad del video)."""
+    paths = [os.path.join(wd, f"s{i:03d}.mp3") for i in range(len(scenes))]
+    try:
+        return paths, [tts(sc["narration"], p) for sc, p in zip(scenes, paths)]
+    except RuntimeError as e:
+        if config.TTS_ENGINE == "kokoro" or MOCK_TTS:
+            raise
+        print(f"[animador] {e} — rehago todas las voces con Kokoro")
+        config.TTS_ENGINE = "kokoro"
+        return paths, [tts(sc["narration"], p) for sc, p in zip(scenes, paths)]
 
 
 # ---------------- Imágenes ----------------
@@ -227,12 +274,13 @@ def run(script, fmt, job_id):
     clips, all_words, scene_meta = [], [], []
     t = 0.0
     seed_base = random.randint(1, 10_000_000)
+    print(f"[animador] generando voces ({config.TTS_ENGINE})")
+    mp3s, all_scene_words = voices(script["scenes"], wd)
     for i, sc in enumerate(script["scenes"]):
         print(f"[animador] escena {i + 1}/{len(script['scenes'])}")
-        mp3 = os.path.join(wd, f"s{i:03d}.mp3")
+        mp3, words = mp3s[i], all_scene_words[i]
         png = os.path.join(wd, f"s{i:03d}.png")
         mp4 = os.path.join(wd, f"s{i:03d}.mp4")
-        words = tts(sc["narration"], mp3)
         image(sc.get("image_prompt") or sc["narration"], png, w, h, seed_base + i)
         if i == 0:
             shutil.copy(png, os.path.join(wd, "cover.png"))
