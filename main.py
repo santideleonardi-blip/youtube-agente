@@ -22,11 +22,11 @@ def main():
         decision = analyst.run(state)
     except Exception as e:  # noqa: BLE001
         print(f"[analista] falló, sigo con valores por defecto: {e}")
-        decision = {"format": "short", "notes": []}
+        decision = {"format": "short", "notes": [], "topic_insights": state.get("topic_insights", [])}
     fmt = forced if forced in ("short", "long") else decision["format"]
     st.save(state)
 
-    topic = trends.run(state, fmt, decision["notes"])
+    topic = trends.run(state, fmt, decision["notes"], decision.get("topic_insights"))
     script = scriptwriter.run(topic, fmt, decision["notes"], state.get("feedback", []))
     render = animator.run(script, fmt, job_id)
     pub = publisher.run(topic, script, render, fmt, state, job_id)

@@ -44,7 +44,7 @@ def _trending_videos(days=10, per_query=15):
     return out[:20]
 
 
-def run(state, fmt, notes):
+def run(state, fmt, notes, topic_insights=None):
     trending = []
     try:
         trending = _trending_videos()
@@ -65,6 +65,7 @@ What is getting the most views per hour in the niche right now:
 Our best performing videos so far: {[(v['title'], v['views']) for v in top] or "none yet"}
 Topics we ALREADY covered (never repeat or closely rephrase these): {done or "none"}
 Analyst notes: {notes}
+What the analyst learned about which TOPICS work on OUR channel (highest priority, follow it): {topic_insights or "no data yet"}
 
 Pick ONE topic with the highest viral potential. Never copy another creator's exact title or
 premise word for word: if you take inspiration from a trending video, give it a clearly different twist for this format. Prefer topics that ride a current

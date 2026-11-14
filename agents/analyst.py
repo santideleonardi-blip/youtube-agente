@@ -116,13 +116,20 @@ Tasks:
 1. Write 3-6 short, concrete, actionable notes for the scriptwriter (what to avoid / repeat, based on
    drop points and what performed). If there is no data yet, give best-practice notes for strong
    retention (hook in first 2 seconds, open loops, no slow intros, pattern interrupts).
-2. Decide the format of the NEXT video: "short" or "long".
+2. Content strategy: compare which TOPICS / themes / hooks got the most views and retention.
+   Write 2-5 "topic_insights": concrete conclusions about WHAT the videos should be about
+   (e.g. "body-swap with animals beats space topics 3x", "avoid slow historical topics").
+   Keep the useful previous insights unless the data contradicts them.
+   Previous insights: {state.get("topic_insights", [])}
+3. Decide the format of the NEXT video: "short" or "long".
    Rules: a new channel (<10 videos) should be mostly shorts, with a long video roughly every 3rd upload.
    Later, favour the format with better views but keep at least 25% of the other format to keep testing.
 
-Return JSON: {{"notes": ["..."], "next_format": "short"|"long", "reason": "..."}}""",
+Return JSON: {{"notes": ["..."], "topic_insights": ["..."], "next_format": "short"|"long", "reason": "..."}}""",
         temperature=0.4,
     )
+    if decision.get("topic_insights"):
+        state["topic_insights"] = decision["topic_insights"][:6]
     fmt = decision.get("next_format", "short")
     if fmt not in ("short", "long"):
         fmt = "short"
@@ -130,4 +137,4 @@ Return JSON: {{"notes": ["..."], "next_format": "short"|"long", "reason": "..."}
         "date": now.isoformat(), "notes": decision.get("notes", []), "reason": decision.get("reason", "")
     }])[-20:]
     print(f"[analista] próximo formato: {fmt} — {decision.get('reason', '')}")
-    return {"format": fmt, "notes": decision.get("notes", [])}
+    return {"format": fmt, "notes": decision.get("notes", []), "topic_insights": state.get("topic_insights", [])}
