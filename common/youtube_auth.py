@@ -35,7 +35,10 @@ def credentials():
 
 def _http():
     # timeout de 5 minutos por request (las subidas van en partes de 8 MB)
-    return google_auth_httplib2.AuthorizedHttp(credentials(), http=httplib2.Http(timeout=300))
+    http = httplib2.Http(timeout=300)
+    # 308 = "Resume Incomplete" en subidas por partes: NO es una redirección
+    http.redirect_codes = http.redirect_codes - {308}
+    return google_auth_httplib2.AuthorizedHttp(credentials(), http=http)
 
 
 def youtube():
