@@ -1,5 +1,47 @@
 {
-  "videos": [],
+  "videos": [
+    {
+      "job_id": "20261114_205128",
+      "youtube_id": "_SnHrz3Acwk",
+      "title": "What Would Happen If Gravity Doubled For 5 Seconds? #shorts",
+      "topic": "What would happen if Earth's gravity doubled for just five seconds?",
+      "format": "short",
+      "duration": 45.01,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if Earth's gravity doubled for just five seconds? Suddenly, every human violently slams into the floor!"
+        },
+        {
+          "start": 7.9,
+          "narration": "Your own bones instantly weigh twice as much, making every single movement feel like you're carrying an invisible boulder."
+        },
+        {
+          "start": 15.4,
+          "narration": "But that is just the beginning of the chaos. Look outside!"
+        },
+        {
+          "start": 19.14,
+          "narration": "Skyscrapers groan and steel suspension bridges begin snapping under the sudden, massive doubling of structural load."
+        },
+        {
+          "start": 26.96,
+          "narration": "Even the atmosphere packs a punch, creating a crushing barometric shockwave that pops everyone's ears at once."
+        },
+        {
+          "start": 34.26,
+          "narration": "Just as total structural collapse seems inevitable... gravity instantly snaps right back to normal."
+        },
+        {
+          "start": 41.06,
+          "narration": "You survived! But what would happen if it stayed like that forever?"
+        }
+      ],
+      "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
+      "publish_at": "2026-11-15T00:00:00+00:00",
+      "publish_hour_et": 19
+    }
+  ],
   "feedback": [
     {
       "date": "2026-11-14T20:41:04.455736+00:00",
@@ -10,6 +52,16 @@
         "Avoid slow background setup; weave essential context into the action rather than spending the first 15 seconds explaining history."
       ],
       "reason": "This is the channel's first upload (0/10 initial videos), so starting with a YouTube Short helps maximize initial reach and audience discovery."
+    },
+    {
+      "date": "2026-11-14T20:51:28.374869+00:00",
+      "notes": [
+        "Hook the viewer in the first 2 seconds with a shocking visual or high-stakes question before any intro graphics.",
+        "Open narrative loops early and delay the resolution to maximize average view duration.",
+        "Use frequent pattern interrupts (sound effects, rapid visual scale shifts, or camera angle cuts) every 5-7 seconds to reset viewer attention.",
+        "Eliminate slow contextual intros and start directly in the middle of the hypothetical scenario."
+      ],
+      "reason": "Since this is a brand new channel with zero videos, we must prioritize YouTube Shorts to build initial algorithmic reach and subscriber base quickly, following the rule that new channels (<10 videos) should focus mostly on shorts."
     }
   ],
   "format_stats": {
