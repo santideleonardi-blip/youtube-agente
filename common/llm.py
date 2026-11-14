@@ -81,6 +81,7 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                         response_mime_type="application/json",
                     ),
                 )
+                print(f"[llm] respuesta de {model}")
                 return _extract_json(resp.text)
             except Exception as e:  # noqa: BLE001
                 last_err = e
@@ -89,7 +90,9 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                 if "404" in msg or "not found" in msg.lower():
                     break  # el modelo no existe: pasar al siguiente
                 if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
-                    time.sleep(30 * (attempt + 1))
+                    if attempt >= 1:
+                        break  # cupo agotado en este modelo: probar el siguiente
+                    time.sleep(20)
                 else:
                     time.sleep(5)
     raise RuntimeError(f"Gemini no respondió: {last_err}")

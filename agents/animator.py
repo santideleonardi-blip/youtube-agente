@@ -92,6 +92,9 @@ def _fallback_image(path, w, h, seed):
     img.filter(ImageFilter.GaussianBlur(2)).save(path)
 
 
+_IMG_FAILS = 0
+
+
 def image(prompt, path, w, h, seed):
     if MOCK_IMAGES:
         return _fallback_image(path, w, h, seed)
@@ -102,21 +105,27 @@ def image(prompt, path, w, h, seed):
         "https://image.pollinations.ai/prompt/" + urllib.parse.quote(full)
         + f"?width={gw}&height={gh}&seed={seed}&nologo=true&model=flux"
     )
+    global _IMG_FAILS
+    if _IMG_FAILS >= 3:  # el servicio no responde: no perder tiempo, usar respaldo
+        return _fallback_image(path, w, h, seed)
     headers = {}
     if os.getenv("POLLINATIONS_TOKEN"):
         headers["Authorization"] = f"Bearer {os.environ['POLLINATIONS_TOKEN']}"
-    for attempt in range(4):
+    for attempt in range(2):
         try:
-            r = requests.get(url, timeout=180, headers=headers)
+            t0 = time.time()
+            r = requests.get(url, timeout=90, headers=headers)
             if r.ok and r.headers.get("content-type", "").startswith("image"):
                 with open(path, "wb") as f:
                     f.write(r.content)
                 Image.open(path).convert("RGB").save(path, "PNG")
+                print(f"[animador] imagen OK en {time.time() - t0:.0f}s")
                 return path
-            print(f"[animador] imagen HTTP {r.status_code}")
+            print(f"[animador] imagen HTTP {r.status_code}: {r.text[:200]}")
         except Exception as e:  # noqa: BLE001
             print(f"[animador] imagen intento {attempt + 1} falló: {e}")
-        time.sleep(10 * (attempt + 1))
+        time.sleep(5)
+    _IMG_FAILS += 1
     print("[animador] uso imagen de respaldo")
     return _fallback_image(path, w, h, seed)
 

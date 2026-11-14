@@ -27,7 +27,7 @@ concurrency:
 jobs:
   produce:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
@@ -52,7 +52,7 @@ jobs:
           PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'private' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           FORCE_FORMAT: ${{ inputs.format }}
-        run: python main.py
+        run: python -u main.py
 
       - name: Guardar el video como artifact (para revisarlo)
         if: always()
