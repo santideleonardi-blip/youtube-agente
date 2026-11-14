@@ -27,8 +27,9 @@ Rules:
 - Simple spoken English, short sentences, accurate science/history, light humour.
 - {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}
 - Each scene needs an image prompt describing ONE clear visual (characters, objects, setting) that
-  matches the narration. Do not include any text in the images. Keep a recurring main character
-  (a small curious astronaut-like explorer) when it fits.
+  matches the narration. Do not include any text in the images. When a person is needed, use the
+  channel's recurring character: "Max, an adult explorer with messy brown hair and an orange jumpsuit".
+  Never depict children. Make the first image the most striking and dramatic one (it is the hook).
 
 Return JSON:
 {{"scenes": [{{"narration": "...", "image_prompt": "..."}}],

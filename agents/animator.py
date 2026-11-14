@@ -190,6 +190,7 @@ def image(prompt, path, w, h, seed):
 def _cover(path, w, h):
     """Recorta/escala la imagen al doble del tamaño final (margen para el zoom suave)."""
     img = Image.open(path).convert("RGB")
+    img = img.crop((0, 0, img.width, int(img.height * 0.93)))  # saca la marca de agua de abajo
     tw, th = w * 2, h * 2
     scale = max(tw / img.width, th / img.height)
     img = img.resize((int(img.width * scale) + 1, int(img.height * scale) + 1), Image.LANCZOS)
@@ -205,23 +206,38 @@ MOTIONS = [
     ("1.12", "(iw-iw/zoom)*on/{f}", "ih/2-(ih/zoom/2)"),                                # paneo der
     ("1.12", "(iw-iw/zoom)*(1-on/{f})", "ih/2-(ih/zoom/2)"),                            # paneo izq
     ("min(zoom+0.0007,1.15)", "iw/2-(iw/zoom/2)", "(ih-ih/zoom)*0.3"),                 # zoom arriba
+    ("min(1.35+on*0.0008,1.45)", "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"),              # primer plano
+    ("1.3", "(iw-iw/zoom)*0.15", "(ih-ih/zoom)*(0.2+0.3*on/{f})"),                    # detalle izq bajando
+    ("min(1.25+on*0.0006,1.35)", "(iw-iw/zoom)*0.85", "(ih-ih/zoom)*0.4"),             # detalle der
 ]
 
 
-def _scene_clip(img, audio, out, w, h, dur, idx):
+def _shot(img, out, w, h, dur, motion_idx):
     frames = int(dur * config.FPS) + 1
-    z, x, y = MOTIONS[idx % len(MOTIONS)]
+    z, x, y = MOTIONS[motion_idx % len(MOTIONS)]
     x, y = x.format(f=frames), y.format(f=frames)
-    vf = (
-        f"zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={w}x{h}:fps={config.FPS},"
-        f"fade=t=in:st=0:d=0.25,format=yuv420p"
-    )
+    vf = f"zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={w}x{h}:fps={config.FPS},format=yuv420p"
+    _run(["ffmpeg", "-y", "-loop", "1", "-i", img, "-vf", vf, "-t", f"{dur:.3f}",
+          "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-r", str(config.FPS), "-an", out])
+
+
+def _scene_clip(img, audio, out, w, h, dur, idx):
+    """Una escena = varias tomas cortas (cortes cada ~2.5 s) sobre la misma ilustración, para dar ritmo."""
+    shot_len = 2.5 if h > w else 4.0
+    n = max(1, round(dur / shot_len))
+    shots = []
+    for k in range(n):
+        sp = out[:-4] + f"_k{k}.mp4"
+        _shot(img, sp, w, h, dur / n, idx * 3 + k)
+        shots.append(sp)
+    lst = out[:-4] + "_list.txt"
+    with open(lst, "w") as f:
+        f.writelines(f"file '{p}'\n" for p in shots)
     _run([
-        "ffmpeg", "-y", "-loop", "1", "-i", img, "-i", audio,
-        "-filter_complex", f"[0:v]{vf}[v];[1:a]apad=pad_dur=0.35,aresample=44100[a]",
-        "-map", "[v]", "-map", "[a]", "-t", f"{dur:.3f}",
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-r", str(config.FPS),
-        "-c:a", "aac", "-b:a", "160k", "-ac", "2", out,
+        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-i", audio,
+        "-filter_complex", "[1:a]apad=pad_dur=0.35,aresample=44100[a]",
+        "-map", "0:v", "-map", "[a]", "-t", f"{dur:.3f}",
+        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-ac", "2", out,
     ])
 
 
@@ -315,8 +331,9 @@ def run(script, fmt, job_id):
     final = os.path.join(config.OUTPUT_DIR, f"{job_id}.mp4")
     _run([
         "ffmpeg", "-y", "-i", joined, "-vf", f"ass={ass}",
+        "-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
-        "-c:a", "copy", "-movflags", "+faststart", final,
+        "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-movflags", "+faststart", final,
     ])
     total = _duration(final)
     print(f"[animador] video listo: {final} ({total:.1f}s)")

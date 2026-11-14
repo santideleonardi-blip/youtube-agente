@@ -32,8 +32,9 @@ TTS_RATE = os.getenv("TTS_RATE", "+8%")
 # Estilo visual fijo del canal (coherencia = marca reconocible)
 IMAGE_STYLE = (
     "flat 2D vector cartoon illustration, simple geometric shapes, bold clean outlines, "
-    "vibrant saturated colors, soft gradients, minimal background, cute expressive characters, "
-    "educational animation style, no text, no letters, no watermark"
+    "vibrant saturated colors, soft gradients, minimal background, expressive adult characters, "
+    "fully clothed, educational explainer animation style, centered subject, "
+    "no children, no text, no letters, no watermark"
 )
 
 # ---------- Formatos ----------
