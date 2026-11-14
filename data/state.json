@@ -1,1 +1,34 @@
-{"videos": [], "feedback": [], "format_stats": {}}
+{
+  "videos": [],
+  "feedback": [
+    {
+      "date": "2026-11-14T20:41:04.455736+00:00",
+      "notes": [
+        "Hook the viewer within the first 2 seconds by jumping straight into the high-stakes hypothetical scenario without any channel intros or greetings.",
+        "Maintain open loops by posing micro-questions throughout the script to keep viewers waiting for the payoff before transitioning topics.",
+        "Implement visual or auditory pattern interrupts every 4-6 seconds to constantly reset viewer attention spans.",
+        "Avoid slow background setup; weave essential context into the action rather than spending the first 15 seconds explaining history."
+      ],
+      "reason": "This is the channel's first upload (0/10 initial videos), so starting with a YouTube Short helps maximize initial reach and audience discovery."
+    }
+  ],
+  "format_stats": {
+    "short": {
+      "count": 0,
+      "avg_views": 0
+    },
+    "long": {
+      "count": 0,
+      "avg_views": 0
+    }
+  },
+  "publish_slots_et": [
+    15,
+    19
+  ],
+  "topic_insights": [
+    "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning) to leverage high innate curiosity.",
+    "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics tend to yield higher emotional engagement than abstract physics.",
+    "Frame historical hypotheticals around massive, recognizable pivot points with clear modern consequences rather than niche events."
+  ]
+}
