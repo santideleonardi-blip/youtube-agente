@@ -1,0 +1,133 @@
+"""Agente 5 — Analista.
+
+- Lee la curva de retención de los videos ya publicados (YouTube Analytics).
+- Detecta en qué segundo se va la gente y qué escena/frase había ahí.
+- Le deja notas al guionista.
+- Decide el formato del próximo video (short o largo).
+"""
+import datetime as dt
+
+from common import llm
+from common.youtube_auth import analytics, youtube
+
+MIN_AGE_HOURS = 48  # YouTube tarda ~2 días en tener datos de retención
+
+
+def _retention_curve(video_id, published):
+    start = published[:10]
+    end = dt.date.today().isoformat()
+    res = analytics().reports().query(
+        ids="channel==MINE",
+        startDate=start,
+        endDate=end,
+        metrics="audienceWatchRatio,relativeRetentionPerformance",
+        dimensions="elapsedVideoTimeRatio",
+        filters=f"video=={video_id}",
+    ).execute()
+    return [(r[0], r[1], r[2]) for r in res.get("rows", [])]
+
+
+def _scene_at(video, ratio):
+    t = ratio * video.get("duration", 0)
+    current = None
+    for sc in video.get("scenes", []):
+        if sc["start"] <= t:
+            current = sc
+    return current, t
+
+
+def _drop_points(video, curve, top=3):
+    drops = []
+    for (r0, w0, _), (r1, w1, _) in zip(curve, curve[1:]):
+        drops.append((w0 - w1, r1))
+    drops.sort(reverse=True)
+    out = []
+    for size, ratio in drops[:top]:
+        if size <= 0.02:
+            continue
+        scene, t = _scene_at(video, ratio)
+        out.append({
+            "second": round(t, 1),
+            "drop_pct": round(size * 100, 1),
+            "narration": (scene or {}).get("narration", "")[:300],
+        })
+    return out
+
+
+def _stats(ids):
+    if not ids:
+        return {}
+    res = youtube().videos().list(part="statistics", id=",".join(ids[:50])).execute()
+    return {i["id"]: i["statistics"] for i in res.get("items", [])}
+
+
+def run(state):
+    now = dt.datetime.now(dt.timezone.utc)
+    uploaded = [v for v in state["videos"] if v.get("youtube_id")]
+    report = []
+
+    stats = {}
+    try:
+        stats = _stats([v["youtube_id"] for v in uploaded[-50:]])
+    except Exception as e:  # noqa: BLE001
+        print(f"[analista] no pude leer estadísticas: {e}")
+
+    for v in uploaded[-50:]:
+        s = stats.get(v["youtube_id"], {})
+        v["views"] = int(s.get("viewCount", v.get("views", 0)))
+        v["likes"] = int(s.get("likeCount", v.get("likes", 0)))
+        age_h = (now - dt.datetime.fromisoformat(v["uploaded_at"])).total_seconds() / 3600
+        if age_h < MIN_AGE_HOURS or v.get("analyzed"):
+            continue
+        try:
+            curve = _retention_curve(v["youtube_id"], v["uploaded_at"])
+        except Exception as e:  # noqa: BLE001
+            print(f"[analista] sin retención para {v['youtube_id']}: {e}")
+            continue
+        if not curve:
+            continue
+        v["retention_end"] = round(curve[-1][1], 3)
+        v["drops"] = _drop_points(v, curve)
+        v["analyzed"] = True
+        report.append({"title": v["title"], "format": v["format"], "views": v["views"],
+                       "retention_end": v["retention_end"], "drops": v["drops"],
+                       "hook": v.get("scenes", [{}])[0].get("narration", "")})
+
+    # Estadísticas por formato
+    fs = {}
+    for fmt in ("short", "long"):
+        vids = [v for v in uploaded if v["format"] == fmt]
+        fs[fmt] = {"count": len(vids),
+                   "avg_views": round(sum(v.get("views", 0) for v in vids) / len(vids)) if vids else 0}
+    state["format_stats"] = fs
+
+    recent = [{"title": v["title"], "format": v["format"], "views": v.get("views", 0)} for v in uploaded[-12:]]
+    decision = llm.ask_json(
+        f"""You are the data analyst of a faceless YouTube channel.
+Channel niche: What If...? science & history hypotheticals (English, animated).
+
+New retention analyses (where viewers left and what was being said):
+{report or "No new retention data yet."}
+
+Recent videos and views: {recent or "No videos yet (new channel)."}
+Average views per format: {fs}
+
+Tasks:
+1. Write 3-6 short, concrete, actionable notes for the scriptwriter (what to avoid / repeat, based on
+   drop points and what performed). If there is no data yet, give best-practice notes for strong
+   retention (hook in first 2 seconds, open loops, no slow intros, pattern interrupts).
+2. Decide the format of the NEXT video: "short" or "long".
+   Rules: a new channel (<10 videos) should be mostly shorts, with a long video roughly every 3rd upload.
+   Later, favour the format with better views but keep at least 25% of the other format to keep testing.
+
+Return JSON: {{"notes": ["..."], "next_format": "short"|"long", "reason": "..."}}""",
+        temperature=0.4,
+    )
+    fmt = decision.get("next_format", "short")
+    if fmt not in ("short", "long"):
+        fmt = "short"
+    state["feedback"] = (state.get("feedback", []) + [{
+        "date": now.isoformat(), "notes": decision.get("notes", []), "reason": decision.get("reason", "")
+    }])[-20:]
+    print(f"[analista] próximo formato: {fmt} — {decision.get('reason', '')}")
+    return {"format": fmt, "notes": decision.get("notes", [])}

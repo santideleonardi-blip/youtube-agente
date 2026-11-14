@@ -1,0 +1,72 @@
+name: Producir y subir video
+
+on:
+  schedule:
+    # 2 videos por día (horario UTC): 13:00 y 22:00 UTC = 10:00 y 19:00 en Argentina
+    - cron: "7 13 * * *"
+    - cron: "7 22 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Prueba: genera el video pero NO lo sube (lo podés descargar en Artifacts)"
+        type: boolean
+        default: true
+      format:
+        description: "Forzar formato (vacío = decide el analista)"
+        type: choice
+        options: ["", "short", "long"]
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: produce-video
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar FFmpeg y fuentes
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Correr los agentes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'private' }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+          FORCE_FORMAT: ${{ inputs.format }}
+        run: python main.py
+
+      - name: Guardar el video como artifact (para revisarlo)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ github.run_id }}
+          path: output/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Guardar la memoria de los agentes
+        if: always() && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        run: |
+          git config user.name "youtube-agente-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/ || true
+          git diff --cached --quiet || (git commit -m "Actualizar memoria de los agentes [skip ci]" && git push)
