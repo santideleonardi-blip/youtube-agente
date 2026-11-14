@@ -159,8 +159,7 @@ def _cloudflare_image(prompt, path, w, h, seed):
             "prompt": (None, prompt), "width": (None, str(gw)), "height": (None, str(gh)),
             "seed": (None, str(seed % 2_000_000_000))})),
         # FLUX.1 schnell (respaldo, imagen cuadrada) — formato JSON
-        ("@cf/black-forest-labs/flux-1-schnell", dict(json={"prompt": prompt, "steps": 8,
-                                                            "seed": seed % 2_000_000_000})),
+        ("@cf/black-forest-labs/flux-1-schnell", dict(json={"prompt": prompt, "steps": 8})),
     ]
     for model, kwargs in attempts:
         if model in _CF_BAD:
@@ -176,6 +175,8 @@ def _cloudflare_image(prompt, path, w, h, seed):
                 print(f"[animador] imagen OK ({model.split('/')[-1]})")
                 return path
             print(f"[animador] Cloudflare {model.split('/')[-1]} HTTP {r.status_code}: {str(data)[:200]}")
+            if "flagged" in str(data).lower():
+                continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
             if r.status_code in (400, 404, 422):
                 _CF_BAD.add(model)  # formato/modelo no soportado: no reintentar en esta corrida
         except Exception as e:  # noqa: BLE001
