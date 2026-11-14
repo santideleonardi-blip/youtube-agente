@@ -21,7 +21,8 @@ Feedback from the analyst (where viewers dropped off and what to do better) — 
 Older lessons: {history[-10:]}
 
 Rules:
-- Total narration: {wmin}-{wmax} words, split into {smin}-{smax} scenes.
+- Total narration: {wmin}-{wmax} words, split into {smin}-{smax} scenes
+  (about {round((wmin + wmax) / 2 / ((smin + smax) / 2))} words per scene). Length matters: count your words.
 - The video answers the question "{topic['topic']}". The first sentence states the premise in a gripping way.
 - Scene 1 is the hook: a shocking or curious statement in the first sentence. No "Hey guys", no intro.
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
@@ -41,5 +42,52 @@ Return JSON:
     if len(scenes) < 3:
         raise RuntimeError("El guion vino vacío o incompleto")
     script["scenes"] = scenes
-    print(f"[guionista] {len(scenes)} escenas, {sum(len(s['narration'].split()) for s in scenes)} palabras")
+
+    # Los modelos tienden a quedarse cortos en guiones largos: si falta texto, se lo pide ampliar
+    # (hasta 2 veces) y se queda con la mejor versión. Un largo de 4 min no suma horas de visualización.
+    for attempt in range(2):
+        words = _words(script)
+        if words >= wmin * 0.9:
+            break
+        print(f"[guionista] guion corto ({words} palabras, objetivo {wmin}-{wmax}) — pido ampliarlo")
+        try:
+            longer = _expand(script, topic, fmt, wmin, wmax, smax)
+        except Exception as e:  # noqa: BLE001
+            print(f"[guionista] no pude ampliarlo: {e}")
+            break
+        if _words(longer) > words:
+            script = longer
+    print(f"[guionista] {len(script['scenes'])} escenas, {_words(script)} palabras")
     return script
+
+
+def _words(script):
+    return sum(len(sc["narration"].split()) for sc in script["scenes"])
+
+
+def _expand(script, topic, fmt, wmin, wmax, smax):
+    words = _words(script)
+    target = (wmin + wmax) // 2
+    out = llm.ask_json(
+        f"""This script for a {"YouTube Short" if fmt == "short" else "long-form YouTube video"} about
+"{topic['topic']}" is TOO SHORT: it has {words} words and needs {wmin}-{wmax} words (aim for {target}).
+
+Rewrite it at full length. Keep the same hook, story arc, tone and ending, but go deeper: add more
+surprising facts, concrete numbers and comparisons, step-by-step consequences, mini open loops and
+light humour. Do NOT pad with filler or repeat yourself. Each existing scene should grow to roughly
+{max(1, round(target / max(len(script['scenes']), 1)))} words; you may add new scenes (max {smax} in total).
+Every scene keeps an "image_prompt" (ONE clear visual, no text; people = "Max, an adult explorer with
+messy brown hair and an orange jumpsuit"; never children).
+
+Current script:
+{script['scenes']}
+
+Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}], "summary": "{script.get('summary', '')}"}}""",
+        temperature=0.7,
+    )
+    scenes = [sc for sc in out.get("scenes", []) if sc.get("narration")][:smax]
+    for sc in scenes:
+        sc.setdefault("image_prompt", sc["narration"])
+    if len(scenes) < 3:
+        raise RuntimeError("ampliación vacía")
+    return {"scenes": scenes, "summary": out.get("summary") or script.get("summary", "")}
