@@ -26,7 +26,8 @@ Hook line: {script['scenes'][0]['narration']}
 Our best titles so far (learn from them): {[(v['title'], v['views']) for v in best] or "none yet"}
 
 Write packaging that maximises click-through WITHOUT lying about the content:
-- title: max 70 characters, curiosity-driven, usually starting with "What If" or a bold claim.
+- title: max 70 characters, curiosity-driven, and it MUST start with "What Would Happen If"
+  (the channel's signature format), e.g. "What Would Happen If You Never Slept?".
   {"Add #shorts at the end." if fmt == "short" else ""}
 - thumbnail_text: 2-4 punchy words in CAPS (complements the title, does not repeat it).
 - description: 2-3 engaging sentences, then "Subscribe to {config.CHANNEL_NAME} for a new mind-bending

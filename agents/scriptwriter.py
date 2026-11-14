@@ -22,6 +22,7 @@ Older lessons: {history[-10:]}
 
 Rules:
 - Total narration: {wmin}-{wmax} words, split into {smin}-{smax} scenes.
+- The video answers the question "{topic['topic']}". The first sentence states the premise in a gripping way.
 - Scene 1 is the hook: a shocking or curious statement in the first sentence. No "Hey guys", no intro.
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
 - Simple spoken English, short sentences, accurate science/history, light humour.

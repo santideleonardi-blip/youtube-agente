@@ -67,7 +67,7 @@ jobs:
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'private' }}
+          PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'scheduled' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           FORCE_FORMAT: ${{ inputs.format }}
         timeout-minutes: 80

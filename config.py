@@ -3,11 +3,12 @@ import os
 
 # ---------- Canal ----------
 CHANNEL_NAME = "WhatWouldHappenIf?"
-NICHE = "What If...? — mind-blowing science & history hypotheticals"
+NICHE = "WhatWouldHappenIf? — every video answers one 'What would happen if...?' question"
 NICHE_DESCRIPTION = (
-    "Animated explainers that answer fascinating hypothetical questions about science, "
-    "space, nature, the human body and history (e.g. 'What if the Moon disappeared?', "
-    "'What if you fell into a black hole?', 'What if Rome never fell?'). "
+    "The channel is called WhatWouldHappenIf?. EVERY video answers exactly one hypothetical question "
+    "that starts with 'What would happen if...?'. The subject is free and chosen by data: the human "
+    "body, animals, space, Earth, physics, history, everyday life, technology, etc. "
+    "(e.g. 'What would happen if the Moon disappeared?', 'What would happen if you never slept?'). "
     "Tone: curious, fast-paced, slightly humorous, scientifically grounded. Language: English."
 )
 # Búsquedas que usa el agente investigador para ver qué funciona en el nicho
@@ -50,7 +51,7 @@ FPS = 30
 # "private"   -> sube en privado, vos lo publicás a mano (modo revisión, recomendado al inicio)
 # "scheduled" -> sube en privado y se publica solo SCHEDULE_DELAY_HOURS después (tiempo para revisar)
 # "public"    -> publica directo
-PUBLISH_MODE = os.getenv("PUBLISH_MODE", "private")
+PUBLISH_MODE = os.getenv("PUBLISH_MODE") or "scheduled"
 SCHEDULE_DELAY_HOURS = int(os.getenv("SCHEDULE_DELAY_HOURS", "6"))
 CATEGORY_ID = "27"  # Education
 

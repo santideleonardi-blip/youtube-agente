@@ -72,7 +72,8 @@ premise word for word: if you take inspiration from a trending video, give it a 
 trend or are proven evergreen curiosities, and that can be explained visually. Avoid medical, financial
 or legal advice, real tragedies, gore or politics.
 
-Return JSON: {{"topic": "What if ...?", "angle": "the specific hook/angle that makes it irresistible",
+The topic MUST be phrased as "What would happen if ...?" (the channel's signature format).
+Return JSON: {{"topic": "What would happen if ...?", "angle": "the specific hook/angle that makes it irresistible",
 "why": "short reason based on the data"}}""",
         temperature=1.0,
     )
