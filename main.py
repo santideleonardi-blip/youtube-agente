@@ -11,6 +11,7 @@ import sys
 import time
 import traceback
 
+import config
 from agents import analyst, animator, publisher, scriptwriter, strategist, trends
 from common import llm, schedule
 from common import state as st
@@ -40,6 +41,9 @@ def should_produce(state, now=None):
 
 def _note_quota(state, manual):
     """Si se agotó el cupo diario gratis de Gemini o de imágenes (Cloudflare), lo anota: el estratega no sube la cadencia."""
+    if os.getenv("DRY_RUN") != "1":  # las corridas manuales reales también gastan cupo de imágenes
+        _add_cf_usage(state, animator.cf_images, exhausted=animator.cf_quota_hit)
+        st.save(state)
     if manual:
         return
     now = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -49,6 +53,27 @@ def _note_quota(state, manual):
     if animator.cf_quota_hit:
         state["image_quota_hits"] = (state.get("image_quota_hits", []) + [now])[-20:]
     st.save(state)
+
+
+def _cf_usage(state):
+    """Imágenes FLUX.2 usadas hoy (día UTC, que es cuando se renueva el cupo de Cloudflare)."""
+    today = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    u = state.get("cf_usage") or {}
+    return u if u.get("date") == today else {"date": today, "images": 0, "exhausted": False}
+
+
+def _add_cf_usage(state, n, exhausted=False):
+    u = _cf_usage(state)
+    u["images"] += n
+    u["exhausted"] = u.get("exhausted") or exhausted
+    state["cf_usage"] = u
+
+
+def images_left(state):
+    u = _cf_usage(state)
+    if u.get("exhausted"):
+        return 0
+    return (animator.CF_DAILY_NEURONS - 300) // animator.CF_NEURONS_PER_IMAGE - u["images"]
 
 
 def main():
@@ -73,6 +98,20 @@ def main():
         print(f"[analista] falló, sigo con valores por defecto: {e}")
         decision = {"format": "short", "notes": [], "topic_insights": state.get("topic_insights", [])}
     fmt = forced if forced in ("short", "long") else decision["format"]
+    last_up = max((dt.datetime.fromisoformat(v["uploaded_at"]) for v in state["videos"] if v.get("youtube_id")), default=None)
+    if last_up and (dt.datetime.now(dt.timezone.utc) - last_up).total_seconds() > 36 * 3600:
+        animator.ALLOW_FALLBACK = True  # el canal lleva mucho sin videos: mejor otro estilo que nada
+        print("[animador] más de 36 h sin videos: si falta cupo de FLUX.2 se permite el respaldo")
+    left = images_left(state)
+    need = {f: animator.images_needed(f, config.FORMATS[f]["scenes"][1]) for f in ("short", "long")}
+    if not animator.ALLOW_FALLBACK and need[fmt] > left:
+        if fmt == "long" and need["short"] <= left:
+            print(f"[animador] quedan ~{left} imágenes FLUX.2 hoy: no alcanzan para un largo ({need['long']}) -> Short")
+            fmt = "short"
+        else:
+            print(f"[animador] quedan ~{left} imágenes FLUX.2 hoy (hacen falta {need[fmt]}): se pospone al próximo turno")
+            st.save(state)
+            return
     st.save(state)
     focus = [f"[growth strategy] {n}" for n in strat.get("focus_notes", [])]
     if strat.get("experiment"):
@@ -88,7 +127,13 @@ def main():
             print(f"[guionista] {e} -> lo hago como Short")
             fmt = "short"
             script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
-        render = animator.run(script, fmt, job_id)
+        try:
+            render = animator.run(script, fmt, job_id)
+        except animator.ImageQuotaExhausted as e:
+            print(f"[animador] {e}")
+            _note_quota(state, manual)
+            print("=== Pospuesto: el próximo turno lo vuelve a intentar ===")
+            return
         pub = publisher.run(topic, script, render, fmt, state, job_id)
     except Exception:
         _note_quota(state, manual)

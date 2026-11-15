@@ -142,6 +142,26 @@ def _fallback_image(path, w, h, seed):
 
 _IMG_FAILS = 0
 cf_quota_hit = False  # se agotó el cupo diario gratis de Cloudflare en esta corrida (lo usa el estratega)
+cf_images = 0         # imágenes FLUX.2 generadas en esta corrida (para llevar la cuenta del cupo diario)
+
+# Cupo de Cloudflare: 10.000 neurons por día (se renueva 00:00 UTC = 21:00 ARG).
+# FLUX.2 klein a 768x1344 = 6 tiles de 512x512 x 26,05 neurons ≈ 157 por imagen → ~60 imágenes por día.
+CF_DAILY_NEURONS = 10_000
+CF_NEURONS_PER_IMAGE = 157
+LONG_SCENES_PER_IMAGE = 2   # en videos largos cada ilustración se usa en 2 escenas seguidas (otra cámara)
+# El estilo que se eligió es el de FLUX.2. Si el cupo se acaba, el video se pospone en vez de
+# hacerse con otro modelo (se ve distinto). main.py activa el respaldo solo si el canal lleva >36 h sin videos.
+ALLOW_FALLBACK = False
+
+
+class ImageQuotaExhausted(RuntimeError):
+    """Se agotó el cupo diario de Cloudflare y no está permitido usar otro modelo."""
+
+
+def images_needed(fmt, n_scenes):
+    if fmt == "long":
+        return -(-n_scenes // LONG_SCENES_PER_IMAGE)
+    return n_scenes
 
 
 def _cloudflare_image(prompt, path, w, h, seed):
@@ -162,9 +182,16 @@ def _cloudflare_image(prompt, path, w, h, seed):
         # FLUX.1 schnell (respaldo, imagen cuadrada) — formato JSON
         ("@cf/black-forest-labs/flux-1-schnell", dict(json={"prompt": prompt, "steps": 8})),
     ]
-    for model, kwargs in attempts:
+    # klein va 2 veces (un error pasajero no debe cambiar el estilo); schnell solo si el filtro rechaza el prompt
+    attempts = [attempts[0], attempts[0], attempts[1]]
+    flagged = False
+    for n, (model, kwargs) in enumerate(attempts):
         if model in _CF_BAD:
             continue
+        if "schnell" in model and not flagged and not ALLOW_FALLBACK:
+            continue
+        if n == 1:
+            time.sleep(5)
         try:
             r = requests.post(base + model, headers=headers, timeout=120, **kwargs)
             data = r.json() if "json" in r.headers.get("content-type", "") else {}
@@ -173,6 +200,9 @@ def _cloudflare_image(prompt, path, w, h, seed):
                 with open(path, "wb") as f:
                     f.write(base64.b64decode(img_b64))
                 Image.open(path).convert("RGB").save(path, "PNG")
+                if "klein" in model:
+                    global cf_images
+                    cf_images += 1
                 print(f"[animador] imagen OK ({model.split('/')[-1]})")
                 return path
             print(f"[animador] Cloudflare {model.split('/')[-1]} HTTP {r.status_code}: {str(data)[:200]}")
@@ -183,6 +213,7 @@ def _cloudflare_image(prompt, path, w, h, seed):
                 print("[animador] cupo diario de Cloudflare agotado: sigo con Pollinations")
                 return None
             if "flagged" in str(data).lower():
+                flagged = True
                 continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
             if r.status_code in (400, 404, 422):
                 _CF_BAD.add(model)  # formato/modelo no soportado: no reintentar en esta corrida
@@ -200,6 +231,8 @@ def image(prompt, path, w, h, seed):
     full = f"{prompt}, {config.IMAGE_STYLE}"
     if _cloudflare_image(full, path, w, h, seed):
         return path
+    if cf_quota_hit and not ALLOW_FALLBACK and os.getenv("CF_ACCOUNT_ID"):
+        raise ImageQuotaExhausted("cupo diario de Cloudflare agotado: el video se pospone para mantener el estilo FLUX.2")
     # Pollinations limita el tamaño: pedimos ~1MP con la proporción correcta y después escalamos.
     gw, gh = (768, 1344) if h > w else (1344, 768)
     url = (
@@ -346,7 +379,12 @@ def run(script, fmt, job_id):
         mp3, words = mp3s[i], all_scene_words[i]
         png = os.path.join(wd, f"s{i:03d}.png")
         mp4 = os.path.join(wd, f"s{i:03d}.mp4")
-        image(sc.get("image_prompt") or sc["narration"], png, w, h, seed_base + i)
+        raw = os.path.join(wd, f"raw{i:03d}.png")
+        if fmt == "long" and i % LONG_SCENES_PER_IMAGE:
+            shutil.copy(os.path.join(wd, f"raw{i - i % LONG_SCENES_PER_IMAGE:03d}.png"), raw)
+        else:
+            image(sc.get("image_prompt") or sc["narration"], raw, w, h, seed_base + i)
+        shutil.copy(raw, png)
         if i == 0:
             shutil.copy(png, os.path.join(wd, "cover.png"))
         _cover(png, w, h)
