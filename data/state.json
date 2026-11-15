@@ -104,6 +104,16 @@
         "Insert pattern interrupts (sound design shifts, rapid visual scene changes, or visual punchlines) every 4 to 6 seconds to prevent audience drop-off."
       ],
       "reason": "We currently have 1 Short video published and 0 Long videos. To adhere to the target 33% long video mix (1 long video for every 2 short videos), publishing a second Short video next maintains the planned progression before deploying the first long-form video as video #3."
+    },
+    {
+      "date": "2026-11-15T22:49:13.928167+00:00",
+      "notes": [
+        "Hook viewers within the first 2 seconds by delivering the core hypothetical immediately—avoid introductions, channel names, or slow build-ups.",
+        "Use open loops mid-script (e.g., 'The final side effect changes everything...') to hold retention past the 30-second mark.",
+        "Implement pattern interrupts every 3-5 seconds (visual switches, sound cues, graphic overlays) to keep the animation visually stimulating.",
+        "Focus script flow on immediate sensory/visceral consequences before diving into deeper scientific or historical explanations."
+      ],
+      "reason": "With only 1 Short currently published and no Long videos yet, creating a second Short allows us to complete a 2 Shorts to 1 Long sequence (aiming for the 33% long-form mix on video 3) while establishing an initial baseline."
     }
   ],
   "format_stats": {
@@ -129,19 +139,19 @@
     "daily_target": 2,
     "long_share": 0.33,
     "focus_notes": [
-      "Launch two distinct content pillars to avoid repetitive content flags: 'Human Body Extremes' (relatable physiology) and 'Cosmic Collapses' (space/physics scale).",
-      "Integrate character 'Max' explicitly into the first 3 seconds of every video (visually and in script) as the relatable test-subject to build character recognition and added value.",
-      "Test three different hook templates across the next batch: Threat-first ('You have 5 seconds before...'), Question-first ('Have you ever wondered...?'), and Direct Escalation ('Day 1 is fine, but by Day 10...').",
-      "Ensure long-form scripts (33% of output) dig deeper into multi-stage consequences (Immediate, 1 Hour, 1 Year) rather than surface-level facts to maximize watch time."
+      "Introduce a third content pillar, 'Everyday Disaster Scenarios' (e.g., global internet loss, all plastic melting), to complement Human Body and Space pillars and maintain broad audience variety.",
+      "Standardize the multi-stage narrative structure (Immediate, 1 Hour, 1 Year) for long-form scripts to naturally extend watch duration toward the 8,000-hour goal.",
+      "Give character 'Max' distinct visual reactions and humorous mini-dialogues in each video to elevate content uniqueness and avoid automated content flags.",
+      "A/B test title lengths on Shorts by placing the core high-stakes phrase first (e.g., 'If Earth Lost Oxygen for 5 Seconds...' instead of long standard phrasing) to maximize feed CTR."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
-    "cadence_reason": "se mantiene en 2/día: todavía hay pocos videos con datos (0)",
+    "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
     "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
     "metrics": {
       "subs": 0,
       "watch_hours_365d": 0.0,
       "shorts_views_90d": 0,
-      "total_views": 0,
+      "total_views": 3,
       "video_count": 1,
       "long_minutes_28d": 0,
       "shorts_views_28d": 0
@@ -154,11 +164,20 @@
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-15T01:51:06.925591+00:00",
-    "experiment": "A/B test visual hook styles on Shorts: 3 Shorts using a fast-paced animated graphic intro vs 3 Shorts starting immediately with 'Max' in a comedic high-stakes situation. Measure performance by comparing 30-second retention rate and 'Viewed vs Swiped Away' percentage.",
-    "summary_es": "Estamos arrancando el canal desde cero, así que la prioridad ahora es generar los primeros datos y captar la atención del algoritmo. Vamos a lanzar dos videos al día combinando Shorts y videos largos, metiendo a Max como personaje principal para marcar diferencia con los canales automatizados comunes. Esta semana vamos a probar distintos tipos de ganchos iniciales para ver qué temática y formato atraen a los primeros suscriptores."
+    "last_run": "2026-11-15T22:44:57.174127+00:00",
+    "experiment": "Test 'Direct Escalation' hooks ('In 3 seconds, every cell in your body...') against 'Question-first' hooks across 6 Shorts featuring Max. Success will be measured by a 3-second Retention Rate above 65% and Average Percentage Viewed (APV) exceeding 70% on the Escalation group.",
+    "summary_es": "Recién estamos arrancando el canal y lanzamos el primer video de prueba para ajustar el algoritmo. Esta semana vamos a testear dos estilos distintos de enganche visual con nuestro personaje Max para ver cuál genera más retención. La meta inmediata es empezar a sumar las primeras reproducciones constantes y ganar tracción inicial."
   },
   "growth_history": [
+    {
+      "date": "2026-11-15",
+      "subs": 0,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 0,
+      "views_day": 0.0,
+      "daily_target": 2,
+      "long_share": 0.33
+    },
     {
       "date": "2026-11-15",
       "subs": 0,

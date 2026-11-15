@@ -1,9 +1,9 @@
 # Reporte de crecimiento — WhatWouldHappenIf?
 
-_Actualizado: 14/11/2026 22:51 (Argentina). Lo escribe solo el agente Estratega una vez por día._
+_Actualizado: 15/11/2026 19:44 (Argentina). Lo escribe solo el agente Estratega una vez por día._
 
 ## Resumen
-Estamos arrancando el canal desde cero, así que la prioridad ahora es generar los primeros datos y captar la atención del algoritmo. Vamos a lanzar dos videos al día combinando Shorts y videos largos, metiendo a Max como personaje principal para marcar diferencia con los canales automatizados comunes. Esta semana vamos a probar distintos tipos de ganchos iniciales para ver qué temática y formato atraen a los primeros suscriptores.
+Recién estamos arrancando el canal y lanzamos el primer video de prueba para ajustar el algoritmo. Esta semana vamos a testear dos estilos distintos de enganche visual con nuestro personaje Max para ver cuál genera más retención. La meta inmediata es empezar a sumar las primeras reproducciones constantes y ganar tracción inicial.
 
 ## Camino a la monetización (reglas desde el 1/2/2027)
 Hacen falta **1.000 suscriptores** y además **una** de estas dos: 8.000 horas de videos largos en 12 meses **o** 20 millones de vistas de Shorts en 90 días.
@@ -22,15 +22,15 @@ Primer escalón (membresías y Super Thanks, sin anuncios): 500 suscriptores + 3
 - Horas de videos largos por día: **0,0**
 
 ## Plan de producción
-- Videos por día: **2** — se mantiene en 2/día: todavía hay pocos videos con datos (0)
+- Videos por día: **2** — se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)
 - Videos largos: **33%** — fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos
-- Experimento de la semana: A/B test visual hook styles on Shorts: 3 Shorts using a fast-paced animated graphic intro vs 3 Shorts starting immediately with 'Max' in a comedic high-stakes situation. Measure performance by comparing 30-second retention rate and 'Viewed vs Swiped Away' percentage.
+- Experimento de la semana: Test 'Direct Escalation' hooks ('In 3 seconds, every cell in your body...') against 'Question-first' hooks across 6 Shorts featuring Max. Success will be measured by a 3-second Retention Rate above 65% and Average Percentage Viewed (APV) exceeding 70% on the Escalation group.
 
 ### Notas de foco para el investigador y el guionista
-- Launch two distinct content pillars to avoid repetitive content flags: 'Human Body Extremes' (relatable physiology) and 'Cosmic Collapses' (space/physics scale).
-- Integrate character 'Max' explicitly into the first 3 seconds of every video (visually and in script) as the relatable test-subject to build character recognition and added value.
-- Test three different hook templates across the next batch: Threat-first ('You have 5 seconds before...'), Question-first ('Have you ever wondered...?'), and Direct Escalation ('Day 1 is fine, but by Day 10...').
-- Ensure long-form scripts (33% of output) dig deeper into multi-stage consequences (Immediate, 1 Hour, 1 Year) rather than surface-level facts to maximize watch time.
+- Introduce a third content pillar, 'Everyday Disaster Scenarios' (e.g., global internet loss, all plastic melting), to complement Human Body and Space pillars and maintain broad audience variety.
+- Standardize the multi-stage narrative structure (Immediate, 1 Hour, 1 Year) for long-form scripts to naturally extend watch duration toward the 8,000-hour goal.
+- Give character 'Max' distinct visual reactions and humorous mini-dialogues in each video to elevate content uniqueness and avoid automated content flags.
+- A/B test title lengths on Shorts by placing the core high-stakes phrase first (e.g., 'If Earth Lost Oxygen for 5 Seconds...' instead of long standard phrasing) to maximize feed CTR.
 
 ## Mejores videos
-- (todavía sin datos)
+- What Would Happen If Gravity Doubled For 5 Seconds? #shorts — 3 vistas
