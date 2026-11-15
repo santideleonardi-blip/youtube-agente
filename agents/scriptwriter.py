@@ -3,6 +3,17 @@ import config
 from common import llm
 
 
+class ScriptTooShort(RuntimeError):
+    """Un guion de video largo quedó muy por debajo del mínimo aun después de ampliarlo."""
+
+
+def _as_script(res):
+    """El modelo a veces devuelve directamente la lista de escenas en vez de {"scenes": [...]}."""
+    if isinstance(res, list):
+        return {"scenes": [sc for sc in res if isinstance(sc, dict)]}
+    return res if isinstance(res, dict) else {}
+
+
 def run(topic, fmt, notes, past_feedback):
     spec = config.FORMATS[fmt]
     wmin, wmax = spec["target_words"]
@@ -38,7 +49,8 @@ Return JSON:
   "summary": "one-sentence summary of the video"}}""",
         temperature=0.9,
     )
-    scenes = [s for s in script.get("scenes", []) if s.get("narration")]
+    script = _as_script(script)
+    scenes = [s for s in script.get("scenes", []) if isinstance(s, dict) and s.get("narration")]
     if len(scenes) < 3:
         raise RuntimeError("El guion vino vacío o incompleto")
     script["scenes"] = scenes
@@ -58,6 +70,8 @@ Return JSON:
         if _words(longer) > words:
             script = longer
     print(f"[guionista] {len(script['scenes'])} escenas, {_words(script)} palabras")
+    if fmt == "long" and _words(script) < wmin * 0.7:
+        raise ScriptTooShort(f"guion largo de solo {_words(script)} palabras (mínimo {wmin})")
     return script
 
 
@@ -97,7 +111,8 @@ Scenes to expand:
 Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}]}}""",
             temperature=0.7,
         )
-        new = [sc for sc in res.get("scenes", []) if sc.get("narration")]
+        res = _as_script(res)
+        new = [sc for sc in res.get("scenes", []) if isinstance(sc, dict) and sc.get("narration")]
         new_words = sum(len(sc["narration"].split()) for sc in new)
         if len(new) >= max(1, len(part) // 2) and new_words > part_words:
             for sc, old in zip(new, part + [{}] * len(new)):

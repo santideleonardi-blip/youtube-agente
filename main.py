@@ -39,11 +39,16 @@ def should_produce(state, now=None):
 
 
 def _note_quota(state, manual):
-    """Si algún modelo de Gemini agotó su cupo diario gratis, lo anota: el estratega no sube la cadencia."""
-    if llm.quota_hit and not manual:
+    """Si se agotó el cupo diario gratis de Gemini o de imágenes (Cloudflare), lo anota: el estratega no sube la cadencia."""
+    if manual:
+        return
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    if llm.quota_hit:
         print(f"[llm] cupo diario agotado en: {sorted(llm.quota_hit)}")
-        state["quota_hits"] = (state.get("quota_hits", []) + [dt.datetime.now(dt.timezone.utc).isoformat()])[-20:]
-        st.save(state)
+        state["quota_hits"] = (state.get("quota_hits", []) + [now])[-20:]
+    if animator.cf_quota_hit:
+        state["image_quota_hits"] = (state.get("image_quota_hits", []) + [now])[-20:]
+    st.save(state)
 
 
 def main():
@@ -76,7 +81,13 @@ def main():
 
     try:
         topic = trends.run(state, fmt, notes, decision.get("topic_insights"))
-        script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
+        try:
+            script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
+        except scriptwriter.ScriptTooShort as e:
+            # un "largo" de 3 minutos no suma horas y se ve flojo: mejor un buen Short del mismo tema
+            print(f"[guionista] {e} -> lo hago como Short")
+            fmt = "short"
+            script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
         render = animator.run(script, fmt, job_id)
         pub = publisher.run(topic, script, render, fmt, state, job_id)
     except Exception:

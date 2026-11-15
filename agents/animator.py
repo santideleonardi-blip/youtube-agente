@@ -141,6 +141,7 @@ def _fallback_image(path, w, h, seed):
 
 
 _IMG_FAILS = 0
+cf_quota_hit = False  # se agotó el cupo diario gratis de Cloudflare en esta corrida (lo usa el estratega)
 
 
 def _cloudflare_image(prompt, path, w, h, seed):
@@ -175,6 +176,12 @@ def _cloudflare_image(prompt, path, w, h, seed):
                 print(f"[animador] imagen OK ({model.split('/')[-1]})")
                 return path
             print(f"[animador] Cloudflare {model.split('/')[-1]} HTTP {r.status_code}: {str(data)[:200]}")
+            if r.status_code == 429 and "daily free allocation" in str(data).lower():
+                global cf_quota_hit
+                cf_quota_hit = True
+                _CF_BAD.update(m for m, _ in attempts)  # cupo del día agotado: no insistir, pasar a Pollinations
+                print("[animador] cupo diario de Cloudflare agotado: sigo con Pollinations")
+                return None
             if "flagged" in str(data).lower():
                 continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
             if r.status_code in (400, 404, 422):
