@@ -39,7 +39,146 @@
       ],
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
-      "publish_hour_et": 19
+      "publish_hour_et": 19,
+      "views": 3,
+      "likes": 0
+    },
+    {
+      "job_id": "20261115_015106",
+      "youtube_id": "8e9Vm6tH2NY",
+      "title": "What Would Happen If Earth Spun Twice As Fast?",
+      "topic": "What would happen if the Earth spun twice as fast?",
+      "format": "long",
+      "duration": 186.61,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if the Earth suddenly spun twice as fast, turning our twenty-four-hour days into a brutal twelve-hour blur?"
+        },
+        {
+          "start": 7.6,
+          "narration": "Meet Max, our test subject, who is about to experience the fastest morning of his entire life."
+        },
+        {
+          "start": 14.29,
+          "narration": "Right now, Earth's rotation at the equator is a cool one thousand miles per hour."
+        },
+        {
+          "start": 20.09,
+          "narration": "Double that speed to two thousand miles per hour, and centrifugal force instantly goes wild."
+        },
+        {
+          "start": 26.58,
+          "narration": "Max steps outside and immediately notices he weighs two percent less."
+        },
+        {
+          "start": 31.35,
+          "narration": "Gravity hasn't changed, but the planet's outward fling is actively fighting it."
+        },
+        {
+          "start": 36.33,
+          "narration": "But that's just the beginning of the physics nightmare. Because the real chaos starts with the oceans."
+        },
+        {
+          "start": 42.09,
+          "narration": "Water begins rushing away from the poles and pooling entirely around the equator."
+        },
+        {
+          "start": 47.43,
+          "narration": "Islands like Hawaii and parts of Indonesia vanish beneath a sudden, permanent equatorial megatsunami."
+        },
+        {
+          "start": 54.92,
+          "narration": "Max checks his phone, but GPS satellites are tumbling out of orbit due to the atmospheric distortion."
+        },
+        {
+          "start": 61.79,
+          "narration": "Communications are dead. And the weather is about to turn apocalyptic."
+        },
+        {
+          "start": 66.47,
+          "narration": "Wind speeds instantly skyrocket to supersonic levels, whipping up fierce one-thousand-mile-per-hour gales."
+        },
+        {
+          "start": 73.88,
+          "narration": "Max has to barricade himself indoors as skyscrapers begin to sway and groan under the pressure."
+        },
+        {
+          "start": 80.08,
+          "narration": "Jet streams merge into a single, planet-encircling atmospheric buzzsaw."
+        },
+        {
+          "start": 84.98,
+          "narration": "Aircraft are permanently grounded because flying against this wind is literal suicide."
+        },
+        {
+          "start": 90.81,
+          "narration": "By hour six, the sun is already setting. Max's internal clock is completely shattered."
+        },
+        {
+          "start": 96.84,
+          "narration": "Human circadian rhythms are wired for twenty-four hours, not twelve."
+        },
+        {
+          "start": 101.67,
+          "narration": "Sleep deprivation sets in almost instantly, causing severe disorientation and cognitive failure."
+        },
+        {
+          "start": 108.47,
+          "narration": "Farmers find out they have half the daylight to grow crops, plunging global food supply chains into crisis."
+        },
+        {
+          "start": 115.74,
+          "narration": "Animals are panicking, migrating frantically as day and night cycle out of control."
+        },
+        {
+          "start": 121.21,
+          "narration": "Fast forward one month, and Earth's crust itself has started to adjust to the spin."
+        },
+        {
+          "start": 126.36,
+          "narration": "Tectonic plates shift, triggering massive earthquakes along the equatorial belt."
+        },
+        {
+          "start": 131.46,
+          "narration": "Volcanoes that have been dormant for centuries roar back to life, choking the skies in ash."
+        },
+        {
+          "start": 137.36,
+          "narration": "Max is now living in an underground bunker, wearing his orange jumpsuit as standard survival gear."
+        },
+        {
+          "start": 144.05,
+          "narration": "The centrifugal bulge at the equator is now permanent, making the Earth noticeably wider and flatter."
+        },
+        {
+          "start": 150.74,
+          "narration": "Satellites require constant orbital burns just to stay functional above this distorted planet."
+        },
+        {
+          "start": 157.34,
+          "narration": "Fast forward one full year. Humanity has adapted, but civilization is drastically smaller."
+        },
+        {
+          "start": 163.87,
+          "narration": "We sleep in shifts of four hours, living life at double speed with shorter years and faster aging."
+        },
+        {
+          "start": 170.36,
+          "narration": "Max looks up at the stars, which now streak across the night sky like glowing neon laser lines."
+        },
+        {
+          "start": 176.96,
+          "narration": "We survived the speed-up, but Earth will never, ever look the same again."
+        },
+        {
+          "start": 181.37,
+          "narration": "What would happen if the Earth stopped spinning completely instead? Click here to find out."
+        }
+      ],
+      "uploaded_at": "2026-11-15T02:24:50.604107+00:00",
+      "publish_at": "2026-11-15T20:00:00+00:00",
+      "publish_hour_et": 15
     }
   ],
   "feedback": [
@@ -62,12 +201,22 @@
         "Eliminate slow contextual intros and start directly in the middle of the hypothetical scenario."
       ],
       "reason": "Since this is a brand new channel with zero videos, we must prioritize YouTube Shorts to build initial algorithmic reach and subscriber base quickly, following the rule that new channels (<10 videos) should focus mostly on shorts."
+    },
+    {
+      "date": "2026-11-15T01:55:31.563625+00:00",
+      "notes": [
+        "Hook the audience visually and audibly in the first 2 seconds with the immediate consequence of the premise.",
+        "Eliminate branded intros, channel hellos, or background setup—jump straight into the hypothetical action.",
+        "Create open loops every 15-20 seconds (e.g., 'But the real chaos begins at minute three...') to maintain curiosity.",
+        "Incorporate rapid animation pattern interrupts every 2-4 seconds to reset viewer attention span."
+      ],
+      "reason": "Only 1 Short video has been uploaded so far, leaving long-form data at zero. Releasing a long video now allows us to test both formats early in the channel's testing phase while building toward the target 33% long content ratio."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 3
     },
     "long": {
       "count": 0,
@@ -82,5 +231,52 @@
     "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning) to leverage high innate curiosity.",
     "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics tend to yield higher emotional engagement than abstract physics.",
     "Frame historical hypotheticals around massive, recognizable pivot points with clear modern consequences rather than niche events."
+  ],
+  "strategy": {
+    "daily_target": 2,
+    "long_share": 0.33,
+    "focus_notes": [
+      "Launch two distinct content pillars to avoid repetitive content flags: 'Human Body Extremes' (relatable physiology) and 'Cosmic Collapses' (space/physics scale).",
+      "Integrate character 'Max' explicitly into the first 3 seconds of every video (visually and in script) as the relatable test-subject to build character recognition and added value.",
+      "Test three different hook templates across the next batch: Threat-first ('You have 5 seconds before...'), Question-first ('Have you ever wondered...?'), and Direct Escalation ('Day 1 is fine, but by Day 10...').",
+      "Ensure long-form scripts (33% of output) dig deeper into multi-stage consequences (Immediate, 1 Hour, 1 Year) rather than surface-level facts to maximize watch time."
+    ],
+    "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
+    "cadence_reason": "se mantiene en 2/día: todavía hay pocos videos con datos (0)",
+    "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
+    "metrics": {
+      "subs": 0,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 0,
+      "total_views": 0,
+      "video_count": 1,
+      "long_minutes_28d": 0,
+      "shorts_views_28d": 0
+    },
+    "pace": {
+      "views_day": 0.0,
+      "subs_day": 0.0,
+      "long_hours_day": 0.0,
+      "shorts_views_day": 0,
+      "long_path_fraction": 0.0,
+      "shorts_path_fraction": 0.0
+    },
+    "last_run": "2026-11-15T01:51:06.925591+00:00",
+    "experiment": "A/B test visual hook styles on Shorts: 3 Shorts using a fast-paced animated graphic intro vs 3 Shorts starting immediately with 'Max' in a comedic high-stakes situation. Measure performance by comparing 30-second retention rate and 'Viewed vs Swiped Away' percentage.",
+    "summary_es": "Estamos arrancando el canal desde cero, así que la prioridad ahora es generar los primeros datos y captar la atención del algoritmo. Vamos a lanzar dos videos al día combinando Shorts y videos largos, metiendo a Max como personaje principal para marcar diferencia con los canales automatizados comunes. Esta semana vamos a probar distintos tipos de ganchos iniciales para ver qué temática y formato atraen a los primeros suscriptores."
+  },
+  "growth_history": [
+    {
+      "date": "2026-11-15",
+      "subs": 0,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 0,
+      "views_day": 0.0,
+      "daily_target": 2,
+      "long_share": 0.33
+    }
+  ],
+  "quota_hits": [
+    "2026-11-15T02:24:50.603514+00:00"
   ]
 }
