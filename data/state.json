@@ -84,6 +84,16 @@
         "Ground abstract physics in relatable human stakes: explain what happens to a person sitting on their couch before zooming out to the planetary scale."
       ],
       "reason": "The growth target is a 33% long-form ratio (1 in 3). Currently, the channel has published 1 long and 1 short video (50% long). Producing a short will balance the distribution to exactly 1 long out of 3 total videos."
+    },
+    {
+      "date": "2026-11-15T17:41:47.979897+00:00",
+      "notes": [
+        "Hook viewers in the first 2 seconds by jumping directly into the hypothetical scenario without any intro, channel greeting, or logo animation.",
+        "Utilize open loops within the script by teasing a major consequence coming at the end of the video to minimize drop-off.",
+        "Incorporate visual or auditory pattern interrupts every 3-5 seconds to keep animated pacing energetic and re-engage viewers.",
+        "Avoid dense scientific jargon or slow setups; present dramatic, easily digestible consequences in rapid succession."
+      ],
+      "reason": "We currently have 0 long-form videos tested and 1 short. To evaluate both formats and maintain the target 33% long-form mix (1 long out of every 3 videos), the next video should be long to gather baseline performance data."
     }
   ],
   "format_stats": {
@@ -92,8 +102,8 @@
       "avg_views": 3
     },
     "long": {
-      "count": 1,
-      "avg_views": 1
+      "count": 0,
+      "avg_views": 0
     }
   },
   "publish_slots_et": [
