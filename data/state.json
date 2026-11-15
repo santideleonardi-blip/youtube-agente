@@ -178,7 +178,50 @@
       ],
       "uploaded_at": "2026-11-15T02:24:50.604107+00:00",
       "publish_at": "2026-11-15T20:00:00+00:00",
-      "publish_hour_et": 15
+      "publish_hour_et": 15,
+      "views": 1,
+      "likes": 0
+    },
+    {
+      "job_id": "20261115_124829",
+      "youtube_id": "0AXCX_hz9uI",
+      "title": "What Would Happen If Humans Ran As Fast As Cheetahs? #shorts",
+      "topic": "What would happen if humans could run as fast as cheetahs?",
+      "format": "short",
+      "duration": 51.1,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "The moment Max sprints to work at 70 miles per hour, his Achilles tendons instantly snap like rubber bands."
+        },
+        {
+          "start": 7.35,
+          "narration": "Hitting cheetah speed subjects a human body to 3G acceleration, but that’s before his blood starts boiling."
+        },
+        {
+          "start": 14.69,
+          "narration": "At top speed, 70-mph winds strip Max's clothes clean off while blinding his unprotected, non-cheetah eyes."
+        },
+        {
+          "start": 22.99,
+          "narration": "Without claw-like traction, his shoes melt instantly, launching him into an uncontrollable, bone-crushing skid."
+        },
+        {
+          "start": 30.69,
+          "narration": "Worst of all, human skin can’t dissipate heat fast enough, causing internal organs to literally cook in twenty seconds."
+        },
+        {
+          "start": 38.64,
+          "narration": "While a cheetah rests peacefully after a short sprint, a human running 70 miles per hour ends up completely destroyed."
+        },
+        {
+          "start": 46.48,
+          "narration": "Which is why you should never try it, especially considering what happens..."
+        }
+      ],
+      "uploaded_at": "2026-11-15T13:08:43.984720+00:00",
+      "publish_at": "2026-11-16T00:00:00+00:00",
+      "publish_hour_et": 19
     }
   ],
   "feedback": [
@@ -211,6 +254,16 @@
         "Incorporate rapid animation pattern interrupts every 2-4 seconds to reset viewer attention span."
       ],
       "reason": "Only 1 Short video has been uploaded so far, leaving long-form data at zero. Releasing a long video now allows us to test both formats early in the channel's testing phase while building toward the target 33% long content ratio."
+    },
+    {
+      "date": "2026-11-15T12:48:29.144182+00:00",
+      "notes": [
+        "Hook viewers within the first 2 seconds: start directly in media res with the catastrophic consequence rather than preamble or channel intros.",
+        "Plant open loops early: tease a bizarre or deadly secondary effect (e.g., 'and that is before the atmosphere catches fire') to maintain watch time through the middle.",
+        "Incorporate audio and visual pattern interrupts every 4 to 6 seconds to prevent retention drop-offs typical in animated explanatory content.",
+        "Ground abstract physics in relatable human stakes: explain what happens to a person sitting on their couch before zooming out to the planetary scale."
+      ],
+      "reason": "The growth target is a 33% long-form ratio (1 in 3). Currently, the channel has published 1 long and 1 short video (50% long). Producing a short will balance the distribution to exactly 1 long out of 3 total videos."
     }
   ],
   "format_stats": {
@@ -219,8 +272,8 @@
       "avg_views": 3
     },
     "long": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 1
     }
   },
   "publish_slots_et": [
@@ -228,9 +281,9 @@
     19
   ],
   "topic_insights": [
-    "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning) to leverage high innate curiosity.",
-    "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics tend to yield higher emotional engagement than abstract physics.",
-    "Frame historical hypotheticals around massive, recognizable pivot points with clear modern consequences rather than niche events."
+    "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning or gravity doubling) to leverage innate curiosity and high click-through intent.",
+    "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics consistently evoke stronger emotional engagement than pure abstract physics.",
+    "Frame historical hypotheticals around massive, globally recognizable pivot points with clear modern consequences rather than niche or academic events."
   ],
   "strategy": {
     "daily_target": 2,
