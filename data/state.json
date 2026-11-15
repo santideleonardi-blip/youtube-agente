@@ -94,6 +94,16 @@
         "Avoid dense scientific jargon or slow setups; present dramatic, easily digestible consequences in rapid succession."
       ],
       "reason": "We currently have 0 long-form videos tested and 1 short. To evaluate both formats and maintain the target 33% long-form mix (1 long out of every 3 videos), the next video should be long to gather baseline performance data."
+    },
+    {
+      "date": "2026-11-15T19:42:32.035176+00:00",
+      "notes": [
+        "Hook viewers within the first 1.5 to 2 seconds by displaying the immediate, dramatic consequence of the hypothetical before giving background context.",
+        "Eliminate intros, channel greetings, and long setups; start the narration mid-action or directly with the core question.",
+        "Create open loops in the script early on (e.g., '...but the real visual nightmare happens at minute two') to drive watch time to the end.",
+        "Insert pattern interrupts (sound design shifts, rapid visual scene changes, or visual punchlines) every 4 to 6 seconds to prevent audience drop-off."
+      ],
+      "reason": "We currently have 1 Short video published and 0 Long videos. To adhere to the target 33% long video mix (1 long video for every 2 short videos), publishing a second Short video next maintains the planned progression before deploying the first long-form video as video #3."
     }
   ],
   "format_stats": {
