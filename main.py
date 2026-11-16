@@ -90,6 +90,17 @@ def main():
     if not manual and not should_produce(state):
         return
 
+    last_up = max((dt.datetime.fromisoformat(v["uploaded_at"]) for v in state["videos"] if v.get("youtube_id")), default=None)
+    if last_up and (dt.datetime.now(dt.timezone.utc) - last_up).total_seconds() > 36 * 3600:
+        animator.ALLOW_FALLBACK = True  # el canal lleva mucho sin videos: mejor otro estilo que nada
+        print("[animador] más de 36 h sin videos: si falta cupo de FLUX.2 se permite el respaldo")
+    left = images_left(state)
+    need = {f: animator.images_needed(f, config.FORMATS[f]["scenes"][1]) for f in ("short", "long")}
+    if not animator.ALLOW_FALLBACK and left < need["short"]:
+        # sin cupo de imágenes ni para un Short: salir antes de gastar cupo de Gemini en el analista
+        print(f"[animador] quedan ~{left} imágenes FLUX.2 hoy: se pospone al próximo turno (se renueva 21:00 ARG)")
+        return
+
     print(f"=== Nuevo video {job_id} ===")
     forced = os.getenv("FORCE_FORMAT")
     try:
@@ -98,12 +109,6 @@ def main():
         print(f"[analista] falló, sigo con valores por defecto: {e}")
         decision = {"format": "short", "notes": [], "topic_insights": state.get("topic_insights", [])}
     fmt = forced if forced in ("short", "long") else decision["format"]
-    last_up = max((dt.datetime.fromisoformat(v["uploaded_at"]) for v in state["videos"] if v.get("youtube_id")), default=None)
-    if last_up and (dt.datetime.now(dt.timezone.utc) - last_up).total_seconds() > 36 * 3600:
-        animator.ALLOW_FALLBACK = True  # el canal lleva mucho sin videos: mejor otro estilo que nada
-        print("[animador] más de 36 h sin videos: si falta cupo de FLUX.2 se permite el respaldo")
-    left = images_left(state)
-    need = {f: animator.images_needed(f, config.FORMATS[f]["scenes"][1]) for f in ("short", "long")}
     if not animator.ALLOW_FALLBACK and need[fmt] > left:
         if fmt == "long" and need["short"] <= left:
             print(f"[animador] quedan ~{left} imágenes FLUX.2 hoy: no alcanzan para un largo ({need['long']}) -> Short")
