@@ -40,8 +40,11 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 3,
-      "likes": 0
+      "views": 5,
+      "likes": 1,
+      "avg_view_pct": 31.9,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261116_015758",
@@ -83,7 +86,7 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 0,
+      "views": 20,
       "likes": 0
     },
     {
@@ -229,7 +232,54 @@
       ],
       "uploaded_at": "2026-11-16T14:03:34.567321+00:00",
       "publish_at": "2026-11-17T00:00:00+00:00",
-      "publish_hour_et": 19
+      "publish_hour_et": 19,
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261116_205804",
+      "youtube_id": "zaL8l6GOhuU",
+      "title": "What Would Happen If You Punched Like A Mantis Shrimp? #shorts",
+      "topic": "What would happen if humans had the punch of a mantis shrimp?",
+      "format": "short",
+      "duration": 45.86,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If you had the punch of a mantis shrimp, a single high-five would trigger a kinetic explosion!"
+        },
+        {
+          "start": 5.9,
+          "narration": "Your fist accelerates at fifty miles per hour in milliseconds—faster than a speeding bullet."
+        },
+        {
+          "start": 11.86,
+          "narration": "The hyper-speed impact instantly boils moisture in the air, creating glowing plasma bubbles hotter than the sun."
+        },
+        {
+          "start": 19.18,
+          "narration": "A deafening shockwave blows out every window on your block before your punch even lands."
+        },
+        {
+          "start": 24.74,
+          "narration": "But that’s not even the worst part. Your human body can't handle the recoil."
+        },
+        {
+          "start": 29.61,
+          "narration": "Delivering fifty thousand Gs of force snaps your arm bones into dust like dry twigs."
+        },
+        {
+          "start": 35.95,
+          "narration": "Unless you evolve metal bones, every simple fist bump is a one-way trip to the emergency room."
+        },
+        {
+          "start": 42.55,
+          "narration": "Which means you would immediately regret asking..."
+        }
+      ],
+      "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
+      "publish_at": "2026-11-17T20:00:00+00:00",
+      "publish_hour_et": 15
     }
   ],
   "feedback": [
@@ -322,15 +372,25 @@
         "Keep voiceover delivery crisp and high-energy with zero dead air between sentences."
       ],
       "reason": "We have published 2 Shorts and 0 long-form videos. Following the target mix of 33% long content (1 long video for every 3 total videos during testing), the next video must be long format."
+    },
+    {
+      "date": "2026-11-16T21:01:14.780600+00:00",
+      "notes": [
+        "Deliver the core hypothetical visual hook within the first 2 seconds without warm-up greetings or channel intros.",
+        "Utilize pattern interrupts (zoom-ins, sound triggers, graphic shifts) every 3-5 seconds in Shorts to protect retention.",
+        "Open visual and narrative loops early by introducing escalations that viewers must stay to see resolved.",
+        "Anchor abstract scientific concepts to immediate sensory human experiences rather than technical jargon."
+      ],
+      "reason": "To maintain the growth strategist's target mix of ~33% long videos (1 long out of every 3 videos), the 4th video should be a short following the recent long-form release."
     }
   ],
   "format_stats": {
     "short": {
       "count": 2,
-      "avg_views": 2
+      "avg_views": 12
     },
     "long": {
-      "count": 0,
+      "count": 1,
       "avg_views": 0
     }
   },
@@ -339,6 +399,7 @@
     19
   ],
   "topic_insights": [
+    "Human body modification and physical capability hypotheticals (e.g., jumping like a flea) generate higher initial organic interest than abstract physics forces.",
     "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning or gravity doubling) to leverage innate curiosity and high click-through intent.",
     "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics consistently evoke stronger emotional engagement than pure abstract physics.",
     "Frame historical hypotheticals around massive, globally recognizable pivot points with clear modern consequences rather than niche or academic events."
@@ -347,10 +408,10 @@
     "daily_target": 2,
     "long_share": 0.33,
     "focus_notes": [
-      "Introduce a third content pillar, 'Everyday Disaster Scenarios' (e.g., global internet loss, all plastic melting), to complement Human Body and Space pillars and maintain broad audience variety.",
-      "Standardize the multi-stage narrative structure (Immediate, 1 Hour, 1 Year) for long-form scripts to naturally extend watch duration toward the 8,000-hour goal.",
-      "Give character 'Max' distinct visual reactions and humorous mini-dialogues in each video to elevate content uniqueness and avoid automated content flags.",
-      "A/B test title lengths on Shorts by placing the core high-stakes phrase first (e.g., 'If Earth Lost Oxygen for 5 Seconds...' instead of long standard phrasing) to maximize feed CTR."
+      "Launch a dedicated content mini-series focused on 'Human Body Extremes' (e.g., 'What Would Happen If You Only Ate Sugar?', 'What Would Happen If Your Brain Used 100% Capacity?') to tap into high-search curiosity niches.",
+      "Upgrade Short hooks: ensure character Max experiences a dramatic visual transformation within the first 1.5 seconds to push Average Percentage Viewed significantly above the current 31.9% benchmark.",
+      "Vary long-form video structure by testing a 'Pivotal Choice' format (showing two alternate outcomes) instead of the standard '1 Hour / 1 Year' timeline to keep content feeling unique and avoid YouTube inauthentic content flags.",
+      "Add bracketed intrigue tags to long-form video titles (e.g., '... [Scientifically Explained]') to improve click-through rates from suggested video feeds."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
@@ -358,23 +419,23 @@
     "metrics": {
       "subs": 0,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 0,
+      "shorts_views_90d": 3,
       "total_views": 3,
-      "video_count": 1,
+      "video_count": 2,
       "long_minutes_28d": 0,
-      "shorts_views_28d": 0
+      "shorts_views_28d": 3
     },
     "pace": {
-      "views_day": 0.0,
+      "views_day": 0.1,
       "subs_day": 0.0,
       "long_hours_day": 0.0,
       "shorts_views_day": 0,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-15T22:44:57.174127+00:00",
-    "experiment": "Test 'Direct Escalation' hooks ('In 3 seconds, every cell in your body...') against 'Question-first' hooks across 6 Shorts featuring Max. Success will be measured by a 3-second Retention Rate above 65% and Average Percentage Viewed (APV) exceeding 70% on the Escalation group.",
-    "summary_es": "Recién estamos arrancando el canal y lanzamos el primer video de prueba para ajustar el algoritmo. Esta semana vamos a testear dos estilos distintos de enganche visual con nuestro personaje Max para ver cuál genera más retención. La meta inmediata es empezar a sumar las primeras reproducciones constantes y ganar tracción inicial."
+    "last_run": "2026-11-16T20:58:04.682328+00:00",
+    "experiment": "Test high-impact visual hooks on Shorts: publish 3 Shorts starting immediately with a 1-second chaotic animation of Max in danger versus 3 Shorts starting with standard voiceover text, measuring if the visual jump-start increases Average Percentage Viewed past 60%.",
+    "summary_es": "El canal está dando sus primeros pasos y recién acumula las primeras reproducciones, lo cual es totalmente normal al principio. Esta semana vamos a probar enganches más dinámicos en los Shorts con el personaje Max y sumaremos temas sobre el cuerpo humano para empezar a despegar. La idea es descubrir qué formato atrae más audiencia rápidamente para sumar horas de visualización."
   },
   "growth_history": [
     {
@@ -394,15 +455,25 @@
       "views_day": 0.0,
       "daily_target": 2,
       "long_share": 0.33
+    },
+    {
+      "date": "2026-11-16",
+      "subs": 0,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3,
+      "views_day": 0.1,
+      "daily_target": 2,
+      "long_share": 0.33
     }
   ],
   "quota_hits": [
     "2026-11-15T02:24:50.603514+00:00",
-    "2026-11-16T02:03:34.989494+00:00"
+    "2026-11-16T02:03:34.989494+00:00",
+    "2026-11-16T21:07:19.035068+00:00"
   ],
   "cf_usage": {
     "date": "2026-11-16",
-    "images": 24,
+    "images": 32,
     "exhausted": false
   }
 }
