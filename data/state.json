@@ -42,6 +42,47 @@
       "publish_hour_et": 19,
       "views": 3,
       "likes": 0
+    },
+    {
+      "job_id": "20261116_015758",
+      "youtube_id": "UdFVLhxmO2s",
+      "title": "What Would Happen If You Jumped Like A Flea? #shorts",
+      "topic": "What would happen if humans could jump like a flea?",
+      "format": "short",
+      "duration": 46.94,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if you could jump like a flea and clear a 60-story skyscraper in one bounce?"
+        },
+        {
+          "start": 6.13,
+          "narration": "It sounds awesome, but before your feet even leave the ground, something horrifying happens to your body."
+        },
+        {
+          "start": 12.93,
+          "narration": "Fleas store elastic protein energy to snap upward with a bone-crushing 100 Gs of explosive acceleration."
+        },
+        {
+          "start": 21.58,
+          "narration": "For Max, that sudden blast would instantly shatter his leg bones and flush all blood from his brain."
+        },
+        {
+          "start": 27.88,
+          "narration": "Passed out cold, his limp body rockets 600 feet into the clouds like an unconscious human cannonball."
+        },
+        {
+          "start": 35.18,
+          "narration": "Then comes the landing—plunging back down at terminal velocity to smash into the pavement like a meteor."
+        },
+        {
+          "start": 41.91,
+          "narration": "You wouldn't even survive the launch, leaving you broken in a crater, wondering..."
+        }
+      ],
+      "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
+      "publish_at": "2026-11-16T20:00:00+00:00",
+      "publish_hour_et": 15
     }
   ],
   "feedback": [
@@ -114,6 +155,16 @@
         "Focus script flow on immediate sensory/visceral consequences before diving into deeper scientific or historical explanations."
       ],
       "reason": "With only 1 Short currently published and no Long videos yet, creating a second Short allows us to complete a 2 Shorts to 1 Long sequence (aiming for the 33% long-form mix on video 3) while establishing an initial baseline."
+    },
+    {
+      "date": "2026-11-16T01:57:58.368309+00:00",
+      "notes": [
+        "Hook the viewer within the first 2 seconds using a visceral visual and immediate question; avoid channel intros, logos, or throat-clearing preamble.",
+        "Plant an explicit open loop early (e.g., '...and by the third second, human bodies do something horrifying') so viewers stay through the mid-point.",
+        "Deploy visual or audio pattern interrupts every 3 to 4 seconds (camera punch-ins, sound effects, sudden motion) to reset viewer attention.",
+        "Ground abstract hypothetical physics in relatable human consequences (e.g., your bones collapsing vs. simple numerical mass calculations)."
+      ],
+      "reason": "Following the test mix target of ~33% long-form content (1 in every 3 videos), producing a second Short now sets up video 3 to be Long, completing the 2 Shorts to 1 Long cycle."
     }
   ],
   "format_stats": {
@@ -189,11 +240,12 @@
     }
   ],
   "quota_hits": [
-    "2026-11-15T02:24:50.603514+00:00"
+    "2026-11-15T02:24:50.603514+00:00",
+    "2026-11-16T02:03:34.989494+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-15",
-    "images": 0,
-    "exhausted": true
+    "date": "2026-11-16",
+    "images": 7,
+    "exhausted": false
   }
 }
