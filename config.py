@@ -37,10 +37,14 @@ TTS_RATE = os.getenv("TTS_RATE", "+8%")
 # para que se vea siempre igual (mismo pelo, ropa y accesorios).
 MAX_NAME = "Max, an adult explorer"
 MAX_LOOK = (
-    "Max: the same adult man in every image, about 30 years old, light tan skin, short messy brown hair, "
-    "thick dark eyebrows, short stubble beard, round friendly face, big expressive eyes, "
-    "bright orange one-piece jumpsuit with rolled-up sleeves, white chest patch, dark brown utility belt, "
-    "dark brown boots, black wristwatch on his left wrist, no hat, no glasses"
+    "Max: the same cartoon man in every image, drawn in a hand-drawn adult-cartoon style with thick black "
+    "outlines and simple cel shading; adult man around 30, fair skin with slightly rosy cheeks, very messy "
+    "spiky dark brown hair sticking out in all directions with a fringe over his forehead, thick brown "
+    "eyebrows, light brown stubble on chin and jaw, big round white eyes with small dark pupils, slightly "
+    "rounded nose; loose bright orange zip-up jumpsuit with a hood collar and a front zipper, dark gray "
+    "t-shirt visible at the neck, dark brown boots; no hat, no helmet, no glasses, no accessories. "
+    "His default expression is calm, curious and friendly (relaxed smile); he only looks scared or shocked "
+    "when the scene says so"
 )
 
 IMAGE_STYLE = (
