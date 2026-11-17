@@ -33,6 +33,16 @@ TTS_VOICE = os.getenv("TTS_VOICE", "en-US-AndrewNeural")
 TTS_RATE = os.getenv("TTS_RATE", "+8%")
 
 # Estilo visual fijo del canal (coherencia = marca reconocible)
+# Aspecto fijo de Max, el personaje del canal: se agrega igual a cada imagen donde aparece
+# para que se vea siempre igual (mismo pelo, ropa y accesorios).
+MAX_NAME = "Max, an adult explorer"
+MAX_LOOK = (
+    "Max: the same adult man in every image, about 30 years old, light tan skin, short messy brown hair, "
+    "thick dark eyebrows, short stubble beard, round friendly face, big expressive eyes, "
+    "bright orange one-piece jumpsuit with rolled-up sleeves, white chest patch, dark brown utility belt, "
+    "dark brown boots, black wristwatch on his left wrist, no hat, no glasses"
+)
+
 IMAGE_STYLE = (
     "flat 2D vector cartoon illustration, simple geometric shapes, bold clean outlines, "
     "vibrant saturated colors, soft gradients, minimal background, expressive adult characters, "

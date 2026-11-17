@@ -225,10 +225,25 @@ def _cloudflare_image(prompt, path, w, h, seed):
 _CF_BAD = set()
 
 
+_MAX_RE = re.compile(r"\bMax\b")
+# Lo que el guionista suele escribir después de "Max" para describirlo ("an adult explorer with messy
+# brown hair and an orange jumpsuit", etc.): se saca para que no compita con la descripción fija.
+_MAX_DESC_RE = re.compile(r"\bMax\b(?:'s)?\s*(?:,|\()?\s*(?:the |an? )?(?:adult )?explorer"
+                          r"(?:\s+(?:with|in|wearing)\b[^,.;)]*)?(?:\s+and\s+an?\s+[^,.;)]*jumpsuit)?\)?", re.I)
+
+
+def with_max_look(prompt):
+    """Si la escena muestra a Max, le pega siempre la misma descripción física."""
+    if not _MAX_RE.search(prompt or ""):
+        return prompt
+    prompt = _MAX_DESC_RE.sub("Max", prompt)
+    return f"{prompt}. {config.MAX_LOOK}"
+
+
 def image(prompt, path, w, h, seed):
     if MOCK_IMAGES:
         return _fallback_image(path, w, h, seed)
-    full = f"{prompt}, {config.IMAGE_STYLE}"
+    full = f"{with_max_look(prompt)}, {config.IMAGE_STYLE}"
     if _cloudflare_image(full, path, w, h, seed):
         return path
     if cf_quota_hit and not ALLOW_FALLBACK and os.getenv("CF_ACCOUNT_ID"):

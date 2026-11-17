@@ -7,6 +7,16 @@ class ScriptTooShort(RuntimeError):
     """Un guion de video largo quedó muy por debajo del mínimo aun después de ampliarlo."""
 
 
+def _ensure_max(scenes):
+    """Max es el protagonista: si alguna imagen quedó sin él, se lo agrega reaccionando a la escena."""
+    for sc in scenes:
+        p = (sc.get("image_prompt") or "").strip()
+        if "Max" not in p:
+            sc["image_prompt"] = f"Max in the foreground reacting to the scene: {p}" if p else \
+                f"Max reacting to: {sc.get('narration', '')[:200]}"
+    return scenes
+
+
 def _as_script(res):
     """El modelo a veces devuelve directamente la lista de escenas en vez de {"scenes": [...]}."""
     if isinstance(res, list):
@@ -39,9 +49,14 @@ Rules:
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
 - Simple spoken English, short sentences, accurate science/history, light humour.
 - {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}
-- Each scene needs an image prompt describing ONE clear visual (characters, objects, setting) that
-  matches the narration. Do not include any text in the images. When a person is needed, use the
-  channel's recurring character: "Max, an adult explorer with messy brown hair and an orange jumpsuit".
+- MAX IS THE PROTAGONIST of the channel and of this video. Tell the story through Max: he lives the
+  "what if" scenario, reacts to it, explores it, explains it and tries things out
+  (e.g. "Max wakes up and the gravity has doubled..."). The narrator talks about what Max sees, feels
+  and does; the science is shown through what happens to him. He is the only recurring person.
+- Each scene needs an image prompt describing ONE clear visual (Max, objects, setting) that matches the
+  narration. Max appears in EVERY image, doing or reacting to what the narration says. Do not include any
+  text in the images. Write him exactly as "Max" (just the name: his look is added automatically,
+  so do NOT describe his face, hair or clothes, and never give him a different outfit, hat or helmet).
   Never depict children. Make the first image the most striking and dramatic one (it is the hook).
 
 Return JSON:
@@ -54,6 +69,7 @@ Return JSON:
     if len(scenes) < 3:
         raise RuntimeError("El guion vino vacío o incompleto")
     script["scenes"] = scenes
+    _ensure_max(scenes)
 
     # Los modelos tienden a quedarse cortos en guiones largos: si falta texto, se lo pide ampliar
     # (hasta 2 veces) y se queda con la mejor versión. Un largo de 4 min no suma horas de visualización.
@@ -101,8 +117,9 @@ Rewrite EACH scene longer, keeping its order, meaning and role in the story (kee
 the beginning, keep the ending if this is the end). Go deeper: surprising facts, concrete numbers and
 comparisons, step-by-step consequences, mini open loops, light humour. No filler, no repetition,
 no greetings, no "in this video". Keep the same number of scenes ({len(part)}).
-Each scene keeps its "image_prompt" (ONE clear visual, no text; people = "Max, an adult explorer with
-messy brown hair and an orange jumpsuit"; never children).
+Each scene keeps its "image_prompt" (ONE clear visual, no text; Max appears in every
+image as the protagonist, written just "Max", without describing his looks or clothes; never children).
+Keep Max as the protagonist of the narration too: the story is what happens to him.
 
 Full video summary: {script.get('summary', '')}
 Scenes to expand:
@@ -120,4 +137,4 @@ Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}]}}""",
             out_scenes += new
         else:
             out_scenes += part  # si esta parte salió mal, se queda la original
-    return {"scenes": out_scenes[:smax], "summary": script.get("summary", "")}
+    return {"scenes": _ensure_max(out_scenes[:smax]), "summary": script.get("summary", "")}
