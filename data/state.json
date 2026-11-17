@@ -280,8 +280,8 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 0,
-      "likes": 0
+      "views": 341,
+      "likes": 15
     },
     {
       "job_id": "20261117_194809",
@@ -318,7 +318,54 @@
       ],
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
-      "publish_hour_et": 19
+      "publish_hour_et": 19,
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261117_221252",
+      "youtube_id": "2dg7qu1C1nQ",
+      "title": "What Would Happen If You Had Chimp Muscles? #shorts",
+      "topic": "What would happen if your muscles suddenly became as strong as a chimpanzee's?",
+      "format": "short",
+      "duration": 47.71,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if Max suddenly woke up with the raw, terrifying muscle strength of a chimpanzee?"
+        },
+        {
+          "start": 5.93,
+          "narration": "He barely taps his alarm clock, and instantly shatters it into a million tiny plastic pieces."
+        },
+        {
+          "start": 12.15,
+          "narration": "Chimps use fast-twitch muscle fibers that pack twice our power density into the exact same frame."
+        },
+        {
+          "start": 18.77,
+          "narration": "So when Max tries to open his front door, he accidentally yanks the entire wooden frame right out of the wall."
+        },
+        {
+          "start": 25.88,
+          "narration": "But having super-strength comes with a brutal hidden cost that turns his own body against him."
+        },
+        {
+          "start": 31.62,
+          "narration": "Human brains put limiters on our muscles to stop us from ripping our own tendons clean off the bone."
+        },
+        {
+          "start": 38.22,
+          "narration": "Without those mental safety blocks, Max can lift a boulder, but he breaks his own arms doing it."
+        },
+        {
+          "start": 44.65,
+          "narration": "So if Max ever woke up with chimp strength..."
+        }
+      ],
+      "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
+      "publish_at": "2026-11-18T20:00:00+00:00",
+      "publish_hour_et": 15
     }
   ],
   "feedback": [
@@ -431,12 +478,21 @@
         "Open loop questions early in the video to incentivize viewers to stay until the final payoff."
       ],
       "reason": "We currently have an imbalance with three shorts and only one long video (25% long format), but recent short performance (like the flea jumping video with 455 views) indicates strong immediate traction that we need to capture before focusing heavily on long-form again."
+    },
+    {
+      "date": "2026-11-17T22:12:52.900550+00:00",
+      "notes": [
+        "Hook the viewer in the first 2 seconds by immediately posing the extreme physical consequence rather than starting with setup or definitions.",
+        "Use rapid pattern interrupts and visual scale shifts every 3 to 4 seconds to maintain attention in short-form content.",
+        "Open a curiosity loop early in the video and delay the final payoff until the very end to maximize view duration."
+      ],
+      "reason": "Shorts are currently outperforming long-form videos significantly in views (averaging 200 views vs 4 views), and we need to continue building baseline audience momentum in the shorts algorithm while maintaining our 1-in-3 long video ratio on upcoming uploads."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 3,
-      "avg_views": 154
+      "count": 4,
+      "avg_views": 200
     },
     "long": {
       "count": 1,
@@ -448,7 +504,7 @@
     19
   ],
   "topic_insights": [
-    "Human body modification and physical capability hypotheticals (e.g., jumping like a flea) generate higher initial organic interest than abstract physics forces.",
+    "Human body modification and physical capability hypotheticals (e.g., jumping like a flea, mantis shrimp punch) generate higher initial organic interest than abstract physics forces.",
     "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning or gravity doubling) to leverage innate curiosity and high click-through intent.",
     "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics consistently evoke stronger emotional engagement than pure abstract physics.",
     "Frame historical hypotheticals around massive, globally recognizable pivot points with clear modern consequences rather than niche or academic events."
@@ -528,11 +584,12 @@
     "2026-11-15T02:24:50.603514+00:00",
     "2026-11-16T02:03:34.989494+00:00",
     "2026-11-16T21:07:19.035068+00:00",
-    "2026-11-17T20:04:41.603210+00:00"
+    "2026-11-17T20:04:41.603210+00:00",
+    "2026-11-17T22:20:30.442125+00:00"
   ],
   "cf_usage": {
     "date": "2026-11-17",
-    "images": 6,
+    "images": 14,
     "exhausted": false
   }
 }
