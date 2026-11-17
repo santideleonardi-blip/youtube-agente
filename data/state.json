@@ -40,8 +40,8 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 5,
-      "likes": 1,
+      "views": 6,
+      "likes": 0,
       "avg_view_pct": 31.9,
       "subs_gained": 0,
       "minutes_watched": 0
@@ -86,8 +86,8 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 20,
-      "likes": 0
+      "views": 455,
+      "likes": 7
     },
     {
       "job_id": "20261116_133344",
@@ -233,7 +233,7 @@
       "uploaded_at": "2026-11-16T14:03:34.567321+00:00",
       "publish_at": "2026-11-17T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 0,
+      "views": 4,
       "likes": 0
     },
     {
@@ -279,7 +279,46 @@
       ],
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
-      "publish_hour_et": 15
+      "publish_hour_et": 15,
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261117_194809",
+      "youtube_id": "sc4kYsKtIJI",
+      "title": "What Would Happen If You Only Ate Sugar? #shorts",
+      "topic": "What would happen if you only ate sugar?",
+      "format": "short",
+      "duration": 45.52,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if you only ate sugar? Max instantly morphs into a glowing, hyperactive neon wreck."
+        },
+        {
+          "start": 6.9,
+          "narration": "Day one is pure euphoria. Your brain swims in dopamine, but your pancreas screams under a tidal wave of insulin."
+        },
+        {
+          "start": 14.8,
+          "narration": "By week two, the horror begins. Cavities carve through your enamel, turning your teeth into crumbling chalk."
+        },
+        {
+          "start": 21.6,
+          "narration": "But that is nothing compared to your insides. Your liver transforms your excess glucose into a heavy sludge of pure fat."
+        },
+        {
+          "start": 29.4,
+          "narration": "By day thirty, scurvy and extreme protein deficiency hit. Your muscles waste away while your blood sugar wildly crashes."
+        },
+        {
+          "start": 37.54,
+          "narration": "Your body collapses into systemic failure. You survived entirely on sweetness, but your sweet tooth cost you everything."
+        }
+      ],
+      "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
+      "publish_at": "2026-11-18T00:00:00+00:00",
+      "publish_hour_et": 19
     }
   ],
   "feedback": [
@@ -382,16 +421,26 @@
         "Anchor abstract scientific concepts to immediate sensory human experiences rather than technical jargon."
       ],
       "reason": "To maintain the growth strategist's target mix of ~33% long videos (1 long out of every 3 videos), the 4th video should be a short following the recent long-form release."
+    },
+    {
+      "date": "2026-11-17T19:52:46.173213+00:00",
+      "notes": [
+        "Hook the viewer within the first 2 seconds with a visceral, high-stakes visual or question before explaining any science.",
+        "Avoid slow intros or background definitions; dive straight into the hypothetical chaos immediately.",
+        "Use frequent pattern interrupts (sound effects, sudden scale shifts, or animation changes) to keep attention high through the mid-point.",
+        "Open loop questions early in the video to incentivize viewers to stay until the final payoff."
+      ],
+      "reason": "We currently have an imbalance with three shorts and only one long video (25% long format), but recent short performance (like the flea jumping video with 455 views) indicates strong immediate traction that we need to capture before focusing heavily on long-form again."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 2,
-      "avg_views": 12
+      "count": 3,
+      "avg_views": 154
     },
     "long": {
       "count": 1,
-      "avg_views": 0
+      "avg_views": 4
     }
   },
   "publish_slots_et": [
@@ -408,34 +457,34 @@
     "daily_target": 2,
     "long_share": 0.33,
     "focus_notes": [
-      "Launch a dedicated content mini-series focused on 'Human Body Extremes' (e.g., 'What Would Happen If You Only Ate Sugar?', 'What Would Happen If Your Brain Used 100% Capacity?') to tap into high-search curiosity niches.",
-      "Upgrade Short hooks: ensure character Max experiences a dramatic visual transformation within the first 1.5 seconds to push Average Percentage Viewed significantly above the current 31.9% benchmark.",
-      "Vary long-form video structure by testing a 'Pivotal Choice' format (showing two alternate outcomes) instead of the standard '1 Hour / 1 Year' timeline to keep content feeling unique and avoid YouTube inauthentic content flags.",
-      "Add bracketed intrigue tags to long-form video titles (e.g., '... [Scientifically Explained]') to improve click-through rates from suggested video feeds."
+      "Launch the 'Human Body Extremes' mini-series with high-curiosity titles like 'What Would Happen If You Only Ate Sugar?' to capture immediate search interest.",
+      "Fix the low Short retention by forcing Max into a dramatic physical transformation within the first 1.5 seconds of every Short.",
+      "Introduce a 'Pivotal Choice' alternative-outcome structure for upcoming long-form videos to avoid the repetitive '1 Hour / 1 Year' template and prevent inauthentic content flags.",
+      "Add bracketed scientific intrigue tags (e.g., '[Scientifically Explained]') to long-form titles to boost click-through rates from suggested feeds."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
     "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
     "metrics": {
-      "subs": 0,
+      "subs": 2,
       "watch_hours_365d": 0.0,
       "shorts_views_90d": 3,
-      "total_views": 3,
-      "video_count": 2,
+      "total_views": 463,
+      "video_count": 3,
       "long_minutes_28d": 0,
       "shorts_views_28d": 3
     },
     "pace": {
-      "views_day": 0.1,
+      "views_day": 0.2,
       "subs_day": 0.0,
       "long_hours_day": 0.0,
       "shorts_views_day": 0,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-16T20:58:04.682328+00:00",
-    "experiment": "Test high-impact visual hooks on Shorts: publish 3 Shorts starting immediately with a 1-second chaotic animation of Max in danger versus 3 Shorts starting with standard voiceover text, measuring if the visual jump-start increases Average Percentage Viewed past 60%.",
-    "summary_es": "El canal está dando sus primeros pasos y recién acumula las primeras reproducciones, lo cual es totalmente normal al principio. Esta semana vamos a probar enganches más dinámicos en los Shorts con el personaje Max y sumaremos temas sobre el cuerpo humano para empezar a despegar. La idea es descubrir qué formato atrae más audiencia rápidamente para sumar horas de visualización."
+    "last_run": "2026-11-17T19:48:09.226835+00:00",
+    "experiment": "Test two distinct hook styles for upcoming Shorts: Style A uses a sudden catastrophic visual (e.g., Max exploding), while Style B uses a direct provocative question with a countdown timer. We will know it worked if the APV (Average Percentage Viewed) for one style consistently beats the current 31.9% baseline.",
+    "summary_es": "Arrancamos con los primeros videos pero la tracción inicial es baja, así que necesitamos ajustar rápido el ritmo y la variedad para salir del cero. El sistema va a implementar ganchos más fuertes con Max en los primeros segundos y probar nuevas estructuras para evitar que YouTube marque el canal como repetitivo."
   },
   "growth_history": [
     {
@@ -464,16 +513,26 @@
       "views_day": 0.1,
       "daily_target": 2,
       "long_share": 0.33
+    },
+    {
+      "date": "2026-11-17",
+      "subs": 2,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3,
+      "views_day": 0.2,
+      "daily_target": 2,
+      "long_share": 0.33
     }
   ],
   "quota_hits": [
     "2026-11-15T02:24:50.603514+00:00",
     "2026-11-16T02:03:34.989494+00:00",
-    "2026-11-16T21:07:19.035068+00:00"
+    "2026-11-16T21:07:19.035068+00:00",
+    "2026-11-17T20:04:41.603210+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-16",
-    "images": 32,
+    "date": "2026-11-17",
+    "images": 6,
     "exhausted": false
   }
 }
