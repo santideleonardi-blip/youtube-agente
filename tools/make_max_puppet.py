@@ -26,10 +26,10 @@ W, H = 620, 740
 INK = "#1c1612"
 SKIN = "#f7d0b4"
 SKIN_SH = "#e8ad8f"
-HAIR = "#7a4b27"     # castaño como el Max de FLUX
-HAIR_SH = "#55311a"
-HAIR_HI = "#a06a3c"
-BROW = "#3d220d"
+HAIR = "#7b5230"     # castaño como el Max del logo
+HAIR_SH = "#5a3a1f"
+HAIR_HI = "#9c6c42"
+BROW = "#3b2412"
 STUBBLE = "#c79f78"
 ORANGE = "#f8921f"
 ORANGE_SH = "#d26f12"
@@ -47,7 +47,7 @@ def _svg(inner):
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VIEWBOX}" width="{W}" height="{H}">{inner}</svg>'
 
 
-SLIM_FACE = 'transform="translate(400 0) scale(0.87 1) translate(-400 0)"'
+SLIM_FACE = 'transform="translate(400 0) scale(0.93 1) translate(-400 0)"'
 SLIM_BODY = 'transform="translate(400 0) scale(0.84 1) translate(-400 0)"'
 
 
@@ -103,7 +103,7 @@ def _palm_up(x, y, flip=1):
 
 def arms(gesture):
     if gesture == "point":     # brazo derecho (del lado del espectador) levantado señalando arriba
-        return _limb([(560, 650), (630, 600), (604, 470)]) + _cuff(604, 462) + _fist_point_up(602, 432)
+        return _limb([(560, 650), (664, 600), (650, 470)]) + _cuff(650, 462) + _fist_point_up(648, 432)
     if gesture == "explain":   # mano abierta a la altura del pecho, como explicando
         return _limb([(560, 650), (640, 740), (590, 640)]) + _cuff(588, 634) + _palm_up(582, 606)
     if gesture == "shrug":     # se encoge de hombros: las dos manos arriba
@@ -119,65 +119,70 @@ def arms(gesture):
 
 # ---------------- Cabeza ----------------
 FACE = f"""
-<g stroke="{INK}" stroke-width="9" stroke-linejoin="round">
-  <ellipse cx="270" cy="432" rx="28" ry="38" fill="{SKIN}"/>
-  <ellipse cx="530" cy="432" rx="28" ry="38" fill="{SKIN}"/>
+<g stroke="{INK}" stroke-width="8" stroke-linejoin="round">
+  <ellipse cx="270" cy="440" rx="27" ry="36" fill="{SKIN}"/>
+  <ellipse cx="530" cy="440" rx="27" ry="36" fill="{SKIN}"/>
 </g>
-<path d="M262 420 Q272 410 280 428" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
-<path d="M538 420 Q528 410 520 428" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
-<path d="M280 372 C276 266 524 266 520 372 L522 452 C522 546 468 595 400 595 C332 595 278 546 278 452 Z" fill="{SKIN}"/>
-<path d="M486 300 C516 334 522 384 522 452 C522 530 482 584 420 594 C468 556 496 508 498 452 C500 392 498 342 486 300 Z" fill="{SKIN_SH}"/>
-<path d="M286 340 Q400 372 514 340 L516 372 Q400 404 284 372 Z" fill="{SKIN_SH}" opacity="0.8"/>
-<path d="M284 466 C292 548 342 592 400 592 C458 592 508 548 516 466 C506 500 484 510 462 502 C440 494 360 494 338 502 C316 510 294 500 284 466 Z" fill="{STUBBLE}" opacity="0.8"/>
-<g fill="#8f6a46">{''.join(f'<circle cx="{x}" cy="{y}" r="2.6"/>' for x, y in [
-    (312, 528), (334, 552), (360, 570), (440, 570), (466, 552), (488, 528), (400, 582), (298, 498), (502, 498),
-    (348, 580), (452, 580), (322, 562), (478, 562), (380, 578), (420, 578), (306, 546), (494, 546)])}</g>
-<path d="M280 372 C276 266 524 266 520 372 L522 452 C522 546 468 595 400 595 C332 595 278 546 278 452 Z" fill="none" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
-<ellipse cx="314" cy="476" rx="24" ry="13" fill="{CHEEK}" opacity="0.5"/>
-<ellipse cx="486" cy="476" rx="24" ry="13" fill="{CHEEK}" opacity="0.5"/>
-<path d="M402 438 C394 466 386 478 396 487 C404 492 414 488 416 481" fill="none" stroke="{INK}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M410 486 Q420 482 418 472" fill="none" stroke="{SKIN_SH}" stroke-width="6" stroke-linecap="round"/>
+<path d="M262 428 Q272 418 280 436" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<path d="M538 428 Q528 418 520 436" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<path d="M280 372 C276 266 524 266 520 372 L522 456 C522 548 468 595 400 595 C332 595 278 548 278 456 Z" fill="{SKIN}"/>
+<path d="M488 300 C516 334 522 384 522 456 C522 530 482 584 420 594 C470 556 498 508 500 456 C502 392 500 342 488 300 Z" fill="{SKIN_SH}" opacity="0.8"/>
+<path d="M290 488 C300 556 346 592 400 592 C454 592 500 556 510 488 C496 520 470 528 446 524 C420 520 380 520 354 524 C330 528 304 520 290 488 Z" fill="{STUBBLE}" opacity="0.45"/>
+<g fill="#8f6a46" opacity="0.8">{''.join(f'<circle cx="{x}" cy="{y}" r="2.3"/>' for x, y in [
+    (316, 532), (338, 554), (362, 570), (438, 570), (462, 554), (484, 532), (400, 582), (350, 580), (450, 580),
+    (326, 560), (474, 560), (380, 578), (420, 578), (372, 538), (428, 538), (300, 512), (500, 512)])}</g>
+<path d="M280 372 C276 266 524 266 520 372 L522 456 C522 548 468 595 400 595 C332 595 278 548 278 456 Z" fill="none" stroke="{INK}" stroke-width="8" stroke-linejoin="round"/>
+<ellipse cx="312" cy="482" rx="26" ry="14" fill="{CHEEK}" opacity="0.45"/>
+<ellipse cx="488" cy="482" rx="26" ry="14" fill="{CHEEK}" opacity="0.45"/>
+<g fill="#c98a6a">{''.join(f'<circle cx="{x}" cy="{y}" r="2.2"/>' for x, y in [(300, 476), (314, 470), (322, 486), (478, 486), (486, 470), (500, 476)])}</g>
+<path d="M398 446 Q391 462 392 474" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="405" cy="484" rx="19" ry="16" fill="#f4b3a2" stroke="{INK}" stroke-width="6"/>
+<ellipse cx="410" cy="480" rx="9" ry="6" fill="#f08a84" opacity="0.7"/>
+<ellipse cx="400" cy="476" rx="4" ry="3" fill="#fff" opacity="0.7"/>
 """
 
 # Pelo como el Max de FLUX (docs/max_referencia.png): melena despeinada y ancha, mechones finos en punta que
 # salen para los costados y flequillo desprolijo cayendo sobre la frente hasta las cejas
-HAIR_PATH = ("M300 420 Q286 400 260 398 Q282 384 284 368 Q262 362 244 340 Q274 340 282 326 Q262 306 256 282 "
-             "Q284 296 296 292 Q290 262 298 240 Q314 260 330 258 Q336 232 350 210 Q362 236 376 236 "
-             "Q392 210 416 198 Q416 224 428 228 Q452 212 480 216 Q466 236 474 246 Q500 244 528 256 "
-             "Q508 270 512 282 Q538 292 556 314 Q530 318 524 328 Q544 346 552 374 Q530 366 520 368 "
-             "Q524 392 514 416 Q508 386 498 362 Q494 368 486 374 Q480 360 466 346 Q456 352 442 358 "
-             "Q436 352 424 340 Q406 346 384 354 Q390 346 388 336 Q368 344 346 352 Q352 342 352 332 "
-             "Q336 340 318 354 Q320 342 314 332 Q304 362 300 420 Z")
-HAIR = f"""
+HAIR_PATH = ("M286 446 Q270 420 262 396 Q274 398 278 388 Q252 372 246 344 Q262 350 270 346 Q252 320 256 292 "
+             "Q270 306 280 302 Q272 270 290 248 Q300 266 312 266 Q316 238 340 222 Q346 242 356 244 "
+             "Q368 216 396 206 Q400 226 410 230 Q430 208 458 214 Q454 232 462 238 Q488 232 508 248 "
+             "Q496 260 502 268 Q530 274 544 298 Q526 302 524 310 Q546 330 550 360 Q532 352 524 356 "
+             "Q540 384 536 408 Q524 396 518 398 Q520 424 512 446 Q506 416 498 392 Q492 404 484 410 "
+             "Q480 384 468 368 Q456 380 444 386 Q440 364 428 352 Q414 366 396 376 Q398 356 392 344 "
+             "Q376 358 356 366 Q360 350 356 340 Q340 352 326 368 Q326 352 318 340 Q306 376 304 404 "
+             "Q296 424 286 446 Z")
+HAIR = f"""<g transform="translate(400 372) scale(1.13 1.1) translate(-400 -372)">
 <path d="{HAIR_PATH}" fill="{HAIR}"/>
 <g fill="{HAIR_SH}">
-  <path d="M480 216 Q466 236 474 246 Q500 244 528 256 Q508 270 512 282 Q538 292 556 314 Q530 318 524 328
-           Q544 346 552 374 Q530 366 520 368 Q524 392 514 416 Q508 386 498 362 Q504 330 494 300 Q498 270 480 252 Z"/>
-  <path d="M424 340 Q406 346 384 354 Q398 330 424 340 Z"/>
-  <path d="M466 346 Q456 352 442 358 Q450 336 466 346 Z"/>
-  <path d="M352 332 Q336 340 318 354 Q330 330 352 332 Z"/>
+  <path d="M508 248 Q496 260 502 268 Q530 274 544 298 Q526 302 524 310 Q546 330 550 360 Q532 352 524 356
+           Q540 384 536 408 Q524 396 518 398 Q520 424 512 446 Q506 416 498 392 Q508 360 500 330 Q506 296 492 270 Z"/>
+  <path d="M428 352 Q414 366 396 376 Q402 352 428 352 Z"/>
+  <path d="M356 340 Q340 352 326 368 Q330 346 356 340 Z"/>
+  <path d="M286 446 Q270 420 262 396 Q274 398 278 388 Q290 410 296 430 Z"/>
 </g>
-<path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="9" stroke-linejoin="round"/>
+<path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="8" stroke-linejoin="round"/>
 <g fill="none" stroke="{HAIR_HI}" stroke-width="6" stroke-linecap="round">
-  <path d="M312 288 Q330 268 352 258"/><path d="M384 248 Q402 230 420 224"/><path d="M286 330 Q296 316 310 310"/>
+  <path d="M306 286 Q324 262 350 252"/><path d="M386 244 Q406 228 428 226"/><path d="M276 340 Q284 320 300 310"/>
 </g>
-<g fill="none" stroke="{INK}" stroke-width="4.5" stroke-linecap="round">
-  <path d="M330 314 Q350 290 380 280"/><path d="M400 300 Q420 274 446 264"/><path d="M450 318 Q474 296 496 290"/>
-  <path d="M300 352 Q306 330 324 318"/><path d="M372 330 Q382 312 400 304"/><path d="M500 332 Q510 312 520 300"/>
-</g>"""
+<g fill="none" stroke="{INK}" stroke-width="4" stroke-linecap="round">
+  <path d="M322 320 Q344 296 376 286"/><path d="M398 306 Q420 284 450 276"/><path d="M456 330 Q478 310 500 304"/>
+  <path d="M290 372 Q298 346 316 334"/><path d="M370 340 Q380 320 398 312"/><path d="M506 354 Q516 334 524 322"/>
+  <path d="M440 352 Q452 336 470 330"/>
+</g></g>"""
 
 
 def _eye_whites(cx, cy, rx, ry):
-    return f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="#fff" stroke="{INK}" stroke-width="8"/>'
+    rx, ry = rx * 0.8, ry * 0.8
+    return f'<ellipse cx="{cx}" cy="{cy + 6}" rx="{rx:.1f}" ry="{ry:.1f}" fill="#fff" stroke="{INK}" stroke-width="6"/>'
 
 
 def _pupils(dx=4, dy=4, r=12, spark=True):
     out = ""
     for cx in (350, 450):
         x = cx + (dx if cx == 350 else -dx)
-        out += f'<circle cx="{x}" cy="{420 + dy}" r="{r}" fill="{INK}"/>'
+        out += f'<circle cx="{x}" cy="{426 + dy}" r="{r}" fill="{INK}"/>'
         if spark:
-            out += f'<circle cx="{x + 4}" cy="{420 + dy - 5}" r="{max(2, r // 3)}" fill="#fff"/>'
+            out += f'<circle cx="{x + 4}" cy="{426 + dy - 5}" r="{max(2, r // 3)}" fill="#fff"/>'
     return out
 
 
@@ -206,8 +211,8 @@ def eyes(emo, closed):
         return _eye_whites(350, 422, 36, 40) + _eye_whites(450, 422, 36, 40) + _pupils(dx=2, dy=6, r=11)
     if emo == "thinking":  # mira hacia arriba y al costado
         return _eye_whites(350, 420, 37, 43) + _eye_whites(450, 420, 37, 43) + \
-            '<circle cx="364" cy="402" r="12" fill="#1c1612"/><circle cx="462" cy="402" r="12" fill="#1c1612"/>' + \
-            '<circle cx="368" cy="397" r="4" fill="#fff"/><circle cx="466" cy="397" r="4" fill="#fff"/>'
+            '<circle cx="362" cy="414" r="11" fill="#1c1612"/><circle cx="460" cy="414" r="11" fill="#1c1612"/>' + \
+            '<circle cx="366" cy="409" r="4" fill="#fff"/><circle cx="464" cy="409" r="4" fill="#fff"/>'
     return _eye_whites(350, 420, 37, 43) + _eye_whites(450, 420, 37, 43) + _pupils()
 
 
