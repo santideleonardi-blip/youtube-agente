@@ -22,6 +22,22 @@ def _voice_rule():
             "and does; the science is shown through what happens to him. He is the only recurring person.")
 
 
+def _acting_rule():
+    """Con Max narrador, cada escena dice qué cara pone y qué gesto hace el muñeco de Max."""
+    if not config.MAX_NARRATOR:
+        return ""
+    return ("- Max (the on-screen narrator) acts every scene. For each scene choose his \"emotion\" while he says it: "
+            "neutral, happy, excited, surprised, worried, scared or thinking; and a \"gesture\": none, point (points up: "
+            "a key fact or 'look at this'), explain (open hand: explaining how something works), shrug ('who knows' / "
+            "irony), crossed (arms crossed: skeptical, serious or calm). Vary them so he feels alive: match the "
+            "feeling of the line, avoid repeating the same pair many scenes in a row, about half the scenes with a "
+            "gesture.")
+
+
+def _acting_fields():
+    return ', "emotion": "...", "gesture": "..."' if config.MAX_NARRATOR else ""
+
+
 def _ensure_max(scenes):
     """Max es el protagonista: si alguna imagen quedó sin él, se lo agrega reaccionando a la escena."""
     for sc in scenes:
@@ -73,8 +89,10 @@ Rules:
   Never depict children. Make the first image the most striking and dramatic one (it is the hook).
 - SERIES: this is a "{serie['label']}" episode. {serie['script_rules']}
 
+{_acting_rule()}
+
 Return JSON:
-{{"scenes": [{{"narration": "...", "image_prompt": "..."}}],
+{{"scenes": [{{"narration": "...", "image_prompt": "..."{_acting_fields()}}}],
   "summary": "one-sentence summary of the video"}}""",
         temperature=0.9,
     )
@@ -141,7 +159,8 @@ Full video summary: {script.get('summary', '')}
 Scenes to expand:
 {part}
 
-Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}]}}""",
+{_acting_rule()}
+Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."{_acting_fields()}}}]}}""",
             temperature=0.7,
         )
         res = _as_script(res)
@@ -150,6 +169,9 @@ Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."}}]}}""",
         if len(new) >= max(1, len(part) // 2) and new_words > part_words:
             for sc, old in zip(new, part + [{}] * len(new)):
                 sc.setdefault("image_prompt", old.get("image_prompt") or sc["narration"])
+                for k in ("emotion", "gesture"):
+                    if old.get(k):
+                        sc.setdefault(k, old[k])
             out_scenes += new
         else:
             out_scenes += part  # si esta parte salió mal, se queda la original

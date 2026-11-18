@@ -1,138 +1,280 @@
-"""Dibuja a Max como "muñeco" por partes (cuerpo + cabeza con 9 bocas x ojos abiertos/cerrados) y
-lo guarda en assets/max_puppet/. Se corre UNA vez a mano (necesita rsvg-convert); el sistema usa los PNG.
+"""Dibuja a Max como "muñeco" por capas y las guarda en assets/max_puppet/. Se corre a mano cuando se
+quiere cambiar el dibujo (necesita rsvg-convert); el sistema solo usa los PNG.
 
     python tools/make_max_puppet.py
 
-Bocas = las de Rhubarb Lip Sync (A-H, X): A cerrada (M/B/P), B dientes (K/S/T/EE), C abierta (EH/AE),
-D muy abierta (AA), E redondeada (AO/ER), F labios en trompa (OO/W), G dientes sobre labio (F/V),
-H lengua arriba (L), X reposo.
+Capas (todas del mismo tamaño, se apilan en este orden):
+  body            torso con el mono naranja
+  arms_<gesto>    brazos: point, explain, shrug, crossed (sin capa = brazos al costado)
+  face            orejas, cara, sombras, barba
+  eyes_<emo>[_blink]
+  mouth_<forma>   bocas de Rhubarb A-H + idle_<emo> (boca en reposo según la emoción)
+  brows_<emo>
+  hair
+
+Emociones: neutral, happy, excited, surprised, worried, scared, thinking.
+Estilo: cartoon adulto dibujado a mano, contornos negros gruesos, sombreado plano (cel), como el Max
+de las imágenes de FLUX (docs/max_referencia.png).
 """
 import os
 import subprocess
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "max_puppet")
-VIEWBOX = "150 120 500 740"   # recorte del lienzo de 800x860
-SCALE = 1.0                  # 500x740 px
+VIEWBOX = "90 120 620 740"   # más ancho que el cuerpo para que entren los brazos
+W, H = 620, 740
 
-INK = "#1b1b1b"
-SKIN = "#f6cfb2"
-HAIR = "#5a3417"
-BEARD = "#c49a6c"
-ORANGE = "#ff8a1f"
+INK = "#1c1612"
+SKIN = "#f7d0b4"
+SKIN_SH = "#e8ad8f"
+HAIR = "#5b3517"
+HAIR_SH = "#3d220d"
+HAIR_HI = "#8b5a2f"
+BROW = "#3d220d"
+STUBBLE = "#c79f78"
+ORANGE = "#f8921f"
+ORANGE_SH = "#d26f12"
+ORANGE_HI = "#ffae4d"
+TEE = "#45484f"
 MOUTH_IN = "#5b1717"
 TONGUE = "#e4707c"
+CHEEK = "#f08a8a"
 
-BODY = f"""
-<g stroke="{INK}" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
-  <path d="M150 870 C150 700 220 615 330 595 L470 595 C580 615 650 700 650 870 Z" fill="{ORANGE}"/>
-  <path d="M372 520 L372 606 C388 620 412 620 428 606 L428 520 Z" fill="#efbf9f"/>
-  <path d="M350 595 L400 668 L450 595 Z" fill="#4a4d55"/>
-  <path d="M296 590 C316 645 358 670 400 672 C360 644 344 614 344 595 Z" fill="#ff9d3d"/>
-  <path d="M504 590 C484 645 442 670 400 672 C440 644 456 614 456 595 Z" fill="#ff9d3d"/>
-  <path d="M400 672 L400 870" fill="none" stroke-width="6"/>
-  <rect x="390" y="686" width="20" height="34" rx="4" fill="#9aa0a6" stroke-width="5"/>
-  <path d="M235 740 C250 720 262 700 268 680" fill="none" stroke-width="6" opacity="0.6"/>
-  <path d="M565 740 C550 720 538 700 532 680" fill="none" stroke-width="6" opacity="0.6"/>
-</g>"""
-
-
-def _eyes(closed):
-    if closed:
-        return f"""
-<g fill="none" stroke="{INK}" stroke-width="8" stroke-linecap="round">
-  <path d="M314 424 Q350 446 386 424"/><path d="M414 424 Q450 446 486 424"/>
-</g>"""
-    return f"""
-<g stroke="{INK}" stroke-width="8">
-  <ellipse cx="350" cy="420" rx="37" ry="43" fill="#fff"/>
-  <ellipse cx="450" cy="420" rx="37" ry="43" fill="#fff"/>
-</g>
-<circle cx="354" cy="424" r="13" fill="{INK}"/><circle cx="446" cy="424" r="13" fill="{INK}"/>
-<circle cx="358" cy="419" r="4" fill="#fff"/><circle cx="450" cy="419" r="4" fill="#fff"/>"""
-
-
-def _mouth(shape):
-    s = f'stroke="{INK}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"'
-    teeth_top = '<path d="M372 508 Q400 503 428 508 L426 517 Q400 513 374 517 Z" fill="#fff"/>'
-    if shape == "X":
-        return f'<path d="M370 512 Q400 532 430 510" fill="none" {s}/>'
-    if shape == "A":
-        return f'<path d="M370 516 Q400 522 430 516" fill="none" {s}/><path d="M384 528 Q400 532 416 528" fill="none" stroke="{INK}" stroke-width="4" stroke-linecap="round"/>'
-    if shape == "B":
-        return (f'<path d="M370 508 Q400 503 430 508 Q426 528 400 530 Q374 528 370 508 Z" fill="{MOUTH_IN}" {s}/>'
-                '<path d="M374 510 Q400 506 426 510 L424 520 Q400 517 376 520 Z" fill="#fff"/>'
-                '<path d="M378 523 Q400 520 422 523 L420 527 Q400 528 380 527 Z" fill="#fff"/>')
-    if shape == "C":
-        return (f'<path d="M366 504 Q400 497 434 504 Q430 542 400 545 Q370 542 366 504 Z" fill="{MOUTH_IN}" {s}/>'
-                f'{teeth_top}<path d="M380 536 Q400 524 420 536 Q410 543 400 543 Q390 543 380 536 Z" fill="{TONGUE}"/>')
-    if shape == "D":
-        return (f'<path d="M362 500 Q400 490 438 500 Q436 560 400 565 Q364 560 362 500 Z" fill="{MOUTH_IN}" {s}/>'
-                '<path d="M370 503 Q400 496 430 503 L428 514 Q400 509 372 514 Z" fill="#fff"/>'
-                f'<path d="M376 552 Q400 532 424 552 Q414 562 400 562 Q386 562 376 552 Z" fill="{TONGUE}"/>')
-    if shape == "E":
-        return (f'<ellipse cx="400" cy="522" rx="24" ry="22" fill="{MOUTH_IN}" {s}/>'
-                f'<path d="M386 536 Q400 527 414 536 Q406 542 400 542 Q394 542 386 536 Z" fill="{TONGUE}"/>')
-    if shape == "F":
-        return (f'<ellipse cx="400" cy="520" rx="15" ry="15" fill="{MOUTH_IN}" {s}/>'
-                f'<path d="M382 508 Q400 500 418 508" fill="none" stroke="{INK}" stroke-width="4" stroke-linecap="round"/>')
-    if shape == "G":
-        return (f'<path d="M370 508 Q400 503 430 508 Q426 526 400 528 Q374 526 370 508 Z" fill="{MOUTH_IN}" {s}/>'
-                '<path d="M376 509 Q400 505 424 509 L422 521 Q400 518 378 521 Z" fill="#fff"/>'
-                f'<path d="M374 524 Q400 516 426 524" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>')
-    if shape == "H":
-        return (f'<path d="M366 504 Q400 497 434 504 Q430 542 400 545 Q370 542 366 504 Z" fill="{MOUTH_IN}" {s}/>'
-                f'{teeth_top}<path d="M382 520 Q400 510 418 520 Q414 540 400 541 Q386 540 382 520 Z" fill="{TONGUE}"/>')
-    raise ValueError(shape)
-
-
-HAIR_PATH = ("M266 405 L246 360 L218 352 L242 320 L206 292 L248 280 L226 236 L274 240 L270 192 L314 212 "
-             "L330 160 L364 196 L392 140 L414 190 L452 150 L460 200 L506 176 L500 222 L548 214 L530 256 "
-             "L578 262 L548 294 L582 322 L540 330 L556 372 L534 400 L524 356 L506 330 L494 352 L470 318 "
-             "L452 340 L436 306 L414 330 L398 296 L378 328 L360 300 L340 330 L322 304 L306 336 L292 316 "
-             "L284 352 Z")
-
-
-def head(shape, closed):
-    stubble = "".join(f'<circle cx="{x}" cy="{y}" r="3"/>' for x, y in
-                      [(318, 530), (338, 552), (362, 568), (438, 568), (462, 552), (482, 530), (400, 578),
-                       (300, 500), (500, 500), (350, 578), (450, 578), (325, 560), (475, 560)])
-    return f"""
-<g stroke="{INK}" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
-  <ellipse cx="270" cy="430" rx="28" ry="38" fill="{SKIN}"/>
-  <ellipse cx="530" cy="430" rx="28" ry="38" fill="{SKIN}"/>
-  <path d="M278 370 C278 270 522 270 522 370 L522 455 C522 545 468 592 400 592 C332 592 278 545 278 455 Z" fill="{SKIN}"/>
-</g>
-<path d="M286 462 C294 545 342 588 400 588 C458 588 506 545 514 462 C506 498 482 506 462 500 C440 494 360 494 338 500 C318 506 294 498 286 462 Z" fill="{BEARD}" opacity="0.85"/>
-<g fill="#8a6440">{stubble}</g>
-<path d="M284 470 C292 548 342 590 400 590 C458 590 508 548 516 470" fill="none" stroke="{INK}" stroke-width="9" stroke-linecap="round"/>
-<ellipse cx="316" cy="472" rx="24" ry="14" fill="#f08c8c" opacity="0.55"/>
-<ellipse cx="484" cy="472" rx="24" ry="14" fill="#f08c8c" opacity="0.55"/>
-{_eyes(closed)}
-<path d="M400 440 C392 468 386 478 396 486 C402 490 412 487 414 481" fill="none" stroke="{INK}" stroke-width="7" stroke-linecap="round"/>
-{_mouth(shape)}
-<path d="M312 372 C330 358 360 356 384 364" fill="none" stroke="#4a2a12" stroke-width="15" stroke-linecap="round"/>
-<path d="M416 364 C440 356 470 358 488 372" fill="none" stroke="#4a2a12" stroke-width="15" stroke-linecap="round"/>
-<path d="{HAIR_PATH}" fill="{HAIR}" stroke="{INK}" stroke-width="9" stroke-linejoin="round"/>
-<g fill="none" stroke="#7a4a24" stroke-width="6" stroke-linecap="round">
-  <path d="M300 262 L330 236"/><path d="M398 205 L410 180"/><path d="M470 240 L495 222"/><path d="M500 290 L530 280"/>
-</g>"""
+EMOTIONS = ["neutral", "happy", "excited", "surprised", "worried", "scared", "thinking"]
+GESTURES = ["point", "explain", "shrug", "crossed"]
 
 
 def _svg(inner):
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VIEWBOX}" width="{int(500 * SCALE)}" height="{int(740 * SCALE)}">{inner}</svg>'
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VIEWBOX}" width="{W}" height="{H}">{inner}</svg>'
 
 
-def _render(svg, png):
-    subprocess.run(["rsvg-convert", "-o", png], input=svg.encode(), check=True)
+def _render(inner, name):
+    subprocess.run(["rsvg-convert", "-o", os.path.join(OUT, name + ".png")], input=_svg(inner).encode(), check=True)
+
+
+# ---------------- Cuerpo y brazos ----------------
+BODY = f"""
+<path d="M372 520 L372 608 C388 622 412 622 428 608 L428 520 Z" fill="{SKIN}" stroke="{INK}" stroke-width="9"/>
+<path d="M372 560 L428 560 L428 608 C412 620 388 620 372 608 Z" fill="{SKIN_SH}"/>
+<path d="M148 875 C146 705 214 622 330 598 L470 598 C586 622 654 705 652 875 Z" fill="{ORANGE}" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
+<path d="M560 640 C610 680 640 760 646 875 L560 875 C566 790 560 700 520 650 Z" fill="{ORANGE_SH}" opacity="0.9"/>
+<path d="M240 650 C210 700 200 780 206 875 L180 875 C176 770 196 700 240 650 Z" fill="{ORANGE_HI}" opacity="0.6"/>
+<path d="M350 598 L400 670 L450 598 Z" fill="{TEE}" stroke="{INK}" stroke-width="8" stroke-linejoin="round"/>
+<path d="M294 592 C314 648 358 674 400 676 C360 646 344 616 344 598 Z" fill="{ORANGE_HI}" stroke="{INK}" stroke-width="9" stroke-linejoin="round"/>
+<path d="M506 592 C486 648 442 674 400 676 C440 646 456 616 456 598 Z" fill="{ORANGE}" stroke="{INK}" stroke-width="9" stroke-linejoin="round"/>
+<path d="M400 676 L400 875" stroke="{INK}" stroke-width="6"/>
+<path d="M392 690 L408 690 L408 724 L392 724 Z" fill="#9aa0a6" stroke="{INK}" stroke-width="5"/>
+<path d="M248 690 C262 720 266 760 262 800" fill="none" stroke="{ORANGE_SH}" stroke-width="7" stroke-linecap="round"/>
+<path d="M552 690 C538 720 534 760 538 800" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+"""
+
+
+def _limb(points, width=74):
+    """Manga naranja con contorno (polilínea gruesa) desde el hombro."""
+    d = "M" + " L".join(f"{x} {y}" for x, y in points)
+    return (f'<path d="{d}" fill="none" stroke="{INK}" stroke-width="{width + 18}" stroke-linecap="round" stroke-linejoin="round"/>'
+            f'<path d="{d}" fill="none" stroke="{ORANGE}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round"/>')
+
+
+def _cuff(x, y, r=24):
+    return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{ORANGE_SH}" stroke="{INK}" stroke-width="8"/>'
+
+
+def _fist_point_up(x, y):
+    return f"""
+<rect x="{x - 10}" y="{y - 78}" width="22" height="62" rx="11" fill="{SKIN}" stroke="{INK}" stroke-width="8"/>
+<ellipse cx="{x}" cy="{y}" rx="30" ry="27" fill="{SKIN}" stroke="{INK}" stroke-width="8"/>
+<path d="M{x - 22} {y - 4} Q{x - 6} {y + 4} {x + 6} {y - 4}" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<path d="M{x - 24} {y + 10} Q{x - 6} {y + 18} {x + 10} {y + 10}" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>"""
+
+
+def _palm_up(x, y, flip=1):
+    """Mano abierta con la palma hacia arriba (flip=-1 la espeja)."""
+    f = flip
+    return f"""
+<path d="M{x - 42 * f} {y + 6} Q{x - 40 * f} {y - 22} {x} {y - 20} Q{x + 44 * f} {y - 22} {x + 46 * f} {y - 2}
+ Q{x + 30 * f} {y + 26} {x} {y + 26} Q{x - 30 * f} {y + 28} {x - 42 * f} {y + 6} Z" fill="{SKIN}" stroke="{INK}" stroke-width="8" stroke-linejoin="round"/>
+<path d="M{x - 40 * f} {y + 2} Q{x - 54 * f} {y - 18} {x - 46 * f} {y - 34}" fill="none" stroke="{INK}" stroke-width="8" stroke-linecap="round"/>
+<path d="M{x - 20 * f} {y} Q{x} {y + 8} {x + 24 * f} {y}" fill="none" stroke="{SKIN_SH}" stroke-width="6" stroke-linecap="round"/>"""
+
+
+def arms(gesture):
+    if gesture == "point":     # brazo derecho (del lado del espectador) levantado señalando arriba
+        return _limb([(560, 650), (630, 600), (604, 470)]) + _cuff(604, 462) + _fist_point_up(602, 432)
+    if gesture == "explain":   # mano abierta a la altura del pecho, como explicando
+        return _limb([(560, 650), (640, 740), (590, 640)]) + _cuff(588, 634) + _palm_up(582, 606)
+    if gesture == "shrug":     # se encoge de hombros: las dos manos arriba
+        return (_limb([(240, 650), (172, 720), (196, 610)]) + _cuff(196, 602) + _palm_up(200, 576, -1)
+                + _limb([(560, 650), (628, 720), (604, 610)]) + _cuff(604, 602) + _palm_up(600, 576))
+    if gesture == "crossed":   # brazos cruzados sobre el pecho
+        return (_limb([(236, 660), (300, 760), (540, 744)], 70)
+                + f'<ellipse cx="548" cy="736" rx="24" ry="20" fill="{SKIN}" stroke="{INK}" stroke-width="8"/>'
+                + _limb([(564, 660), (500, 770), (262, 752)], 70)
+                + f'<ellipse cx="252" cy="746" rx="24" ry="20" fill="{SKIN}" stroke="{INK}" stroke-width="8"/>')
+    raise ValueError(gesture)
+
+
+# ---------------- Cabeza ----------------
+FACE = f"""
+<g stroke="{INK}" stroke-width="9" stroke-linejoin="round">
+  <ellipse cx="270" cy="432" rx="28" ry="38" fill="{SKIN}"/>
+  <ellipse cx="530" cy="432" rx="28" ry="38" fill="{SKIN}"/>
+</g>
+<path d="M262 420 Q272 410 280 428" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<path d="M538 420 Q528 410 520 428" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>
+<path d="M280 372 C276 266 524 266 520 372 L522 452 C522 546 468 595 400 595 C332 595 278 546 278 452 Z" fill="{SKIN}"/>
+<path d="M486 300 C516 334 522 384 522 452 C522 530 482 584 420 594 C468 556 496 508 498 452 C500 392 498 342 486 300 Z" fill="{SKIN_SH}"/>
+<path d="M286 340 Q400 372 514 340 L516 372 Q400 404 284 372 Z" fill="{SKIN_SH}" opacity="0.8"/>
+<path d="M284 466 C292 548 342 592 400 592 C458 592 508 548 516 466 C506 500 484 510 462 502 C440 494 360 494 338 502 C316 510 294 500 284 466 Z" fill="{STUBBLE}" opacity="0.8"/>
+<g fill="#8f6a46">{''.join(f'<circle cx="{x}" cy="{y}" r="2.6"/>' for x, y in [
+    (312, 528), (334, 552), (360, 570), (440, 570), (466, 552), (488, 528), (400, 582), (298, 498), (502, 498),
+    (348, 580), (452, 580), (322, 562), (478, 562), (380, 578), (420, 578), (306, 546), (494, 546)])}</g>
+<path d="M280 372 C276 266 524 266 520 372 L522 452 C522 546 468 595 400 595 C332 595 278 546 278 452 Z" fill="none" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
+<ellipse cx="314" cy="476" rx="24" ry="13" fill="{CHEEK}" opacity="0.5"/>
+<ellipse cx="486" cy="476" rx="24" ry="13" fill="{CHEEK}" opacity="0.5"/>
+<path d="M402 438 C394 466 386 478 396 487 C404 492 414 488 416 481" fill="none" stroke="{INK}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M410 486 Q420 482 418 472" fill="none" stroke="{SKIN_SH}" stroke-width="6" stroke-linecap="round"/>
+"""
+
+# Mechones: forma general en punta + flequillo cayendo sobre la frente (más alto que antes, para que se vean las cejas)
+HAIR_PATH = ("M268 410 L250 366 L216 360 L242 326 L204 298 L248 284 L224 238 L274 242 L268 192 L314 212 "
+             "L326 158 L364 194 L390 136 L416 188 L454 146 L462 198 L508 172 L502 222 L552 210 L532 256 "
+             "L582 262 L550 296 L586 324 L542 332 L560 374 L534 410 L526 360 L512 330 L500 344 L482 312 "
+             "L462 328 L446 300 L424 320 L408 290 L386 318 L368 292 L350 318 L330 292 L314 322 L298 302 "
+             "L288 352 Z")
+HAIR = f"""
+<path d="{HAIR_PATH}" fill="{HAIR}"/>
+<g fill="{HAIR_SH}">
+  <path d="M470 200 L508 172 L502 222 L552 210 L532 256 L582 262 L550 296 L586 324 L542 332 L560 374 L534 410 L526 360 L512 330 L500 344 L482 312 L500 290 L520 300 L512 260 L490 250 Z"/>
+  <path d="M300 250 L330 236 L350 262 L322 270 Z"/>
+  <path d="M400 214 L430 204 L436 240 L410 236 Z"/>
+</g>
+<path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
+<g fill="none" stroke="{HAIR_HI}" stroke-width="6" stroke-linecap="round">
+  <path d="M286 268 L318 238"/><path d="M366 222 L384 176"/><path d="M430 214 L452 178"/><path d="M262 316 L290 300"/>
+</g>
+<g fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round">
+  <path d="M352 300 L366 262"/><path d="M420 296 L432 258"/><path d="M482 310 L496 276"/><path d="M300 296 L312 268"/>
+</g>"""
+
+
+def _eye_whites(cx, cy, rx, ry):
+    return f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="#fff" stroke="{INK}" stroke-width="8"/>'
+
+
+def _pupils(dx=4, dy=4, r=12, spark=True):
+    out = ""
+    for cx in (350, 450):
+        x = cx + (dx if cx == 350 else -dx)
+        out += f'<circle cx="{x}" cy="{420 + dy}" r="{r}" fill="{INK}"/>'
+        if spark:
+            out += f'<circle cx="{x + 4}" cy="{420 + dy - 5}" r="{max(2, r // 3)}" fill="#fff"/>'
+    return out
+
+
+SWEAT = (f'<path d="M548 330 Q562 356 548 368 Q534 356 548 330 Z" fill="#a8dcff" stroke="{INK}" stroke-width="5"/>'
+         '<path d="M545 352 Q544 360 549 362" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>')
+
+
+def eyes(emo, closed):
+    if closed:
+        arc = "M314 426 Q350 448 386 426 M414 426 Q450 448 486 426"
+        if emo in ("happy", "excited"):
+            arc = "M314 432 Q350 404 386 432 M414 432 Q450 404 486 432"  # ojos ^^
+        extra = SWEAT if emo == "scared" else ""
+        return f'<path d="{arc}" fill="none" stroke="{INK}" stroke-width="8" stroke-linecap="round"/>' + extra
+    if emo == "happy":  # ojos un poco entrecerrados por la sonrisa
+        return (_eye_whites(350, 422, 37, 38) + _eye_whites(450, 422, 37, 38) + _pupils(dy=0, r=12)
+                + f'<path d="M328 472 Q350 464 372 472 M428 472 Q450 464 472 472" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>')
+    if emo == "excited":
+        return _eye_whites(350, 418, 38, 46) + _eye_whites(450, 418, 38, 46) + _pupils(dy=0, r=13) + \
+            '<circle cx="342" cy="428" r="3" fill="#fff"/><circle cx="442" cy="428" r="3" fill="#fff"/>'
+    if emo == "surprised":
+        return _eye_whites(350, 416, 38, 48) + _eye_whites(450, 416, 38, 48) + _pupils(dx=0, dy=0, r=9)
+    if emo == "scared":
+        return _eye_whites(350, 416, 38, 48) + _eye_whites(450, 416, 38, 48) + _pupils(dx=0, dy=2, r=7, spark=False) + SWEAT
+    if emo == "worried":
+        return _eye_whites(350, 422, 36, 40) + _eye_whites(450, 422, 36, 40) + _pupils(dx=2, dy=6, r=11)
+    if emo == "thinking":  # mira hacia arriba y al costado
+        return _eye_whites(350, 420, 37, 43) + _eye_whites(450, 420, 37, 43) + \
+            '<circle cx="364" cy="402" r="12" fill="#1c1612"/><circle cx="462" cy="402" r="12" fill="#1c1612"/>' + \
+            '<circle cx="368" cy="397" r="4" fill="#fff"/><circle cx="466" cy="397" r="4" fill="#fff"/>'
+    return _eye_whites(350, 420, 37, 43) + _eye_whites(450, 420, 37, 43) + _pupils()
+
+
+BROWS = {
+    "neutral": ("M312 368 C330 354 360 352 384 360", "M416 360 C440 352 470 354 488 368"),
+    "happy": ("M312 360 C330 344 360 342 384 350", "M416 350 C440 342 470 344 488 360"),
+    "excited": ("M312 352 C330 332 362 330 386 342", "M414 342 C438 330 470 332 488 352"),
+    "surprised": ("M314 348 C330 324 364 322 386 336", "M414 336 C436 322 470 324 486 348"),
+    "worried": ("M312 368 C334 366 360 356 382 340", "M418 340 C440 356 466 366 488 368"),
+    "scared": ("M312 360 C334 358 360 346 382 326", "M418 326 C440 346 466 358 488 360"),
+    "thinking": ("M312 372 C334 368 362 368 384 370", "M416 342 C440 326 470 328 488 346"),
+}
+
+
+def brows(emo):
+    a, b = BROWS[emo]
+    return f'<path d="{a} M{b[1:]}" fill="none" stroke="{BROW}" stroke-width="16" stroke-linecap="round"/>'
+
+
+def mouth(shape):
+    s = f'stroke="{INK}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"'
+    teeth_top = '<path d="M372 508 Q400 503 428 508 L426 517 Q400 513 374 517 Z" fill="#fff"/>'
+    m = {
+        "X": f'<path d="M370 512 Q400 532 430 510" fill="none" {s}/>',
+        "A": f'<path d="M370 516 Q400 522 430 516" fill="none" {s}/>'
+             f'<path d="M386 528 Q400 532 414 528" fill="none" stroke="{INK}" stroke-width="4" stroke-linecap="round"/>',
+        "B": f'<path d="M370 508 Q400 503 430 508 Q426 528 400 530 Q374 528 370 508 Z" fill="{MOUTH_IN}" {s}/>'
+             '<path d="M374 510 Q400 506 426 510 L424 520 Q400 517 376 520 Z" fill="#fff"/>'
+             '<path d="M378 523 Q400 520 422 523 L420 527 Q400 528 380 527 Z" fill="#fff"/>',
+        "C": f'<path d="M366 504 Q400 497 434 504 Q430 542 400 545 Q370 542 366 504 Z" fill="{MOUTH_IN}" {s}/>'
+             f'{teeth_top}<path d="M380 536 Q400 524 420 536 Q410 543 400 543 Q390 543 380 536 Z" fill="{TONGUE}"/>',
+        "D": f'<path d="M362 500 Q400 490 438 500 Q436 560 400 565 Q364 560 362 500 Z" fill="{MOUTH_IN}" {s}/>'
+             '<path d="M370 503 Q400 496 430 503 L428 514 Q400 509 372 514 Z" fill="#fff"/>'
+             f'<path d="M376 552 Q400 532 424 552 Q414 562 400 562 Q386 562 376 552 Z" fill="{TONGUE}"/>',
+        "E": f'<ellipse cx="400" cy="522" rx="24" ry="22" fill="{MOUTH_IN}" {s}/>'
+             f'<path d="M386 536 Q400 527 414 536 Q406 542 400 542 Q394 542 386 536 Z" fill="{TONGUE}"/>',
+        "F": f'<ellipse cx="400" cy="520" rx="15" ry="15" fill="{MOUTH_IN}" {s}/>'
+             f'<path d="M382 508 Q400 500 418 508" fill="none" stroke="{INK}" stroke-width="4" stroke-linecap="round"/>',
+        "G": f'<path d="M370 508 Q400 503 430 508 Q426 526 400 528 Q374 526 370 508 Z" fill="{MOUTH_IN}" {s}/>'
+             '<path d="M376 509 Q400 505 424 509 L422 521 Q400 518 378 521 Z" fill="#fff"/>'
+             f'<path d="M374 524 Q400 516 426 524" fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round"/>',
+        "H": f'<path d="M366 504 Q400 497 434 504 Q430 542 400 545 Q370 542 366 504 Z" fill="{MOUTH_IN}" {s}/>'
+             f'{teeth_top}<path d="M382 520 Q400 510 418 520 Q414 540 400 541 Q386 540 382 520 Z" fill="{TONGUE}"/>',
+        # bocas en reposo según la emoción
+        "idle_neutral": f'<path d="M370 512 Q400 532 430 510" fill="none" {s}/>',
+        "idle_happy": f'<path d="M364 504 Q400 512 436 502 Q430 544 400 546 Q370 544 364 504 Z" fill="{MOUTH_IN}" {s}/>'
+                      '<path d="M370 506 Q400 512 430 504 L428 516 Q400 521 372 517 Z" fill="#fff"/>'
+                      f'<path d="M382 536 Q400 526 418 536 Q410 543 400 543 Q390 543 382 536 Z" fill="{TONGUE}"/>',
+        "idle_excited": f'<path d="M358 500 Q400 508 442 498 Q438 560 400 564 Q362 560 358 500 Z" fill="{MOUTH_IN}" {s}/>'
+                        '<path d="M366 502 Q400 509 434 500 L432 514 Q400 521 368 516 Z" fill="#fff"/>'
+                        f'<path d="M378 550 Q400 532 422 550 Q412 560 400 560 Q388 560 378 550 Z" fill="{TONGUE}"/>',
+        "idle_surprised": f'<ellipse cx="400" cy="524" rx="17" ry="22" fill="{MOUTH_IN}" {s}/>',
+        "idle_worried": f'<path d="M368 522 Q384 510 400 518 Q416 526 432 512" fill="none" {s}/>',
+        "idle_scared": f'<path d="M364 506 Q400 500 436 506 Q436 534 400 536 Q364 534 364 506 Z" fill="#fff" {s}/>'
+                       f'<path d="M366 520 L434 520 M384 506 L384 534 M400 504 L400 536 M416 506 L416 534" stroke="{INK}" stroke-width="4"/>',
+        "idle_thinking": f'<path d="M380 522 Q402 518 426 508" fill="none" {s}/>',
+    }
+    return m[shape]
 
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    _render(_svg(BODY), os.path.join(OUT, "body.png"))
-    for shape in "ABCDEFGHX":
-        for closed in (False, True):
-            _render(_svg(head(shape, closed)), os.path.join(OUT, f"head_{shape}{'_blink' if closed else ''}.png"))
-    _render(_svg(BODY + head("X", False)), os.path.join(OUT, "preview.png"))
+    for f in os.listdir(OUT):
+        if f.endswith(".png"):
+            os.remove(os.path.join(OUT, f))
+    _render(BODY, "body")
+    for g in GESTURES:
+        _render(arms(g), f"arms_{g}")
+    _render(FACE, "face")
+    _render(HAIR, "hair")
+    for e in EMOTIONS:
+        _render(eyes(e, False), f"eyes_{e}")
+        _render(eyes(e, True), f"eyes_{e}_blink")
+        _render(brows(e), f"brows_{e}")
+        _render(mouth(f"idle_{e}"), f"mouth_idle_{e}")
+    for s in "ABCDEFGHX":
+        _render(mouth(s), f"mouth_{s}")
     print(f"listo: {OUT}")
 
 

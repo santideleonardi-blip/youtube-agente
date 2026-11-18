@@ -375,12 +375,14 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         f.write(header + "\n".join(lines) + "\n")
 
 
-def _final_with_max(joined, ass, script, wd, w, h, duration, enc):
+def _final_with_max(joined, ass, script, wd, w, h, duration, enc, scene_meta=None):
     """Montaje final con el muñeco de Max narrando (boca sincronizada) encima de las escenas."""
     from agents import puppet
 
     text = " ".join(sc["narration"] for sc in script["scenes"])
-    (pw, ph, x, y), frames = puppet.overlay_frames(joined, text, wd, w, h, config.FPS, duration)
+    timeline = [{"start": m["start"], "emotion": sc.get("emotion"), "gesture": sc.get("gesture")}
+                for m, sc in zip(scene_meta or [], script["scenes"])]
+    (pw, ph, x, y), frames = puppet.overlay_frames(joined, text, wd, w, h, config.FPS, duration, timeline)
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", joined,
            "-f", "rawvideo", "-pix_fmt", "rgba", "-s", f"{pw}x{ph}", "-r", str(config.FPS), "-i", "pipe:0",
            "-filter_complex", f"[0:v][1:v]overlay={x}:{y}:eof_action=pass:format=auto,ass={ass}[v]",
@@ -457,7 +459,7 @@ def run(script, fmt, job_id):
     done = False
     if config.MAX_NARRATOR:
         try:
-            _final_with_max(joined, ass, script, wd, w, h, t, enc)
+            _final_with_max(joined, ass, script, wd, w, h, t, enc, scene_meta)
             done = True
         except Exception as e:  # noqa: BLE001
             print(f"[max] no pude agregar a Max narrando, sigo sin él: {e}")

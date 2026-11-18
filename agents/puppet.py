@@ -95,29 +95,57 @@ def _shape_at(cues, t, idx):
 
 
 # ---------------- Dibujo ----------------
+EMOTIONS = ("neutral", "happy", "excited", "surprised", "worried", "scared", "thinking")
+GESTURES = ("none", "point", "explain", "shrug", "crossed")
+HOP_EMOTIONS = ("surprised", "excited", "scared")
+GESTURE_SECS = 3.5        # cuánto dura el gesto al empezar cada escena
+ENTRANCE_SECS = 0.6       # Max entra desde abajo con un rebote al principio del video
+HOP_SECS = 0.35           # saltito al empezar una escena sorprendente
+# lienzo de los PNG: x 90..710, y 120..860 en las coordenadas del dibujo (cuello en x=400, y=585)
+_CANVAS = (90, 120, 620, 740)
+
+
+def _aspect():
+    return _CANVAS[2] / _CANVAS[3]
+
+
 def layout(w, h):
     """Tamaño y posición del muñeco: abajo a la izquierda en Shorts (debajo de los subtítulos),
-    abajo a la derecha en videos largos (los subtítulos van al centro)."""
+    abajo a la derecha en videos largos (los subtítulos van al centro). Devuelve (ancho, alto, x, y, a_la_derecha)."""
     if h > w:
         # en Shorts la parte de abajo la tapan el título y el nombre del canal: Max va un poco más
         # arriba y el cuerpo se desvanece hacia abajo
         ph = int(h * 0.27)                  # ~520 px en 1920
-        pw = int(ph * 500 / 740)
-        return pw, ph, int(w * 0.03), h - ph - int(h * 0.08)
+        pw = int(ph * _aspect())
+        return pw, ph, 0, h - ph - int(h * 0.08), False
     ph = int(h * 0.42)                      # ~450 px en 1080
-    pw = int(ph * 500 / 740)
-    return pw, ph, w - pw - int(w * 0.02), h - ph
+    pw = int(ph * _aspect())
+    return pw, ph, w - pw, h - ph, True
+
+
+def norm_emotion(e):
+    e = (e or "").strip().lower()
+    return e if e in EMOTIONS else "neutral"
+
+
+def norm_gesture(g):
+    g = (g or "").strip().lower()
+    return g if g in GESTURES else "none"
+
+
+def _ease_out_back(p):
+    c1, c3 = 1.70158, 2.70158
+    return 1 + c3 * (p - 1) ** 3 + c1 * (p - 1) ** 2
 
 
 class Puppet:
-    def __init__(self, pw, ph, fade=False):
+    def __init__(self, pw, ph, fade=False, mirror=False):
         self.size = (pw, ph)
-        load = lambda n: Image.open(os.path.join(ASSETS, n)).convert("RGBA").resize((pw, ph), Image.LANCZOS)  # noqa: E731
-        self.body = load("body.png")
-        self.heads = {(s, b): load(f"head_{s}{'_blink' if b else ''}.png") for s in SHAPES for b in (False, True)}
-        # la cabeza gira alrededor del cuello (en el lienzo original: x=400, y=585 dentro del recorte 150,120)
-        self.pivot = ((400 - 150) / 500 * pw, (585 - 120) / 740 * ph)
-        self._cache = {}
+        self.mirror = mirror   # a la derecha de la pantalla: los gestos apuntan hacia el centro
+        self._img = {}
+        cx, cy, cw, ch = _CANVAS
+        self.pivot = ((400 - cx) / cw * pw, (585 - cy) / ch * ph)
+        self._torso, self._head, self._cache = {}, {}, {}
         self.fade = None
         if fade:  # el último 30% del cuerpo se desvanece (no queda "cortado" en el medio de la pantalla)
             g = np.ones(ph, dtype=np.float32)
@@ -125,37 +153,81 @@ class Puppet:
             g[start:] = np.linspace(1, 0, ph - start)
             self.fade = Image.fromarray((np.repeat(g[:, None], pw, axis=1) * 255).astype(np.uint8), "L")
 
-    def frame(self, shape, blink, angle, dy):
-        key = (shape, blink, angle, dy)
+    def _layer(self, name):
+        if name not in self._img:
+            path = os.path.join(ASSETS, name + ".png")
+            self._img[name] = Image.open(path).convert("RGBA").resize(self.size, Image.LANCZOS)
+        return self._img[name]
+
+    def torso(self, gesture):
+        if gesture not in self._torso:
+            img = self._layer("body").copy()
+            if gesture != "none":
+                arms = self._layer(f"arms_{gesture}")
+                img.alpha_composite(arms.transpose(Image.FLIP_LEFT_RIGHT) if self.mirror else arms)
+            self._torso[gesture] = img
+        return self._torso[gesture]
+
+    def head(self, emotion, shape, blink):
+        mouth = f"mouth_idle_{emotion}" if shape == "X" else f"mouth_{shape}"
+        key = (emotion, mouth, blink)
+        if key not in self._head:
+            img = self._layer("face").copy()
+            for n in (f"eyes_{emotion}{'_blink' if blink else ''}", mouth, f"brows_{emotion}", "hair"):
+                img.alpha_composite(self._layer(n))
+            self._head[key] = img
+        return self._head[key]
+
+    def frame(self, emotion, gesture, shape, blink, angle, dy, lift):
+        key = (emotion, gesture, shape, blink, angle, dy, lift)
         if key not in self._cache:
-            head = self.heads[(shape, blink)]
+            head = self.head(emotion, shape, blink)
             if angle:
                 head = head.rotate(angle, resample=Image.BICUBIC, center=self.pivot)
-            img = self.body.copy()
+            img = self.torso(gesture).copy()
             img.alpha_composite(head, (0, dy))
+            if lift:  # todo el muñeco desplazado (entrada / saltito): lo de abajo queda fuera del cuadro
+                moved = Image.new("RGBA", self.size, (0, 0, 0, 0))
+                moved.alpha_composite(img, (0, lift)) if lift > 0 else moved.alpha_composite(img.crop((0, -lift, *self.size)))
+                img = moved
             if self.fade is not None:
                 a = np.asarray(img.getchannel("A"), dtype=np.uint16) * np.asarray(self.fade, dtype=np.uint16) // 255
                 img.putalpha(Image.fromarray(a.astype(np.uint8), "L"))
-            if len(self._cache) > 400:
+            if len(self._cache) > 300:
                 self._cache.clear()
             self._cache[key] = img.tobytes()
         return self._cache[key]
 
 
-def overlay_frames(video, text, wd, w, h, fps, duration):
-    """Prepara el muñeco. Devuelve ((ancho, alto, x, y), generador de cuadros RGBA crudos) para pasarle
-    a FFmpeg por stdin (un video largo serían GB si se guardara en disco)."""
-    pw, ph, x, y = layout(w, h)
+def _scene_at(timeline, t, idx):
+    while idx < len(timeline) - 1 and timeline[idx + 1]["start"] <= t:
+        idx += 1
+    return idx
+
+
+def overlay_frames(video, text, wd, w, h, fps, duration, timeline=None):
+    """Prepara el muñeco. timeline = [{"start": s, "emotion": ..., "gesture": ...}] por escena.
+    Devuelve ((ancho, alto, x, y), generador de cuadros RGBA crudos) para pasarle a FFmpeg por stdin
+    (un video largo serían GB si se guardara en disco)."""
+    pw, ph, x, y, right = layout(w, h)
     cues = mouth_cues(video, text, wd, fps)
-    pup = Puppet(pw, ph, fade=h > w)
+    pup = Puppet(pw, ph, fade=h > w, mirror=right)
+    timeline = timeline or [{"start": 0.0}]
+    for sc in timeline:
+        sc["emotion"], sc["gesture"] = norm_emotion(sc.get("emotion")), norm_gesture(sc.get("gesture"))
     n = int(math.ceil(duration * fps))
 
     def gen():
         rnd = random.Random(11)
-        next_blink, blink_left, idx, talk = rnd.uniform(1.5, 4), 0, 0, 0.0
+        next_blink, blink_left, idx, sidx, talk = rnd.uniform(1.5, 4), 0, 0, 0, 0.0
         for i in range(n):
             t = i / fps
             shape, idx = _shape_at(cues, t, idx)
+            sidx = _scene_at(timeline, t, sidx)
+            sc = timeline[sidx]
+            since = t - sc["start"]
+            end = timeline[sidx + 1]["start"] if sidx + 1 < len(timeline) else duration
+            gesture = sc["gesture"] if 0.15 <= since <= min(GESTURE_SECS, end - sc["start"] - 0.2) else "none"
             talk = talk * 0.85 + (0.15 if shape not in "XA" else 0.0)   # cuánto está hablando (suavizado)
             if t >= next_blink:
                 blink_left, next_blink = 4, t + rnd.uniform(2.0, 5.0)
@@ -164,6 +236,12 @@ def overlay_frames(video, text, wd, w, h, fps, duration):
             # cabeceo leve: respiración + más movimiento cuando habla
             angle = round((math.sin(t * 1.3) * 1.2 + math.sin(t * 4.1) * 1.6 * talk) * 2) / 2
             dy = int(round(math.sin(t * 2.2) * 2 + talk * 3 * math.sin(t * 7.0)))
-            yield pup.frame(shape, blink, angle, dy)
+            lift = 0
+            if t < ENTRANCE_SECS:   # entra desde abajo con rebote
+                lift = int(round((1 - _ease_out_back(t / ENTRANCE_SECS)) * ph * 0.7))
+            elif sc["emotion"] in HOP_EMOTIONS and since < HOP_SECS and sidx > 0:
+                lift = -int(round(math.sin(math.pi * since / HOP_SECS) * ph * 0.05))
+            lift = int(round(lift / 3) * 3)   # de a 3 px: menos cuadros distintos que dibujar
+            yield pup.frame(sc["emotion"], gesture, shape, blink, angle, dy, lift)
 
     return (pw, ph, x, y), gen()
