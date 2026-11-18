@@ -175,11 +175,12 @@ def _cloudflare_image(prompt, path, w, h, seed):
     headers = {"Authorization": f"Bearer {tok}"}
     gw, gh = (768, 1344) if h > w else (1344, 768)
     klein = "@cf/black-forest-labs/flux-2-klein-4b"
+    skip_ref = False
 
     def klein_kwargs():
         files = {"prompt": (None, prompt), "width": (None, str(gw)), "height": (None, str(gh)),
                  "seed": (None, str(seed % 2_000_000_000))}
-        ref = _max_reference() if _MAX_RE.search(prompt) else None
+        ref = _max_reference() if _MAX_RE.search(prompt) and not skip_ref else None
         if ref:
             # Max tiene que verse SIEMPRE igual: se le pasa el dibujo oficial (el del logo) como imagen de referencia
             files["prompt"] = (None, MAX_REF_PROMPT + prompt)
@@ -227,6 +228,11 @@ def _cloudflare_image(prompt, path, w, h, seed):
             if "flagged" in str(data).lower():
                 flagged = True
                 continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
+            if with_ref and "flagged" in str(data).lower():
+                # el filtro rechazó ESTA combinación de prompt + referencia: reintentar esta imagen sin la referencia
+                print("[animador] el filtro rechazó la imagen con referencia: la reintento sin ella")
+                skip_ref = True
+                continue
             if with_ref and r.status_code in (400, 413, 422):
                 global _REF_BROKEN
                 _REF_BROKEN = True   # la imagen de referencia no la acepta: seguir solo con la descripción
