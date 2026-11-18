@@ -40,7 +40,7 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 6,
+      "views": 8,
       "likes": 0,
       "avg_view_pct": 31.9,
       "subs_gained": 0,
@@ -86,7 +86,7 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 455,
+      "views": 529,
       "likes": 7
     },
     {
@@ -280,8 +280,8 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 341,
-      "likes": 15
+      "views": 1120,
+      "likes": 25
     },
     {
       "job_id": "20261117_194809",
@@ -319,8 +319,8 @@
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 0,
-      "likes": 0
+      "views": 14,
+      "likes": 2
     },
     {
       "job_id": "20261117_221252",
@@ -365,7 +365,9 @@
       ],
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
-      "publish_hour_et": 15
+      "publish_hour_et": 15,
+      "views": 0,
+      "likes": 0
     }
   ],
   "feedback": [
@@ -487,12 +489,22 @@
         "Open a curiosity loop early in the video and delay the final payoff until the very end to maximize view duration."
       ],
       "reason": "Shorts are currently outperforming long-form videos significantly in views (averaging 200 views vs 4 views), and we need to continue building baseline audience momentum in the shorts algorithm while maintaining our 1-in-3 long video ratio on upcoming uploads."
+    },
+    {
+      "date": "2026-11-18T19:26:56.693597+00:00",
+      "notes": [
+        "Deliver the central visual hook within the first 2 seconds (e.g., show immediate catastrophic outcome) without setup or channel intros.",
+        "Incorporate visual pattern interrupts (fast zoom-ins, graphic pop-ups, sound effects) every 3 to 5 seconds to hold passive attention.",
+        "Avoid disclaimers, preamble, or lengthy scientific explanations; jump straight into the consequence.",
+        "Build open loops mid-script (e.g., 'But the dynamic changes entirely when...') to drive full video completion."
+      ],
+      "reason": "The target mix calls for approximately 33% long-form content (1 long video for every 2-3 shorts). Since three short videos have been published since the last long video, the next upload should be a long format video to maintain the intended testing strategy."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 4,
-      "avg_views": 200
+      "count": 5,
+      "avg_views": 334
     },
     "long": {
       "count": 1,
@@ -500,33 +512,33 @@
     }
   },
   "publish_slots_et": [
-    15,
-    19
+    11,
+    15
   ],
   "topic_insights": [
-    "Human body modification and physical capability hypotheticals (e.g., jumping like a flea, mantis shrimp punch) generate higher initial organic interest than abstract physics forces.",
-    "Prioritize immediate, existential Earth/cosmic disaster hypotheticals (e.g., Earth stops spinning or gravity doubling) to leverage innate curiosity and high click-through intent.",
-    "Focus on human biology hypotheticals (e.g., what if humans stopped sleeping) as body-centric topics consistently evoke stronger emotional engagement than pure abstract physics.",
-    "Frame historical hypotheticals around massive, globally recognizable pivot points with clear modern consequences rather than niche or academic events."
+    "Animal-inspired biological superpower hypotheticals (e.g., Mantis Shrimp Punch, Flea Jump) significantly outperform abstract physics or dietary topics.",
+    "Visceral, relatable human body modifications generate stronger immediate engagement than large-scale material disappearance concepts.",
+    "Abstract physics hypotheticals (e.g., gravity doubling) require direct personal impact framing to gain organic traction.",
+    "Focusing on extreme physical capability comparisons bridges complex science concepts with high-curiosity viral hooks."
   ],
   "strategy": {
     "daily_target": 2,
     "long_share": 0.33,
     "focus_notes": [
-      "Launch the 'Human Body Extremes' mini-series with high-curiosity titles like 'What Would Happen If You Only Ate Sugar?' to capture immediate search interest.",
-      "Fix the low Short retention by forcing Max into a dramatic physical transformation within the first 1.5 seconds of every Short.",
-      "Introduce a 'Pivotal Choice' alternative-outcome structure for upcoming long-form videos to avoid the repetitive '1 Hour / 1 Year' template and prevent inauthentic content flags.",
-      "Add bracketed scientific intrigue tags (e.g., '[Scientifically Explained]') to long-form titles to boost click-through rates from suggested feeds."
+      "Double down on animal-human hybrid strength comparisons (flea, mantis shrimp, chimp) since early Shorts data shows they outperform general physics and material-loss concepts.",
+      "Implement a strict 3-act structure for long-form videos to avoid the repetitive 1-year/1-hour format, ensuring each script features a unique narrative hook rather than standard countdowns.",
+      "Introduce bracketed scientific intrigue tags like '[Scientifically Explained]' exclusively on long-form titles to test if suggested-feed CTR improves.",
+      "Stop producing overly broad global catastrophe scenarios (like vanishing plastic) until the channel builds a core subscriber base, shifting focus to relatable personal hypothetical scenarios."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
     "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
     "metrics": {
-      "subs": 2,
+      "subs": 4,
       "watch_hours_365d": 0.0,
       "shorts_views_90d": 3,
-      "total_views": 463,
-      "video_count": 3,
+      "total_views": 469,
+      "video_count": 4,
       "long_minutes_28d": 0,
       "shorts_views_28d": 3
     },
@@ -538,9 +550,9 @@
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-17T19:48:09.226835+00:00",
-    "experiment": "Test two distinct hook styles for upcoming Shorts: Style A uses a sudden catastrophic visual (e.g., Max exploding), while Style B uses a direct provocative question with a countdown timer. We will know it worked if the APV (Average Percentage Viewed) for one style consistently beats the current 31.9% baseline.",
-    "summary_es": "Arrancamos con los primeros videos pero la tracción inicial es baja, así que necesitamos ajustar rápido el ritmo y la variedad para salir del cero. El sistema va a implementar ganchos más fuertes con Max en los primeros segundos y probar nuevas estructuras para evitar que YouTube marque el canal como repetitivo."
+    "last_run": "2026-11-18T19:23:46.693920+00:00",
+    "experiment": "Test two different hook styles for Shorts within the 'Human Body Extremes' theme: Hook A uses an immediate visual shock (Max undergoing a drastic transformation in 1.5 seconds), while Hook B starts with a direct, shocking numerical question. We will know it worked if Hook A achieves a retention rate above 50% at the 5-second mark compared to Hook B.",
+    "summary_es": "Arrancamos re bien con los cortos de animales y fuerza, que picaron en punta con más de 400 vistas. El sistema ahora va a priorizar estos temas de biología extrema y cambiar la estructura de los videos largos para no quedar repetitivos y armar una audiencia fiel."
   },
   "growth_history": [
     {
@@ -578,6 +590,15 @@
       "views_day": 0.2,
       "daily_target": 2,
       "long_share": 0.33
+    },
+    {
+      "date": "2026-11-18",
+      "subs": 4,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3,
+      "views_day": 0.2,
+      "daily_target": 2,
+      "long_share": 0.33
     }
   ],
   "quota_hits": [
@@ -585,11 +606,33 @@
     "2026-11-16T02:03:34.989494+00:00",
     "2026-11-16T21:07:19.035068+00:00",
     "2026-11-17T20:04:41.603210+00:00",
-    "2026-11-17T22:20:30.442125+00:00"
+    "2026-11-17T22:20:30.442125+00:00",
+    "2026-11-18T19:43:04.001575+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-17",
-    "images": 14,
+    "date": "2026-11-18",
+    "images": 0,
     "exhausted": false
-  }
+  },
+  "series_stats": {
+    "adventure": {
+      "count": 0,
+      "avg_views": 0
+    },
+    "challenge": {
+      "count": 0,
+      "avg_views": 0
+    },
+    "curiosity": {
+      "count": 0,
+      "avg_views": 0
+    },
+    "classic": {
+      "count": 0,
+      "avg_views": 0
+    }
+  },
+  "failures": [
+    "2026-11-18T19:43:04.002818+00:00"
+  ]
 }
