@@ -17,6 +17,7 @@ from PIL import Image
 import config
 
 ASSETS = os.path.join(config.ROOT, "assets", "max_puppet")
+LOGO_ASSETS = os.path.join(config.ROOT, "assets", "max_logo")
 SHAPES = "ABCDEFGHX"
 
 
@@ -106,6 +107,9 @@ _CANVAS = (90, 120, 620, 740)
 
 
 def _aspect():
+    if config.MAX_PUPPET_STYLE == "logo":
+        w, h = Image.open(os.path.join(LOGO_ASSETS, "base.png")).size
+        return w / h
     return _CANVAS[2] / _CANVAS[3]
 
 
@@ -199,6 +203,54 @@ class Puppet:
         return self._cache[key]
 
 
+class LogoPuppet:
+    """Max tal cual el dibujo del logo (assets/max_logo, sacado de la imagen del logo y ampliado):
+    se le mueve la boca, parpadea, se balancea y salta. No tiene brazos ni cejas separados."""
+
+    MARGIN = 0.04   # el dibujo es un poco más alto que el cuadro: al moverse nunca se ve el corte de abajo
+
+    def __init__(self, pw, ph, fade=False, mirror=False):
+        self.size = (pw, ph)
+        self.mirror = mirror   # a la derecha de la pantalla: espejado para que mire hacia el centro
+        self.dh = int(ph * (1 + self.MARGIN))
+        self.dw = int(self.dh * pw / ph)
+        self._img, self._cache = {}, {}
+        self.fade = None
+        if fade:
+            g = np.ones(ph, dtype=np.float32)
+            start = int(ph * 0.70)
+            g[start:] = np.linspace(1, 0, ph - start)
+            self.fade = Image.fromarray((np.repeat(g[:, None], pw, axis=1) * 255).astype(np.uint8), "L")
+
+    def _layer(self, name):
+        if name not in self._img:
+            im = Image.open(os.path.join(LOGO_ASSETS, name + ".png")).convert("RGBA").resize((self.dw, self.dh), Image.LANCZOS)
+            self._img[name] = im.transpose(Image.FLIP_LEFT_RIGHT) if self.mirror else im
+        return self._img[name]
+
+    def frame(self, emotion, gesture, shape, blink, angle, dy, lift):
+        key = (shape, blink, angle, dy, lift)
+        if key not in self._cache:
+            img = self._layer("base").copy()
+            if shape not in "XA":
+                img.alpha_composite(self._layer(f"mouth_{shape}"))
+            if blink:
+                img.alpha_composite(self._layer("blink"))
+            if angle:
+                img = img.rotate(angle * 0.6, resample=Image.BICUBIC, center=(self.dw / 2, self.dh))
+            pw, ph = self.size
+            out = Image.new("RGBA", self.size, (0, 0, 0, 0))
+            x0 = (self.dw - pw) // 2   # el dibujo es apenas más ancho: se recorta el centro
+            out.alpha_composite(img.crop((x0, 0, x0 + pw, self.dh)), (0, int(ph * self.MARGIN / 2) + abs(dy) + lift))
+            if self.fade is not None:
+                a = np.asarray(out.getchannel("A"), dtype=np.uint16) * np.asarray(self.fade, dtype=np.uint16) // 255
+                out.putalpha(Image.fromarray(a.astype(np.uint8), "L"))
+            if len(self._cache) > 300:
+                self._cache.clear()
+            self._cache[key] = out.tobytes()
+        return self._cache[key]
+
+
 def _scene_at(timeline, t, idx):
     while idx < len(timeline) - 1 and timeline[idx + 1]["start"] <= t:
         idx += 1
@@ -211,7 +263,8 @@ def overlay_frames(video, text, wd, w, h, fps, duration, timeline=None):
     (un video largo serían GB si se guardara en disco)."""
     pw, ph, x, y, right = layout(w, h)
     cues = mouth_cues(video, text, wd, fps)
-    pup = Puppet(pw, ph, fade=h > w, mirror=right)
+    cls = LogoPuppet if config.MAX_PUPPET_STYLE == "logo" else Puppet
+    pup = cls(pw, ph, fade=h > w, mirror=right)
     timeline = timeline or [{"start": 0.0}]
     for sc in timeline:
         sc["emotion"], sc["gesture"] = norm_emotion(sc.get("emotion")), norm_gesture(sc.get("gesture"))

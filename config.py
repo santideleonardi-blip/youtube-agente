@@ -51,6 +51,9 @@ MAX_LOOK = (
 # cuenta en primera persona ("I wake up and..."). Con MAX_NARRATOR=0 se vuelve a solo imágenes
 # y narrador en tercera persona, como antes del 17/11.
 MAX_NARRATOR = os.getenv("MAX_NARRATOR", "1") == "1"
+# "logo": el Max exacto del logo del canal (elegido por Santi el 18/11). "dibujo": el muñeco vectorial
+# con expresiones y brazos (assets/max_puppet).
+MAX_PUPPET_STYLE = os.getenv("MAX_PUPPET_STYLE", "logo")
 
 IMAGE_STYLE = (
     "flat 2D vector cartoon illustration, simple geometric shapes, bold clean outlines, "
