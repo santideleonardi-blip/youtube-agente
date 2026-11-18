@@ -87,7 +87,26 @@
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
       "views": 529,
-      "likes": 7
+      "likes": 7,
+      "retention_end": 0.116,
+      "drops": [
+        {
+          "second": 5.2,
+          "drop_pct": 11.0,
+          "narration": "What would happen if you could jump like a flea and clear a 60-story skyscraper in one bounce?"
+        },
+        {
+          "second": 5.6,
+          "drop_pct": 9.8,
+          "narration": "What would happen if you could jump like a flea and clear a 60-story skyscraper in one bounce?"
+        },
+        {
+          "second": 4.7,
+          "drop_pct": 7.3,
+          "narration": "What would happen if you could jump like a flea and clear a 60-story skyscraper in one bounce?"
+        }
+      ],
+      "analyzed": true
     },
     {
       "job_id": "20261116_133344",
@@ -280,7 +299,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1120,
+      "views": 1121,
       "likes": 25
     },
     {
@@ -366,8 +385,162 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 0,
-      "likes": 0
+      "views": 27,
+      "likes": 1
+    },
+    {
+      "job_id": "20261118_215055",
+      "youtube_id": "v2ev8dyg3ZE",
+      "title": "What Would Happen If You Had A T-Rex Bite?",
+      "topic": "What would happen if you had the bite force of a Tyrannosaurus Rex?",
+      "format": "long",
+      "series": "adventure",
+      "duration": 513.38,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "My jaw just slammed shut with eight terrifying tons of pressure, instantly turning a solid steel sedan into a completely crumpled soda can while you watch in pure disbelief. The sheer kinetic violence of that sudden impact sent a shockwave echoing across the entire neighborhood, and believe me, the ground beneath my feet literally shook from the force."
+        },
+        {
+          "start": 22.22,
+          "narration": "Welcome back to another exceptionally dangerous experiment on Max's Adventures. Today, I am pushing biology to the absolute absolute limit by giving myself the terrifying bite force of a Tyrannosaurus Rex. We are going to test this crazy power to its absolute breaking point, and you won't believe the catastrophic physics involved."
+        },
+        {
+          "start": 44.42,
+          "narration": "To fully understand how completely insane this scientific leap actually is, let's look at a quick animal-human hybrid comparison before things get totally out of hand. Nature designed teeth for specific survival tasks, but the gap between us and the prehistoric giants is unimaginably massive."
+        },
+        {
+          "start": 64.42,
+          "narration": "A normal human bite delivers about one hundred and sixty paltry pounds of force. It is surprisingly useful for chewing a medium-rare steak, but utterly terrible for surviving the prehistoric Jurassic where everything wants to eat you."
+        },
+        {
+          "start": 79.76,
+          "narration": "A muscular chimpanzee hits around thirteen hundred pounds of crushing pressure. That is undeniably impressive and enough to snap heavy bones like dry twigs, but still nowhere near the undisputed king of the ancient dinosaurs."
+        },
+        {
+          "start": 94.96,
+          "narration": "Meanwhile, a massive T-Rex delivered a mind-boggling eight thousand pounds of bone-pulverizing power. And now, thanks to a completely unethical gene-modifying serum coursing through my veins, that apocalyptic power is locked directly inside my skull."
+        },
+        {
+          "start": 112.19,
+          "narration": "At first, everything feels deceptively normal as I stroll down the sidewalk. I casually take a bite out of a fresh apple, and it doesn't just slice—it literally vaporizes into a red mist of juice and flying skin."
+        },
+        {
+          "start": 126.19,
+          "narration": "Oops. That was my absolute favorite fruit gone in a single millisecond without a trace. But trust me, that little snack is just the mild warm-up for what happens when we scale this terrifying power up to industrial levels."
+        },
+        {
+          "start": 140.38,
+          "narration": "I immediately head out to a local industrial junkyard to see what this terrifying biological upgrade can truly accomplish. My ultimate goal is simple: bite a heavy car completely in half and see how my teeth hold up."
+        },
+        {
+          "start": 155.22,
+          "narration": "Before I take a dangerous bite out of vehicular history, let's quickly check the vital science of why my fragile head hasn't exploded yet. Or has the structural failure already begun to crack beneath the surface?"
+        },
+        {
+          "start": 169.05,
+          "narration": "Prehistoric dinosaurs didn't just possess giant jaw muscles. Their massive skulls were entirely fused and rigidly built to handle cataclysmic shockwaves without snapping in half under the immense biomechanical load."
+        },
+        {
+          "start": 183.63,
+          "narration": "My fragile human skull, however, is made of separate plates held together by delicate sutures. If I bite down too hard here, my soft brain might literally scramble inside my head like raw eggs."
+        },
+        {
+          "start": 196.83,
+          "narration": "I nervously approach a bright red pickup truck parked right in the middle of the yard. I carefully position my newly upgraded teeth right over the thick steel bed of the rusted, abandoned truck."
+        },
+        {
+          "start": 209.23,
+          "narration": "I take a deep breath and count down from three to zero to steady my nerves. Three. Two. One. Here comes the absolute peak of the experiment, and you won't believe what happens next to the metal."
+        },
+        {
+          "start": 221.83,
+          "narration": "I clamp down with the full, devastating force of a hungry apex predator. Crack! The heavy metal gives way instantly with a deafening screech of tortured iron echoing loudly across the empty yard."
+        },
+        {
+          "start": 235.23,
+          "narration": "My teeth sink straight through solid iron like it is warm summer butter. But honestly, watching the metal deform like paper is not even the scariest part of this high-risk stunt."
+        },
+        {
+          "start": 246.93,
+          "narration": "The sheer kinetic shockwave travels straight up my jaw joints like a lightning bolt and violently rattles my entire defenseless brain against the inside of my skull bones."
+        },
+        {
+          "start": 258.27,
+          "narration": "My vision flashes blinding white for a terrifying second. Every single tooth in my mouth feels like it is vibrating violently at the exact speed of sound, threatening to fall out."
+        },
+        {
+          "start": 270.1,
+          "narration": "That right there is the hidden, deadly danger of biological upgrades: raw power without proper structural skeletal support is a guaranteed one-way ticket to the hospital emergency room."
+        },
+        {
+          "start": 283.14,
+          "narration": "Despite the severe ringing echoing in my ears, I need to test the absolute limit of my new bite on something even tougher. It is officially time to visit a massive boulder quarry."
+        },
+        {
+          "start": 294.84,
+          "narration": "If a T-Rex could crush bone effortlessly, can I manage to crush solid granite? Let's find out right now before my curiosity gets the better of me, because testing this monstrous biological limit is the only way to truly understand my terrifying new superpower."
+        },
+        {
+          "start": 312.71,
+          "narration": "I wedge a large, jagged chunk of granite directly between my molars. I squeeze gently—or as gently as eight tons of crushing pressure allows me to, feeling the immense kinetic potential waiting to unleash inside my skull."
+        },
+        {
+          "start": 327.93,
+          "narration": "The mighty rock groans under the unimaginable pressure. Tiny micro-fractures instantly spiderweb across the entire surface of the stone as over seventeen thousand pounds of force push down on a single point."
+        },
+        {
+          "start": 342.06,
+          "narration": "And then, a sudden explosion! The boulder violently shatters into fine grey dust and sharp gravel right inside my mouth, startling even myself with how effortlessly the geological mass gave way to my prehistoric jaws."
+        },
+        {
+          "start": 357.79,
+          "narration": "Miraculously, my teeth are completely unharmed, heavily coated in these bizarre diamond-hard enamel mutations gifted directly by the strange experimental serum that rewrote my entire biological blueprint."
+        },
+        {
+          "start": 372.86,
+          "narration": "My dental enamel is officially tougher than industrial titanium now. Honestly, I could easily chew right through a bank safe door if I really wanted to, which is an impressive party trick until you realize you cannot eat soft food safely."
+        },
+        {
+          "start": 388.64,
+          "narration": "However, my jaw muscles are burning fiercely. Holding that kind of biological superpower requires massive amounts of blood sugar and continuous energy, and my body is desperately paying the metabolic price."
+        },
+        {
+          "start": 402.79,
+          "narration": "My stomach is growling so loudly it literally sounds like a distant thunderstorm rolling in. A hungry T-Rex had to consume hundreds of pounds of meat daily just to stay alive, and my human metabolism is suddenly demanding the same."
+        },
+        {
+          "start": 418.95,
+          "narration": "If I decide to keep this terrifying bite force permanently, I am definitely going to bankrupt my local grocery store buying expensive prime rib steaks every single day just to keep my jaw muscles from consuming my own energy reserves."
+        },
+        {
+          "start": 435.21,
+          "narration": "It is officially time to reverse this serum before I accidentally bite my own kitchen counter or house in half while simply chewing in my sleep or reacting to a loud unexpected noise."
+        },
+        {
+          "start": 447.42,
+          "narration": "I rush desperately inside my laboratory and slam the glowing blue antidote syringe directly into my arm just in the nick of time to stop the mutation before it permanently fuses my jawbones together."
+        },
+        {
+          "start": 461.56,
+          "narration": "Instantly, my strained jaw muscles finally relax. The overwhelming, skull-crushing pressure in my head fades right back down to normal human levels as my DNA returns to its cozy, non-carnivorous state."
+        },
+        {
+          "start": 476.22,
+          "narration": "I take a cautious test bite on a normal orange carrot. It snaps satisfyingly with a normal, gentle crunch without destroying the entire kitchen. Absolutely perfect, and incredibly comforting."
+        },
+        {
+          "start": 489.67,
+          "narration": "Having a T-Rex bite force is undeniably amazing for destroying cars and boulders, but honestly, it is completely terrible for everyday human life, social interactions, and dental hygiene."
+        },
+        {
+          "start": 503.01,
+          "narration": "Now, what would happen if you never blinked for the rest of your life? Click the screen right now to find out, and I'll see you next time on the channel for another wild experiment!"
+        }
+      ],
+      "uploaded_at": "2026-11-18T22:21:47.423960+00:00",
+      "publish_at": "2026-11-19T16:00:00+00:00",
+      "publish_hour_et": 11
     }
   ],
   "feedback": [
@@ -499,12 +672,21 @@
         "Build open loops mid-script (e.g., 'But the dynamic changes entirely when...') to drive full video completion."
       ],
       "reason": "The target mix calls for approximately 33% long-form content (1 long video for every 2-3 shorts). Since three short videos have been published since the last long video, the next upload should be a long format video to maintain the intended testing strategy."
+    },
+    {
+      "date": "2026-11-18T21:50:55.388449+00:00",
+      "notes": [
+        "Trim the hook down: viewers are dropping off around the 4-to-5-second mark during the initial premise of the flea jump.",
+        "Deliver the core visual or answer faster in the first 2 seconds; avoid repeating the long question setup.",
+        "Repeat the success formula of high-impact biological superpower comparisons (like the Mantis Shrimp and Flea jumps) while cutting preamble."
+      ],
+      "reason": "The growth strategist target mix requires approximately 33% long-form content (1 out of every 3 videos) during this testing phase to gather balanced performance data across formats, despite current short-form view momentum."
     }
   ],
   "format_stats": {
     "short": {
       "count": 5,
-      "avg_views": 334
+      "avg_views": 340
     },
     "long": {
       "count": 1,
@@ -513,7 +695,7 @@
   },
   "publish_slots_et": [
     11,
-    15
+    13
   ],
   "topic_insights": [
     "Animal-inspired biological superpower hypotheticals (e.g., Mantis Shrimp Punch, Flea Jump) significantly outperform abstract physics or dietary topics.",
@@ -607,11 +789,12 @@
     "2026-11-16T21:07:19.035068+00:00",
     "2026-11-17T20:04:41.603210+00:00",
     "2026-11-17T22:20:30.442125+00:00",
-    "2026-11-18T19:43:04.001575+00:00"
+    "2026-11-18T19:43:04.001575+00:00",
+    "2026-11-18T22:21:47.422856+00:00"
   ],
   "cf_usage": {
     "date": "2026-11-18",
-    "images": 0,
+    "images": 18,
     "exhausted": false
   },
   "series_stats": {
@@ -634,5 +817,8 @@
   },
   "failures": [
     "2026-11-18T19:43:04.002818+00:00"
-  ]
+  ],
+  "playlists": {
+    "adventure": "PLcSjWkBi0rhk"
+  }
 }
