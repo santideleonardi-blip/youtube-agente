@@ -15,6 +15,7 @@ import config
 from agents import analyst, animator, publisher, scriptwriter, strategist, trends
 from common import llm, schedule
 from common import series as series_mod
+from common import requests_queue
 from common import state as st
 
 
@@ -110,6 +111,11 @@ def main():
         print(f"[analista] falló, sigo con valores por defecto: {e}")
         decision = {"format": "short", "notes": [], "topic_insights": state.get("topic_insights", [])}
     fmt = forced if forced in ("short", "long") else decision["format"]
+    req = requests_queue.next_request()
+    if req:
+        print(f"[pedido] tema pedido: {req['topic']} ({req.get('format') or fmt})")
+        if req.get("format") in ("short", "long") and forced not in ("short", "long"):
+            fmt = req["format"]
     if not animator.ALLOW_FALLBACK and need[fmt] > left:
         if fmt == "long" and need["short"] <= left:
             print(f"[animador] quedan ~{left} imágenes FLUX.2 hoy: no alcanzan para un largo ({need['long']}) -> Short")
@@ -124,9 +130,14 @@ def main():
         focus.append(f"[experiment this week] {strat['experiment']}")
     notes = list(decision["notes"]) + focus
 
-    serie = series_mod.pick(state)
+    serie = (req or {}).get("series") if (req or {}).get("series") in config.SERIES else series_mod.pick(state)
     try:
-        topic = trends.run(state, fmt, notes, decision.get("topic_insights"), serie)
+        if req:
+            notes = notes + [f"[requested topic] {n}" for n in req.get("notes", [])]
+            topic = {"topic": req["topic"], "angle": req.get("angle", ""), "why": "pedido del dueño del canal",
+                     "series": serie}
+        else:
+            topic = trends.run(state, fmt, notes, decision.get("topic_insights"), serie)
         try:
             script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
         except scriptwriter.ScriptTooShort as e:
@@ -167,6 +178,8 @@ def main():
         "publish_hour_et": pub["publish_at"].astimezone(schedule.ET).hour if pub.get("publish_at") else None,
     })
     st.save(state)
+    if req:
+        requests_queue.mark_done(req.get("id"), pub["youtube_id"])
     print("=== Listo ===")
 
 

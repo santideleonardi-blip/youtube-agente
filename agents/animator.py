@@ -271,8 +271,26 @@ _MAX_DESC_RE = re.compile(r"\bMax\b(?:'s)?\s*(?:,|\()?\s*(?:the |an? )?(?:adult 
                           r"(?:\s+(?:with|in|wearing)\b[^,.;)]*)?(?:\s+and\s+an?\s+[^,.;)]*jumpsuit)?\)?", re.I)
 
 
+# Marcas y personajes ajenos no se dibujan (derechos de autor): se cambian por algo genérico
+_BRANDS = [
+    (re.compile(r"\b(vice city|leonida)\b", re.I), "a sunny neon Miami-like coastal city"),
+    (re.compile(r"\b(jason|lucia)\b", re.I), "a stranger"),
+    (re.compile(r"\b(rockstar(?: games)?'?s?\s*)?(grand theft auto(?:\s*(?:vi|6|v|5))?|gta\s*(?:vi|6|v|5)?)\b", re.I),
+     "an open-world video game"),
+    (re.compile(r"\brockstar games\b", re.I), "a game studio"),
+]
+
+
+def clean_brands(prompt):
+    out = prompt or ""
+    for rx, rep in _BRANDS:
+        out = rx.sub(rep, out)
+    return re.sub(r"(an open-world video game)(\s+an open-world video game)+", r"\1", out)
+
+
 def with_max_look(prompt):
     """Si la escena muestra a Max, le pega siempre la misma descripción física."""
+    prompt = clean_brands(prompt)
     if not _MAX_RE.search(prompt or ""):
         return prompt
     prompt = _MAX_DESC_RE.sub("Max", prompt)

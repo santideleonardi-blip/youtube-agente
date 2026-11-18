@@ -90,12 +90,39 @@ def _available_models():
     return _models
 
 
+OVERLOAD_ROUNDS = 3          # si TODOS los modelos están saturados (503/504), se espera y se vuelve a probar
+OVERLOAD_WAITS = (60, 150)   # segundos de espera entre vueltas
+
+
 def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
-    """Pide una respuesta JSON. Prueba el mejor modelo disponible y luego los de respaldo."""
+    """Pide una respuesta JSON. Prueba el mejor modelo disponible y luego los de respaldo. Si fallan todos
+    solo por saturación de Google (pasajera), espera y da otra vuelta antes de rendirse."""
+    last_err = None
+    for rnd in range(OVERLOAD_ROUNDS):
+        ok, result, overloaded = _ask_round(prompt, system, temperature)
+        if ok:
+            return result
+        last_err = result
+        if not overloaded or rnd == OVERLOAD_ROUNDS - 1:
+            break
+        wait = OVERLOAD_WAITS[min(rnd, len(OVERLOAD_WAITS) - 1)]
+        print(f"[llm] todos los modelos saturados: espero {wait} s y vuelvo a probar (vuelta {rnd + 2}/{OVERLOAD_ROUNDS})")
+        time.sleep(wait)
+    raise RuntimeError(f"Gemini no respondió: {last_err}")
+
+
+def _is_overload(msg):
+    return any(x in msg for x in ("503", "UNAVAILABLE", "504", "DEADLINE_EXCEEDED")) or \
+        "disconnected" in msg.lower() or "timed out" in msg.lower()
+
+
+def _ask_round(prompt, system, temperature):
+    """Una vuelta por todos los modelos. Devuelve (ok, resultado_o_error, todo_fue_saturación)."""
     from google.genai import types
 
     models = [m for m in _available_models() if m not in _exhausted]
     last_err = None
+    overloaded = bool(models)
     for model in models:
         for attempt in range(3):
             try:
@@ -107,15 +134,17 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                 resp = _with_timeout(lambda: _get_client().models.generate_content(
                     model=model, contents=prompt, config=cfg), 150)
                 print(f"[llm] respuesta de {model}")
-                return _extract_json(resp.text)
+                return True, _extract_json(resp.text), False
             except Exception as e:  # noqa: BLE001
                 last_err = e
                 msg = str(e)
+                if not _is_overload(msg):
+                    overloaded = False
                 print(f"[llm] {model} intento {attempt + 1} falló: {msg[:200]}")
                 if "404" in msg or "not found" in msg.lower() or "no longer available" in msg.lower():
                     _exhausted.add(model)  # el modelo no existe: no volver a probarlo en esta corrida
                     break
-                if "503" in msg or "UNAVAILABLE" in msg or "disconnected" in msg.lower() or "timed out" in msg.lower():
+                if _is_overload(msg):
                     if attempt >= 1:
                         break  # modelo saturado: probar el siguiente
                     time.sleep(8)
@@ -130,4 +159,4 @@ def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
                     time.sleep(20)
                 else:
                     time.sleep(5)
-    raise RuntimeError(f"Gemini no respondió: {last_err}")
+    return False, last_err, overloaded

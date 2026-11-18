@@ -1,0 +1,17 @@
+[
+  {
+    "id": "gta6-launch",
+    "topic": "What would happen if you lived inside GTA 6 for 24 hours?",
+    "series": "challenge",
+    "format": "short",
+    "not_before": "2026-11-18",
+    "angle": "GTA 6 comes out on November 19, 2026: Max wakes up inside a GTA-style neon Florida city and has to survive 24 hours with game logic in real life (wanted stars, cars, ragdoll physics, respawning). Funny and science-based: what would really happen to a human body and to a city if game rules were real.",
+    "notes": [
+      "Release-day hook: open with 'GTA 6 just came out... so what if you had to LIVE in it for 24 hours?'. Say 'GTA 6' in the first sentence (it is what people search today).",
+      "Keep it family friendly: chases, crashes, wild physics, 5-star wanted level, insane stunts. No shooting people, no killing, no drugs.",
+      "IMAGE PROMPTS: never write 'GTA', 'Grand Theft Auto', 'Rockstar' or game character names (Jason, Lucia) and never draw logos, game HUD screenshots or real game characters. Describe an ORIGINAL sunny neon Miami-like coastal city with palm trees, sports cars, police cars and beaches, video-game vibe.",
+      "Use real science for each consequence (g-forces in crashes, falling from buildings, how fast police respond, how long a body can go without sleep)."
+    ],
+    "done": false
+  }
+]
