@@ -47,6 +47,10 @@ def _svg(inner):
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VIEWBOX}" width="{W}" height="{H}">{inner}</svg>'
 
 
+SLIM_FACE = 'transform="translate(400 0) scale(0.87 1) translate(-400 0)"'
+SLIM_BODY = 'transform="translate(400 0) scale(0.84 1) translate(-400 0)"'
+
+
 def _render(inner, name):
     subprocess.run(["rsvg-convert", "-o", os.path.join(OUT, name + ".png")], input=_svg(inner).encode(), check=True)
 
@@ -135,25 +139,25 @@ FACE = f"""
 <path d="M410 486 Q420 482 418 472" fill="none" stroke="{SKIN_SH}" stroke-width="6" stroke-linecap="round"/>
 """
 
-# Mechones: forma general en punta + flequillo cayendo sobre la frente (más alto que antes, para que se vean las cejas)
-HAIR_PATH = ("M268 410 L250 366 L216 360 L242 326 L204 298 L248 284 L224 238 L274 242 L268 192 L314 212 "
-             "L326 158 L364 194 L390 136 L416 188 L454 146 L462 198 L508 172 L502 222 L552 210 L532 256 "
-             "L582 262 L550 296 L586 324 L542 332 L560 374 L534 410 L526 360 L512 330 L500 344 L482 312 "
-             "L462 328 L446 300 L424 320 L408 290 L386 318 L368 292 L350 318 L330 292 L314 322 L298 302 "
-             "L288 352 Z")
+# Pelo despeinado pero suave: mechones redondeados (no en punta) y flequillo cayendo de costado
+HAIR_PATH = ("M298 410 Q280 384 290 356 Q266 336 284 306 Q268 276 300 260 Q298 228 336 228 "
+             "Q352 204 384 216 Q406 196 432 214 Q464 204 478 232 Q510 236 510 266 Q534 286 516 312 "
+             "Q534 338 512 358 Q516 384 498 402 Q494 370 484 340 Q468 346 456 326 Q436 344 408 328 "
+             "Q388 346 360 332 Q340 348 318 334 Q304 370 298 410 Z")
 HAIR = f"""
 <path d="{HAIR_PATH}" fill="{HAIR}"/>
 <g fill="{HAIR_SH}">
-  <path d="M470 200 L508 172 L502 222 L552 210 L532 256 L582 262 L550 296 L586 324 L542 332 L560 374 L534 410 L526 360 L512 330 L500 344 L482 312 L500 290 L520 300 L512 260 L490 250 Z"/>
-  <path d="M300 250 L330 236 L350 262 L322 270 Z"/>
-  <path d="M400 214 L430 204 L436 240 L410 236 Z"/>
+  <path d="M478 232 Q510 236 510 266 Q534 286 516 312 Q534 338 512 358 Q516 384 498 402 Q494 370 484 340
+           Q500 326 496 306 Q508 282 490 262 Q494 244 478 232 Z"/>
+  <path d="M456 326 Q436 344 408 328 Q432 314 456 326 Z"/>
+  <path d="M360 332 Q340 348 318 334 Q340 322 360 332 Z"/>
 </g>
 <path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
-<g fill="none" stroke="{HAIR_HI}" stroke-width="6" stroke-linecap="round">
-  <path d="M286 268 L318 238"/><path d="M366 222 L384 176"/><path d="M430 214 L452 178"/><path d="M262 316 L290 300"/>
+<g fill="none" stroke="{HAIR_HI}" stroke-width="7" stroke-linecap="round">
+  <path d="M318 272 Q340 248 372 240"/><path d="M404 226 Q428 216 452 224"/><path d="M296 320 Q304 300 320 292"/>
 </g>
 <g fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round">
-  <path d="M352 300 L366 262"/><path d="M420 296 L432 258"/><path d="M482 310 L496 276"/><path d="M300 296 L312 268"/>
+  <path d="M340 300 Q366 278 404 270"/><path d="M424 302 Q446 282 478 278"/><path d="M314 326 Q322 304 346 294"/>
 </g>"""
 
 
@@ -171,8 +175,8 @@ def _pupils(dx=4, dy=4, r=12, spark=True):
     return out
 
 
-SWEAT = (f'<path d="M548 330 Q562 356 548 368 Q534 356 548 330 Z" fill="#a8dcff" stroke="{INK}" stroke-width="5"/>'
-         '<path d="M545 352 Q544 360 549 362" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>')
+SWEAT = (f'<path d="M524 334 Q538 360 524 372 Q510 360 524 334 Z" fill="#a8dcff" stroke="{INK}" stroke-width="5"/>'
+         '<path d="M521 356 Q520 364 525 366" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>')
 
 
 def eyes(emo, closed):
@@ -204,11 +208,11 @@ def eyes(emo, closed):
 BROWS = {
     "neutral": ("M312 368 C330 354 360 352 384 360", "M416 360 C440 352 470 354 488 368"),
     "happy": ("M312 360 C330 344 360 342 384 350", "M416 350 C440 342 470 344 488 360"),
-    "excited": ("M312 352 C330 332 362 330 386 342", "M414 342 C438 330 470 332 488 352"),
-    "surprised": ("M314 348 C330 324 364 322 386 336", "M414 336 C436 322 470 324 486 348"),
+    "excited": ("M312 358 C330 340 362 338 386 348", "M414 348 C438 338 470 340 488 358"),
+    "surprised": ("M314 356 C330 336 364 334 386 346", "M414 346 C436 334 470 336 486 356"),
     "worried": ("M312 368 C334 366 360 356 382 340", "M418 340 C440 356 466 366 488 368"),
-    "scared": ("M312 360 C334 358 360 346 382 326", "M418 326 C440 346 466 358 488 360"),
-    "thinking": ("M312 372 C334 368 362 368 384 370", "M416 342 C440 326 470 328 488 346"),
+    "scared": ("M312 364 C334 362 360 352 382 336", "M418 336 C440 352 466 362 488 364"),
+    "thinking": ("M312 372 C334 368 362 368 384 370", "M416 350 C440 336 470 338 488 354"),
 }
 
 
@@ -263,10 +267,10 @@ def main():
     for f in os.listdir(OUT):
         if f.endswith(".png"):
             os.remove(os.path.join(OUT, f))
-    _render(BODY, "body")
+    _render(f"<g {SLIM_BODY}>{BODY}</g>", "body")
     for g in GESTURES:
-        _render(arms(g), f"arms_{g}")
-    _render(FACE, "face")
+        _render(f"<g {SLIM_BODY}>{arms(g)}</g>", f"arms_{g}")
+    _render(f"<g {SLIM_FACE}>{FACE}</g>", "face")
     _render(HAIR, "hair")
     for e in EMOTIONS:
         _render(eyes(e, False), f"eyes_{e}")
