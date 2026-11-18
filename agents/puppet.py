@@ -173,7 +173,7 @@ class Puppet:
         key = (emotion, mouth, blink)
         if key not in self._head:
             img = self._layer("face").copy()
-            for n in (f"eyes_{emotion}{'_blink' if blink else ''}", mouth, f"brows_{emotion}", "hair"):
+            for n in (f"eyes_{emotion}{'_blink' if blink else ''}", mouth, "hair", f"brows_{emotion}"):
                 img.alpha_composite(self._layer(n))
             self._head[key] = img
         return self._head[key]

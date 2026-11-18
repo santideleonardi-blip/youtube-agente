@@ -9,8 +9,8 @@ Capas (todas del mismo tamaño, se apilan en este orden):
   face            orejas, cara, sombras, barba
   eyes_<emo>[_blink]
   mouth_<forma>   bocas de Rhubarb A-H + idle_<emo> (boca en reposo según la emoción)
-  brows_<emo>
   hair
+  brows_<emo>     (encima del flequillo, para que siempre se vean las expresiones)
 
 Emociones: neutral, happy, excited, surprised, worried, scared, thinking.
 Estilo: cartoon adulto dibujado a mano, contornos negros gruesos, sombreado plano (cel), como el Max
@@ -26,9 +26,9 @@ W, H = 620, 740
 INK = "#1c1612"
 SKIN = "#f7d0b4"
 SKIN_SH = "#e8ad8f"
-HAIR = "#5b3517"
-HAIR_SH = "#3d220d"
-HAIR_HI = "#8b5a2f"
+HAIR = "#7a4b27"     # castaño como el Max de FLUX
+HAIR_SH = "#55311a"
+HAIR_HI = "#a06a3c"
 BROW = "#3d220d"
 STUBBLE = "#c79f78"
 ORANGE = "#f8921f"
@@ -139,25 +139,31 @@ FACE = f"""
 <path d="M410 486 Q420 482 418 472" fill="none" stroke="{SKIN_SH}" stroke-width="6" stroke-linecap="round"/>
 """
 
-# Pelo despeinado pero suave: mechones redondeados (no en punta) y flequillo cayendo de costado
-HAIR_PATH = ("M298 410 Q280 384 290 356 Q266 336 284 306 Q268 276 300 260 Q298 228 336 228 "
-             "Q352 204 384 216 Q406 196 432 214 Q464 204 478 232 Q510 236 510 266 Q534 286 516 312 "
-             "Q534 338 512 358 Q516 384 498 402 Q494 370 484 340 Q468 346 456 326 Q436 344 408 328 "
-             "Q388 346 360 332 Q340 348 318 334 Q304 370 298 410 Z")
+# Pelo como el Max de FLUX (docs/max_referencia.png): melena despeinada y ancha, mechones finos en punta que
+# salen para los costados y flequillo desprolijo cayendo sobre la frente hasta las cejas
+HAIR_PATH = ("M300 420 Q286 400 260 398 Q282 384 284 368 Q262 362 244 340 Q274 340 282 326 Q262 306 256 282 "
+             "Q284 296 296 292 Q290 262 298 240 Q314 260 330 258 Q336 232 350 210 Q362 236 376 236 "
+             "Q392 210 416 198 Q416 224 428 228 Q452 212 480 216 Q466 236 474 246 Q500 244 528 256 "
+             "Q508 270 512 282 Q538 292 556 314 Q530 318 524 328 Q544 346 552 374 Q530 366 520 368 "
+             "Q524 392 514 416 Q508 386 498 362 Q494 368 486 374 Q480 360 466 346 Q456 352 442 358 "
+             "Q436 352 424 340 Q406 346 384 354 Q390 346 388 336 Q368 344 346 352 Q352 342 352 332 "
+             "Q336 340 318 354 Q320 342 314 332 Q304 362 300 420 Z")
 HAIR = f"""
 <path d="{HAIR_PATH}" fill="{HAIR}"/>
 <g fill="{HAIR_SH}">
-  <path d="M478 232 Q510 236 510 266 Q534 286 516 312 Q534 338 512 358 Q516 384 498 402 Q494 370 484 340
-           Q500 326 496 306 Q508 282 490 262 Q494 244 478 232 Z"/>
-  <path d="M456 326 Q436 344 408 328 Q432 314 456 326 Z"/>
-  <path d="M360 332 Q340 348 318 334 Q340 322 360 332 Z"/>
+  <path d="M480 216 Q466 236 474 246 Q500 244 528 256 Q508 270 512 282 Q538 292 556 314 Q530 318 524 328
+           Q544 346 552 374 Q530 366 520 368 Q524 392 514 416 Q508 386 498 362 Q504 330 494 300 Q498 270 480 252 Z"/>
+  <path d="M424 340 Q406 346 384 354 Q398 330 424 340 Z"/>
+  <path d="M466 346 Q456 352 442 358 Q450 336 466 346 Z"/>
+  <path d="M352 332 Q336 340 318 354 Q330 330 352 332 Z"/>
 </g>
-<path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="10" stroke-linejoin="round"/>
-<g fill="none" stroke="{HAIR_HI}" stroke-width="7" stroke-linecap="round">
-  <path d="M318 272 Q340 248 372 240"/><path d="M404 226 Q428 216 452 224"/><path d="M296 320 Q304 300 320 292"/>
+<path d="{HAIR_PATH}" fill="none" stroke="{INK}" stroke-width="9" stroke-linejoin="round"/>
+<g fill="none" stroke="{HAIR_HI}" stroke-width="6" stroke-linecap="round">
+  <path d="M312 288 Q330 268 352 258"/><path d="M384 248 Q402 230 420 224"/><path d="M286 330 Q296 316 310 310"/>
 </g>
-<g fill="none" stroke="{INK}" stroke-width="5" stroke-linecap="round">
-  <path d="M340 300 Q366 278 404 270"/><path d="M424 302 Q446 282 478 278"/><path d="M314 326 Q322 304 346 294"/>
+<g fill="none" stroke="{INK}" stroke-width="4.5" stroke-linecap="round">
+  <path d="M330 314 Q350 290 380 280"/><path d="M400 300 Q420 274 446 264"/><path d="M450 318 Q474 296 496 290"/>
+  <path d="M300 352 Q306 330 324 318"/><path d="M372 330 Q382 312 400 304"/><path d="M500 332 Q510 312 520 300"/>
 </g>"""
 
 
