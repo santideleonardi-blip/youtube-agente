@@ -15,6 +15,7 @@ from common.youtube_auth import youtube
 
 
 def _metadata(topic, script, fmt, state):
+    serie = config.SERIES.get(topic.get("series") or "classic", config.SERIES["classic"])
     best = sorted([v for v in state["videos"] if v.get("views")], key=lambda v: v["views"], reverse=True)[:5]
     return llm.ask_json(
         f"""You are a YouTube packaging expert (titles, thumbnails, SEO) for a viral animated channel.
@@ -31,12 +32,45 @@ Write packaging that maximises click-through WITHOUT lying about the content:
   {"Add #shorts at the end." if fmt == "short" else ""}
 - thumbnail_text: 2-4 punchy words in CAPS (complements the title, does not repeat it).
 - description: 2-3 engaging sentences, then "Subscribe to {config.CHANNEL_NAME} for a new mind-bending
-  hypothetical every day!", then 3-5 relevant hashtags.
+  hypothetical every day!", then 3-5 relevant hashtags (one of them must be {serie['hashtag']}).
 - tags: 10-15 SEO tags.
 
 Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "tags": ["..."]}}""",
         temperature=0.8,
     )
+
+
+def _ensure_hashtag(description, tag):
+    return description if tag.lower() in description.lower() else f"{description.rstrip()}\n{tag}"
+
+
+def _playlist_id(yt, state, series):
+    """Lista de reproducción de la serie (se crea la primera vez). Ayuda a que miren varios videos seguidos."""
+    ids = state.setdefault("playlists", {})
+    if ids.get(series):
+        return ids[series]
+    serie = config.SERIES[series]
+    res = yt.playlists().insert(part="snippet,status", body={
+        "snippet": {"title": serie["playlist"],
+                    "description": f"{serie['label']}: Max lives a new 'What would happen if...?' in every episode.",
+                    "defaultLanguage": "en"},
+        "status": {"privacyStatus": "public"},
+    }).execute()
+    ids[series] = res["id"]
+    print(f"[publicador] lista creada: {serie['playlist']}")
+    return res["id"]
+
+
+def _add_to_playlist(yt, state, series, video_id):
+    if series not in config.SERIES:
+        return
+    try:
+        pid = _playlist_id(yt, state, series)
+        yt.playlistItems().insert(part="snippet", body={
+            "snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": video_id}},
+        }).execute()
+    except Exception as e:  # noqa: BLE001
+        print(f"[publicador] no pude agregarlo a la lista de la serie: {e}")
 
 
 def _thumbnail(cover, text, out):
@@ -68,6 +102,9 @@ def _thumbnail(cover, text, out):
 def run(topic, script, render, fmt, state, job_id):
     meta = _metadata(topic, script, fmt, state)
     title = meta.get("title", topic["topic"])[:100]
+    series = topic.get("series") or "classic"
+    if series in config.SERIES:
+        meta["description"] = _ensure_hashtag(meta.get("description", ""), config.SERIES[series]["hashtag"])
     status = {"selfDeclaredMadeForKids": False, "embeddable": True}
     if config.PUBLISH_MODE == "public":
         status["privacyStatus"] = "public"
@@ -104,6 +141,7 @@ def run(topic, script, render, fmt, state, job_id):
         _, resp = req.next_chunk()
     vid = resp["id"]
     print(f"[publicador] subido: https://youtu.be/{vid} ({status['privacyStatus']})")
+    _add_to_playlist(yt, state, series, vid)
 
     if fmt == "long":
         try:

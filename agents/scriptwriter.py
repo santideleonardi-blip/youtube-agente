@@ -26,6 +26,7 @@ def _as_script(res):
 
 def run(topic, fmt, notes, past_feedback):
     spec = config.FORMATS[fmt]
+    serie = config.SERIES.get(topic.get("series") or "classic", config.SERIES["classic"])
     wmin, wmax = spec["target_words"]
     smin, smax = spec["scenes"]
     history = [n for fb in past_feedback[-5:] for n in fb.get("notes", [])]
@@ -58,6 +59,7 @@ Rules:
   text in the images. Write him exactly as "Max" (just the name: his look is added automatically,
   so do NOT describe his face, hair or clothes, and never give him a different outfit, hat or helmet).
   Never depict children. Make the first image the most striking and dramatic one (it is the hook).
+- SERIES: this is a "{serie['label']}" episode. {serie['script_rules']}
 
 Return JSON:
 {{"scenes": [{{"narration": "...", "image_prompt": "..."}}],
@@ -99,6 +101,7 @@ def _expand(script, topic, fmt, wmin, wmax, smax):
     """Amplía el guion por partes (de hasta 20 escenas): pedidos más chicos = el modelo respeta mejor el largo."""
     scenes = script["scenes"]
     target = (wmin + wmax) // 2
+    serie = config.SERIES.get(topic.get("series") or "classic", config.SERIES["classic"])
     chunk = 20
     parts = [scenes[i:i + chunk] for i in range(0, len(scenes), chunk)]
     out_scenes = []
@@ -120,6 +123,7 @@ no greetings, no "in this video". Keep the same number of scenes ({len(part)}).
 Each scene keeps its "image_prompt" (ONE clear visual, no text; Max appears in every
 image as the protagonist, written just "Max", without describing his looks or clothes; never children).
 Keep Max as the protagonist of the narration too: the story is what happens to him.
+Series: "{serie['label']}" — {serie['script_rules']}
 
 Full video summary: {script.get('summary', '')}
 Scenes to expand:

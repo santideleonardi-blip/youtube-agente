@@ -288,6 +288,10 @@ def write_report(state, metrics, pace, strat, now):
         f"- Videos largos: **{strat['long_share']:.0%}** — {strat['long_share_reason']}",
         f"- Experimento de la semana: {strat.get('experiment') or '—'}",
         "",
+        "### Series de Max (vistas promedio, videos con +48 h)",
+        *[f"- {config.SERIES[k]['label']}: {_n(v['avg_views'])} vistas en {v['count']} videos"
+          for k, v in (state.get("series_stats") or {}).items() if k in config.SERIES],
+        "",
         "### Notas de foco para el investigador y el guionista",
         *([f"- {n}" for n in strat.get("focus_notes", [])] or ["- (todavía ninguna)"]),
         "",

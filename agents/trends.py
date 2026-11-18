@@ -44,7 +44,8 @@ def _trending_videos(days=10, per_query=15):
     return out[:20]
 
 
-def run(state, fmt, notes, topic_insights=None):
+def run(state, fmt, notes, topic_insights=None, series=None):
+    serie = config.SERIES.get(series or "classic", config.SERIES["classic"])
     trending = []
     try:
         trending = _trending_videos()
@@ -72,10 +73,16 @@ premise word for word: if you take inspiration from a trending video, give it a 
 trend or are proven evergreen curiosities, and that can be explained visually. Avoid medical, financial
 or legal advice, real tragedies, gore or politics.
 
+This video belongs to the series "{serie['label']}": the topic must be {serie['topic_hint']}
+Max, the channel's character, will live it. Phrase it the way people search it, without naming Max
+(e.g. "What would happen if you didn't sleep for 30 days?").
+
 The topic MUST be phrased as "What would happen if ...?" (the channel's signature format).
 Return JSON: {{"topic": "What would happen if ...?", "angle": "the specific hook/angle that makes it irresistible",
 "why": "short reason based on the data"}}""",
         temperature=1.0,
     )
-    print(f"[tendencias] tema elegido: {pick.get('topic')} — {pick.get('why')}")
+    if isinstance(pick, dict):
+        pick["series"] = series or "classic"
+    print(f"[tendencias] tema elegido ({series or 'classic'}): {pick.get('topic')} — {pick.get('why')}")
     return pick

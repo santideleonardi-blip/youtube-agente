@@ -54,6 +54,54 @@ IMAGE_STYLE = (
     "no children, no text, no letters, no watermark"
 )
 
+# ---------- Series ----------
+# Todos los videos siguen siendo "What would happen if...?"; la serie define CÓMO lo vive Max.
+# El título queda genérico (lo que la gente busca); la serie cambia el tratamiento del guion.
+SERIES = {
+    "adventure": {
+        "label": "Max's Adventures",
+        "playlist": "Max's Adventures — What Would Happen If?",
+        "hashtag": "#MaxAdventures",
+        "topic_hint": "a place or extreme situation Max can physically go into and explore "
+                      "(e.g. falling into a black hole, living on the bottom of the ocean, being stuck on Venus).",
+        "script_rules": "ADVENTURE episode: Max is IN the scenario from the first second. Tell it as a journey with "
+                        "a clear goal, obstacles and rising danger, moving from place to place; each new location "
+                        "reveals a new piece of science. Tension, close calls and a satisfying ending (he makes it "
+                        "out, or a twist).",
+    },
+    "challenge": {
+        "label": "Max's Challenges",
+        "playlist": "Max's Challenges — What Would Happen If?",
+        "hashtag": "#MaxChallenge",
+        "topic_hint": "something Max tries to endure or do for a set time "
+                      "(e.g. not sleeping for 30 days, eating only potatoes for a year, staying awake on the Moon for a week).",
+        "script_rules": "CHALLENGE episode: Max takes on the challenge and the story moves forward with a clear "
+                        "time counter (\"Day 1...\", \"Hour 12...\", \"By day thirty...\"). Each step shows what "
+                        "changes in his body or world and why (real science). Stakes rise; keep viewers asking "
+                        "'will he make it?'. End with the final result and what it teaches.",
+    },
+    "curiosity": {
+        "label": "Max's Curiosities",
+        "playlist": "Max's Curiosities — What Would Happen If?",
+        "hashtag": "#MaxCuriosities",
+        "topic_hint": "a strange, funny or mind-bending tweak to everyday life, the body or physics that Max "
+                      "can try out (e.g. shrinking to the size of an ant, having no friction, swapping senses with a bat).",
+        "script_rules": "CURIOSITY episode: Max experiments with the strange idea in everyday situations, almost "
+                        "like a playful science experiment. Lots of surprising facts, comparisons and 'wait, what?' "
+                        "moments, light humour, Max discovering things step by step. End with the most surprising "
+                        "consequence.",
+    },
+    "classic": {
+        "label": "What Would Happen If?",
+        "playlist": "What Would Happen If? — The Big Questions",
+        "hashtag": "#WhatWouldHappenIf",
+        "topic_hint": "a big 'what if' about the planet, space, history or humanity as a whole "
+                      "(e.g. the Moon disappearing, all plastic vanishing, Earth spinning twice as fast).",
+        "script_rules": "CLASSIC episode: the big-picture consequences of the scenario, minute by minute or "
+                        "stage by stage, seen through Max's eyes as he lives through it.",
+    },
+}
+
 # ---------- Formatos ----------
 FORMATS = {
     "short": {"width": 1080, "height": 1920, "target_words": (110, 150), "scenes": (6, 9)},

@@ -14,6 +14,7 @@ import traceback
 import config
 from agents import analyst, animator, publisher, scriptwriter, strategist, trends
 from common import llm, schedule
+from common import series as series_mod
 from common import state as st
 
 
@@ -123,8 +124,9 @@ def main():
         focus.append(f"[experiment this week] {strat['experiment']}")
     notes = list(decision["notes"]) + focus
 
+    serie = series_mod.pick(state)
     try:
-        topic = trends.run(state, fmt, notes, decision.get("topic_insights"))
+        topic = trends.run(state, fmt, notes, decision.get("topic_insights"), serie)
         try:
             script = scriptwriter.run(topic, fmt, notes, state.get("feedback", []))
         except scriptwriter.ScriptTooShort as e:
@@ -157,6 +159,7 @@ def main():
         "title": pub["title"],
         "topic": topic["topic"],
         "format": fmt,
+        "series": topic.get("series", serie),
         "duration": round(render["duration"], 2),
         "scenes": render["scenes"],
         "uploaded_at": dt.datetime.now(dt.timezone.utc).isoformat(),

@@ -8,6 +8,7 @@
 import datetime as dt
 
 from common import llm, schedule
+from common import series as series_mod
 from common.youtube_auth import analytics, youtube
 
 MIN_AGE_HOURS = 48  # YouTube tarda ~2 días en tener datos de retención
@@ -128,7 +129,8 @@ def run(state):
         print(f"[analista] horarios de publicación (ET): {slots} — vistas promedio por horario: {slot_avg}")
     state["publish_slots_et"] = slots
 
-    recent = [{"title": v["title"], "format": v["format"], "views": v.get("views", 0),
+    state["series_stats"] = series_mod.stats(state)
+    recent = [{"title": v["title"], "format": v["format"], "series": v.get("series", "classic"), "views": v.get("views", 0),
                "avg_view_pct": v.get("avg_view_pct"), "subs_gained": v.get("subs_gained")} for v in uploaded[-12:]]
     strat = state.get("strategy") or {}
     long_share = float(strat.get("long_share", 0.33))
@@ -141,6 +143,7 @@ New retention analyses (where viewers left and what was being said):
 
 Recent videos and views: {recent or "No videos yet (new channel)."}
 Average views per format: {fs}
+Average views per series (Max's Adventures / Challenges / Curiosities / classic; videos older than 48 h): {state["series_stats"]}
 
 Tasks:
 1. Write 3-6 short, concrete, actionable notes for the scriptwriter (what to avoid / repeat, based on
@@ -148,7 +151,8 @@ Tasks:
    retention (hook in first 2 seconds, open loops, no slow intros, pattern interrupts).
 2. Content strategy: compare which TOPICS / themes / hooks got the most views and retention.
    Write 2-5 "topic_insights": concrete conclusions about WHAT the videos should be about
-   (e.g. "body-swap with animals beats space topics 3x", "avoid slow historical topics").
+   (e.g. "body-swap with animals beats space topics 3x", "avoid slow historical topics",
+   "challenge episodes keep viewers longer than adventures").
    Keep the useful previous insights unless the data contradicts them.
    Previous insights: {state.get("topic_insights", [])}
 3. Decide the format of the NEXT video: "short" or "long".
