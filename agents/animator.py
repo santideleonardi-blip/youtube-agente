@@ -226,13 +226,12 @@ def _cloudflare_image(prompt, path, w, h, seed):
                 print("[animador] cupo diario de Cloudflare agotado: sigo con Pollinations")
                 return None
             if "flagged" in str(data).lower():
+                if with_ref:
+                    # el filtro rechazó ESTA combinación de prompt + referencia: reintentar esta imagen sin la referencia
+                    print("[animador] el filtro rechazó la imagen con referencia: la reintento sin ella")
+                    skip_ref = True
                 flagged = True
                 continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
-            if with_ref and "flagged" in str(data).lower():
-                # el filtro rechazó ESTA combinación de prompt + referencia: reintentar esta imagen sin la referencia
-                print("[animador] el filtro rechazó la imagen con referencia: la reintento sin ella")
-                skip_ref = True
-                continue
             if with_ref and r.status_code in (400, 413, 422):
                 global _REF_BROKEN
                 _REF_BROKEN = True   # la imagen de referencia no la acepta: seguir solo con la descripción
