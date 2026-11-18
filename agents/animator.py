@@ -147,7 +147,7 @@ cf_images = 0         # imágenes FLUX.2 generadas en esta corrida (para llevar 
 # Cupo de Cloudflare: 10.000 neurons por día (se renueva 00:00 UTC = 21:00 ARG).
 # FLUX.2 klein a 768x1344 = 6 tiles de 512x512 x 26,05 neurons ≈ 157 por imagen → ~60 imágenes por día.
 CF_DAILY_NEURONS = 10_000
-CF_NEURONS_PER_IMAGE = 157
+CF_NEURONS_PER_IMAGE = 165   # 157 de la imagen + ~6 de la imagen de referencia de Max
 LONG_SCENES_PER_IMAGE = 2   # en videos largos cada ilustración se usa en 2 escenas seguidas (otra cámara)
 # El estilo que se eligió es el de FLUX.2. Si el cupo se acaba, el video se pospone en vez de
 # hacerse con otro modelo (se ve distinto). main.py activa el respaldo solo si el canal lleva >36 h sin videos.
@@ -174,18 +174,28 @@ def _cloudflare_image(prompt, path, w, h, seed):
     base = f"https://api.cloudflare.com/client/v4/accounts/{acc}/ai/run/"
     headers = {"Authorization": f"Bearer {tok}"}
     gw, gh = (768, 1344) if h > w else (1344, 768)
+    klein = "@cf/black-forest-labs/flux-2-klein-4b"
+
+    def klein_kwargs():
+        files = {"prompt": (None, prompt), "width": (None, str(gw)), "height": (None, str(gh)),
+                 "seed": (None, str(seed % 2_000_000_000))}
+        ref = _max_reference() if _MAX_RE.search(prompt) else None
+        if ref:
+            # Max tiene que verse SIEMPRE igual: se le pasa el dibujo oficial (el del logo) como imagen de referencia
+            files["prompt"] = (None, MAX_REF_PROMPT + prompt)
+            files["input_image_0"] = ("max.png", ref, "image/png")
+        return dict(files=files)
+
     attempts = [
         # FLUX.2 klein (mejor calidad, acepta proporción vertical) — formato multipart
-        ("@cf/black-forest-labs/flux-2-klein-4b", dict(files={
-            "prompt": (None, prompt), "width": (None, str(gw)), "height": (None, str(gh)),
-            "seed": (None, str(seed % 2_000_000_000))})),
+        (klein, klein_kwargs),
         # FLUX.1 schnell (respaldo, imagen cuadrada) — formato JSON
-        ("@cf/black-forest-labs/flux-1-schnell", dict(json={"prompt": prompt, "steps": 8})),
+        ("@cf/black-forest-labs/flux-1-schnell", lambda: dict(json={"prompt": prompt, "steps": 8})),
     ]
     # klein va 2 veces (un error pasajero no debe cambiar el estilo); schnell solo si el filtro rechaza el prompt
-    attempts = [attempts[0], attempts[0], attempts[1]]
+    attempts = [attempts[0], attempts[0], attempts[0], attempts[1]]
     flagged = False
-    for n, (model, kwargs) in enumerate(attempts):
+    for n, (model, make_kwargs) in enumerate(attempts):
         if model in _CF_BAD:
             continue
         if "schnell" in model and not flagged and not ALLOW_FALLBACK:
@@ -193,6 +203,8 @@ def _cloudflare_image(prompt, path, w, h, seed):
         if n == 1:
             time.sleep(5)
         try:
+            kwargs = make_kwargs()
+            with_ref = "input_image_0" in kwargs.get("files", {})
             r = requests.post(base + model, headers=headers, timeout=120, **kwargs)
             data = r.json() if "json" in r.headers.get("content-type", "") else {}
             img_b64 = (data.get("result") or {}).get("image")
@@ -215,6 +227,11 @@ def _cloudflare_image(prompt, path, w, h, seed):
             if "flagged" in str(data).lower():
                 flagged = True
                 continue  # el filtro de contenido rechazó ESTE prompt: probar el otro modelo, no descartar
+            if with_ref and r.status_code in (400, 413, 422):
+                global _REF_BROKEN
+                _REF_BROKEN = True   # la imagen de referencia no la acepta: seguir solo con la descripción
+                print("[animador] FLUX.2 no aceptó la imagen de referencia de Max: sigo sin ella")
+                continue
             if r.status_code in (400, 404, 422):
                 _CF_BAD.add(model)  # formato/modelo no soportado: no reintentar en esta corrida
         except Exception as e:  # noqa: BLE001
@@ -223,6 +240,23 @@ def _cloudflare_image(prompt, path, w, h, seed):
 
 
 _CF_BAD = set()
+_REF_BROKEN = False
+_REF_CACHE = None
+MAX_REFERENCE = os.path.join(config.ROOT, "assets", "max_logo", "reference.png")
+MAX_REF_PROMPT = ("Max is the man shown in image 0: draw him EXACTLY as in image 0 (same face, eyes, round pink nose, "
+                  "shaggy brown hair, stubble, orange zip hoodie, same drawing style), only change his pose, "
+                  "expression and the scene. ")
+
+
+def _max_reference():
+    """Bytes del dibujo oficial de Max (<512 px, como pide Cloudflare) o None si no se puede usar."""
+    global _REF_CACHE
+    if _REF_BROKEN or not config.MAX_REFERENCE_IMAGE or not os.path.exists(MAX_REFERENCE):
+        return None
+    if _REF_CACHE is None:
+        with open(MAX_REFERENCE, "rb") as f:
+            _REF_CACHE = f.read()
+    return _REF_CACHE
 
 
 _MAX_RE = re.compile(r"\bMax\b")

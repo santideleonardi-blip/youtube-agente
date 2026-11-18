@@ -37,14 +37,15 @@ TTS_RATE = os.getenv("TTS_RATE", "+8%")
 # para que se vea siempre igual (mismo pelo, ropa y accesorios).
 MAX_NAME = "Max, an adult explorer"
 MAX_LOOK = (
-    "Max: the same cartoon man in every image, drawn in a hand-drawn adult-cartoon style with thick black "
-    "outlines and simple cel shading; adult man around 30, fair skin with slightly rosy cheeks, very messy "
-    "spiky dark brown hair sticking out in all directions with a fringe over his forehead, thick brown "
-    "eyebrows, light brown stubble on chin and jaw, big round white eyes with small dark pupils, slightly "
-    "rounded nose; loose bright orange zip-up jumpsuit with a hood collar and a front zipper, dark gray "
-    "t-shirt visible at the neck, dark brown boots; no hat, no helmet, no glasses, no accessories. "
-    "His default expression is calm, curious and friendly (relaxed smile); he only looks scared or shocked "
-    "when the scene says so"
+    # Igual al Max del logo del canal (docs/max_logo.png), que es su aspecto oficial: no cambia nunca.
+    "Max: the exact same cartoon man in every image, in a bold hand-drawn cartoon style with thick black "
+    "outlines, soft cel shading and a slightly sketchy texture; adult man around 30, fair skin with rosy cheeks "
+    "and a few faint freckles, big shaggy messy medium-brown hair with choppy short spiky tufts all around and a "
+    "messy fringe falling over his forehead down to his eyebrows, thick dark brown eyebrows, big round white "
+    "eyes with black pupils, round bulbous nose with a pinkish-red tip, light brown stubble on chin and jaw, "
+    "small relaxed smile; bright orange zip-up hoodie with the hood around his neck and a front zipper, dark "
+    "gray t-shirt visible at the collar; no hat, no helmet, no glasses, no accessories. "
+    "His default expression is calm, curious and friendly; he only looks scared or shocked when the scene says so"
 )
 
 # Max narrador: Max aparece en una esquina hablando (boca sincronizada con la voz) y el guion se
@@ -54,6 +55,9 @@ MAX_NARRATOR = os.getenv("MAX_NARRATOR", "1") == "1"
 # "logo": el Max exacto del logo del canal (elegido por Santi el 18/11). "dibujo": el muñeco vectorial
 # con expresiones y brazos (assets/max_puppet).
 MAX_PUPPET_STYLE = os.getenv("MAX_PUPPET_STYLE", "logo")
+# Las imágenes de FLUX.2 reciben el dibujo oficial de Max (assets/max_logo/reference.png) como referencia,
+# para que Max salga siempre igual al del logo. MAX_REFERENCE_IMAGE=0 lo apaga (solo descripción de texto).
+MAX_REFERENCE_IMAGE = os.getenv("MAX_REFERENCE_IMAGE", "1") == "1"
 
 IMAGE_STYLE = (
     "flat 2D vector cartoon illustration, simple geometric shapes, bold clean outlines, "

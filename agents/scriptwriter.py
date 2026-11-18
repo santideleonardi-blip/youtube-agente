@@ -24,7 +24,7 @@ def _voice_rule():
 
 def _acting_rule():
     """Con Max narrador, cada escena dice qué cara pone y qué gesto hace el muñeco de Max."""
-    if not config.MAX_NARRATOR:
+    if not config.MAX_NARRATOR or config.MAX_PUPPET_STYLE == "logo":
         return ""
     return ("- Max (the on-screen narrator) acts every scene. For each scene choose his \"emotion\" while he says it: "
             "neutral, happy, excited, surprised, worried, scared or thinking; and a \"gesture\": none, point (points up: "
@@ -35,7 +35,7 @@ def _acting_rule():
 
 
 def _acting_fields():
-    return ', "emotion": "...", "gesture": "..."' if config.MAX_NARRATOR else ""
+    return ', "emotion": "...", "gesture": "..."' if config.MAX_NARRATOR and config.MAX_PUPPET_STYLE != "logo" else ""
 
 
 def _ensure_max(scenes):
