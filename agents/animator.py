@@ -337,7 +337,7 @@ def _ass_time(t):
 
 def _subtitles(words, path, w, h, fmt):
     size = int(h * 0.055) if fmt == "short" else int(h * 0.065)
-    margin_v = int(h * 0.30) if fmt == "short" else int(h * 0.08)
+    margin_v = int(h * (0.36 if config.MAX_NARRATOR else 0.30)) if fmt == "short" else int(h * 0.08)
     header = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: {w}
@@ -373,6 +373,36 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             chunk = []
     with open(path, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(lines) + "\n")
+
+
+def _final_with_max(joined, ass, script, wd, w, h, duration, enc):
+    """Montaje final con el muñeco de Max narrando (boca sincronizada) encima de las escenas."""
+    from agents import puppet
+
+    text = " ".join(sc["narration"] for sc in script["scenes"])
+    (pw, ph, x, y), frames = puppet.overlay_frames(joined, text, wd, w, h, config.FPS, duration)
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", joined,
+           "-f", "rawvideo", "-pix_fmt", "rgba", "-s", f"{pw}x{ph}", "-r", str(config.FPS), "-i", "pipe:0",
+           "-filter_complex", f"[0:v][1:v]overlay={x}:{y}:eof_action=pass:format=auto,ass={ass}[v]",
+           "-map", "[v]", "-map", "0:a", *enc]
+    log = os.path.join(wd, "ffmpeg_max.log")
+    with open(log, "w") as err:
+        p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=err)
+        try:
+            for fr in frames:
+                p.stdin.write(fr)
+        except BrokenPipeError:
+            pass
+        finally:
+            try:
+                p.stdin.close()
+            except BrokenPipeError:
+                pass
+        p.wait()
+    if p.returncode != 0:
+        with open(log) as f:
+            raise RuntimeError(f"FFmpeg con Max falló: {f.read()[-800:]}")
+    print("[max] Max narrando agregado")
 
 
 # ---------------- Principal ----------------
@@ -421,12 +451,18 @@ def run(script, fmt, job_id):
     ass = os.path.join(wd, "subs.ass")
     _subtitles(all_words, ass, w, h, fmt)
     final = os.path.join(config.OUTPUT_DIR, f"{job_id}.mp4")
-    _run([
-        "ffmpeg", "-y", "-i", joined, "-vf", f"ass={ass}",
-        "-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-movflags", "+faststart", final,
-    ])
+    enc = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
+           "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
+           "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-movflags", "+faststart", final]
+    done = False
+    if config.MAX_NARRATOR:
+        try:
+            _final_with_max(joined, ass, script, wd, w, h, t, enc)
+            done = True
+        except Exception as e:  # noqa: BLE001
+            print(f"[max] no pude agregar a Max narrando, sigo sin él: {e}")
+    if not done:
+        _run(["ffmpeg", "-y", "-i", joined, "-vf", f"ass={ass}", *enc])
     total = _duration(final)
     print(f"[animador] video listo: {final} ({total:.1f}s)")
     return {"video": final, "cover": os.path.join(wd, "cover.png"), "duration": total, "scenes": scene_meta}

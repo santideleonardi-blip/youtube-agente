@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: models
-          key: models-v2
+          key: models-v3
 
       - name: Descargar modelo de voz si falta
         run: |
@@ -60,6 +60,12 @@ jobs:
           [ -f models/voices-v1.0.bin ] || curl -sSL -o models/voices-v1.0.bin $base/voices-v1.0.bin
           [ -f models/depth_anything_v2_small.onnx ] || curl -sSL -o models/depth_anything_v2_small.onnx \
             https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx || true
+          # Rhubarb Lip Sync: mueve la boca de Max al ritmo de la voz (si falla, se usa el volumen)
+          if [ ! -x models/rhubarb/rhubarb ]; then
+            curl -sSL -o /tmp/rhubarb.zip https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/Rhubarb-Lip-Sync-1.13.0-Linux.zip \
+              && unzip -q -o /tmp/rhubarb.zip -d /tmp/rhubarb \
+              && mv /tmp/rhubarb/Rhubarb-Lip-Sync-1.13.0-Linux models/rhubarb || true
+          fi
           ls -la models
 
       - name: Correr los agentes
@@ -74,6 +80,8 @@ jobs:
           PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'scheduled' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           FORCE_FORMAT: ${{ inputs.format }}
+          RHUBARB_BIN: models/rhubarb/rhubarb
+          MAX_NARRATOR: ${{ vars.MAX_NARRATOR || '1' }}
         timeout-minutes: 80
         run: python -u main.py
 

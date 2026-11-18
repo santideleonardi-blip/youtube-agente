@@ -7,6 +7,21 @@ class ScriptTooShort(RuntimeError):
     """Un guion de video largo quedó muy por debajo del mínimo aun después de ampliarlo."""
 
 
+def _voice_rule():
+    """Con Max narrador, Max cuenta su propia historia en primera persona (es su voz y su boca la que se mueve)."""
+    if config.MAX_NARRATOR:
+        return ("MAX IS THE PROTAGONIST AND THE NARRATOR. Max tells his own story in FIRST PERSON, as the host "
+                "of the channel talking to the viewer (\"I wake up and gravity has doubled. My coffee cup "
+                "slams into the table...\"). He lives the 'what if', reacts, explores, explains the science "
+                "through what happens to him and talks to the viewer directly now and then (\"and you won't "
+                "believe what happened next\"). Never write \"Max\" in the narration (he is the one talking); "
+                "he is the only recurring person.")
+    return ("MAX IS THE PROTAGONIST of the channel and of this video. Tell the story through Max: he lives the "
+            "\"what if\" scenario, reacts to it, explores it, explains it and tries things out "
+            "(e.g. \"Max wakes up and the gravity has doubled...\"). The narrator talks about what Max sees, feels "
+            "and does; the science is shown through what happens to him. He is the only recurring person.")
+
+
 def _ensure_max(scenes):
     """Max es el protagonista: si alguna imagen quedó sin él, se lo agrega reaccionando a la escena."""
     for sc in scenes:
@@ -50,10 +65,7 @@ Rules:
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
 - Simple spoken English, short sentences, accurate science/history, light humour.
 - {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}
-- MAX IS THE PROTAGONIST of the channel and of this video. Tell the story through Max: he lives the
-  "what if" scenario, reacts to it, explores it, explains it and tries things out
-  (e.g. "Max wakes up and the gravity has doubled..."). The narrator talks about what Max sees, feels
-  and does; the science is shown through what happens to him. He is the only recurring person.
+- {_voice_rule()}
 - Each scene needs an image prompt describing ONE clear visual (Max, objects, setting) that matches the
   narration. Max appears in EVERY image, doing or reacting to what the narration says. Do not include any
   text in the images. Write him exactly as "Max" (just the name: his look is added automatically,
@@ -122,7 +134,7 @@ comparisons, step-by-step consequences, mini open loops, light humour. No filler
 no greetings, no "in this video". Keep the same number of scenes ({len(part)}).
 Each scene keeps its "image_prompt" (ONE clear visual, no text; Max appears in every
 image as the protagonist, written just "Max", without describing his looks or clothes; never children).
-Keep Max as the protagonist of the narration too: the story is what happens to him.
+{_voice_rule()}
 Series: "{serie['label']}" — {serie['script_rules']}
 
 Full video summary: {script.get('summary', '')}

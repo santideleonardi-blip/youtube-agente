@@ -47,6 +47,11 @@ MAX_LOOK = (
     "when the scene says so"
 )
 
+# Max narrador: Max aparece en una esquina hablando (boca sincronizada con la voz) y el guion se
+# cuenta en primera persona ("I wake up and..."). Con MAX_NARRATOR=0 se vuelve a solo imágenes
+# y narrador en tercera persona, como antes del 17/11.
+MAX_NARRATOR = os.getenv("MAX_NARRATOR", "1") == "1"
+
 IMAGE_STYLE = (
     "flat 2D vector cartoon illustration, simple geometric shapes, bold clean outlines, "
     "vibrant saturated colors, soft gradients, minimal background, expressive adult characters, "
