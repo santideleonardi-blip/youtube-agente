@@ -155,8 +155,27 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1181,
-      "likes": 26
+      "views": 1185,
+      "likes": 27,
+      "retention_end": 0.165,
+      "drops": [
+        {
+          "second": 6.0,
+          "drop_pct": 8.7,
+          "narration": "Your fist accelerates at fifty miles per hour in milliseconds—faster than a speeding bullet."
+        },
+        {
+          "second": 6.4,
+          "drop_pct": 7.4,
+          "narration": "Your fist accelerates at fifty miles per hour in milliseconds—faster than a speeding bullet."
+        },
+        {
+          "second": 8.3,
+          "drop_pct": 6.7,
+          "narration": "Your fist accelerates at fifty miles per hour in milliseconds—faster than a speeding bullet."
+        }
+      ],
+      "analyzed": true
     },
     {
       "job_id": "20261117_194809",
@@ -194,7 +213,7 @@
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 17,
+      "views": 18,
       "likes": 2
     },
     {
@@ -241,8 +260,8 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1092,
-      "likes": 23
+      "views": 1098,
+      "likes": 24
     },
     {
       "job_id": "20261118_215055",
@@ -593,7 +612,51 @@
       ],
       "uploaded_at": "2026-11-19T20:18:32.763497+00:00",
       "publish_at": "2026-11-20T16:00:00+00:00",
-      "publish_hour_et": 11
+      "publish_hour_et": 11,
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261119_220654",
+      "youtube_id": "8LdPGZ_N2Ug",
+      "title": "What Would Happen If A Blue Whale Swallowed You? #BlueWhale #shorts",
+      "topic": "What would happen if you were swallowed by a blue whale?",
+      "format": "short",
+      "series": "adventure",
+      "duration": 52.92,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "What would happen if I got swallowed alive by a blue whale? A cavernous, pitch-black mouth slams shut around me!"
+        },
+        {
+          "start": 7.11,
+          "narration": "I'm trapped behind giant five-foot baleen bristles, splashing frantically while thousands of panicked krill bump into my face."
+        },
+        {
+          "start": 15.44,
+          "narration": "A massive tongue shoves me toward its throat, but here's the catch: a blue whale's esophagus is only nine inches wide!"
+        },
+        {
+          "start": 23.47,
+          "narration": "I physically cannot fit. But that's not even the most dangerous part—my oxygen is vanishing fast under crushing water pressure."
+        },
+        {
+          "start": 31.97,
+          "narration": "If forced through, its four-chambered stomach would dissolve me in total darkness with zero air to breathe."
+        },
+        {
+          "start": 38.87,
+          "narration": "Instead, my body violently triggers the giant’s gag reflex, creating an explosive underwater volcanic cough!"
+        },
+        {
+          "start": 46.49,
+          "narration": "I'm shot like a cannonball into the ocean, sucked right back toward that giant shadow, wondering..."
+        }
+      ],
+      "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
+      "publish_at": "2026-11-20T18:00:00+00:00",
+      "publish_hour_et": 13
     }
   ],
   "feedback": [
@@ -754,15 +817,25 @@
         "Include pattern interrupts every 3 to 5 seconds (zooms, audio stingers, or rapid visual shifts) to maintain high visual pacing."
       ],
       "reason": "The growth strategist target mix calls for roughly 33% long-form videos during the testing phase. With 6 shorts and only 1 long video currently published (14%), producing a long video aligns with the targeted ratio to gather baseline performance and retention data for long-form content."
+    },
+    {
+      "date": "2026-11-19T22:06:54.565030+00:00",
+      "notes": [
+        "Avoid front-loading heavy technical stats or repetitive explanations right after the hook (seconds 6-8 saw repeated drops of over 22% total on 'fist accelerates at fifty miles per hour').",
+        "Transition immediately from the visual hook into consequences or escalating stakes rather than pausing to explain speed and acceleration metrics.",
+        "Maintain the winning animal-superpower formula (Mantis Shrimp: 1,185 views, Chimp Muscles: 1,098 views, Flea Jump: 527 views), which consistently outperforms all other subjects.",
+        "Keep punchy visual gags or pattern interrupts around second 5-6 to break up narration before viewer attention lapses."
+      ],
+      "reason": "Currently, 2 out of the 8 total videos are long-form (25%). While the long-term target is 33% (1 in 3), long-form videos currently have 0 views and zero retention data, whereas Shorts in the animal-superpower niche are actively driving 1,000+ views and subscribers. Releasing another high-retention Short builds algorithmic momentum and viewer base before testing the next long-form release."
     }
   ],
   "format_stats": {
     "short": {
       "count": 6,
-      "avg_views": 472
+      "avg_views": 474
     },
     "long": {
-      "count": 1,
+      "count": 2,
       "avg_views": 0
     }
   },
@@ -771,10 +844,9 @@
     13
   ],
   "topic_insights": [
-    "Animal-inspired human biological superpowers (e.g., Mantis Shrimp Punch, Chimp Muscles, Flea Jump) dramatically outperform abstract physics, dietary, and pop-culture topics.",
-    "Visceral, relatable human body modifications generate stronger immediate engagement than abstract physical constants or gaming-related scenarios.",
-    "Abstract science hypotheticals require direct, individual personal impact framing rather than macro-scale physical effects to earn views.",
-    "Concepts bridging extreme biomechanics with viral animal capability comparisons remain the strongest core content pillar."
+    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, averaging over 900+ views compared to single-digit views for gaming and diet topics.",
+    "Visceral, physical 'what would your body do' hypotheticals trigger immediate algorithmic pickup, whereas gaming/pop-culture hypotheticals (GTA 6) and pure dietary changes (Sugar) currently fail to gain initial traction.",
+    "Keep hooks focused on extreme kinetic consequences (e.g., 'a single high-five triggers a kinetic explosion') rather than purely educational metrics."
   ],
   "strategy": {
     "daily_target": 2,
@@ -873,11 +945,12 @@
     "2026-11-17T22:20:30.442125+00:00",
     "2026-11-18T19:43:04.001575+00:00",
     "2026-11-18T22:21:47.422856+00:00",
-    "2026-11-19T00:25:12.287408+00:00"
+    "2026-11-19T00:25:12.287408+00:00",
+    "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
     "date": "2026-11-19",
-    "images": 24,
+    "images": 31,
     "exhausted": false
   },
   "series_stats": {
