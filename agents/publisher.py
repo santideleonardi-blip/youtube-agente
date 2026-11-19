@@ -4,6 +4,7 @@ Crea título llamativo, descripción, tags y miniatura, y sube el video a YouTub
 """
 import datetime as dt
 import os
+import re
 import textwrap
 
 from googleapiclient.http import MediaFileUpload
@@ -32,12 +33,49 @@ Write packaging that maximises click-through WITHOUT lying about the content:
   {"Add #shorts at the end." if fmt == "short" else ""}
 - thumbnail_text: 2-4 punchy words in CAPS (complements the title, does not repeat it).
 - description: 2-3 engaging sentences, then "Subscribe to {config.CHANNEL_NAME} for a new mind-bending
-  hypothetical every day!", then 3-5 relevant hashtags (one of them must be {serie['hashtag']}).
+  hypothetical every day!" (no hashtags in the description, they are added separately).
+- hashtags: 5-7 hashtags that people actually search, ordered from most to least important: first the
+  1-2 most specific to THIS topic (e.g. #TRex #Dinosaurs, #GTA6, #Sleep), then broad discovery ones for the
+  niche (#Science #WhatIf #Facts #Space #Biology...). CamelCase, no spaces, only relevant ones (YouTube
+  penalises misleading hashtags). Do NOT include #shorts or {serie['hashtag']} (added automatically).
 - tags: 10-15 SEO tags.
 
-Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "tags": ["..."]}}""",
+Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "hashtags": ["#..."], "tags": ["..."]}}""",
         temperature=0.8,
     )
+
+
+MAX_HASHTAGS = 8          # YouTube ignora TODOS si hay más de 15; con 5-8 es lo recomendado
+
+
+def _clean_tag(t):
+    t = re.sub(r"[^0-9A-Za-z_]", "", str(t).lstrip("#"))
+    return f"#{t}" if t and not t.isdigit() else None
+
+
+def apply_hashtags(title, description, fmt, topic_tags, series_tag, requested=()):
+    """Pone los hashtags donde más rinden:
+    - título: el hashtag más específico del tema (y #shorts en los Shorts), es clickeable en la app;
+    - descripción: una línea con todos; los 3 primeros los muestra YouTube arriba del título.
+    Los pedidos (p. ej. #GTA6) van primero."""
+    seen, tags = set(), []
+    for t in list(requested) + list(topic_tags or []) + [series_tag]:
+        c = _clean_tag(t)
+        if c and c.lower() not in seen and c.lower() != "#shorts":
+            seen.add(c.lower())
+            tags.append(c)
+    tags = tags[:MAX_HASHTAGS]
+    base = re.sub(r"\s*#\w+", "", title).strip()          # el título queda sin hashtags y se rearma
+    suffix = [tags[0]] if tags else []
+    if fmt == "short":
+        suffix.append("#shorts")
+    new_title = base
+    for t in suffix:
+        if len(f"{new_title} {t}") <= 100:
+            new_title = f"{new_title} {t}"
+    body = re.sub(r"(\n\s*)?(#\w+\s*)+$", "", (description or "").rstrip()).rstrip()
+    line = " ".join(tags + (["#shorts"] if fmt == "short" else []))
+    return new_title, f"{body}\n\n{line}" if line else body
 
 
 def _ensure_hashtag(description, tag):
@@ -102,14 +140,10 @@ def _thumbnail(cover, text, out):
 def run(topic, script, render, fmt, state, job_id):
     meta = _metadata(topic, script, fmt, state)
     title = meta.get("title", topic["topic"])[:100]
-    for tag in topic.get("hashtags", []):   # hashtags pedidos (p. ej. #GTA6): van en el título y la descripción
-        if tag.lower() not in title.lower():
-            short = title.replace(" #shorts", "")
-            title = (f"{short} {tag}" + (" #shorts" if "#shorts" in title else ""))[:100]
-        meta["description"] = _ensure_hashtag(meta.get("description", ""), tag)
     series = topic.get("series") or "classic"
-    if series in config.SERIES:
-        meta["description"] = _ensure_hashtag(meta.get("description", ""), config.SERIES[series]["hashtag"])
+    serie_tag = config.SERIES.get(series, config.SERIES["classic"])["hashtag"]
+    title, meta["description"] = apply_hashtags(title, meta.get("description", ""), fmt, meta.get("hashtags", []),
+                                                 serie_tag, topic.get("hashtags", []))
     status = {"selfDeclaredMadeForKids": False, "embeddable": True}
     if config.PUBLISH_MODE == "public":
         status["privacyStatus"] = "public"
