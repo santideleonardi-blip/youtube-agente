@@ -135,7 +135,7 @@ def main():
         if req:
             notes = notes + [f"[requested topic] {n}" for n in req.get("notes", [])]
             topic = {"topic": req["topic"], "angle": req.get("angle", ""), "why": "pedido del dueño del canal",
-                     "series": serie}
+                     "series": serie, "hashtags": req.get("hashtags", [])}
         else:
             topic = trends.run(state, fmt, notes, decision.get("topic_insights"), serie)
         try:

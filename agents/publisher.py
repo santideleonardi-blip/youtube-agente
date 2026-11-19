@@ -102,6 +102,11 @@ def _thumbnail(cover, text, out):
 def run(topic, script, render, fmt, state, job_id):
     meta = _metadata(topic, script, fmt, state)
     title = meta.get("title", topic["topic"])[:100]
+    for tag in topic.get("hashtags", []):   # hashtags pedidos (p. ej. #GTA6): van en el título y la descripción
+        if tag.lower() not in title.lower():
+            short = title.replace(" #shorts", "")
+            title = (f"{short} {tag}" + (" #shorts" if "#shorts" in title else ""))[:100]
+        meta["description"] = _ensure_hashtag(meta.get("description", ""), tag)
     series = topic.get("series") or "classic"
     if series in config.SERIES:
         meta["description"] = _ensure_hashtag(meta.get("description", ""), config.SERIES[series]["hashtag"])
