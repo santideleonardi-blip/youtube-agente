@@ -40,11 +40,11 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 8,
+      "views": 9,
       "likes": 0,
-      "avg_view_pct": 31.9,
+      "avg_view_pct": 67.2,
       "subs_gained": 0,
-      "minutes_watched": 0
+      "minutes_watched": 2
     },
     {
       "job_id": "20261116_015758",
@@ -86,7 +86,7 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 529,
+      "views": 527,
       "likes": 7,
       "retention_end": 0.116,
       "drops": [
@@ -106,7 +106,10 @@
           "narration": "What would happen if you could jump like a flea and clear a 60-story skyscraper in one bounce?"
         }
       ],
-      "analyzed": true
+      "analyzed": true,
+      "avg_view_pct": 35.0,
+      "subs_gained": 2,
+      "minutes_watched": 61
     },
     {
       "job_id": "20261116_205804",
@@ -152,8 +155,8 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1128,
-      "likes": 25
+      "views": 1181,
+      "likes": 26
     },
     {
       "job_id": "20261117_194809",
@@ -191,7 +194,7 @@
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 14,
+      "views": 17,
       "likes": 2
     },
     {
@@ -238,8 +241,8 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 473,
-      "likes": 24
+      "views": 1092,
+      "likes": 23
     },
     {
       "job_id": "20261118_215055",
@@ -442,7 +445,155 @@
       "uploaded_at": "2026-11-19T00:25:12.288715+00:00",
       "publish_at": "2026-11-19T13:14:00+00:00",
       "publish_hour_et": 8,
-      "published_manually": true
+      "published_manually": true,
+      "views": 8,
+      "likes": 0
+    },
+    {
+      "job_id": "20261119_192817",
+      "youtube_id": "Li3eJNVE-78",
+      "title": "What Would Happen If GTA 6 Physics Were Real? #GTA6",
+      "topic": "What would happen if GTA 6 physics became real for the whole world?",
+      "format": "long",
+      "series": "classic",
+      "duration": 454.72,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "GTA 6 just came out, but what if its physics suddenly became REAL for all eight billion of us? I stepped outside this morning, accidentally bumped a parked car, and watched it launch fifty feet upward, exploding in mid-air!"
+        },
+        {
+          "start": 14.93,
+          "narration": "If open-world game physics took over our planet today, everyday reality would completely shatter. And trust me, by the end of this script, you will see how it completely rewrites human biology and the global economy."
+        },
+        {
+          "start": 28.87,
+          "narration": "Minute one: I walked onto the highway to check the commute. In real life, car crashes absorb kinetic force through crumple zones, safely protecting the cabin while turning metal into a crushed accordion."
+        },
+        {
+          "start": 41.87,
+          "narration": "But in game physics, vehicles behave like rigid rubber blocks with rocket boosters! The second a front bumper clips a sidewalk curve, the car flips sideways, spinning three times like a fidget spinner."
+        },
+        {
+          "start": 55.47,
+          "narration": "And here is the scariest part: any car resting upside down for more than five seconds instantly catches fire! Within minutes, every major highway across the world turns into a flaming, chain-reaction domino line."
+        },
+        {
+          "start": 70.29,
+          "narration": "But the traffic nightmare gets even stranger. I turned around to look at the ocean, took two steps forward, and turned back. Suddenly, three brand-new semi-trucks instantly materialised out of thin air right behind me!"
+        },
+        {
+          "start": 84.44,
+          "narration": "Real physics requires matter to be created from energy, obeying mass conservation. Here, object rendering algorithms only generate objects when you look at them, creating instant traffic jams out of literal empty vacuum."
+        },
+        {
+          "start": 99.96,
+          "narration": "Hour one: I ran up to the top of a twenty-story skyscraper to escape the street-level fires. A gust of wind knocked me over the ledge! Normally, gravity accelerates a falling human at 9.8 meters per second squared."
+        },
+        {
+          "start": 115.82,
+          "narration": "At terminal velocity, hitting concrete generates over four thousand Newtons of force—enough to break every bone instantly. But as I plunged toward the street, my body suddenly went completely limp into full ragdoll mode!"
+        },
+        {
+          "start": 130.89,
+          "narration": "I bounced off the asphalt like a rubber bouncy ball, tumbled across three lanes of traffic, stood right up, brushed off my shoulders, and suffered only five percent health damage!"
+        },
+        {
+          "start": 142.7,
+          "narration": "Wait, how do you fix that five percent damage? In real biology, tissue repair requires cellular mitosis, white blood cells, and days of rest. But I just pulled a snack bar out of my pocket, ate it in one bite..."
+        },
+        {
+          "start": 157.36,
+          "narration": "...and my health bar instantly recharged to one hundred percent! Medical science is officially obsolete when eating a sugar bar instantly knits human skin and muscle tissue back together in less than two seconds."
+        },
+        {
+          "start": 171.26,
+          "narration": "Day one: What happens when someone actually takes a fatal blow? I saw a pedestrian get squished between two heavy buses. In real life, that requires immediate trauma surgery, ICU care, and months of rehab."
+        },
+        {
+          "start": 185.67,
+          "narration": "Instead, the person faded into a dark blur and instantly respawned right outside the nearest municipal hospital front doors! They were completely healthy, fully healed, but five thousand dollars poorer!"
+        },
+        {
+          "start": 199.29,
+          "narration": "The global healthcare industry collapses overnight. Hospitals no longer employ doctors or surgeons; they just operate automated respawn points that automatically deduct flat fees directly from your bank account!"
+        },
+        {
+          "start": 213.59,
+          "narration": "But surviving in this world comes with bizarre new social rules. I accidentally bumped into a parked police cruiser while jogging. Instantly, a bright flashing star lit up over the city!"
+        },
+        {
+          "start": 225.91,
+          "narration": "Real law enforcement uses investigation, witness interviews, and legal process. Here, the police instantly knew my exact GPS location and dispatched aggressive pursuit vehicles to ram me off the road!"
+        },
+        {
+          "start": 240.45,
+          "narration": "I sprinted into an alleyway and crouched behind a dirty yellow dumpster. I stayed completely still for exactly two minutes while the officers searched right outside the alley entrance."
+        },
+        {
+          "start": 251.48,
+          "narration": "Suddenly, the flashing star disappeared! The police officers wiped their memory banks, turned their cars around, and drove away as if I never existed. In game logic, out of sight literally means out of mind!"
+        },
+        {
+          "start": 265.4,
+          "narration": "Week one: Infrastructure across the entire world begins to disintegrate. Take commercial aviation, for example. Pilots discover that landing a Boeing 747 under arcade flight physics is an absolute nightmare!"
+        },
+        {
+          "start": 280.87,
+          "narration": "Aircraft no longer obey aerodynamic lift and fluid dynamics. If a landing gear touches the runway two degrees off-center, the entire airplane instantly flips like a giant skateboard and explodes!"
+        },
+        {
+          "start": 294.67,
+          "narration": "All global air travel grounds to a complete halt. International shipping isn't doing any better. Cargo ships touching a wooden pier bounce backward like pinballs, destroying coastal docks across the globe."
+        },
+        {
+          "start": 308.17,
+          "narration": "Marine biology undergoes a hilarious shift, too. I jumped into the ocean to test water physics. In real fluid mechanics, water density creates drag, pressure increases with depth, and hypothermia sets in rapidly."
+        },
+        {
+          "start": 323.69,
+          "narration": "But here, I could dive hundreds of feet down without any pressure crushing my lungs! And if I ran low on air? I simply swam near a tiny underwater oxygen pickup bubble to reset my lung capacity!"
+        },
+        {
+          "start": 337.41,
+          "narration": "Back on land, environmental destruction reaches bizarre contradictions. I saw a runaway heavy tank smash through a thick concrete wall, turning brick into crumbling dust in a fraction of a second."
+        },
+        {
+          "start": 350.31,
+          "narration": "But when that same tank tried to knock over a tiny, thin volleyball net pole on the beach... the tank stopped dead in its tracks! The pole didn't bend a single millimeter because it was coded as an indestructible object!"
+        },
+        {
+          "start": 364.14,
+          "narration": "Human achievements completely lose all meaning. Professional sports instantly collapse. Why watch pole vaulting when anyone can sprint up a steep mountain cliff at a forty-five degree angle without slipping?"
+        },
+        {
+          "start": 377.49,
+          "narration": "Frictional force between shoes and terrain no longer depends on surface texture. Steep rocky inclines act like flat sidewalks, allowing pedestrians to effortlessly scale Mount Everest in casual sneakers!"
+        },
+        {
+          "start": 391.62,
+          "narration": "Month one: We reach the ultimate, world-altering consequence I promised earlier. Since physical damage can be cured by eating snacks and death only results in a localized respawn fee, human fear disappears!"
+        },
+        {
+          "start": 405.75,
+          "narration": "Without physical mortality, global productivity plummets to zero. Nobody goes to work, nobody pays mortgages, and everyone spends their day launching cars off makeshift wooden ramps into the bay!"
+        },
+        {
+          "start": 419.18,
+          "narration": "But the economy faces total hyperinflation. Every time a car explodes, money bundles magically spill out onto the street asphalt, creating an infinite supply of currency until cash becomes totally worthless!"
+        },
+        {
+          "start": 433.98,
+          "narration": "Humanity would be trapped in a chaotic, perpetual carnival—unbeatable, unkillable, but unable to build a stable civilization ever again!"
+        },
+        {
+          "start": 443.72,
+          "narration": "What crazy rule shift should we survive next? What would happen if the Earth suddenly stopped spinning for just five seconds? Click here to find out, and don't forget to subscribe!"
+        }
+      ],
+      "uploaded_at": "2026-11-19T20:18:32.763497+00:00",
+      "publish_at": "2026-11-20T16:00:00+00:00",
+      "publish_hour_et": 11
     }
   ],
   "feedback": [
@@ -593,16 +744,26 @@
         "Include pattern interrupts every 3 to 5 seconds using sudden animation shifts, zoom-ins, or audio cues."
       ],
       "reason": "Shorts are significantly outperforming long-form videos in current views (430 avg views for Shorts vs. 2 avg views for Long), making it vital to leverage Shorts with proven animal superpower hooks to build channel momentum."
+    },
+    {
+      "date": "2026-11-19T19:34:06.805820+00:00",
+      "notes": [
+        "Hook viewers within the first 2 seconds with an immediate, visceral statement or visual rather than introducing the concept slowly.",
+        "Eliminate intros, channel greetings, or filler transitions—jump straight into the core hypothetical scenario.",
+        "Create open loops early in the script by promising an unexpected or extreme final consequence near the end.",
+        "Include pattern interrupts every 3 to 5 seconds (zooms, audio stingers, or rapid visual shifts) to maintain high visual pacing."
+      ],
+      "reason": "The growth strategist target mix calls for roughly 33% long-form videos during the testing phase. With 6 shorts and only 1 long video currently published (14%), producing a long video aligns with the targeted ratio to gather baseline performance and retention data for long-form content."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 5,
-      "avg_views": 430
+      "count": 6,
+      "avg_views": 472
     },
     "long": {
-      "count": 2,
-      "avg_views": 2
+      "count": 1,
+      "avg_views": 0
     }
   },
   "publish_slots_et": [
@@ -610,43 +771,43 @@
     13
   ],
   "topic_insights": [
-    "Animal-inspired biological superpower hypotheticals (e.g., Mantis Shrimp Punch, Flea Jump, Chimp Muscles) significantly outperform abstract physics or dietary topics.",
-    "Visceral, relatable human body modifications generate stronger immediate engagement than large-scale material disappearance concepts.",
-    "Abstract physics hypotheticals (e.g., gravity doubling) require direct personal impact framing to gain organic traction.",
-    "Focusing on extreme physical capability comparisons bridges complex science concepts with high-curiosity viral hooks."
+    "Animal-inspired human biological superpowers (e.g., Mantis Shrimp Punch, Chimp Muscles, Flea Jump) dramatically outperform abstract physics, dietary, and pop-culture topics.",
+    "Visceral, relatable human body modifications generate stronger immediate engagement than abstract physical constants or gaming-related scenarios.",
+    "Abstract science hypotheticals require direct, individual personal impact framing rather than macro-scale physical effects to earn views.",
+    "Concepts bridging extreme biomechanics with viral animal capability comparisons remain the strongest core content pillar."
   ],
   "strategy": {
     "daily_target": 2,
     "long_share": 0.33,
     "focus_notes": [
-      "Double down on animal-human hybrid strength comparisons (flea, mantis shrimp, chimp) since early Shorts data shows they outperform general physics and material-loss concepts.",
-      "Implement a strict 3-act structure for long-form videos to avoid the repetitive 1-year/1-hour format, ensuring each script features a unique narrative hook rather than standard countdowns.",
-      "Introduce bracketed scientific intrigue tags like '[Scientifically Explained]' exclusively on long-form titles to test if suggested-feed CTR improves.",
-      "Stop producing overly broad global catastrophe scenarios (like vanishing plastic) until the channel builds a core subscriber base, shifting focus to relatable personal hypothetical scenarios."
+      "Double down on the 'Human vs Animal Superpower' series (e.g., crocodile bite force, cheetah speed) as animal-hybrid Shorts continue to drive over 90% of views and subscriber growth.",
+      "Feature 'Max' (our recurring protagonist) explicitly in the first 3 seconds of both Shorts and long-form videos to add narrative personality and protect against YouTube's repetitive content policy.",
+      "Pivot long-form scripts to progressive biological scale scenarios ('Day 1 vs Month 1 vs Year 1') to build strong watch time through clear escalation hooks.",
+      "Pause abstract micro-physics topics (like 5-second gravity shifts) which have performed poorly in retention and click-through rates."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
     "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
     "metrics": {
-      "subs": 4,
+      "subs": 8,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 3,
-      "total_views": 469,
-      "video_count": 4,
+      "shorts_views_90d": 456,
+      "total_views": 1678,
+      "video_count": 6,
       "long_minutes_28d": 0,
-      "shorts_views_28d": 3
+      "shorts_views_28d": 456
     },
     "pace": {
-      "views_day": 0.2,
-      "subs_day": 0.0,
+      "views_day": 17.7,
+      "subs_day": 0.08,
       "long_hours_day": 0.0,
-      "shorts_views_day": 0,
+      "shorts_views_day": 16,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-18T19:23:46.693920+00:00",
-    "experiment": "Test two different hook styles for Shorts within the 'Human Body Extremes' theme: Hook A uses an immediate visual shock (Max undergoing a drastic transformation in 1.5 seconds), while Hook B starts with a direct, shocking numerical question. We will know it worked if Hook A achieves a retention rate above 50% at the 5-second mark compared to Hook B.",
-    "summary_es": "Arrancamos re bien con los cortos de animales y fuerza, que picaron en punta con más de 400 vistas. El sistema ahora va a priorizar estos temas de biología extrema y cambiar la estructura de los videos largos para no quedar repetitivos y armar una audiencia fiel."
+    "last_run": "2026-11-19T19:28:17.472682+00:00",
+    "experiment": "Test a 2-second visual action hook featuring Max against a standard voiceover question hook across 6 consecutive Shorts. Success will be defined by achieving an Average Percentage Viewed >65% and a 'Viewed vs Swiped Away' ratio above 70%.",
+    "summary_es": "El canal viene arrancando despacio, pero los datos muestran claramente que las comparaciones de superpoderes de animales con humanos son las que mejor funcionan. Esta semana vamos a exprimir esa temática y meter a Max como personaje principal para darle personalidad al contenido y evitar sanciones de YouTube por contenido repetitivo. Además, vamos a probar un nuevo estilo de inicio rápido en los Shorts para enganchar a más audiencia desde el segundo uno."
   },
   "growth_history": [
     {
@@ -693,6 +854,15 @@
       "views_day": 0.2,
       "daily_target": 2,
       "long_share": 0.33
+    },
+    {
+      "date": "2026-11-19",
+      "subs": 8,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 456,
+      "views_day": 17.7,
+      "daily_target": 2,
+      "long_share": 0.33
     }
   ],
   "quota_hits": [
@@ -707,7 +877,7 @@
   ],
   "cf_usage": {
     "date": "2026-11-19",
-    "images": 7,
+    "images": 24,
     "exhausted": false
   },
   "series_stats": {
@@ -733,6 +903,7 @@
   ],
   "playlists": {
     "adventure": "PLcSjWkBi0rhk",
-    "challenge": "PLGRtSL3b6PZ8"
+    "challenge": "PLGRtSL3b6PZ8",
+    "classic": "PLFrw1F30jgfo"
   }
 }
