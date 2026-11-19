@@ -299,7 +299,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1121,
+      "views": 1128,
       "likes": 25
     },
     {
@@ -385,8 +385,8 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 27,
-      "likes": 1
+      "views": 473,
+      "likes": 24
     },
     {
       "job_id": "20261118_215055",
@@ -540,7 +540,55 @@
       ],
       "uploaded_at": "2026-11-18T22:21:47.423960+00:00",
       "publish_at": "2026-11-19T16:00:00+00:00",
-      "publish_hour_et": 11
+      "publish_hour_et": 11,
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261119_001637",
+      "youtube_id": "rR7O_lRXYe8",
+      "title": "What Would Happen If You Lived In GTA 6? #shorts",
+      "topic": "What would happen if you lived inside GTA 6 for 24 hours?",
+      "format": "short",
+      "series": "challenge",
+      "duration": 49.75,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "GTA 6 just came out, so what if I had to live inside it for 24 hours?"
+        },
+        {
+          "start": 5.87,
+          "narration": "Hour one, I steal a super sports car and slam the gas. Instant thirty g-forces crush my spine!"
+        },
+        {
+          "start": 12.87,
+          "narration": "Real physics means human organs would rupture at fifteen gees, yet game logic keeps me totally intact."
+        },
+        {
+          "start": 20.27,
+          "narration": "Hour twelve, I accidentally bump a police cruiser and a five-star wanted level triggers instantly."
+        },
+        {
+          "start": 26.97,
+          "narration": "But that is not even the most dangerous part about surviving this neon digital world."
+        },
+        {
+          "start": 32.44,
+          "narration": "Hour twenty-three, I jump off a skyscraper expecting a standard video-game fall animation."
+        },
+        {
+          "start": 38.96,
+          "narration": "Terminal velocity hits at one hundred twenty miles per hour, turning bone into absolute dust."
+        },
+        {
+          "start": 45.17,
+          "narration": "I instantly respawn on the sidewalk with zero memory, proving that..."
+        }
+      ],
+      "uploaded_at": "2026-11-19T00:25:12.288715+00:00",
+      "publish_at": "2026-11-19T18:00:00+00:00",
+      "publish_hour_et": 13
     }
   ],
   "feedback": [
@@ -681,16 +729,26 @@
         "Repeat the success formula of high-impact biological superpower comparisons (like the Mantis Shrimp and Flea jumps) while cutting preamble."
       ],
       "reason": "The growth strategist target mix requires approximately 33% long-form content (1 out of every 3 videos) during this testing phase to gather balanced performance data across formats, despite current short-form view momentum."
+    },
+    {
+      "date": "2026-11-19T00:16:37.454527+00:00",
+      "notes": [
+        "Hook the viewer within the first 2 seconds by opening directly with the extreme physical impact (e.g., 'If you punched like a mantis shrimp, your fist would ignite the air').",
+        "Avoid slow background setups—jump straight into the immediate, visceral consequence to prevent early drop-off.",
+        "Use open loops mid-script (e.g., 'But that's not even the most dangerous part...') to keep viewers watching past the half-way mark.",
+        "Include pattern interrupts every 3 to 5 seconds using sudden animation shifts, zoom-ins, or audio cues."
+      ],
+      "reason": "Shorts are significantly outperforming long-form videos in current views (430 avg views for Shorts vs. 2 avg views for Long), making it vital to leverage Shorts with proven animal superpower hooks to build channel momentum."
     }
   ],
   "format_stats": {
     "short": {
       "count": 5,
-      "avg_views": 340
+      "avg_views": 430
     },
     "long": {
-      "count": 1,
-      "avg_views": 4
+      "count": 2,
+      "avg_views": 2
     }
   },
   "publish_slots_et": [
@@ -698,7 +756,7 @@
     13
   ],
   "topic_insights": [
-    "Animal-inspired biological superpower hypotheticals (e.g., Mantis Shrimp Punch, Flea Jump) significantly outperform abstract physics or dietary topics.",
+    "Animal-inspired biological superpower hypotheticals (e.g., Mantis Shrimp Punch, Flea Jump, Chimp Muscles) significantly outperform abstract physics or dietary topics.",
     "Visceral, relatable human body modifications generate stronger immediate engagement than large-scale material disappearance concepts.",
     "Abstract physics hypotheticals (e.g., gravity doubling) require direct personal impact framing to gain organic traction.",
     "Focusing on extreme physical capability comparisons bridges complex science concepts with high-curiosity viral hooks."
@@ -790,11 +848,12 @@
     "2026-11-17T20:04:41.603210+00:00",
     "2026-11-17T22:20:30.442125+00:00",
     "2026-11-18T19:43:04.001575+00:00",
-    "2026-11-18T22:21:47.422856+00:00"
+    "2026-11-18T22:21:47.422856+00:00",
+    "2026-11-19T00:25:12.287408+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-18",
-    "images": 18,
+    "date": "2026-11-19",
+    "images": 7,
     "exhausted": false
   },
   "series_stats": {
@@ -819,6 +878,7 @@
     "2026-11-18T19:43:04.002818+00:00"
   ],
   "playlists": {
-    "adventure": "PLcSjWkBi0rhk"
+    "adventure": "PLcSjWkBi0rhk",
+    "challenge": "PLGRtSL3b6PZ8"
   }
 }
