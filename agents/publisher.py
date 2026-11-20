@@ -39,8 +39,12 @@ Write packaging that maximises click-through WITHOUT lying about the content:
   niche (#Science #WhatIf #Facts #Space #Biology...). CamelCase, no spaces, only relevant ones (YouTube
   penalises misleading hashtags). Do NOT include #shorts or {serie['hashtag']} (added automatically).
 - tags: 10-15 SEO tags.
+- first_comment: the channel's first comment under the video, written as Max: ONE short, fun question that
+  makes viewers want to answer (pick a side, choose an option, guess), max 120 characters, 0-1 emoji.
+  E.g. "Would you trade your arms for mantis shrimp punches? Yes or no? 👇". No links, no "subscribe".
 
-Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "hashtags": ["#..."], "tags": ["..."]}}""",
+Return JSON: {{"title": "...", "thumbnail_text": "...", "description": "...", "hashtags": ["#..."], "tags": ["..."],
+"first_comment": "..."}}""",
         temperature=0.8,
     )
 
@@ -190,3 +194,26 @@ def run(topic, script, render, fmt, state, job_id):
         except Exception as e:  # noqa: BLE001
             print(f"[publicador] no pude poner la miniatura (¿canal sin verificar por teléfono?): {e}")
     return {"youtube_id": vid, "title": title, "meta": meta, "publish_at": publish_at}
+
+
+def post_pending_comments(state, now=None):
+    """Cuando un video ya salió público, el canal deja el primer comentario con una pregunta (invita a
+    responder: los comentarios cuentan como interacción). Mientras está programado (privado) no se puede."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    yt = None
+    for v in state.get("videos", []):
+        text = (v.get("first_comment") or "").strip()
+        if not text or v.get("comment_id") or not v.get("youtube_id") or v.get("comment_tries", 0) >= 3:
+            continue
+        live = v.get("publish_at") or v.get("uploaded_at")
+        if not live or dt.datetime.fromisoformat(live) > now:
+            continue
+        try:
+            yt = yt or youtube()
+            res = yt.commentThreads().insert(part="snippet", body={"snippet": {
+                "videoId": v["youtube_id"], "topLevelComment": {"snippet": {"textOriginal": text[:500]}}}}).execute()
+            v["comment_id"] = res.get("id")
+            print(f"[publicador] comentario publicado en {v['youtube_id']}: {text}")
+        except Exception as e:  # noqa: BLE001
+            v["comment_tries"] = v.get("comment_tries", 0) + 1
+            print(f"[publicador] no pude comentar en {v['youtube_id']}: {str(e)[:200]}")

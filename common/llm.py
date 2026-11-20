@@ -94,6 +94,15 @@ OVERLOAD_ROUNDS = 3          # si TODOS los modelos están saturados (503/504), 
 OVERLOAD_WAITS = (60, 150)   # segundos de espera entre vueltas
 
 
+def all_exhausted():
+    """¿Se agotó el cupo de TODOS los modelos? (que se agote uno y responda otro es normal en el plan gratis)"""
+    try:
+        models = _available_models()
+    except Exception:  # noqa: BLE001
+        return bool(quota_hit)
+    return bool(models) and all(m in _exhausted for m in models)
+
+
 def ask_json(prompt: str, system: str = "", temperature: float = 0.9):
     """Pide una respuesta JSON. Prueba el mejor modelo disponible y luego los de respaldo. Si fallan todos
     solo por saturación de Google (pasajera), espera y da otra vuelta antes de rendirse."""

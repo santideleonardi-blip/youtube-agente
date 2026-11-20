@@ -125,7 +125,8 @@ WINNING_FORMULA_SHARE = {"short": 0.75, "long": 0.5}
 
 # ---------- Formatos ----------
 FORMATS = {
-    "short": {"width": 1080, "height": 1920, "target_words": (110, 150), "scenes": (6, 9)},
+    # Shorts de ~30-38 s (20/11): con 45-53 s la gente veía en promedio un 35%; más cortos = más % visto = más alcance
+    "short": {"width": 1080, "height": 1920, "target_words": (75, 100), "scenes": (5, 7)},
     "long": {"width": 1920, "height": 1080, "target_words": (1100, 1400), "scenes": (28, 40)},
 }
 FPS = 30

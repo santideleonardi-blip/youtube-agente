@@ -51,7 +51,10 @@ def _note_quota(state, manual):
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     if llm.quota_hit:
         print(f"[llm] cupo diario agotado en: {sorted(llm.quota_hit)}")
-        state["quota_hits"] = (state.get("quota_hits", []) + [now])[-20:]
+        # solo frena la cadencia si no quedó NINGÚN modelo (antes contaba cualquier modelo agotado,
+        # aunque otro respondiera, y el estratega nunca podía subir a más videos por día)
+        if llm.all_exhausted():
+            state["quota_hits"] = (state.get("quota_hits", []) + [now])[-20:]
     if animator.cf_quota_hit:
         state["image_quota_hits"] = (state.get("image_quota_hits", []) + [now])[-20:]
     st.save(state)
@@ -89,6 +92,12 @@ def main():
         print(f"[estratega] falló, sigo con el plan anterior: {e}")
         strat = state.get("strategy") or {}
     st.save(state)
+    if os.getenv("DRY_RUN") != "1":
+        try:
+            publisher.post_pending_comments(state)
+            st.save(state)
+        except Exception as e:  # noqa: BLE001
+            print(f"[publicador] comentarios pendientes: {e}")
     if not manual and not should_produce(state):
         return
 
@@ -176,6 +185,7 @@ def main():
         "uploaded_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "publish_at": pub["publish_at"].isoformat() if pub.get("publish_at") else None,
         "publish_hour_et": pub["publish_at"].astimezone(schedule.ET).hour if pub.get("publish_at") else None,
+        "first_comment": (pub.get("meta") or {}).get("first_comment", ""),
     })
     st.save(state)
     if req:
