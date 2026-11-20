@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1205,
+      "views": 1216,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -266,8 +266,27 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1109,
-      "likes": 24
+      "views": 1110,
+      "likes": 24,
+      "retention_end": 0.169,
+      "drops": [
+        {
+          "second": 5.7,
+          "drop_pct": 9.3,
+          "narration": "What would happen if Max suddenly woke up with the raw, terrifying muscle strength of a chimpanzee?"
+        },
+        {
+          "second": 4.8,
+          "drop_pct": 8.9,
+          "narration": "What would happen if Max suddenly woke up with the raw, terrifying muscle strength of a chimpanzee?"
+        },
+        {
+          "second": 6.2,
+          "drop_pct": 7.5,
+          "narration": "He barely taps his alarm clock, and instantly shatters it into a million tiny plastic pieces."
+        }
+      ],
+      "analyzed": true
     },
     {
       "job_id": "20261118_215055",
@@ -471,7 +490,7 @@
       "publish_at": "2026-11-19T13:14:00+00:00",
       "publish_hour_et": 8,
       "published_manually": true,
-      "views": 16,
+      "views": 19,
       "likes": 1
     },
     {
@@ -663,7 +682,7 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 1,
+      "views": 3,
       "likes": 0
     },
     {
@@ -703,7 +722,48 @@
       "uploaded_at": "2026-11-20T19:16:28.815523+00:00",
       "publish_at": "2026-11-21T00:00:00+00:00",
       "publish_hour_et": 19,
-      "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡"
+      "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261120_214640",
+      "youtube_id": "mt9DY7m53Ug",
+      "title": "What Would Happen If You Snapped Like A Pistol Shrimp? #PistolShrimp #shorts",
+      "topic": "What would happen if you had the snap of a pistol shrimp?",
+      "format": "short",
+      "series": "curiosity",
+      "duration": 35.57,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "I tried snapping my fingers and instantly vaporized my alarm clock into a blinding shockwave."
+        },
+        {
+          "start": 6.64,
+          "narration": "The kinetic blast shatters every window in my house and blows my couch backward!"
+        },
+        {
+          "start": 12.01,
+          "narration": "My snap collapses surrounding air so fast it creates a underwater-style cavitation bubble."
+        },
+        {
+          "start": 18.41,
+          "narration": "It reaches four thousand seven hundred degrees, emitting instant light and two hundred eighteen decibels!"
+        },
+        {
+          "start": 25.11,
+          "narration": "Dip my hand in a pool, and one snap instantly boils all the water in a millisecond."
+        },
+        {
+          "start": 30.92,
+          "narration": "Which is why you should never ask me to snap along to your favorite song."
+        }
+      ],
+      "uploaded_at": "2026-11-20T21:49:32.799347+00:00",
+      "publish_at": "2026-11-21T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇"
     }
   ],
   "feedback": [
@@ -884,12 +944,22 @@
         "Open a visual loop early by teasing the ultimate destruction or bodily transformation mid-script to drive completion rate."
       ],
       "reason": "Shorts are driving 100% of channel view growth (up to 1,200+ views vs 1 view on long videos), and long-form content currently sits at 22% (2 out of 9 recent videos), adhering to the 20% target mix."
+    },
+    {
+      "date": "2026-11-20T21:46:40.160937+00:00",
+      "notes": [
+        "Trim setup wording in the hook: In 'Chimp Muscles', lingering on character introduction ('What would happen if Max suddenly woke up...') caused a ~18% drop between seconds 4.8 and 5.7.",
+        "Deliver visual payoff in under 3 seconds: Show the destroyed object (e.g., shattered alarm clock) immediately while stating the premise rather than setting up the narrative backstory first.",
+        "Avoid repeating or rephrasing the question mid-intro; state the wild condition once and jump straight to extreme kinetic impact.",
+        "Incorporate pattern interrupts (screen shake, visual punch cuts, sharp SFX) at seconds 4-6 where drop-off typically peaks."
+      ],
+      "reason": "Shorts are the sole engine for channel views and initial subscriber growth (top Shorts pull 500-1200 views while long-form videos remain at 1 view). Maintaining the 20% long-form target (currently 2 long out of 10 videos) requires the next upload to be a Short."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 7,
-      "avg_views": 413
+      "count": 8,
+      "avg_views": 364
     },
     "long": {
       "count": 2,
@@ -901,9 +971,9 @@
     19
   ],
   "topic_insights": [
-    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, averaging over 900+ views compared to single-digit views for gaming and diet topics.",
-    "Visceral, physical 'what would your body do' hypotheticals trigger immediate algorithmic pickup, whereas gaming/pop-culture hypotheticals (GTA 6) and abstract physics (Gravity Doubled) currently fail to gain initial traction.",
-    "Keep hooks focused on extreme kinetic consequences (e.g., kinetic explosions, snapping bones, jumping over skyscrapers) rather than passive or educational hypotheticals."
+    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, driving 500-1200+ views per video compared to single-digit or low double-digit views for gaming, diet, and abstract physics topics.",
+    "Visceral, physical 'what would your body do' hypotheticals trigger strong algorithmic pickup, whereas pop-culture hypotheticals (GTA 6) and passive scenarios (Gravity Doubled, Blue Whale) fail to gain initial traction.",
+    "Focus hooks exclusively on immediate kinetic consequences (shattering objects, launching into the atmosphere, bone-snapping impact) rather than character-driven backstory or passive educational facts."
   ],
   "strategy": {
     "daily_target": 2,
@@ -1016,7 +1086,7 @@
   ],
   "cf_usage": {
     "date": "2026-11-20",
-    "images": 6,
+    "images": 12,
     "exhausted": false
   },
   "series_stats": {
@@ -1043,6 +1113,7 @@
   "playlists": {
     "adventure": "PLcSjWkBi0rhk",
     "challenge": "PLGRtSL3b6PZ8",
-    "classic": "PLFrw1F30jgfo"
+    "classic": "PLFrw1F30jgfo",
+    "curiosity": "PLTvtBZK6cdQA"
   }
 }
