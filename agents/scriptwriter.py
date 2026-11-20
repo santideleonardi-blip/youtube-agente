@@ -78,6 +78,11 @@ Rules:
   (about {round((wmin + wmax) / 2 / ((smin + smax) / 2))} words per scene). Length matters: count your words.
 - The video answers the question "{topic['topic']}". The first sentence states the premise in a gripping way.
 - Scene 1 is the hook: a shocking or curious statement in the first sentence. No "Hey guys", no intro.
+- THE FIRST 8 SECONDS (scenes 1-2) decide if people keep watching (our data: viewers leave at seconds 6-8 when
+  the script explains numbers). Open with the most visceral PHYSICAL consequence for Max's body or the world
+  ("My first high-five shatters every bone in my friend's hand"), then escalate straight into the next
+  consequence. NO numbers, units, speeds or statistics in the first 8 seconds; bring facts later and always as a
+  consequence you can picture ("faster than a bullet", not "50 mph").
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
 - Simple spoken English, short sentences, accurate science/history, light humour.
 - {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}

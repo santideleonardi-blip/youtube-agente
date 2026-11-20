@@ -183,8 +183,14 @@ def decide_cadence(state, now):
     return cadence, f"se mantiene en {cadence}/día (mediana de vistas {med_recent:.0f} vs {med_prev:.0f})"
 
 
-def decide_long_share(state, pace):
+EARLY_SUBS = 100   # con menos suscriptores YouTube casi no empuja los largos: 1 de cada 5
+
+
+def decide_long_share(state, pace, subs=None):
     """Qué proporción de largos producir según cuál camino a la monetización avanza más rápido."""
+    if subs is not None and subs < EARLY_SUBS:
+        return LONG_SHARE_RANGE[0], (f"canal chico ({subs} suscriptores): 1 de cada 5 videos es largo; los Shorts "
+                                     f"traen los primeros suscriptores y los largos casi no se recomiendan todavía")
     analyzed = [v for v in state["videos"] if matured(v)]
     longs = [v for v in analyzed if v["format"] == "long"]
     shorts = [v for v in analyzed if v["format"] == "short"]
@@ -320,7 +326,7 @@ def run(state, force=False):
     pace = _pace(metrics)
     old_cadence = strat.get("daily_target", START_DAILY)
     cadence, cadence_reason = decide_cadence(state, now)
-    long_share, long_reason = decide_long_share(state, pace)
+    long_share, long_reason = decide_long_share(state, pace, metrics.get("subs"))
     if cadence != old_cadence:
         strat["cadence_changed_at"] = now.isoformat()
         print(f"[estratega] cadencia {old_cadence} -> {cadence} videos/día")

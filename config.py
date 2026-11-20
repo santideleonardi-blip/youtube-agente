@@ -114,6 +114,15 @@ SERIES = {
     },
 }
 
+# Fórmula que funciona en NUESTRO canal (datos al 20/11: Mantis 1.185 vistas, Chimpancé 1.098, Pulga 527;
+# el resto < 20). La mayoría de los temas la usan, adaptada a la serie; el resto explora otros temas.
+WINNING_FORMULA = (
+    "a human (Max) getting ONE real ability or body part of a specific animal and what it does to his body "
+    "and the world (e.g. punch like a mantis shrimp, jump like a flea, chimp muscles, cheetah speed, "
+    "a gecko's grip, an owl's eyes, a tardigrade's toughness). Pick an animal and ability we have NOT done yet."
+)
+WINNING_FORMULA_SHARE = {"short": 0.75, "long": 0.5}
+
 # ---------- Formatos ----------
 FORMATS = {
     "short": {"width": 1080, "height": 1920, "target_words": (110, 150), "scenes": (6, 9)},

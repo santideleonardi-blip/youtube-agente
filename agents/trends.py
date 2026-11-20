@@ -55,6 +55,14 @@ def run(state, fmt, notes, topic_insights=None, series=None):
     top = [v for v in state["videos"] if v.get("views")]
     top = sorted(top, key=lambda v: v["views"], reverse=True)[:5]
 
+    import random
+
+    formula = random.random() < config.WINNING_FORMULA_SHARE.get(fmt, 0.5)
+    formula_rule = (f"\nTHIS VIDEO MUST USE OUR WINNING FORMULA (it is what our viewers watch): {config.WINNING_FORMULA} "
+                    f"Make it fit the series treatment below.\n" if formula else
+                    "\nThis time explore a DIFFERENT kind of topic than animal abilities (keep testing new ideas), "
+                    "still visceral and physical: what happens to the body or the world.\n")
+    print(f"[tendencias] {'fórmula ganadora (animales)' if formula else 'tema de exploración'}")
     pick = llm.ask_json(
         f"""You are the trend researcher of a faceless YouTube channel.
 Niche: {config.NICHE_DESCRIPTION}
@@ -73,6 +81,7 @@ premise word for word: if you take inspiration from a trending video, give it a 
 trend or are proven evergreen curiosities, and that can be explained visually. Avoid medical, financial
 or legal advice, real tragedies, gore or politics.
 
+{formula_rule}
 This video belongs to the series "{serie['label']}": the topic must be {serie['topic_hint']}
 Max, the channel's character, will live it. Phrase it the way people search it, without naming Max
 (e.g. "What would happen if you didn't sleep for 30 days?").

@@ -75,10 +75,10 @@ def _enforce_mix(state, fmt, long_share, now):
     last = vids[-9:]
     if len(last) >= 3:
         actual = sum(v["format"] == "long" for v in last) / len(last)
-        if actual < long_share - 0.15:
+        if actual < long_share - 0.1:
             print(f"[analista] pocos largos últimamente ({actual:.0%} vs objetivo {long_share:.0%}) -> largo")
             return "long"
-        if actual > long_share + 0.15:
+        if actual > long_share + 0.05:
             return "short"
     return fmt
 
