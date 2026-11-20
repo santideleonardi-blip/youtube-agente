@@ -79,8 +79,9 @@ def _ease(t):
     return t * t * (3 - 2 * t)
 
 
-def render_shot(img, depth, out_path, w, h, dur, move_idx, fps=config.FPS):
-    """Renderiza una toma con cámara virtual 2.5D y la guarda como mp4 (sin audio)."""
+def render_shot(img, depth, out_path, w, h, dur, move_idx, fps=config.FPS, overlay=None, t0=0.0):
+    """Renderiza una toma con cámara virtual 2.5D y la guarda como mp4 (sin audio).
+    overlay(frame, t) dibuja algo encima de cada cuadro (Max actor); t = t0 + tiempo dentro de la toma."""
     z0, z1, px0, px1, py0, py1, k = MOVES[move_idx % len(MOVES)]
     sh, sw = img.shape[:2]
     # coordenadas de salida centradas, en escala de la imagen fuente (la fuente cubre la salida)
@@ -115,6 +116,8 @@ def render_shot(img, depth, out_path, w, h, dur, move_idx, fps=config.FPS):
             fx = cx + panx + (xs / zoom) / dz - shift * move_dir[0]
             fy = cy + pany + (ys / zoom) / dz - shift * move_dir[1]
             frame = cv2.remap(img, fx, fy, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+            if overlay is not None:
+                overlay(frame, t0 + i / fps)
             proc.stdin.write(frame.tobytes())
     finally:
         proc.stdin.close()

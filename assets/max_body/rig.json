@@ -1,0 +1,103 @@
+{
+ "canvas": [
+  1024,
+  1536
+ ],
+ "ground_y": 1450,
+ "parts": {
+  "arm_l": {
+   "pos": [
+    256,
+    471
+   ],
+   "pivot": [
+    62,
+    54
+   ],
+   "size": [
+    136,
+    521
+   ]
+  },
+  "arm_r": {
+   "pos": [
+    603,
+    471
+   ],
+   "pivot": [
+    77,
+    54
+   ],
+   "size": [
+    138,
+    521
+   ]
+  },
+  "leg_l": {
+   "pos": [
+    269,
+    792
+   ],
+   "pivot": [
+    159,
+    80
+   ],
+   "size": [
+    229,
+    660
+   ]
+  },
+  "leg_r": {
+   "pos": [
+    498,
+    792
+   ],
+   "pivot": [
+    68,
+    80
+   ],
+   "size": [
+    225,
+    660
+   ]
+  },
+  "torso": {
+   "pos": [
+    348,
+    425
+   ],
+   "pivot": [
+    149,
+    27
+   ],
+   "size": [
+    307,
+    441
+   ]
+  },
+  "head": {
+   "pos": [
+    321,
+    167
+   ],
+   "pivot": [
+    176,
+    285
+   ],
+   "size": [
+    346,
+    345
+   ]
+  }
+ },
+ "head_layers": [
+  "head_blink",
+  "head_mouth_B",
+  "head_mouth_C",
+  "head_mouth_D",
+  "head_mouth_E",
+  "head_mouth_F",
+  "head_mouth_G",
+  "head_mouth_H"
+ ]
+}
