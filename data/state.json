@@ -40,9 +40,9 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 9,
-      "likes": 0,
-      "avg_view_pct": 67.2,
+      "views": 10,
+      "likes": 1,
+      "avg_view_pct": 56.5,
       "subs_gained": 0,
       "minutes_watched": 2
     },
@@ -86,8 +86,8 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 527,
-      "likes": 7,
+      "views": 528,
+      "likes": 8,
       "retention_end": 0.116,
       "drops": [
         {
@@ -107,9 +107,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 35.0,
+      "avg_view_pct": 34.9,
       "subs_gained": 2,
-      "minutes_watched": 61
+      "minutes_watched": 72
     },
     {
       "job_id": "20261116_205804",
@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1185,
+      "views": 1205,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -175,7 +175,10 @@
           "narration": "Your fist accelerates at fifty miles per hour in milliseconds—faster than a speeding bullet."
         }
       ],
-      "analyzed": true
+      "analyzed": true,
+      "avg_view_pct": 37.4,
+      "subs_gained": 4,
+      "minutes_watched": 172
     },
     {
       "job_id": "20261117_194809",
@@ -213,8 +216,11 @@
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 18,
-      "likes": 2
+      "views": 22,
+      "likes": 3,
+      "avg_view_pct": 100.6,
+      "subs_gained": 0,
+      "minutes_watched": 3
     },
     {
       "job_id": "20261117_221252",
@@ -260,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1098,
+      "views": 1109,
       "likes": 24
     },
     {
@@ -416,7 +422,7 @@
       "uploaded_at": "2026-11-18T22:21:47.423960+00:00",
       "publish_at": "2026-11-19T16:00:00+00:00",
       "publish_hour_et": 11,
-      "views": 0,
+      "views": 1,
       "likes": 0
     },
     {
@@ -465,8 +471,8 @@
       "publish_at": "2026-11-19T13:14:00+00:00",
       "publish_hour_et": 8,
       "published_manually": true,
-      "views": 8,
-      "likes": 0
+      "views": 16,
+      "likes": 1
     },
     {
       "job_id": "20261119_192817",
@@ -613,7 +619,7 @@
       "uploaded_at": "2026-11-19T20:18:32.763497+00:00",
       "publish_at": "2026-11-20T16:00:00+00:00",
       "publish_hour_et": 11,
-      "views": 0,
+      "views": 1,
       "likes": 0
     },
     {
@@ -656,7 +662,48 @@
       ],
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
-      "publish_hour_et": 13
+      "publish_hour_et": 13,
+      "views": 1,
+      "likes": 0
+    },
+    {
+      "job_id": "20261120_190524",
+      "youtube_id": "DTHnx6ChqWo",
+      "title": "What Would Happen If You Had Electric Eel Power? #ElectricEel #shorts",
+      "topic": "What would happen if you had the electric shock of an electric eel?",
+      "format": "short",
+      "series": "classic",
+      "duration": 34.14,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "I just flipped a light switch and exploded the bulb, boiling my sweat into instant steam."
+        },
+        {
+          "start": 5.68,
+          "narration": "The electric surge shot through the walls, instantly blacking out my entire city block."
+        },
+        {
+          "start": 11.48,
+          "narration": "My body now acts like a giant biological battery, packed with thousands of voltage-generating cells."
+        },
+        {
+          "start": 18.72,
+          "narration": "Every phone I touch instantly fries, and a simple high-five delivers eight hundred volts."
+        },
+        {
+          "start": 24.6,
+          "narration": "Worst of all, I cannot turn it off—one single sneeze could collapse the power grid."
+        },
+        {
+          "start": 29.93,
+          "narration": "So if your lights suddenly go dark... it is probably because..."
+        }
+      ],
+      "uploaded_at": "2026-11-20T19:16:28.815523+00:00",
+      "publish_at": "2026-11-21T00:00:00+00:00",
+      "publish_hour_et": 19,
+      "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡"
     }
   ],
   "feedback": [
@@ -827,59 +874,69 @@
         "Keep punchy visual gags or pattern interrupts around second 5-6 to break up narration before viewer attention lapses."
       ],
       "reason": "Currently, 2 out of the 8 total videos are long-form (25%). While the long-term target is 33% (1 in 3), long-form videos currently have 0 views and zero retention data, whereas Shorts in the animal-superpower niche are actively driving 1,000+ views and subscribers. Releasing another high-retention Short builds algorithmic momentum and viewer base before testing the next long-form release."
+    },
+    {
+      "date": "2026-11-20T19:10:04.853496+00:00",
+      "notes": [
+        "Hook viewers in the first 2 seconds by stating the most extreme physical consequence immediately (e.g., 'Your punch would explode water into light').",
+        "Eliminate intros and background setup; jump directly from the hypothetical question to the visual action.",
+        "Use pattern interrupts (sound effects, camera cuts, text pop-ups) every 3-4 seconds to prevent scroll-away on Shorts.",
+        "Open a visual loop early by teasing the ultimate destruction or bodily transformation mid-script to drive completion rate."
+      ],
+      "reason": "Shorts are driving 100% of channel view growth (up to 1,200+ views vs 1 view on long videos), and long-form content currently sits at 22% (2 out of 9 recent videos), adhering to the 20% target mix."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 6,
-      "avg_views": 474
+      "count": 7,
+      "avg_views": 413
     },
     "long": {
       "count": 2,
-      "avg_views": 0
+      "avg_views": 1
     }
   },
   "publish_slots_et": [
-    11,
-    13
+    15,
+    19
   ],
   "topic_insights": [
     "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, averaging over 900+ views compared to single-digit views for gaming and diet topics.",
-    "Visceral, physical 'what would your body do' hypotheticals trigger immediate algorithmic pickup, whereas gaming/pop-culture hypotheticals (GTA 6) and pure dietary changes (Sugar) currently fail to gain initial traction.",
-    "Keep hooks focused on extreme kinetic consequences (e.g., 'a single high-five triggers a kinetic explosion') rather than purely educational metrics."
+    "Visceral, physical 'what would your body do' hypotheticals trigger immediate algorithmic pickup, whereas gaming/pop-culture hypotheticals (GTA 6) and abstract physics (Gravity Doubled) currently fail to gain initial traction.",
+    "Keep hooks focused on extreme kinetic consequences (e.g., kinetic explosions, snapping bones, jumping over skyscrapers) rather than passive or educational hypotheticals."
   ],
   "strategy": {
     "daily_target": 2,
-    "long_share": 0.33,
+    "long_share": 0.2,
     "focus_notes": [
-      "Double down on the 'Human vs Animal Superpower' series (e.g., crocodile bite force, cheetah speed) as animal-hybrid Shorts continue to drive over 90% of views and subscriber growth.",
-      "Feature 'Max' (our recurring protagonist) explicitly in the first 3 seconds of both Shorts and long-form videos to add narrative personality and protect against YouTube's repetitive content policy.",
-      "Pivot long-form scripts to progressive biological scale scenarios ('Day 1 vs Month 1 vs Year 1') to build strong watch time through clear escalation hooks.",
-      "Pause abstract micro-physics topics (like 5-second gravity shifts) which have performed poorly in retention and click-through rates."
+      "Expand the 'Human vs. Animal Abilities' series with highly visual topics (e.g., Electric Eel Shock, Pistol Shrimp Snap, Falcon Vision), as animal-hybrid concepts account for over 95% of total channel views and all subscriber gains.",
+      "Vary the script hook structure: instead of always opening with 'What would happen if...', start 50% of videos directly with an action beat starring Max (e.g., 'Max just tried to punch through a brick wall...') to improve 3-second retention and prevent automated/repetitive content flags.",
+      "Format all long-form videos into progressive time-lapse structures ('Day 1, Month 1, Year 1') focused on extreme human body transformations to maximize average view duration and start building long-form watch hours.",
+      "Fully pause gaming and micro-physics scenarios (e.g., GTA 6, 5-second gravity shifts), which consistently underperform with under 20 views."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
-    "long_share_reason": "fase de prueba: 1 de cada 3 videos es largo hasta tener datos de los dos formatos",
+    "long_share_reason": "canal chico (9 suscriptores): 1 de cada 5 videos es largo; los Shorts traen los primeros suscriptores y los largos casi no se recomiendan todavía",
     "metrics": {
-      "subs": 8,
+      "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 456,
-      "total_views": 1678,
-      "video_count": 6,
+      "shorts_views_90d": 1657,
+      "total_views": 2850,
+      "video_count": 9,
       "long_minutes_28d": 0,
-      "shorts_views_28d": 456
+      "shorts_views_28d": 1657
     },
     "pace": {
-      "views_day": 17.7,
-      "subs_day": 0.08,
+      "views_day": 64.0,
+      "subs_day": 0.23,
       "long_hours_day": 0.0,
-      "shorts_views_day": 16,
+      "shorts_views_day": 59,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-19T19:28:17.472682+00:00",
-    "experiment": "Test a 2-second visual action hook featuring Max against a standard voiceover question hook across 6 consecutive Shorts. Success will be defined by achieving an Average Percentage Viewed >65% and a 'Viewed vs Swiped Away' ratio above 70%.",
-    "summary_es": "El canal viene arrancando despacio, pero los datos muestran claramente que las comparaciones de superpoderes de animales con humanos son las que mejor funcionan. Esta semana vamos a exprimir esa temática y meter a Max como personaje principal para darle personalidad al contenido y evitar sanciones de YouTube por contenido repetitivo. Además, vamos a probar un nuevo estilo de inicio rápido en los Shorts para enganchar a más audiencia desde el segundo uno."
+    "last_run": "2026-11-20T19:05:24.773658+00:00",
+    "experiment": "Test 'Character-Led Action Hook' vs. 'Standard Question Hook' across 6 upcoming animal-hybrid Shorts. Half will open with a standard 'What would happen if...' narration, while the other half will open with Max in an immediate crisis situation. We will measure success by an increase in Average Percentage Viewed above 50% and higher subscriber conversion per 1,000 views.",
+    "summary_es": "Los Shorts de superpoderes animales con Max son los únicos que están trayendo vistas y suscriptores reales. Esta semana vamos a enfocarnos 100% en esa temática y a cambiar la forma en que arrancan los videos para enganchar más rápido a la gente y evitar que YouTube nos considere contenido repetitivo. Además, empezaremos a subir videos largos con formato de evolución en el tiempo para empezar a sumar las horas de reproducción necesarias."
   },
   "growth_history": [
     {
@@ -935,6 +992,15 @@
       "views_day": 17.7,
       "daily_target": 2,
       "long_share": 0.33
+    },
+    {
+      "date": "2026-11-20",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 1657,
+      "views_day": 64.0,
+      "daily_target": 2,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -949,8 +1015,8 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-19",
-    "images": 31,
+    "date": "2026-11-20",
+    "images": 6,
     "exhausted": false
   },
   "series_stats": {
