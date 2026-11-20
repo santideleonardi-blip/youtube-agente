@@ -55,10 +55,6 @@ MAX_NARRATOR = os.getenv("MAX_NARRATOR", "1") == "1"
 # "logo": el Max exacto del logo del canal (elegido por Santi el 18/11). "dibujo": el muñeco vectorial
 # con expresiones y brazos (assets/max_puppet).
 MAX_PUPPET_STYLE = os.getenv("MAX_PUPPET_STYLE", "logo")
-# Max actor (20/11): Max de cuerpo entero DENTRO de cada escena (camina, corre, salta, se cae, flota, señala),
-# con la cabeza del logo hablando sincronizada. Las escenas de FLUX se generan sin Max y él se anima encima.
-# Reemplaza al Max de la esquina. Hasta que Santi lo apruebe queda apagado: se prueba con el workflow manual.
-MAX_ACTOR = os.getenv("MAX_ACTOR", "0") == "1"
 # Las imágenes de FLUX.2 reciben el dibujo oficial de Max (assets/max_logo/reference.png) como referencia,
 # para que Max salga siempre igual al del logo. MAX_REFERENCE_IMAGE=0 lo apaga (solo descripción de texto).
 MAX_REFERENCE_IMAGE = os.getenv("MAX_REFERENCE_IMAGE", "1") == "1"

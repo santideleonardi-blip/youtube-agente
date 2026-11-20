@@ -20,10 +20,6 @@ on:
         type: choice
         options: ["", "short", "long"]
         default: ""
-      max_actor:
-        description: "Max actor: Max de cuerpo entero animado dentro de las escenas (en prueba)"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -86,7 +82,6 @@ jobs:
           FORCE_FORMAT: ${{ inputs.format }}
           RHUBARB_BIN: models/rhubarb/rhubarb
           MAX_NARRATOR: ${{ vars.MAX_NARRATOR || '1' }}
-          MAX_ACTOR: ${{ (github.event_name == 'workflow_dispatch' && inputs.max_actor) && '1' || vars.MAX_ACTOR || '0' }}
         timeout-minutes: 80
         run: python -u main.py
 

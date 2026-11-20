@@ -300,11 +300,6 @@ def with_max_look(prompt):
 def image(prompt, path, w, h, seed):
     if MOCK_IMAGES:
         return _fallback_image(path, w, h, seed)
-    if ACTOR["on"]:
-        # Max actor: la escena va sin Max (él se dibuja animado encima)
-        from agents import actor
-
-        prompt = actor.background_prompt(clean_brands(prompt))
     full = f"{with_max_look(prompt)}, {config.IMAGE_STYLE}"
     if _cloudflare_image(full, path, w, h, seed):
         return path
@@ -364,46 +359,7 @@ def _cover(path, w, h):
 # ---------------- Escenas ----------------
 
 
-# Max actor (config.MAX_ACTOR): Max de cuerpo entero animado dentro de las escenas. Si falla, se apaga
-# para el resto del video y vuelve el Max narrador de la esquina.
-ACTOR = {"on": False, "failed": False}
-
-
-def _scene_actor(sc, audio, wd, w, h, dur, idx):
-    """Prepara a Max actor para esta escena (acción + boca sincronizada con la voz de la escena)."""
-    if not ACTOR["on"]:
-        return None
-    try:
-        from agents import actor, puppet
-
-        action = actor.norm_action(sc.get("max_action")) or actor.infer_action(sc.get("narration"), idx)
-        sc["max_action"] = action
-        cues = puppet.mouth_cues(audio, sc.get("narration", ""), wd, config.FPS)
-        print(f"[max] escena {idx + 1}: Max {action}")
-        return actor.SceneActor(w, h, action, dur, cues, idx).composite
-    except Exception as e:  # noqa: BLE001
-        print(f"[max] no pude preparar a Max actor, sigo con el Max de la esquina: {e}")
-        ACTOR.update(on=False, failed=True)
-        return None
-
-
-def _cover_with_max(cover, w, h):
-    """La miniatura (sale de la primera escena) también lleva a Max, señalando."""
-    try:
-        import cv2
-
-        from agents import actor
-
-        img = cv2.imread(cover)
-        ch, cw = img.shape[:2]
-        sa = actor.SceneActor(cw, ch, "point", 2.0, [], 1 if cw > ch else 0)
-        sa.composite(img, 1.0)
-        cv2.imwrite(cover, img)
-    except Exception as e:  # noqa: BLE001
-        print(f"[max] miniatura sin Max: {e}")
-
-
-def _scene_clip(img, audio, out, w, h, dur, idx, overlay=None):
+def _scene_clip(img, audio, out, w, h, dur, idx):
     """Una escena = varias tomas cortas (cortes cada ~2.5 s) con cámara 2.5D sobre la misma ilustración."""
     import cv2
 
@@ -416,15 +372,7 @@ def _scene_clip(img, audio, out, w, h, dur, idx, overlay=None):
     shots = []
     for k in range(n):
         sp = out[:-4] + f"_k{k}.mp4"
-        try:
-            parallax.render_shot(src, depth, sp, w, h, dur / n, idx * 3 + k, overlay=overlay, t0=k * dur / n)
-        except Exception as e:  # noqa: BLE001
-            if overlay is None:
-                raise
-            print(f"[max] Max actor falló en la escena {idx + 1}, sigo con el Max de la esquina: {e}")
-            ACTOR.update(on=False, failed=True)
-            overlay = None
-            parallax.render_shot(src, depth, sp, w, h, dur / n, idx * 3 + k)
+        parallax.render_shot(src, depth, sp, w, h, dur / n, idx * 3 + k)
         shots.append(sp)
     lst = out[:-4] + "_list.txt"
     with open(lst, "w") as f:
@@ -446,11 +394,7 @@ def _ass_time(t):
 
 def _subtitles(words, path, w, h, fmt):
     size = int(h * 0.055) if fmt == "short" else int(h * 0.065)
-    if fmt == "short":
-        # con Max actor los subtítulos van más arriba (Max está parado en la parte de abajo)
-        margin_v = int(h * (0.52 if ACTOR["on"] else 0.36 if config.MAX_NARRATOR else 0.30))
-    else:
-        margin_v = int(h * 0.08)
+    margin_v = int(h * (0.36 if config.MAX_NARRATOR else 0.30)) if fmt == "short" else int(h * 0.08)
     header = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: {w}
@@ -531,7 +475,6 @@ def run(script, fmt, job_id):
 
     clips, all_words, scene_meta = [], [], []
     t = 0.0
-    ACTOR.update(on=config.MAX_ACTOR, failed=False)
     seed_base = random.randint(1, 10_000_000)
     print(f"[animador] generando voces ({config.TTS_ENGINE})")
     mp3s, all_scene_words = voices(script["scenes"], wd)
@@ -548,11 +491,9 @@ def run(script, fmt, job_id):
         shutil.copy(raw, png)
         if i == 0:
             shutil.copy(png, os.path.join(wd, "cover.png"))
-            if ACTOR["on"]:
-                _cover_with_max(os.path.join(wd, "cover.png"), w, h)
         _cover(png, w, h)
         dur = _duration(mp3) + 0.35
-        _scene_clip(png, mp3, mp4, w, h, dur, i, _scene_actor(sc, mp3, wd, w, h, dur, i))
+        _scene_clip(png, mp3, mp4, w, h, dur, i)
         dur = _duration(mp4)
         for wdict in words:
             all_words.append({"text": wdict["text"], "start": wdict["start"] + t, "end": wdict["end"] + t})
@@ -573,9 +514,7 @@ def run(script, fmt, job_id):
            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
            "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-movflags", "+faststart", final]
     done = False
-    if config.MAX_ACTOR and not ACTOR["failed"]:
-        print("[max] Max actor en todas las escenas (sin el Max de la esquina)")
-    elif config.MAX_NARRATOR:
+    if config.MAX_NARRATOR:
         try:
             _final_with_max(joined, ass, script, wd, w, h, t, enc, scene_meta)
             done = True

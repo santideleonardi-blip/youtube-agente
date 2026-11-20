@@ -22,31 +22,9 @@ def _voice_rule():
             "and does; the science is shown through what happens to him. He is the only recurring person.")
 
 
-ACTOR_ACTIONS = "idle, walk, run, jump, fall, float, scared, point, wave, celebrate"
-
-
-def _image_rule():
-    """Qué tiene que describir el prompt de imagen de cada escena."""
-    if config.MAX_ACTOR:
-        return ("- Each scene needs an image prompt describing ONLY THE PLACE / BACKGROUND of the scene (setting, objects, "
-                "sky, light, what is happening around) that matches the narration, as a wide shot with open ground in "
-                "the lower part. Do NOT put Max or any person in it: Max is animated on top of it later. No text in "
-                "the images. Never depict children. Make the first image the most striking and dramatic one (the hook).\n"
-                f"- For each scene also choose what Max DOES on screen, \"max_action\", one of: {ACTOR_ACTIONS}. "
-                "walk = arrives/explores, run = escapes/hurries, jump = surprise/excitement/launch, fall = falls/crashes/"
-                "gravity, float = weightless/space/flying, scared = danger/panic, point = shows a fact or 'look at this', "
-                "wave = greets or says goodbye, celebrate = wins/survives, idle = just talks. Match the line and vary "
-                "them: avoid the same action two scenes in a row.")
-    return ("- Each scene needs an image prompt describing ONE clear visual (Max, objects, setting) that matches the\n"
-            "  narration. Max appears in EVERY image, doing or reacting to what the narration says. Do not include any\n"
-            "  text in the images. Write him exactly as \"Max\" (just the name: his look is added automatically,\n"
-            "  so do NOT describe his face, hair or clothes, and never give him a different outfit, hat or helmet).\n"
-            "  Never depict children. Make the first image the most striking and dramatic one (it is the hook).")
-
-
 def _acting_rule():
     """Con Max narrador, cada escena dice qué cara pone y qué gesto hace el muñeco de Max."""
-    if config.MAX_ACTOR or not config.MAX_NARRATOR or config.MAX_PUPPET_STYLE == "logo":
+    if not config.MAX_NARRATOR or config.MAX_PUPPET_STYLE == "logo":
         return ""
     return ("- Max (the on-screen narrator) acts every scene. For each scene choose his \"emotion\" while he says it: "
             "neutral, happy, excited, surprised, worried, scared or thinking; and a \"gesture\": none, point (points up: "
@@ -57,16 +35,11 @@ def _acting_rule():
 
 
 def _acting_fields():
-    if config.MAX_ACTOR:
-        return ', "max_action": "..."'
     return ', "emotion": "...", "gesture": "..."' if config.MAX_NARRATOR and config.MAX_PUPPET_STYLE != "logo" else ""
 
 
 def _ensure_max(scenes):
-    """Max es el protagonista: si alguna imagen quedó sin él, se lo agrega reaccionando a la escena.
-    Con Max actor no: las imágenes son solo el lugar y Max se anima encima."""
-    if config.MAX_ACTOR:
-        return scenes
+    """Max es el protagonista: si alguna imagen quedó sin él, se lo agrega reaccionando a la escena."""
     for sc in scenes:
         p = (sc.get("image_prompt") or "").strip()
         if "Max" not in p:
@@ -109,7 +82,11 @@ Rules:
 - Simple spoken English, short sentences, accurate science/history, light humour.
 - {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}
 - {_voice_rule()}
-{_image_rule()}
+- Each scene needs an image prompt describing ONE clear visual (Max, objects, setting) that matches the
+  narration. Max appears in EVERY image, doing or reacting to what the narration says. Do not include any
+  text in the images. Write him exactly as "Max" (just the name: his look is added automatically,
+  so do NOT describe his face, hair or clothes, and never give him a different outfit, hat or helmet).
+  Never depict children. Make the first image the most striking and dramatic one (it is the hook).
 - SERIES: this is a "{serie['label']}" episode. {serie['script_rules']}
 
 {_acting_rule()}
@@ -173,7 +150,8 @@ Rewrite EACH scene longer, keeping its order, meaning and role in the story (kee
 the beginning, keep the ending if this is the end). Go deeper: surprising facts, concrete numbers and
 comparisons, step-by-step consequences, mini open loops, light humour. No filler, no repetition,
 no greetings, no "in this video". Keep the same number of scenes ({len(part)}).
-Each scene keeps its "image_prompt"{' (ONLY the place/background, no Max, no people, no text; never children) and its "max_action"' if config.MAX_ACTOR else ' (ONE clear visual, no text; Max appears in every image as the protagonist, written just "Max", without describing his looks or clothes; never children)'}.
+Each scene keeps its "image_prompt" (ONE clear visual, no text; Max appears in every
+image as the protagonist, written just "Max", without describing his looks or clothes; never children).
 {_voice_rule()}
 Series: "{serie['label']}" — {serie['script_rules']}
 
@@ -191,7 +169,7 @@ Return JSON: {{"scenes": [{{"narration": "...", "image_prompt": "..."{_acting_fi
         if len(new) >= max(1, len(part) // 2) and new_words > part_words:
             for sc, old in zip(new, part + [{}] * len(new)):
                 sc.setdefault("image_prompt", old.get("image_prompt") or sc["narration"])
-                for k in ("emotion", "gesture", "max_action"):
+                for k in ("emotion", "gesture"):
                     if old.get(k):
                         sc.setdefault(k, old[k])
             out_scenes += new
