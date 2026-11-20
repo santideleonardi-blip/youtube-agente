@@ -33,10 +33,12 @@ def best_slots(state):
     """Elige tantos horarios como videos por día decidió el estratega, según las vistas promedio
     de los videos ya publicados en cada horario (probando uno nuevo de vez en cuando)."""
     n = max(1, min(len(CANDIDATE_HOURS_ET), int((state.get("strategy") or {}).get("daily_target", 2))))
+    from common.state import matured
+
     perf = {}
     for v in state.get("videos", []):
         h = v.get("publish_hour_et")
-        if h is None or not v.get("analyzed"):
+        if h is None or not matured(v):
             continue
         perf.setdefault(h, []).append(v.get("views", 0))
     avg = {h: sum(x) / len(x) for h, x in perf.items() if len(x) >= 2}
@@ -52,9 +54,19 @@ def best_slots(state):
         if h not in ranked:
             ranked.append(h)
     ranked = ranked[:n]
-    # exploración: cada 6 videos prueba un horario que todavía no tiene datos suficientes
+    # exploración: cada 6 videos prueba UNA vez un horario sin datos suficientes, en lugar del peor horario
+    # (antes se repetía en cada corrida mientras el total seguía en 6, 12... y terminaba sacando al mejor)
     total = len([v for v in state.get("videos", []) if v.get("youtube_id")])
     untested = [h for h in CANDIDATE_HOURS_ET if h not in avg and h not in ranked]
-    if untested and total and total % 6 == 0 and len(ranked) >= 2:
-        ranked = ranked[:-1] + [untested[0]]
+    if (untested and total and total % 6 == 0 and len(ranked) >= 2 and len(avg) >= 1
+            and state.get("slot_explored_at") != total):
+        state["slot_explored_at"] = total
+        state["slot_exploring"] = untested[0]
+    # el horario en prueba se mantiene hasta que se suban 2 videos más (así alguno sale en ese horario)
+    exp = state.get("slot_exploring")
+    if exp is not None and total < (state.get("slot_explored_at") or 0) + 2 and len(ranked) >= 2:
+        if exp not in ranked:
+            ranked = ranked[:-1] + [exp]
+    elif exp is not None:
+        state.pop("slot_exploring", None)
     return sorted(ranked), avg

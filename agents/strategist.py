@@ -15,6 +15,7 @@ import statistics
 
 import config
 from common import llm
+from common.state import matured
 from common.youtube_auth import analytics, youtube
 
 ARG = dt.timezone(dt.timedelta(hours=-3))
@@ -184,7 +185,7 @@ def decide_cadence(state, now):
 
 def decide_long_share(state, pace):
     """Qué proporción de largos producir según cuál camino a la monetización avanza más rápido."""
-    analyzed = [v for v in state["videos"] if v.get("analyzed")]
+    analyzed = [v for v in state["videos"] if matured(v)]
     longs = [v for v in analyzed if v["format"] == "long"]
     shorts = [v for v in analyzed if v["format"] == "short"]
     if len(longs) < 2 or len(shorts) < 4:
@@ -202,7 +203,7 @@ def decide_long_share(state, pace):
 
 def _focus_notes(state, metrics, pace, cadence, long_share):
     top = sorted([v for v in state["videos"] if v.get("views")], key=lambda v: v["views"], reverse=True)[:8]
-    low = sorted([v for v in state["videos"] if v.get("analyzed")], key=lambda v: v.get("views", 0))[:5]
+    low = sorted([v for v in state["videos"] if matured(v)], key=lambda v: v.get("views", 0))[:5]
     recent_titles = [v["title"] for v in state["videos"][-15:]]
     return llm.ask_json(
         f"""You are the growth strategist of an automated faceless YouTube channel.

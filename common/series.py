@@ -6,6 +6,7 @@ import os
 import random
 
 import config
+from common.state import matured
 
 MIN_AGE_HOURS = 48     # antes de esto las vistas de un video todavía no dicen nada
 MIN_VIDEOS = 3         # con menos videos por serie no se saca ninguna conclusión
@@ -16,7 +17,7 @@ def _views_by_series(state):
     out = {k: [] for k in config.SERIES}
     for v in state.get("videos", []):
         s = v.get("series")
-        if s in out and v.get("youtube_id") and v.get("analyzed"):
+        if s in out and matured(v):
             out[s].append(v.get("views", 0))
     return out
 
