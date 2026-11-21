@@ -40,7 +40,7 @@
       "uploaded_at": "2026-11-14T20:54:05.604053+00:00",
       "publish_at": "2026-11-15T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 10,
+      "views": 11,
       "likes": 1,
       "avg_view_pct": 56.5,
       "subs_gained": 0,
@@ -86,7 +86,7 @@
       "uploaded_at": "2026-11-16T02:03:34.989971+00:00",
       "publish_at": "2026-11-16T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 528,
+      "views": 530,
       "likes": 8,
       "retention_end": 0.116,
       "drops": [
@@ -107,7 +107,7 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 34.9,
+      "avg_view_pct": 35.0,
       "subs_gained": 2,
       "minutes_watched": 72
     },
@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1216,
+      "views": 1245,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -176,9 +176,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.4,
+      "avg_view_pct": 37.3,
       "subs_gained": 4,
-      "minutes_watched": 172
+      "minutes_watched": 175
     },
     {
       "job_id": "20261117_194809",
@@ -216,7 +216,7 @@
       "uploaded_at": "2026-11-17T20:04:41.603927+00:00",
       "publish_at": "2026-11-18T00:00:00+00:00",
       "publish_hour_et": 19,
-      "views": 22,
+      "views": 24,
       "likes": 3,
       "avg_view_pct": 100.6,
       "subs_gained": 0,
@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1110,
+      "views": 1115,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -286,7 +286,10 @@
           "narration": "He barely taps his alarm clock, and instantly shatters it into a million tiny plastic pieces."
         }
       ],
-      "analyzed": true
+      "analyzed": true,
+      "avg_view_pct": 37.7,
+      "subs_gained": 5,
+      "minutes_watched": 209
     },
     {
       "job_id": "20261118_215055",
@@ -441,8 +444,8 @@
       "uploaded_at": "2026-11-18T22:21:47.423960+00:00",
       "publish_at": "2026-11-19T16:00:00+00:00",
       "publish_hour_et": 11,
-      "views": 1,
-      "likes": 0
+      "views": 2,
+      "likes": 1
     },
     {
       "job_id": "20261119_001637",
@@ -490,8 +493,11 @@
       "publish_at": "2026-11-19T13:14:00+00:00",
       "publish_hour_et": 8,
       "published_manually": true,
-      "views": 19,
-      "likes": 1
+      "views": 23,
+      "likes": 1,
+      "avg_view_pct": 22.0,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261119_192817",
@@ -638,8 +644,8 @@
       "uploaded_at": "2026-11-19T20:18:32.763497+00:00",
       "publish_at": "2026-11-20T16:00:00+00:00",
       "publish_hour_et": 11,
-      "views": 1,
-      "likes": 0
+      "views": 2,
+      "likes": 1
     },
     {
       "job_id": "20261119_220654",
@@ -682,7 +688,7 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 3,
+      "views": 17,
       "likes": 0
     },
     {
@@ -723,7 +729,7 @@
       "publish_at": "2026-11-21T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡",
-      "views": 0,
+      "views": 8,
       "likes": 0,
       "comment_id": "Ugy6xT3xeWUc_eoxOC94AaABAg"
     },
@@ -764,7 +770,48 @@
       "uploaded_at": "2026-11-20T21:49:32.799347+00:00",
       "publish_at": "2026-11-21T20:00:00+00:00",
       "publish_hour_et": 15,
-      "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇"
+      "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇",
+      "views": 1,
+      "likes": 0
+    },
+    {
+      "job_id": "20261121_175730",
+      "youtube_id": "Q2pZIJmAjoA",
+      "title": "What Would Happen If You Spent 30 Days In Darkness? #Darkness #shorts",
+      "topic": "What would happen if you lived in total darkness for 30 days?",
+      "format": "short",
+      "series": "challenge",
+      "duration": 43.93,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "Stepping into total darkness instantly shatters my biological clock—and the final side effect will break my brain."
+        },
+        {
+          "start": 8.14,
+          "narration": "Day one: my body panics, flooding me with stress hormones while my heart pounds wildly in pitch black."
+        },
+        {
+          "start": 14.84,
+          "narration": "Day seven: my sleep cycle collapses, triggering horrifying visual hallucinations out of absolute nothingness."
+        },
+        {
+          "start": 22.55,
+          "narration": "Day fifteen: zero sunlight starves me of Vitamin D, causing severe muscle fatigue and weakening my bones."
+        },
+        {
+          "start": 30.37,
+          "narration": "Day thirty: my dilated pupils turn every tiny spark into an agonizing explosion of light!"
+        },
+        {
+          "start": 36.8,
+          "narration": "Blasted by brightness, I desperately crawl backward, begging to start over by stepping into total darkness."
+        }
+      ],
+      "uploaded_at": "2026-11-21T18:30:51.062568+00:00",
+      "publish_at": "2026-11-22T00:00:00+00:00",
+      "publish_hour_et": 19,
+      "first_comment": "How many days do you think you could last in total darkness before panicking? 👇"
     }
   ],
   "feedback": [
@@ -955,16 +1002,26 @@
         "Incorporate pattern interrupts (screen shake, visual punch cuts, sharp SFX) at seconds 4-6 where drop-off typically peaks."
       ],
       "reason": "Shorts are the sole engine for channel views and initial subscriber growth (top Shorts pull 500-1200 views while long-form videos remain at 1 view). Maintaining the 20% long-form target (currently 2 long out of 10 videos) requires the next upload to be a Short."
+    },
+    {
+      "date": "2026-11-21T18:03:17.820036+00:00",
+      "notes": [
+        "Deliver the core hook in the first 2 seconds with immediate kinetic visuals and direct physical consequences rather than setup or backstory.",
+        "Insert visual pattern interrupts (scene cuts, screen shakes, fast SFX) every 2-3 seconds to prevent swipe-aways and push completion rates higher.",
+        "Plant an open loop within the first 5 seconds (e.g., '...but the final side effect will completely destroy your skeleton') to drive viewers past the 50% mark.",
+        "Avoid passive phrasing or broad educational facts; frame every hypothetical around visceral, first-person body impacts."
+      ],
+      "reason": "Shorts are currently driving all subscriber growth (11 subs gained) and algorithm traction (up to 1,245 views), whereas Long videos average only 2 views. At 9 total subscribers, the strategy prioritizes Shorts to build an initial audience base before scaling Long-form content."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 8,
-      "avg_views": 364
+      "count": 9,
+      "avg_views": 330
     },
     "long": {
       "count": 2,
-      "avg_views": 1
+      "avg_views": 2
     }
   },
   "publish_slots_et": [
@@ -972,7 +1029,7 @@
     19
   ],
   "topic_insights": [
-    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, driving 500-1200+ views per video compared to single-digit or low double-digit views for gaming, diet, and abstract physics topics.",
+    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, driving 500-1200+ views and 100% of channel subscriber growth.",
     "Visceral, physical 'what would your body do' hypotheticals trigger strong algorithmic pickup, whereas pop-culture hypotheticals (GTA 6) and passive scenarios (Gravity Doubled, Blue Whale) fail to gain initial traction.",
     "Focus hooks exclusively on immediate kinetic consequences (shattering objects, launching into the atmosphere, bone-snapping impact) rather than character-driven backstory or passive educational facts."
   ],
@@ -980,10 +1037,10 @@
     "daily_target": 2,
     "long_share": 0.2,
     "focus_notes": [
-      "Expand the 'Human vs. Animal Abilities' series with highly visual topics (e.g., Electric Eel Shock, Pistol Shrimp Snap, Falcon Vision), as animal-hybrid concepts account for over 95% of total channel views and all subscriber gains.",
-      "Vary the script hook structure: instead of always opening with 'What would happen if...', start 50% of videos directly with an action beat starring Max (e.g., 'Max just tried to punch through a brick wall...') to improve 3-second retention and prevent automated/repetitive content flags.",
-      "Format all long-form videos into progressive time-lapse structures ('Day 1, Month 1, Year 1') focused on extreme human body transformations to maximize average view duration and start building long-form watch hours.",
-      "Fully pause gaming and micro-physics scenarios (e.g., GTA 6, 5-second gravity shifts), which consistently underperform with under 20 views."
+      "Scale the 'Human vs. Animal Superpowers' series (e.g., Dung Beetle Strength, Eagle Vision, Gecko Grip), as animal-hybrid concepts continue to drive over 95% of channel views and 100% of subscriber conversions.",
+      "Diversify script opening hooks to prevent YouTube repetitive content flags: alternate between direct action beats ('Max just tried to lift a 2-ton car...'), intriguing scientific facts, and classic question hooks.",
+      "Revamp long-form video strategy by committing to detailed progressive timelines ('1 Hour, 1 Day, 1 Month, 1 Year') focusing on extreme human body transformations (e.g., 'What Would Happen If You Never Stopped Growing?') to start building watch hours.",
+      "Strictly avoid gaming scenarios (GTA 6) and abstract physics anomalies (5-second gravity shifts), which consistently fail to gain algorithmic traction."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
     "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
@@ -991,23 +1048,23 @@
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 1657,
-      "total_views": 2850,
-      "video_count": 9,
+      "shorts_views_90d": 2780,
+      "total_views": 2932,
+      "video_count": 10,
       "long_minutes_28d": 0,
-      "shorts_views_28d": 1657
+      "shorts_views_28d": 2780
     },
     "pace": {
-      "views_day": 64.0,
-      "subs_day": 0.23,
+      "views_day": 107.2,
+      "subs_day": 0.42,
       "long_hours_day": 0.0,
-      "shorts_views_day": 59,
+      "shorts_views_day": 99,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-20T19:05:24.773658+00:00",
-    "experiment": "Test 'Character-Led Action Hook' vs. 'Standard Question Hook' across 6 upcoming animal-hybrid Shorts. Half will open with a standard 'What would happen if...' narration, while the other half will open with Max in an immediate crisis situation. We will measure success by an increase in Average Percentage Viewed above 50% and higher subscriber conversion per 1,000 views.",
-    "summary_es": "Los Shorts de superpoderes animales con Max son los únicos que están trayendo vistas y suscriptores reales. Esta semana vamos a enfocarnos 100% en esa temática y a cambiar la forma en que arrancan los videos para enganchar más rápido a la gente y evitar que YouTube nos considere contenido repetitivo. Además, empezaremos a subir videos largos con formato de evolución en el tiempo para empezar a sumar las horas de reproducción necesarias."
+    "last_run": "2026-11-21T17:57:30.272213+00:00",
+    "experiment": "A/B test hook formats on Shorts: compare standard question hooks ('What would happen if...') against story-driven action hooks featuring Max ('Max just tried to...') across 6 new animal-ability Shorts, aiming to increase 3-second retention past 65% and Average Percentage Viewed (APV) above 50%.",
+    "summary_es": "El canal está teniendo muy buen rendimiento en Shorts cuando combinamos a Max con superpoderes animales (camarón mantis, fuerza de chimpancé), generando casi la totalidad de las vistas y suscriptores. En los próximos días vamos a variabilizar los ganchos de inicio para evitar sanciones por contenido repetitivo y reestructurar los videos largos con líneas de tiempo escalonadas. El objetivo principal es subir la retención del público y empezar a sumar horas de reproducción reales."
   },
   "growth_history": [
     {
@@ -1072,6 +1129,15 @@
       "views_day": 64.0,
       "daily_target": 2,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-21",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 2780,
+      "views_day": 107.2,
+      "daily_target": 2,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1086,18 +1152,18 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-20",
-    "images": 12,
+    "date": "2026-11-21",
+    "images": 6,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 2
     },
     "challenge": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 23
     },
     "curiosity": {
       "count": 0,
