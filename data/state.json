@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1245,
+      "views": 1247,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -688,7 +688,7 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 17,
+      "views": 19,
       "likes": 0
     },
     {
@@ -772,7 +772,8 @@
       "publish_hour_et": 15,
       "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇",
       "views": 1,
-      "likes": 0
+      "likes": 0,
+      "comment_id": "UgzCoq3Txz9QNe3ZTwN4AaABAg"
     },
     {
       "job_id": "20261121_175730",
@@ -811,20 +812,51 @@
       "uploaded_at": "2026-11-21T18:30:51.062568+00:00",
       "publish_at": "2026-11-22T00:00:00+00:00",
       "publish_hour_et": 19,
-      "first_comment": "How many days do you think you could last in total darkness before panicking? 👇"
+      "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261121_202821",
+      "youtube_id": "GYWo-BDRS5M",
+      "title": "What Would Happen If You Had Dung Beetle Strength? #DungBeetle #shorts",
+      "topic": "What would happen if you had the strength of a dung beetle?",
+      "format": "short",
+      "series": "curiosity",
+      "duration": 36.32,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "The second I try taking a normal step, my feet blast straight through concrete like wet cardboard."
+        },
+        {
+          "start": 6.3,
+          "narration": "I try pushing myself up, but my pinky finger instantly snaps a massive oak tree in half!"
+        },
+        {
+          "start": 12.5,
+          "narration": "Dung beetles can push over eleven hundred times their weight, but here's the fatal catch..."
+        },
+        {
+          "start": 18.3,
+          "narration": "Physics demands equal recoil. Lifting a house doesn't make me heavier, so I drive myself into the ground like a nail!"
+        },
+        {
+          "start": 26.1,
+          "narration": "Plus, my human muscles would shatter my own skeleton long before throwing six double-decker buses."
+        },
+        {
+          "start": 32.64,
+          "narration": "So every time I try to walk away from this disaster..."
+        }
+      ],
+      "uploaded_at": "2026-11-21T20:37:17.494488+00:00",
+      "publish_at": "2026-11-22T16:00:00+00:00",
+      "publish_hour_et": 11,
+      "first_comment": "Would you take super strength if it meant sinking through concrete everywhere? Yes or no? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-14T20:41:04.455736+00:00",
-      "notes": [
-        "Hook the viewer within the first 2 seconds by jumping straight into the high-stakes hypothetical scenario without any channel intros or greetings.",
-        "Maintain open loops by posing micro-questions throughout the script to keep viewers waiting for the payoff before transitioning topics.",
-        "Implement visual or auditory pattern interrupts every 4-6 seconds to constantly reset viewer attention spans.",
-        "Avoid slow background setup; weave essential context into the action rather than spending the first 15 seconds explaining history."
-      ],
-      "reason": "This is the channel's first upload (0/10 initial videos), so starting with a YouTube Short helps maximize initial reach and audience discovery."
-    },
     {
       "date": "2026-11-14T20:51:28.374869+00:00",
       "notes": [
@@ -1012,12 +1044,22 @@
         "Avoid passive phrasing or broad educational facts; frame every hypothetical around visceral, first-person body impacts."
       ],
       "reason": "Shorts are currently driving all subscriber growth (11 subs gained) and algorithm traction (up to 1,245 views), whereas Long videos average only 2 views. At 9 total subscribers, the strategy prioritizes Shorts to build an initial audience base before scaling Long-form content."
+    },
+    {
+      "date": "2026-11-21T20:28:22.312374+00:00",
+      "notes": [
+        "Hook within the first 1.5 seconds by showing an immediate, explosive consequence (e.g., bone shattering, sonic boom) instead of explaining premise context.",
+        "Eliminate expository setups: start directly in the second person with action ('The moment you swing your fist...') rather than factual trivia about the animal or phenomenon.",
+        "Introduce a mid-video open loop around second 15-20 (e.g., '...but your own skeleton can't survive it') to elevate Short completion rates beyond 60%.",
+        "Deploy rapid visual and pacing pattern interrupts every 3 to 4 seconds to combat scroll-away drop-offs on YouTube Shorts."
+      ],
+      "reason": "At only 9 subscribers, long-form videos are not yet recommended by the algorithm (averaging just 2 views), whereas Shorts drive virtually all channel views and subscriber acquisition. Prioritizing Shorts maintains the target 80/20 balance while accelerating audience growth."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 9,
-      "avg_views": 330
+      "count": 10,
+      "avg_views": 298
     },
     "long": {
       "count": 2,
@@ -1025,13 +1067,13 @@
     }
   },
   "publish_slots_et": [
-    15,
-    19
+    11,
+    15
   ],
   "topic_insights": [
-    "Animal-inspired human biomechanical superpowers (Mantis Shrimp, Chimp Muscles, Flea Jump) vastly outperform all other concepts, driving 500-1200+ views and 100% of channel subscriber growth.",
-    "Visceral, physical 'what would your body do' hypotheticals trigger strong algorithmic pickup, whereas pop-culture hypotheticals (GTA 6) and passive scenarios (Gravity Doubled, Blue Whale) fail to gain initial traction.",
-    "Focus hooks exclusively on immediate kinetic consequences (shattering objects, launching into the atmosphere, bone-snapping impact) rather than character-driven backstory or passive educational facts."
+    "Biomechanical animal superpower hypotheticals ('Punch like a mantis shrimp', 'Chimp muscles', 'Jump like a flea') dominate channel performance, generating 500-1,200+ views and 100% of all subscriber gains.",
+    "Kinetic, high-impact physical transformations dramatically outperform passive survival or pop-culture scenarios (GTA 6, Gravity Doubled, Blue Whale), which failed to pass algorithmic testing thresholds.",
+    "Visceral, relatable human body modifications deliver the highest viewer curiosity; future concepts should continue exploring extreme biological adaptations applied directly to everyday human actions."
   ],
   "strategy": {
     "daily_target": 2,
@@ -1153,7 +1195,7 @@
   ],
   "cf_usage": {
     "date": "2026-11-21",
-    "images": 6,
+    "images": 12,
     "exhausted": false
   },
   "series_stats": {
@@ -1182,5 +1224,7 @@
     "challenge": "PLGRtSL3b6PZ8",
     "classic": "PLFrw1F30jgfo",
     "curiosity": "PLTvtBZK6cdQA"
-  }
+  },
+  "slot_explored_at": 12,
+  "slot_exploring": 11
 }
