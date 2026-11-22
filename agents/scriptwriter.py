@@ -8,14 +8,17 @@ class ScriptTooShort(RuntimeError):
 
 
 def _voice_rule():
-    """Con Max narrador, Max cuenta su propia historia en primera persona (es su voz y su boca la que se mueve)."""
+    """Narración en SEGUNDA persona ("you"): pone al espectador en el 'what if', como en los 3 Shorts que
+    funcionaron (Mantis 1.250, Chimpancé 1.122, Pulga 530 vistas). Con la primera persona ("I", desde el 19/11)
+    ningún Short pasó de 25 vistas, ni siquiera los de animales a las 15 ET (22/11)."""
     if config.MAX_NARRATOR:
-        return ("MAX IS THE PROTAGONIST AND THE NARRATOR. Max tells his own story in FIRST PERSON, as the host "
-                "of the channel talking to the viewer (\"I wake up and gravity has doubled. My coffee cup "
-                "slams into the table...\"). He lives the 'what if', reacts, explores, explains the science "
-                "through what happens to him and talks to the viewer directly now and then (\"and you won't "
-                "believe what happened next\"). Never write \"Max\" in the narration (he is the one talking); "
-                "he is the only recurring person.")
+        return ("NARRATE IN SECOND PERSON: put the VIEWER inside the 'what if' (\"If you had the punch of a mantis "
+                "shrimp, your first high-five would explode like a bomb. Your friend's hand? Gone.\"). The title "
+                "asks about YOU, so the narration answers about YOU. The narrator is Max, the channel host, talking "
+                "straight to the viewer; never use \"I\"/\"my\" for the scenario and never write \"Max\" in the "
+                "narration. In the IMAGES, Max is the one living the scenario (he stands in for the viewer). Where the "
+                "series rules talk about Max or \"he\", that is what the images show; the narration says \"you\" "
+                "(\"Day 1: you feel...\", \"will you make it?\").")
     return ("MAX IS THE PROTAGONIST of the channel and of this video. Tell the story through Max: he lives the "
             "\"what if\" scenario, reacts to it, explores it, explains it and tries things out "
             "(e.g. \"Max wakes up and the gravity has doubled...\"). The narrator talks about what Max sees, feels "
@@ -79,13 +82,14 @@ Rules:
 - The video answers the question "{topic['topic']}". The first sentence states the premise in a gripping way.
 - Scene 1 is the hook: a shocking or curious statement in the first sentence. No "Hey guys", no intro.
 - THE FIRST 8 SECONDS (scenes 1-2) decide if people keep watching (our data: viewers leave at seconds 6-8 when
-  the script explains numbers). Open with the most visceral PHYSICAL consequence for Max's body or the world
-  ("My first high-five shatters every bone in my friend's hand"), then escalate straight into the next
+  the script explains numbers). Open with the most visceral PHYSICAL consequence for the viewer's body or the world,
+  using the shape of our best Shorts: "If you had <power>, a single <everyday action> would <extreme result>!"
+  ("If you had the punch of a mantis shrimp, a single high-five would trigger a kinetic explosion!"), then escalate straight into the next
   consequence. NO numbers, units, speeds or statistics in the first 8 seconds; bring facts later and always as a
   consequence you can picture ("faster than a bullet", not "50 mph").
 - Keep open loops ("but that's not even the worst part..."), escalate stakes, pay off at the end.
 - Simple spoken English, short sentences, accurate science/history, light humour.
-- {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If."}
+- {"End with a line that loops back to the start so viewers rewatch." if fmt == "short" else "Every ~60 seconds add a pattern interrupt or new mini-question. End with a teaser for another What If and one short line asking viewers to subscribe so they don't miss it."}
 - {_voice_rule()}
 - Each scene needs an image prompt describing ONE clear visual (Max, objects, setting) that matches the
   narration. Max appears in EVERY image, doing or reacting to what the narration says. Do not include any

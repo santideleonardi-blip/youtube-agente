@@ -50,8 +50,8 @@ MAX_LOOK = (
     "His default expression is calm, curious and friendly; he only looks scared or shocked when the scene says so"
 )
 
-# Max narrador: Max aparece en una esquina hablando (boca sincronizada con la voz) y el guion se
-# cuenta en primera persona ("I wake up and..."). Con MAX_NARRATOR=0 se vuelve a solo imágenes
+# Max narrador: Max aparece en una esquina hablando (boca sincronizada con la voz). Desde el 22/11 el guion
+# va en segunda persona ("If you had...", como los Shorts que funcionaron); Max vive el escenario en las imágenes. Con MAX_NARRATOR=0 se vuelve a solo imágenes
 # y narrador en tercera persona, como antes del 17/11.
 MAX_NARRATOR = os.getenv("MAX_NARRATOR", "1") == "1"
 # "logo": el Max exacto del logo del canal (elegido por Santi el 18/11). "dibujo": el muñeco vectorial
