@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1122,
+      "views": 1124,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -694,7 +694,7 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 23,
+      "views": 27,
       "likes": 0,
       "avg_view_pct": 28.5,
       "subs_gained": 0,
@@ -822,7 +822,7 @@
       "publish_at": "2026-11-22T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg"
     },
@@ -865,7 +865,7 @@
       "publish_hour_et": 11,
       "first_comment": "Would you take super strength if it meant sinking through concrete everywhere? Yes or no? 👇",
       "comment_id": "UgxSn6_zQMcyGRVr1zR4AaABAg",
-      "views": 11,
+      "views": 12,
       "likes": 1
     },
     {
@@ -901,20 +901,51 @@
       "uploaded_at": "2026-11-22T18:40:06.855119+00:00",
       "publish_at": "2026-11-23T16:00:00+00:00",
       "publish_hour_et": 11,
-      "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇"
+      "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261122_204054",
+      "youtube_id": "wlqSwCG-xKc",
+      "title": "What Would Happen If You Ran Like A Cheetah? #Cheetah #shorts",
+      "topic": "What would happen if you could run as fast as a cheetah?",
+      "format": "short",
+      "series": "challenge",
+      "duration": 34.62,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If you ran like a cheetah, your first step would instantly melt your shoes and trigger a violent shockwave!"
+        },
+        {
+          "start": 6.15,
+          "narration": "Second one: intense friction turns rubber to smoke while your feet kick up absolute chaos."
+        },
+        {
+          "start": 11.64,
+          "narration": "Second two: air resistance at highway speed hits your chest like a wall of solid concrete."
+        },
+        {
+          "start": 17.6,
+          "narration": "Second three: your muscles snap under kinetic force, tearing tendons right off the bone!"
+        },
+        {
+          "start": 22.94,
+          "narration": "Worst of all, your brain cannot react fast enough, turning a tiny pebble into a lethal landmine."
+        },
+        {
+          "start": 29.03,
+          "narration": "So unless your skeleton evolves, one sprint will send you crashing right back where you started!"
+        }
+      ],
+      "uploaded_at": "2026-11-22T20:47:57.763956+00:00",
+      "publish_at": "2026-11-23T00:00:00+00:00",
+      "publish_hour_et": 19,
+      "first_comment": "Would you take cheetah speed even if your shoes melted every time? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-15T01:55:31.563625+00:00",
-      "notes": [
-        "Hook the audience visually and audibly in the first 2 seconds with the immediate consequence of the premise.",
-        "Eliminate branded intros, channel hellos, or background setup—jump straight into the hypothetical action.",
-        "Create open loops every 15-20 seconds (e.g., 'But the real chaos begins at minute three...') to maintain curiosity.",
-        "Incorporate rapid animation pattern interrupts every 2-4 seconds to reset viewer attention span."
-      ],
-      "reason": "Only 1 Short video has been uploaded so far, leaving long-form data at zero. Releasing a long video now allows us to test both formats early in the channel's testing phase while building toward the target 33% long content ratio."
-    },
     {
       "date": "2026-11-15T12:48:29.144182+00:00",
       "notes": [
@@ -1103,12 +1134,22 @@
         "Deliver the core answer directly in the middle of the video rather than holding back basic facts."
       ],
       "reason": "Shorts are currently driving 100% of audience growth and view volume (avg 273 views vs. 2 for long-form). For a small 9-subscriber channel, prioritizing Shorts builds the core subscriber base before scaling long-form production."
+    },
+    {
+      "date": "2026-11-22T20:40:54.786751+00:00",
+      "notes": [
+        "Deliver the core high-impact visual hook within the first 2 seconds (e.g., show the immediate physical impact of the superpower/mutation).",
+        "Maintain high pacing using pattern interrupts every 3-5 seconds (sound FX, visual scale changes, screen shakes) to prevent drop-off in Shorts.",
+        "Open an immediate loop in the script's first line (e.g., 'If your punch accelerated like a mantis shrimp, your fist would vaporize water—and break your own arm.') to drive completion rate.",
+        "Avoid slow setup or backstory introductions; jump straight into the physical consequence of the hypothetical scenario."
+      ],
+      "reason": "Shorts are currently the sole engine for channel growth and subscriber conversion (1,000+ views vs 2 views on Longs). For a small channel with 9 subscribers, double down on high-performing Short topics (biomechanical superpowers) to build audience momentum before scaling long-form production."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 11,
-      "avg_views": 273
+      "count": 12,
+      "avg_views": 251
     },
     "long": {
       "count": 2,
@@ -1116,14 +1157,13 @@
     }
   },
   "publish_slots_et": [
-    11,
-    15
+    15,
+    19
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Punch like a mantis shrimp', 'Chimp muscles', 'Jump like a flea') dominate channel performance, generating 500-1,200+ views and 100% of all subscriber gains.",
-    "Kinetic, high-impact physical transformations dramatically outperform passive survival or pop-culture scenarios (GTA 6, Blue Whale), which failed to pass algorithmic testing thresholds.",
-    "Visceral, relatable human body modifications deliver the highest viewer curiosity; future concepts should continue exploring extreme biological adaptations applied directly to everyday human actions.",
-    "Niche health/dietary extreme hypotheticals ('Only Ate Sugar') yield high retention (88.6%), showing potential if paired with higher-impact titles and hooks."
+    "Biomechanical animal superpower hypotheticals ('Punch like a mantis shrimp', 'Chimp muscles') dominate channel performance, driving 1,100–1,250+ views and 100% of channel subscriber gains.",
+    "Kinetic, high-impact physical human transformations dramatically outperform passive survival scenarios or pop-culture hooks (GTA 6, Blue Whale), which fail to gain algorithmic traction.",
+    "Extreme dietary or body-challenge hypotheticals ('Only Ate Sugar') generate high retention (88.6%), but require stronger visceral titles/hooks to match the view volume of animal superpower videos."
   ],
   "strategy": {
     "daily_target": 2,
@@ -1254,13 +1294,13 @@
   ],
   "cf_usage": {
     "date": "2026-11-22",
-    "images": 5,
+    "images": 11,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
       "count": 2,
-      "avg_views": 12
+      "avg_views": 14
     },
     "challenge": {
       "count": 1,
@@ -1284,6 +1324,5 @@
     "classic": "PLFrw1F30jgfo",
     "curiosity": "PLTvtBZK6cdQA"
   },
-  "slot_explored_at": 12,
-  "slot_exploring": 11
+  "slot_explored_at": 12
 }
