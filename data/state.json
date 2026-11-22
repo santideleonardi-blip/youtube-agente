@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1247,
+      "views": 1250,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -176,9 +176,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.3,
-      "subs_gained": 4,
-      "minutes_watched": 175
+      "avg_view_pct": 37.1,
+      "subs_gained": 5,
+      "minutes_watched": 182
     },
     {
       "job_id": "20261117_194809",
@@ -218,7 +218,7 @@
       "publish_hour_et": 19,
       "views": 24,
       "likes": 3,
-      "avg_view_pct": 100.6,
+      "avg_view_pct": 88.6,
       "subs_gained": 0,
       "minutes_watched": 3
     },
@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1115,
+      "views": 1122,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -287,9 +287,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.7,
+      "avg_view_pct": 37.8,
       "subs_gained": 5,
-      "minutes_watched": 209
+      "minutes_watched": 212
     },
     {
       "job_id": "20261118_215055",
@@ -445,7 +445,10 @@
       "publish_at": "2026-11-19T16:00:00+00:00",
       "publish_hour_et": 11,
       "views": 2,
-      "likes": 1
+      "likes": 1,
+      "avg_view_pct": 0.3,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261119_001637",
@@ -495,9 +498,9 @@
       "published_manually": true,
       "views": 23,
       "likes": 1,
-      "avg_view_pct": 22.0,
+      "avg_view_pct": 24.9,
       "subs_gained": 0,
-      "minutes_watched": 0
+      "minutes_watched": 1
     },
     {
       "job_id": "20261119_192817",
@@ -645,7 +648,10 @@
       "publish_at": "2026-11-20T16:00:00+00:00",
       "publish_hour_et": 11,
       "views": 2,
-      "likes": 1
+      "likes": 1,
+      "avg_view_pct": 3.9,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261119_220654",
@@ -688,8 +694,11 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 19,
-      "likes": 0
+      "views": 23,
+      "likes": 0,
+      "avg_view_pct": 28.5,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261120_190524",
@@ -729,7 +738,7 @@
       "publish_at": "2026-11-21T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡",
-      "views": 8,
+      "views": 9,
       "likes": 0,
       "comment_id": "Ugy6xT3xeWUc_eoxOC94AaABAg"
     },
@@ -813,7 +822,7 @@
       "publish_at": "2026-11-22T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
-      "views": 0,
+      "views": 2,
       "likes": 0,
       "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg"
     },
@@ -854,20 +863,48 @@
       "uploaded_at": "2026-11-21T20:37:17.494488+00:00",
       "publish_at": "2026-11-22T16:00:00+00:00",
       "publish_hour_et": 11,
-      "first_comment": "Would you take super strength if it meant sinking through concrete everywhere? Yes or no? 👇"
+      "first_comment": "Would you take super strength if it meant sinking through concrete everywhere? Yes or no? 👇",
+      "comment_id": "UgxSn6_zQMcyGRVr1zR4AaABAg",
+      "views": 11,
+      "likes": 1
+    },
+    {
+      "job_id": "20261122_182829",
+      "youtube_id": "MqbI4_FwvJM",
+      "title": "What Would Happen If You Had Eagle Vision? #EagleVision #shorts",
+      "topic": "What would happen if you had the vision of an eagle?",
+      "format": "short",
+      "series": "adventure",
+      "duration": 31.27,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "I step onto a skyscraper roof and my eyes violently zoom in on an ant on the sidewalk!"
+        },
+        {
+          "start": 6.09,
+          "narration": "My vision snaps like a high-powered telescope, revealing glowing patterns of hidden ultraviolet light!"
+        },
+        {
+          "start": 12.82,
+          "narration": "Eagle vision gives me ultimate visual acuity, but my brain instantly starts to overload."
+        },
+        {
+          "start": 18.82,
+          "narration": "Normal sunlight hits like a blinding laser beam, scorching my eyes in pure agony!"
+        },
+        {
+          "start": 24.42,
+          "narration": "Desperate for shade, I cover my eyes and retreat inside... until I step onto a skyscraper roof!"
+        }
+      ],
+      "uploaded_at": "2026-11-22T18:40:06.855119+00:00",
+      "publish_at": "2026-11-23T16:00:00+00:00",
+      "publish_hour_et": 11,
+      "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-14T20:51:28.374869+00:00",
-      "notes": [
-        "Hook the viewer in the first 2 seconds with a shocking visual or high-stakes question before any intro graphics.",
-        "Open narrative loops early and delay the resolution to maximize average view duration.",
-        "Use frequent pattern interrupts (sound effects, rapid visual scale shifts, or camera angle cuts) every 5-7 seconds to reset viewer attention.",
-        "Eliminate slow contextual intros and start directly in the middle of the hypothetical scenario."
-      ],
-      "reason": "Since this is a brand new channel with zero videos, we must prioritize YouTube Shorts to build initial algorithmic reach and subscriber base quickly, following the rule that new channels (<10 videos) should focus mostly on shorts."
-    },
     {
       "date": "2026-11-15T01:55:31.563625+00:00",
       "notes": [
@@ -1055,12 +1092,23 @@
         "Deploy rapid visual and pacing pattern interrupts every 3 to 4 seconds to combat scroll-away drop-offs on YouTube Shorts."
       ],
       "reason": "At only 9 subscribers, long-form videos are not yet recommended by the algorithm (averaging just 2 views), whereas Shorts drive virtually all channel views and subscriber acquisition. Prioritizing Shorts maintains the target 80/20 balance while accelerating audience growth."
+    },
+    {
+      "date": "2026-11-22T18:31:50.684286+00:00",
+      "notes": [
+        "Hook viewers within the first 2 seconds with an immediate visual impact and high-stakes question; skip any intro setup.",
+        "Use pattern interrupts (sound effects, visual zooms, angle cuts) every 3-5 seconds to maintain momentum.",
+        "Create open loops early in the script (e.g., 'but the final side effect is even worse...') to push watch time past the 50% mark.",
+        "Avoid passive survival scenarios; frame every hypothetical as an active, kinetic physical transformation.",
+        "Deliver the core answer directly in the middle of the video rather than holding back basic facts."
+      ],
+      "reason": "Shorts are currently driving 100% of audience growth and view volume (avg 273 views vs. 2 for long-form). For a small 9-subscriber channel, prioritizing Shorts builds the core subscriber base before scaling long-form production."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 10,
-      "avg_views": 298
+      "count": 11,
+      "avg_views": 273
     },
     "long": {
       "count": 2,
@@ -1073,41 +1121,42 @@
   ],
   "topic_insights": [
     "Biomechanical animal superpower hypotheticals ('Punch like a mantis shrimp', 'Chimp muscles', 'Jump like a flea') dominate channel performance, generating 500-1,200+ views and 100% of all subscriber gains.",
-    "Kinetic, high-impact physical transformations dramatically outperform passive survival or pop-culture scenarios (GTA 6, Gravity Doubled, Blue Whale), which failed to pass algorithmic testing thresholds.",
-    "Visceral, relatable human body modifications deliver the highest viewer curiosity; future concepts should continue exploring extreme biological adaptations applied directly to everyday human actions."
+    "Kinetic, high-impact physical transformations dramatically outperform passive survival or pop-culture scenarios (GTA 6, Blue Whale), which failed to pass algorithmic testing thresholds.",
+    "Visceral, relatable human body modifications deliver the highest viewer curiosity; future concepts should continue exploring extreme biological adaptations applied directly to everyday human actions.",
+    "Niche health/dietary extreme hypotheticals ('Only Ate Sugar') yield high retention (88.6%), showing potential if paired with higher-impact titles and hooks."
   ],
   "strategy": {
     "daily_target": 2,
     "long_share": 0.2,
     "focus_notes": [
-      "Scale the 'Human vs. Animal Superpowers' series (e.g., Dung Beetle Strength, Eagle Vision, Gecko Grip), as animal-hybrid concepts continue to drive over 95% of channel views and 100% of subscriber conversions.",
-      "Diversify script opening hooks to prevent YouTube repetitive content flags: alternate between direct action beats ('Max just tried to lift a 2-ton car...'), intriguing scientific facts, and classic question hooks.",
-      "Revamp long-form video strategy by committing to detailed progressive timelines ('1 Hour, 1 Day, 1 Month, 1 Year') focusing on extreme human body transformations (e.g., 'What Would Happen If You Never Stopped Growing?') to start building watch hours.",
-      "Strictly avoid gaming scenarios (GTA 6) and abstract physics anomalies (5-second gravity shifts), which consistently fail to gain algorithmic traction."
+      "Capitalize on the proven 'Human + Animal Abilities' series (e.g., Eagle Vision, Cheetah Speed, Gecko Grip), as superpower comparison concepts drive virtually all views and subscriber conversions.",
+      "Execute the long-form strategy using 8-10 minute progressive timeline structures ('1 Hour, 1 Day, 1 Month, 1 Year') on extreme human body scenarios (e.g., 'What Would Happen If You Stopped Eating Food?') to start earning watch hours.",
+      "Inject distinct visual identity and story structures into each episode featuring Max to avoid YouTube repetitive/mass-produced content flags and ensure monetization approval.",
+      "Completely phase out gaming hypotheticals (GTA 6) and abstract environmental physics shifts, as data confirms they consistently cap below 25 views."
     ],
     "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
-    "cadence_reason": "se mantiene en 2/día (la próxima revisión es a los 7 días del último cambio)",
+    "cadence_reason": "se mantiene en 2/día: las vistas aguantan, pero el cupo gratis de Gemini o de imágenes se agotó en días recientes; primero hay que tener margen",
     "long_share_reason": "canal chico (9 suscriptores): 1 de cada 5 videos es largo; los Shorts traen los primeros suscriptores y los largos casi no se recomiendan todavía",
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 2780,
-      "total_views": 2932,
-      "video_count": 10,
-      "long_minutes_28d": 0,
-      "shorts_views_28d": 2780
+      "shorts_views_90d": 2866,
+      "total_views": 2995,
+      "video_count": 13,
+      "long_minutes_28d": 0.0,
+      "shorts_views_28d": 2866
     },
     "pace": {
-      "views_day": 107.2,
-      "subs_day": 0.42,
+      "views_day": 110.5,
+      "subs_day": 0.46,
       "long_hours_day": 0.0,
-      "shorts_views_day": 99,
+      "shorts_views_day": 102,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-21T17:57:30.272213+00:00",
-    "experiment": "A/B test hook formats on Shorts: compare standard question hooks ('What would happen if...') against story-driven action hooks featuring Max ('Max just tried to...') across 6 new animal-ability Shorts, aiming to increase 3-second retention past 65% and Average Percentage Viewed (APV) above 50%.",
-    "summary_es": "El canal está teniendo muy buen rendimiento en Shorts cuando combinamos a Max con superpoderes animales (camarón mantis, fuerza de chimpancé), generando casi la totalidad de las vistas y suscriptores. En los próximos días vamos a variabilizar los ganchos de inicio para evitar sanciones por contenido repetitivo y reestructurar los videos largos con líneas de tiempo escalonadas. El objetivo principal es subir la retención del público y empezar a sumar horas de reproducción reales."
+    "last_run": "2026-11-22T18:28:29.860480+00:00",
+    "experiment": "Test opening Shorts with a 2-second high-stakes action scene featuring Max ('Max just shattered a brick wall with his head...') versus traditional question hooks on 6 upcoming animal-ability Shorts, aiming to boost Average Percentage Viewed from ~37% to above 50%.",
+    "summary_es": "El canal viene funcionando bien en Shorts gracias a los videos de superpoderes animales, pero todavía no tenemos horas acumuladas en videos largos. Esta semana lanzaremos videos largos estructurados en líneas de tiempo sobre transformaciones del cuerpo humano para empezar a sumar horas de reproducción. También vamos a ajustar los primeros dos segundos de los Shorts para aumentar la retención de audiencia."
   },
   "growth_history": [
     {
@@ -1181,6 +1230,15 @@
       "views_day": 107.2,
       "daily_target": 2,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-22",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 2866,
+      "views_day": 110.5,
+      "daily_target": 2,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1195,14 +1253,14 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-21",
-    "images": 12,
+    "date": "2026-11-22",
+    "images": 5,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
-      "count": 1,
-      "avg_views": 2
+      "count": 2,
+      "avg_views": 12
     },
     "challenge": {
       "count": 1,
@@ -1213,8 +1271,8 @@
       "avg_views": 0
     },
     "classic": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 2
     }
   },
   "failures": [
