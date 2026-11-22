@@ -74,6 +74,18 @@ def _estimate_words(text, dur, lead=0.05):
     return out
 
 
+def _kokoro_voice(k, spec):
+    """'am_puck' -> nombre tal cual; 'am_puck:0.6,am_michael:0.4' -> mezcla de estilos (pesos normalizados)."""
+    if ":" not in spec and "," not in spec:
+        return spec.strip()
+    parts = []
+    for item in spec.split(","):
+        name, _, w = item.strip().partition(":")
+        parts.append((name.strip(), float(w) if w else 1.0))
+    total = sum(w for _, w in parts) or 1.0
+    return sum(k.get_voice_style(n) * (w / total) for n, w in parts)
+
+
 def _tts_kokoro(text, mp3_path):
     """Voz local con Kokoro (gratis, sin internet, no la bloquea nadie)."""
     global _kokoro
@@ -83,7 +95,7 @@ def _tts_kokoro(text, mp3_path):
     if _kokoro is None:
         _kokoro = Kokoro(os.path.join(config.KOKORO_DIR, "kokoro-v1.0.onnx"),
                          os.path.join(config.KOKORO_DIR, "voices-v1.0.bin"))
-    samples, sr = _kokoro.create(text, voice=config.KOKORO_VOICE, speed=config.KOKORO_SPEED, lang="en-us")
+    samples, sr = _kokoro.create(text, voice=_kokoro_voice(_kokoro, config.KOKORO_VOICE), speed=config.KOKORO_SPEED, lang="en-us")
     wav = mp3_path[:-4] + ".wav"
     sf.write(wav, samples, sr)
     _run(["ffmpeg", "-y", "-i", wav, "-c:a", "libmp3lame", "-b:a", "192k", mp3_path])

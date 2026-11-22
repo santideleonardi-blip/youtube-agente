@@ -27,8 +27,10 @@ GEMINI_FALLBACK_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-fl
 TTS_ENGINE = os.getenv("TTS_ENGINE", "kokoro")
 MODELS_DIR = os.getenv("MODELS_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "models"))
 KOKORO_DIR = os.getenv("KOKORO_DIR", MODELS_DIR)
-KOKORO_VOICE = os.getenv("KOKORO_VOICE", "am_michael")
-KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.08"))
+# Voz de Max: una voz ("am_puck") o una mezcla "voz:peso,voz:peso" (más natural y más joven que una sola).
+# Elegidas por Santi (22/11): puck+michael (por defecto) o puck+fenrir (KOKORO_VOICE=am_puck:0.5,am_fenrir:0.5).
+KOKORO_VOICE = os.getenv("KOKORO_VOICE") or "am_puck:0.6,am_michael:0.4"
+KOKORO_SPEED = float(os.getenv("KOKORO_SPEED") or "1.1")
 TTS_VOICE = os.getenv("TTS_VOICE", "en-US-AndrewNeural")
 TTS_RATE = os.getenv("TTS_RATE", "+8%")
 

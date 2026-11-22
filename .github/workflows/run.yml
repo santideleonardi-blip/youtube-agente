@@ -82,6 +82,8 @@ jobs:
           FORCE_FORMAT: ${{ inputs.format }}
           RHUBARB_BIN: models/rhubarb/rhubarb
           MAX_NARRATOR: ${{ vars.MAX_NARRATOR || '1' }}
+          KOKORO_VOICE: ${{ vars.KOKORO_VOICE }}
+          KOKORO_SPEED: ${{ vars.KOKORO_SPEED }}
         timeout-minutes: 80
         run: python -u main.py
 
