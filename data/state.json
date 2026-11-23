@@ -42,7 +42,7 @@
       "publish_hour_et": 19,
       "views": 11,
       "likes": 1,
-      "avg_view_pct": 56.5,
+      "avg_view_pct": 45.2,
       "subs_gained": 0,
       "minutes_watched": 2
     },
@@ -109,7 +109,7 @@
       "analyzed": true,
       "avg_view_pct": 35.0,
       "subs_gained": 2,
-      "minutes_watched": 72
+      "minutes_watched": 73
     },
     {
       "job_id": "20261116_205804",
@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1250,
+      "views": 1247,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -176,9 +176,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.1,
+      "avg_view_pct": 36.5,
       "subs_gained": 5,
-      "minutes_watched": 182
+      "minutes_watched": 186
     },
     {
       "job_id": "20261117_194809",
@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1124,
+      "views": 1130,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -287,9 +287,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.8,
+      "avg_view_pct": 37.7,
       "subs_gained": 5,
-      "minutes_watched": 212
+      "minutes_watched": 213
     },
     {
       "job_id": "20261118_215055",
@@ -446,7 +446,7 @@
       "publish_hour_et": 11,
       "views": 2,
       "likes": 1,
-      "avg_view_pct": 0.3,
+      "avg_view_pct": 3.0,
       "subs_gained": 0,
       "minutes_watched": 0
     },
@@ -496,11 +496,11 @@
       "publish_at": "2026-11-19T13:14:00+00:00",
       "publish_hour_et": 8,
       "published_manually": true,
-      "views": 23,
+      "views": 24,
       "likes": 1,
-      "avg_view_pct": 24.9,
+      "avg_view_pct": 63.4,
       "subs_gained": 0,
-      "minutes_watched": 1
+      "minutes_watched": 4
     },
     {
       "job_id": "20261119_192817",
@@ -649,7 +649,7 @@
       "publish_hour_et": 11,
       "views": 2,
       "likes": 1,
-      "avg_view_pct": 3.9,
+      "avg_view_pct": 2.9,
       "subs_gained": 0,
       "minutes_watched": 0
     },
@@ -694,11 +694,30 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 27,
+      "views": 31,
       "likes": 0,
-      "avg_view_pct": 28.5,
+      "avg_view_pct": 11.0,
       "subs_gained": 0,
-      "minutes_watched": 0
+      "minutes_watched": 1,
+      "retention_end": 0.091,
+      "drops": [
+        {
+          "second": 5.8,
+          "drop_pct": 18.2,
+          "narration": "What would happen if I got swallowed alive by a blue whale? A cavernous, pitch-black mouth slams shut around me!"
+        },
+        {
+          "second": 4.8,
+          "drop_pct": 9.1,
+          "narration": "What would happen if I got swallowed alive by a blue whale? A cavernous, pitch-black mouth slams shut around me!"
+        },
+        {
+          "second": 2.6,
+          "drop_pct": 9.1,
+          "narration": "What would happen if I got swallowed alive by a blue whale? A cavernous, pitch-black mouth slams shut around me!"
+        }
+      ],
+      "analyzed": true
     },
     {
       "job_id": "20261120_190524",
@@ -738,9 +757,12 @@
       "publish_at": "2026-11-21T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "Would you trade your phone charger to shoot 860-volt electric shocks from your hands? Yes or no? ⚡",
-      "views": 9,
+      "views": 10,
       "likes": 0,
-      "comment_id": "Ugy6xT3xeWUc_eoxOC94AaABAg"
+      "comment_id": "Ugy6xT3xeWUc_eoxOC94AaABAg",
+      "avg_view_pct": 65.1,
+      "subs_gained": 0,
+      "minutes_watched": 1
     },
     {
       "job_id": "20261120_214640",
@@ -780,9 +802,12 @@
       "publish_at": "2026-11-21T20:00:00+00:00",
       "publish_hour_et": 15,
       "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇",
-      "views": 1,
+      "views": 4,
       "likes": 0,
-      "comment_id": "UgzCoq3Txz9QNe3ZTwN4AaABAg"
+      "comment_id": "UgzCoq3Txz9QNe3ZTwN4AaABAg",
+      "avg_view_pct": 25.3,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261121_175730",
@@ -824,7 +849,10 @@
       "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
       "views": 3,
       "likes": 0,
-      "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg"
+      "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg",
+      "avg_view_pct": 13.9,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261121_202821",
@@ -865,8 +893,11 @@
       "publish_hour_et": 11,
       "first_comment": "Would you take super strength if it meant sinking through concrete everywhere? Yes or no? 👇",
       "comment_id": "UgxSn6_zQMcyGRVr1zR4AaABAg",
-      "views": 12,
-      "likes": 1
+      "views": 13,
+      "likes": 1,
+      "avg_view_pct": 104.6,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261122_182829",
@@ -903,7 +934,8 @@
       "publish_hour_et": 11,
       "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇",
       "views": 0,
-      "likes": 0
+      "likes": 0,
+      "comment_id": "UgyN7CGnbcNjfJqPq894AaABAg"
     },
     {
       "job_id": "20261122_204054",
@@ -943,20 +975,51 @@
       "publish_at": "2026-11-23T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "Would you take cheetah speed even if your shoes melted every time? 👇",
-      "comment_id": "Ugw6bIuuEdnA6oaMEZp4AaABAg"
+      "comment_id": "Ugw6bIuuEdnA6oaMEZp4AaABAg",
+      "views": 14,
+      "likes": 0
+    },
+    {
+      "job_id": "20261123_223850",
+      "youtube_id": "nwpf0pj1MN4",
+      "title": "What Would Happen If You Had Gecko Grip? #Gecko #shorts",
+      "topic": "What would happen if you had the grip of a gecko?",
+      "format": "short",
+      "series": "curiosity",
+      "duration": 32.85,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If you had the grip of a gecko, a simple high-five would instantly weld your palms together!"
+        },
+        {
+          "start": 5.41,
+          "narration": "You could casually scale a smooth glass skyscraper using sheer microscopic friction."
+        },
+        {
+          "start": 10.83,
+          "narration": "Millions of tiny toe bristles trigger van der Waals forces, creating instant atomic adhesion."
+        },
+        {
+          "start": 17.43,
+          "narration": "Sounds cool, until you realize you can never turn it off in daily life."
+        },
+        {
+          "start": 21.83,
+          "narration": "Your phone sticks to your face, door handles rip off, and pizza stays glued to your fingers!"
+        },
+        {
+          "start": 27.18,
+          "narration": "You must peel your fingers at precise angles to let go, unless you attempt a high-five!"
+        }
+      ],
+      "uploaded_at": "2026-11-23T22:57:28.285520+00:00",
+      "publish_at": "2026-11-24T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "Would you trade normal hands for gecko grip even if you got stuck to everything? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-15T12:48:29.144182+00:00",
-      "notes": [
-        "Hook viewers within the first 2 seconds: start directly in media res with the catastrophic consequence rather than preamble or channel intros.",
-        "Plant open loops early: tease a bizarre or deadly secondary effect (e.g., 'and that is before the atmosphere catches fire') to maintain watch time through the middle.",
-        "Incorporate audio and visual pattern interrupts every 4 to 6 seconds to prevent retention drop-offs typical in animated explanatory content.",
-        "Ground abstract physics in relatable human stakes: explain what happens to a person sitting on their couch before zooming out to the planetary scale."
-      ],
-      "reason": "The growth target is a 33% long-form ratio (1 in 3). Currently, the channel has published 1 long and 1 short video (50% long). Producing a short will balance the distribution to exactly 1 long out of 3 total videos."
-    },
     {
       "date": "2026-11-15T17:41:47.979897+00:00",
       "notes": [
@@ -1145,12 +1208,22 @@
         "Avoid slow setup or backstory introductions; jump straight into the physical consequence of the hypothetical scenario."
       ],
       "reason": "Shorts are currently the sole engine for channel growth and subscriber conversion (1,000+ views vs 2 views on Longs). For a small channel with 9 subscribers, double down on high-performing Short topics (biomechanical superpowers) to build audience momentum before scaling long-form production."
+    },
+    {
+      "date": "2026-11-23T22:41:38.049909+00:00",
+      "notes": [
+        "Cut redundant verbal intros: Do not re-read the video title in the first 5 seconds. On the Blue Whale short, viewers dropped 36.4% in the first 6 seconds due to repeating the hook question.",
+        "Hook immediately within 0-2 seconds with a visual action or visceral sound effect instead of setup narrative.",
+        "Introduce a pattern interrupt or open loop around second 4-5 to arrest retention decay (18.2% drop occurred at second 5.8).",
+        "Double down on human body animal transformation concepts, which show the strongest replay value (e.g., Dung Beetle Strength achieved 104.6% retention)."
+      ],
+      "reason": "Shorts are driving 100% of subscriber gains and algorithmic reach (e.g., 'Chimp Muscles' at 1,130 views), whereas long-form videos currently average only 2 views and 3% retention. Prioritizing Shorts establishes the subscriber seed audience needed to validate long-form content later."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 12,
-      "avg_views": 251
+      "count": 13,
+      "avg_views": 234
     },
     "long": {
       "count": 2,
@@ -1158,46 +1231,45 @@
     }
   },
   "publish_slots_et": [
-    15,
-    19
+    15
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Punch like a mantis shrimp', 'Chimp muscles') dominate channel performance, driving 1,100–1,250+ views and 100% of channel subscriber gains.",
-    "Kinetic, high-impact physical human transformations dramatically outperform passive survival scenarios or pop-culture hooks (GTA 6, Blue Whale), which fail to gain algorithmic traction.",
-    "Extreme dietary or body-challenge hypotheticals ('Only Ate Sugar') generate high retention (88.6%), but require stronger visceral titles/hooks to match the view volume of animal superpower videos."
+    "Biomechanical animal superpower hypotheticals ('Chimp muscles', 'Dung beetle strength') remain the primary driver of channel growth and top retention, reaching up to 104.6% average view percentage.",
+    "Kinetic, high-impact physical transformations dramatically outperform passive survival scenarios or pop-culture hypotheticals ('GTA 6', 'Blue Whale'), which fail to gain algorithmic traction.",
+    "Extreme body-challenge hypotheticals ('Only Ate Sugar', '30 Days In Darkness') retain dedicated viewers (up to 88.6% retention) but require more aggressive, high-stakes visual hooks to match animal strength view counts."
   ],
   "strategy": {
-    "daily_target": 2,
+    "daily_target": 1,
     "long_share": 0.2,
     "focus_notes": [
-      "Capitalize on the proven 'Human + Animal Abilities' series (e.g., Eagle Vision, Cheetah Speed, Gecko Grip), as superpower comparison concepts drive virtually all views and subscriber conversions.",
-      "Execute the long-form strategy using 8-10 minute progressive timeline structures ('1 Hour, 1 Day, 1 Month, 1 Year') on extreme human body scenarios (e.g., 'What Would Happen If You Stopped Eating Food?') to start earning watch hours.",
-      "Inject distinct visual identity and story structures into each episode featuring Max to avoid YouTube repetitive/mass-produced content flags and ensure monetization approval.",
-      "Completely phase out gaming hypotheticals (GTA 6) and abstract environmental physics shifts, as data confirms they consistently cap below 25 views."
+      "Double down on the high-performing 'Human + Animal Abilities' series (e.g., Gecko Grip, Chameleon Camouflage, Axolotl Regeneration) for Shorts, as extreme body modifications drive nearly 100% of subscriber conversions and views.",
+      "Launch the first 8-10 minute long-form video using a progressive timeline structure ('24 Hours, 1 Week, 1 Month, 1 Year') on an extreme human body topic like 'What Would Happen If You Stopped Sleeping?' to start building watch hours.",
+      "Actively feature Max with distinct narrative situations and unique scientific explanations in every episode to vary script pacing and protect the channel from YouTube mass-produced/repetitive content flags.",
+      "Strictly avoid gaming topics (GTA 6) and obscure animal traits (Pistol Shrimp, Electric Eel), keeping topics focused on relatable human superpowers and extreme survival scenarios."
     ],
-    "cadence_changed_at": "2026-11-15T01:51:06.925591+00:00",
-    "cadence_reason": "se mantiene en 2/día: las vistas aguantan, pero el cupo gratis de Gemini o de imágenes se agotó en días recientes; primero hay que tener margen",
+    "cadence_changed_at": "2026-11-23T22:38:50.354424+00:00",
+    "cadence_reason": "baja a 1/día: las vistas por video cayeron fuerte (23 vs 270); conviene menos volumen y más calidad",
     "long_share_reason": "canal chico (9 suscriptores): 1 de cada 5 videos es largo; los Shorts traen los primeros suscriptores y los largos casi no se recomiendan todavía",
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 2866,
-      "total_views": 2995,
-      "video_count": 13,
+      "shorts_views_90d": 2993,
+      "total_views": 3006,
+      "video_count": 15,
       "long_minutes_28d": 0.0,
-      "shorts_views_28d": 2866
+      "shorts_views_28d": 2993
     },
     "pace": {
-      "views_day": 110.5,
-      "subs_day": 0.46,
+      "views_day": 111.2,
+      "subs_day": 0.48,
       "long_hours_day": 0.0,
-      "shorts_views_day": 102,
+      "shorts_views_day": 107,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-22T18:28:29.860480+00:00",
-    "experiment": "Test opening Shorts with a 2-second high-stakes action scene featuring Max ('Max just shattered a brick wall with his head...') versus traditional question hooks on 6 upcoming animal-ability Shorts, aiming to boost Average Percentage Viewed from ~37% to above 50%.",
-    "summary_es": "El canal viene funcionando bien en Shorts gracias a los videos de superpoderes animales, pero todavía no tenemos horas acumuladas en videos largos. Esta semana lanzaremos videos largos estructurados en líneas de tiempo sobre transformaciones del cuerpo humano para empezar a sumar horas de reproducción. También vamos a ajustar los primeros dos segundos de los Shorts para aumentar la retención de audiencia."
+    "last_run": "2026-11-23T22:38:50.354424+00:00",
+    "experiment": "Test a scenario-first narrative hook ('Max tried scaling a glass skyscraper using Gecko hands...') against the standard title question hook ('What would happen if you had Gecko hands?') across 5 Shorts to see if 100% retention at 5 seconds improves average view percentage above 45%.",
+    "summary_es": "El canal viene sumando vistas y suscriptores gracias a los Shorts de superpoderes de animales aplicados a humanos. Esta semana lanzamos el primer video largo con una línea de tiempo progresiva sobre el cuerpo humano para empezar a acumular horas de reproducción. Además, vamos a probar nuevos inicios en los videos para enganchar más rápido a la gente sin caer en contenido repetitivo."
   },
   "growth_history": [
     {
@@ -1280,6 +1352,15 @@
       "views_day": 110.5,
       "daily_target": 2,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-23",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 2993,
+      "views_day": 111.2,
+      "daily_target": 1,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1294,26 +1375,26 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-22",
-    "images": 11,
+    "date": "2026-11-23",
+    "images": 6,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
       "count": 2,
-      "avg_views": 14
+      "avg_views": 16
     },
     "challenge": {
       "count": 1,
-      "avg_views": 23
+      "avg_views": 24
     },
     "curiosity": {
-      "count": 0,
-      "avg_views": 0
+      "count": 1,
+      "avg_views": 4
     },
     "classic": {
-      "count": 1,
-      "avg_views": 2
+      "count": 2,
+      "avg_views": 6
     }
   },
   "failures": [
