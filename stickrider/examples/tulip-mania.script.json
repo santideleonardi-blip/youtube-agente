@@ -1,0 +1,40 @@
+{
+ "story_key": "tulip-mania-1637",
+ "title": "The Flower That Cost More Than a House",
+ "description": "In 1637, Dutch traders paid fortunes for tulip bulbs they had never seen bloom. Then, in a single week, the market vanished. Sources: https://www.britannica.com/event/tulipmania https://www.smithsonianmag.com/history/there-never-was-real-tulip-fever-180964915/",
+ "tags": ["tulip mania", "history", "true story", "economics", "bubble", "netherlands", "1637", "stickman"],
+ "mood": "playful",
+ "cast": [
+  {"id": "pieter", "look": "townsman", "v": 2},
+  {"id": "merchant", "look": "noble", "v": 1},
+  {"id": "wife", "look": "townswoman", "v": 4}
+ ],
+ "lines": [
+  {"text": "In sixteen thirty-seven, a Dutchman could trade a single flower bulb for an entire house.", "set": "square", "light": "day", "shot": "low", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "cheer", "expr": "laugh"}], "crowd": {"size": "many", "act": "cheer", "expr": "grin"}, "props": ["crate"], "fx": "burst", "caption": "1637"},
+  {"text": "Holland is rich, and everyone wants the newest status symbol: tulips.", "set": "square", "light": "day", "shot": "crowd", "focus": "crowd",
+   "on_screen": [{"id": "pieter", "act": "wave", "expr": "grin"}], "crowd": {"size": "many", "act": "wave", "expr": "smile"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Pieter, a weaver, hears his neighbor doubled his money in a month.", "set": "street", "light": "day", "shot": "medium", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "shock"}, {"id": "wife", "act": "stand", "expr": "nervous"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "His wife says: \"You don't even like flowers.\"", "set": "street", "light": "day", "shot": "close", "focus": "wife",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "grin"}, {"id": "wife", "act": "stand", "expr": "stern"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Pieter doesn't care. He sells his loom and buys a bulb he has never seen.", "set": "room", "light": "day", "shot": "medium", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "cheer", "expr": "laugh"}, {"id": "merchant", "act": "wave", "expr": "grin"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": ["chest", "table"], "fx": "stars", "caption": ""},
+  {"text": "Because the bulbs are still in the ground. People are trading pieces of paper.", "set": "room", "light": "day", "shot": "close", "focus": "merchant",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "smile"}, {"id": "merchant", "act": "stand", "expr": "smile_closed"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Prices climb every single day. One rare bulb reaches ten thousand guilders.", "set": "square", "light": "golden", "shot": "aerial", "focus": "crowd",
+   "on_screen": [{"id": "merchant", "act": "cheer", "expr": "laugh"}], "crowd": {"size": "huge", "act": "cheer", "expr": "laugh"}, "props": [], "fx": "none", "caption": "10,000"},
+  {"text": "Then, one February morning in Haarlem, nobody shows up to buy.", "set": "square", "light": "golden", "shot": "wide", "focus": "merchant",
+   "on_screen": [{"id": "merchant", "act": "stand", "expr": "shock"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Within days, the paper is worth almost nothing. So was Holland ruined?", "set": "square", "light": "golden", "shot": "close", "focus": "merchant",
+   "on_screen": [{"id": "merchant", "act": "fall", "expr": "dazed"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "puff", "caption": ""},
+  {"text": "You see, most deals were never paid. It's like a bet you both agree to forget.", "set": "street", "light": "night", "shot": "medium", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "nervous"}, {"id": "wife", "act": "stand", "expr": "stern"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Courts called them gambling debts, and most sellers settled for a tiny fraction.", "set": "street", "light": "night", "shot": "close", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "relief"}, {"id": "wife", "act": "stand", "expr": "stern"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Historians now think the famous crash ruined very few people.", "set": "street", "light": "night", "shot": "wide", "focus": "pieter",
+   "on_screen": [{"id": "pieter", "act": "wave", "expr": "relief_open"}, {"id": "wife", "act": "stand", "expr": "smile"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""},
+  {"text": "Pieter just had to explain to his wife why they no longer owned a loom.", "set": "street", "light": "night", "shot": "close", "focus": "wife",
+   "on_screen": [{"id": "pieter", "act": "stand", "expr": "nervous"}, {"id": "wife", "act": "stand", "expr": "stern"}], "crowd": {"size": "none", "act": "stand", "expr": "neutral"}, "props": [], "fx": "none", "caption": ""}
+ ]
+}

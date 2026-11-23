@@ -1,0 +1,93 @@
+name: StickRider — producir y subir un Short
+
+on:
+  schedule:
+    # 1 Short por día. Corre 12:37 UTC (09:37 Argentina); el video queda programado para las 15:00 ET.
+    - cron: "37 12 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Prueba: genera el video pero NO lo sube (se descarga en Artifacts)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stickrider
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: stickrider/package-lock.json
+
+      - name: Instalar FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt kokoro-onnx soundfile scipy
+          cd stickrider && npm ci --no-audit --no-fund
+
+      - name: Cache del modelo de voz (Kokoro)
+        uses: actions/cache@v4
+        with:
+          path: models
+          key: sr-kokoro-v1
+
+      - name: Descargar modelo de voz si falta
+        run: |
+          mkdir -p models
+          base=https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0
+          [ -f models/kokoro-v1.0.onnx ] || curl -sSL -o models/kokoro-v1.0.onnx $base/kokoro-v1.0.onnx
+          [ -f models/voices-v1.0.bin ] || curl -sSL -o models/voices-v1.0.bin $base/voices-v1.0.bin
+
+      - name: Producir el Short
+        env:
+          GEMINI_API_KEY: ${{ secrets.SR_GEMINI_API_KEY || secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.SR_YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.SR_YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.SR_YT_REFRESH_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+          KOKORO_DIR: models
+          REMOTION_GL: swangle
+          REMOTION_CONCURRENCY: "4"
+          SR_SCALE: ${{ vars.SR_SCALE || '1' }}
+        timeout-minutes: 310
+        run: python -u stickrider/py/main.py
+
+      - name: Guardar el video como artifact (para revisarlo)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stickrider-${{ github.run_id }}
+          path: |
+            output/stickrider/*.mp4
+            output/stickrider/*/script.json
+            output/stickrider/*/research.txt
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Guardar la memoria del canal
+        if: always() && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        run: |
+          git config user.name "stickrider-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add stickrider/data/ || true
+          git diff --cached --quiet || git commit -m "StickRider: actualizar memoria [skip ci]"
+          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
