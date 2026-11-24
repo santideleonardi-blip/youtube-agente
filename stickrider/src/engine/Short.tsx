@@ -2,7 +2,7 @@
 // ink -> lens blur -> bloom -> NEUTRAL tone map -> grade. Crossfades stack a second canvas for the fade frames.
 import React, { useMemo } from "react";
 import * as THREE from "three";
-import { AbsoluteFill, useCurrentFrame, staticFile, delayRender, continueRender } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, staticFile, delayRender, continueRender } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
@@ -66,14 +66,17 @@ const Inner: React.FC<{ i: number; spec: Spec; lead: number }> = ({ i, spec, lea
   return (<><primitive object={world.root} dispose={null} />{post}</>);
 };
 
-const ShotView: React.FC<{ i: number; spec: Spec; alpha: number; lead: number }> = ({ i, spec, alpha, lead }) => (
+const ShotView: React.FC<{ i: number; spec: Spec; alpha: number; lead: number }> = ({ i, spec, alpha, lead }) => {
+  const { width, height } = useVideoConfig();
+  return (
   <AbsoluteFill style={{ opacity: alpha }}>
-    <ThreeCanvas width={1080} height={1920} shadows gl={{ antialias: false, stencil: false, powerPreference: "high-performance", toneMappingExposure: 1.0 }}
+    <ThreeCanvas width={width} height={height} shadows gl={{ antialias: false, stencil: false, powerPreference: "high-performance", toneMappingExposure: 1.0 }}
       camera={{ fov: 36, near: 0.2, far: 1500 }}>
       <Inner i={i} spec={spec} lead={lead} />
     </ThreeCanvas>
   </AbsoluteFill>
-);
+  );
+};
 
 export const Short: React.FC<ShortProps> = ({ spec, onlyShot, lead = 0 }) => {
   const f = useCurrentFrame() - lead;
