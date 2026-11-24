@@ -1,12 +1,13 @@
-"""StickRider — Voz: un narrador masculino, rápido y parejo (referencia: ~3,7 palabras/s, casi sin pausas)."""
+"""StickRider — Voz: un narrador masculino en español, rápido y parejo (~3,4 palabras/s, casi sin pausas)."""
 import os
 
 import numpy as np
 import soundfile as sf
 
 MODELS = os.getenv("KOKORO_DIR") or os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "models")
-VOICE = os.getenv("SR_VOICE", "am_michael")
-SPEED = float(os.getenv("SR_VOICE_SPEED", "1.32"))
+VOICE = os.getenv("SR_VOICE") or "em_alex"          # español; alternativa: em_santa
+SPEED = float(os.getenv("SR_VOICE_SPEED") or "1.2")
+LANG = os.getenv("SR_LANG") or "es"
 
 
 def _voice(k, spec):
@@ -27,11 +28,11 @@ def speak(lines, out_wav):
     voice = _voice(k, VOICE)
     parts, meta, t, sr = [], [], 0.0, 24000
     for text in lines:
-        a, sr = k.create(text, voice=voice, speed=SPEED, lang="en-us")
+        a, sr = k.create(text, voice=voice, speed=SPEED, lang=LANG)
         nz = np.where(np.abs(a) > 0.01)[0]
         if len(nz):
             a = a[max(0, nz[0] - 200): nz[-1] + 400]
-        gap = 0.16 if text.rstrip().endswith(("?", "!", "...")) else 0.09
+        gap = 0.16 if text.rstrip().endswith(("?", "!", "...")) else 0.09  # ¿...? y ¡...! también
         meta.append({"start": round(t, 3), "end": round(t + len(a) / sr, 3)})
         parts += [a, np.zeros(int(gap * sr), dtype=a.dtype)]
         t += len(a) / sr + gap

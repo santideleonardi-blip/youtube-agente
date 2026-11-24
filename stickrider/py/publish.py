@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, ROOT)
 
 ET = dt.timezone(dt.timedelta(hours=-5))
-PUBLISH_HOUR_ET = int(os.getenv("SR_PUBLISH_HOUR_ET", "15"))  # mismo horario que funcionó en el canal de Max
+PUBLISH_HOUR_ET = int(os.getenv("SR_PUBLISH_HOUR_ET") or "17")  # 17 ET = 19 Argentina = 16 México: tarde en toda Latinoamérica
 
 
 def next_slot(state, now=None):
@@ -29,11 +29,11 @@ def upload(video, script, state):
     title = script["title"][:95]
     if "#shorts" not in title.lower() and len(title) < 88:
         title = f"{title} #shorts"
-    desc = script.get("description", "").strip() + "\n\n#shorts #history #truestory #stickrider"
+    desc = script.get("description", "").strip() + "\n\n#shorts #historia #historiasreales #curiosidades #stickrider"
     t = next_slot(state)
     body = {
         "snippet": {"title": title, "description": desc[:4900], "tags": script.get("tags", [])[:15], "categoryId": "27",
-                    "defaultLanguage": "en", "defaultAudioLanguage": "en"},
+                    "defaultLanguage": "es", "defaultAudioLanguage": "es"},
         "status": {"privacyStatus": "private", "publishAt": t.strftime("%Y-%m-%dT%H:%M:%S.0Z"),
                    "selfDeclaredMadeForKids": False, "embeddable": True},
     }

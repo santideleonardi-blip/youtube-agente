@@ -1,0 +1,366 @@
+{
+ "story_key": "tulip-mania-1637",
+ "title": "La flor que costaba más que una casa",
+ "description": "En 1637, en Holanda, se pagaban fortunas por bulbos de tulipán que nadie había visto florecer. Fuentes: https://www.britannica.com/event/tulipmania https://www.smithsonianmag.com/history/there-never-was-real-tulip-fever-180964915/",
+ "tags": [
+  "tulipomanía",
+  "historia",
+  "historias reales",
+  "economía",
+  "burbuja",
+  "holanda",
+  "1637",
+  "curiosidades"
+ ],
+ "mood": "playful",
+ "cast": [
+  {
+   "id": "pieter",
+   "look": "townsman",
+   "v": 2
+  },
+  {
+   "id": "merchant",
+   "look": "noble",
+   "v": 1
+  },
+  {
+   "id": "wife",
+   "look": "townswoman",
+   "v": 4
+  }
+ ],
+ "lines": [
+  {
+   "text": "En mil seiscientos treinta y siete, un holandés podía cambiar un bulbo de flor por una casa entera.",
+   "set": "square",
+   "light": "day",
+   "shot": "low",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "cheer",
+     "expr": "laugh"
+    }
+   ],
+   "crowd": {
+    "size": "many",
+    "act": "cheer",
+    "expr": "grin"
+   },
+   "props": [
+    "crate"
+   ],
+   "fx": "burst",
+   "caption": "1637"
+  },
+  {
+   "text": "Holanda es rica, y todos quieren el nuevo símbolo de estatus: los tulipanes.",
+   "set": "square",
+   "light": "day",
+   "shot": "crowd",
+   "focus": "crowd",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "wave",
+     "expr": "grin"
+    }
+   ],
+   "crowd": {
+    "size": "many",
+    "act": "wave",
+    "expr": "smile"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Pieter, un tejedor, escucha que su vecino duplicó su dinero en un mes.",
+   "set": "street",
+   "light": "day",
+   "shot": "medium",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "shock"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "nervous"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Su esposa le dice: \"Pero si a ti ni te gustan las flores.\"",
+   "set": "street",
+   "light": "day",
+   "shot": "close",
+   "focus": "wife",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "grin"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "stern"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "A Pieter no le importa. Vende su telar y compra un bulbo que nunca vio.",
+   "set": "room",
+   "light": "day",
+   "shot": "medium",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "cheer",
+     "expr": "laugh"
+    },
+    {
+     "id": "merchant",
+     "act": "wave",
+     "expr": "grin"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [
+    "chest",
+    "table"
+   ],
+   "fx": "stars",
+   "caption": ""
+  },
+  {
+   "text": "Porque los bulbos siguen bajo tierra. La gente está comprando papelitos.",
+   "set": "room",
+   "light": "day",
+   "shot": "close",
+   "focus": "merchant",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "smile"
+    },
+    {
+     "id": "merchant",
+     "act": "stand",
+     "expr": "smile_closed"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Los precios suben todos los días. Un bulbo raro llega a diez mil florines.",
+   "set": "square",
+   "light": "golden",
+   "shot": "aerial",
+   "focus": "crowd",
+   "on_screen": [
+    {
+     "id": "merchant",
+     "act": "cheer",
+     "expr": "laugh"
+    }
+   ],
+   "crowd": {
+    "size": "huge",
+    "act": "cheer",
+    "expr": "laugh"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": "10,000"
+  },
+  {
+   "text": "Hasta que una mañana de febrero, en Haarlem, nadie aparece para comprar.",
+   "set": "square",
+   "light": "golden",
+   "shot": "wide",
+   "focus": "merchant",
+   "on_screen": [
+    {
+     "id": "merchant",
+     "act": "stand",
+     "expr": "shock"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "En pocos días, los papeles no valen casi nada. ¿Holanda quedó en la ruina?",
+   "set": "square",
+   "light": "golden",
+   "shot": "close",
+   "focus": "merchant",
+   "on_screen": [
+    {
+     "id": "merchant",
+     "act": "fall",
+     "expr": "dazed"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "puff",
+   "caption": ""
+  },
+  {
+   "text": "Resulta que la mayoría de los tratos nunca se pagaron. Es como una apuesta que los dos deciden olvidar.",
+   "set": "street",
+   "light": "night",
+   "shot": "medium",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "nervous"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "stern"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Los jueces las trataron como deudas de juego, y casi todos se conformaron con una miseria.",
+   "set": "street",
+   "light": "night",
+   "shot": "close",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "relief"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "stern"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Hoy los historiadores creen que el famoso derrumbe arruinó a muy poca gente.",
+   "set": "street",
+   "light": "night",
+   "shot": "wide",
+   "focus": "pieter",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "wave",
+     "expr": "relief_open"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "smile"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  },
+  {
+   "text": "Pieter solo tuvo que explicarle a su esposa por qué ya no tenían telar.",
+   "set": "street",
+   "light": "night",
+   "shot": "close",
+   "focus": "wife",
+   "on_screen": [
+    {
+     "id": "pieter",
+     "act": "stand",
+     "expr": "nervous"
+    },
+    {
+     "id": "wife",
+     "act": "stand",
+     "expr": "stern"
+    }
+   ],
+   "crowd": {
+    "size": "none",
+    "act": "stand",
+    "expr": "neutral"
+   },
+   "props": [],
+   "fx": "none",
+   "caption": ""
+  }
+ ]
+}

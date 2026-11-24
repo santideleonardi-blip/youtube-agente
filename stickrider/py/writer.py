@@ -35,25 +35,28 @@ PROPS = ["stage", "wagon", "table", "statue", "barrel", "crate", "chest", "car",
 FX = ["none", "burst", "stars", "puff", "splash"]
 MOODS = ["jig", "playful", "mystery", "tense", "epic"]
 
-STYLE = """You write 40-55 second YouTube Shorts for the channel StickRider: TRUE stories, told by one fast, steady male
-narrator over flat stick-figure cartoons. The formula below was measured on 20 viral shorts of the genre; follow it.
+STYLE = """Escribes Shorts de YouTube de 40-55 segundos para el canal StickRider: HISTORIAS REALES contadas por un
+narrador masculino, rápido y parejo, sobre dibujos de personajes de palito. Todo en ESPAÑOL NEUTRO latinoamericano
+(tuteo, nada de voseo ni de modismos de un solo país; "ustedes", nunca "vosotros"). La fórmula de abajo se midió en
+20 shorts virales del género: síguela.
 
-SCRIPT FORMULA
-1. HOOK (line 1, 8-16 words): the paradox stated as a fact, no setup, no "did you know", no question.
-   e.g. "In 1518, a city tried to cure a dancing epidemic... with more dancing."
-2. SETTING (1-2 lines): present tense, concrete: year, place, a named person (or "a man named X"), a number.
-3. ESCALATION (3-5 lines): each beat bigger than the last. Include 1-2 SHORT in-character dialogue lines in quotes
-   (e.g. 'His boss says: "That's impossible."') and 1 exaggeration joke.
-4. MYSTERY BEAT (1 line): a question the viewer is now asking ("So why didn't anyone stop him?").
-5. PIVOT: a line that starts with "You see," and gives the real mechanism, with an EVERYDAY analogy
-   ("It's like ...", "Think about the last time you ...").
-6. IRONIC PAYOFF (last 1-2 lines): short, lands the twist. The video ends on the last word. No call to action, no
-   "subscribe", no moral lecture.
-- 120-170 words total, 10-15 lines, sentences ~8-16 words, plain spoken English, contractions, no jargon.
-- Every line must be something we can SHOW. Facts must be true and match the sources; if historians disagree on a
-  number, say "some say" or use the modern estimate. Never invent quotes and present them as real: dialogue lines are
-  clearly dramatized and must match what is documented.
-- Numbers as words when spoken naturally ("four hundred", "fifteen eighteen" for a year)."""
+FÓRMULA DEL GUION
+1. GANCHO (línea 1, 8-16 palabras): la paradoja dicha como un hecho, sin introducción, sin "¿sabías que...?",
+   sin pregunta. Ej.: "En mil quinientos dieciocho, una ciudad intentó curar una epidemia de baile... con más baile."
+2. ESCENA (1-2 líneas): en presente, concreta: año, lugar, una persona con nombre (o "un hombre llamado X"), un número.
+3. ESCALADA (3-5 líneas): cada momento más grande que el anterior. Incluye 1-2 diálogos CORTOS entre comillas
+   (ej.: 'Su jefe le dice: "Eso es imposible."') y 1 chiste de exageración.
+4. MISTERIO (1 línea): la pregunta que el espectador ya se está haciendo ("¿Y por qué nadie lo detuvo?").
+5. GIRO: una línea que empieza con "Resulta que" y explica el mecanismo real con una analogía de la vida
+   COTIDIANA ("Es como cuando...", "Piensa en la última vez que...").
+6. REMATE IRÓNICO (última 1-2 líneas): corto, cierra el giro. El video termina en la última palabra. Nada de
+   "suscríbete", nada de moraleja.
+- 110-160 palabras en total, 10-15 líneas, oraciones de ~8-16 palabras, español hablado y natural, sin tecnicismos.
+- Cada línea tiene que poder MOSTRARSE. Los datos tienen que ser verdaderos y coincidir con las fuentes; si los
+  historiadores no se ponen de acuerdo en un número, di "algunos dicen" o usa la estimación moderna. Los diálogos
+  son dramatizaciones: no inventes citas presentadas como reales.
+- Los números y años van con LETRAS, como se dicen ("cuatrocientos", "mil quinientos dieciocho"), para que la voz
+  los lea bien. Los nombres extranjeros, en su forma española si existe."""
 
 
 def _grounded_text(prompt):
@@ -87,11 +90,12 @@ def _grounded_text(prompt):
 
 def research(state, insights):
     used = [v.get("story_key", "") for v in state.get("videos", [])][-80:]
-    prompt = f"""Find ONE true, little-known, surprising story for a 45-second YouTube Short. "All kinds of real stories":
-history, science, crime that's funny not gory, business blunders, weird laws, sports, inventions, animals, disasters
-with a twist, kings and fools. It must have a paradox or ironic twist, cause and effect you can SHOW with simple
+    prompt = f"""Find ONE true, little-known, surprising story for a 45-second YouTube Short IN SPANISH for a Spanish-speaking
+audience (Latin America and Spain). "All kinds of real stories": history, science, crime that's funny not gory, business
+blunders, weird laws, sports, inventions, disasters with a twist, kings and fools. Mix world stories with stories from
+Latin America and Spain. It must have a paradox or ironic twist, cause and effect you can SHOW with simple
 cartoon characters, and facts verifiable on reputable sites (Britannica, Smithsonian, History.com, BBC, NatGeo,
-university or museum pages, major newspapers).
+university or museum pages, major newspapers, also reputable Spanish-language sources).
 Avoid these stories already used: {json.dumps(used)}
 {insights}
 Search the web, verify the key facts and numbers, then answer in plain text with:
@@ -114,7 +118,9 @@ RESEARCH NOTES (the only facts you may use):
 
 {insights}
 
-Now write the short as JSON. Every line gets a visual "beat" built ONLY from this vocabulary:
+Now write the short as JSON. The spoken "text", the "title", the "description" and the "tags" are in SPANISH (neutral
+Latin American). The vocabulary values below stay exactly as written (they are codes for the animation engine).
+Every line gets a visual "beat" built ONLY from this vocabulary:
 SETS:
 {sets}
 LIGHT: day | golden (sunset, warm) | night (use for the "You see," explanation or dark moments; change light only
@@ -132,29 +138,30 @@ Rules for beats:
 - Keep the SAME set for consecutive lines that happen in the same place (the camera then moves continuously
   between lines instead of cutting). Change set only when the story changes place (max 4 sets per video).
 - Vary the SHOT from line to line (never the same shot 3 times in a row). Hook: crowd/wide/low with action.
+- The MYSTERY line and the "Resulta que" line usually switch to night light (explanation mood).
   Dialogue and jokes: close. Numbers: aerial or crowd with a caption.
 - "on_screen": the cast members visible in that line (1-4), each with act and expr that ILLUSTRATE the line
   literally (shock when surprised, laugh when mocking, dazed, pained, cheer when celebrating...).
 - "crowd": none | few (8) | many (40) | huge (150), with an act, when the story has many people.
-- "caption": optional 1-4 characters/words shown big on screen for a key number or year (e.g. "1518", "400",
-  "$2M"); at most 3 captions per video.
+- "caption": optional 1-4 characters/words shown big on screen for a key number or year, written with digits
+  (e.g. "1518", "400", "$2M"); at most 3 captions per video.
 - Cast: 1-4 recurring characters with ids, a look that fits the era and role, and v (0-9) to vary colours/face.
 
 JSON format:
 {{
- "story_key": "slug", "title": "max 70 chars, curiosity-driven, no clickbait lies, no hashtags",
- "description": "2-3 sentences + 'Sources:' with 1-3 URLs from the research",
- "tags": ["8-12 tags"], "mood": "jig",
+ "story_key": "slug-en-ingles", "title": "en español, máx. 70 caracteres, genera curiosidad, sin mentir, sin hashtags",
+ "description": "2-3 oraciones en español + 'Fuentes:' con 1-3 URLs de la investigación",
+ "tags": ["8-12 tags en español"], "mood": "jig",
  "cast": [{{"id": "anna", "look": "townswoman", "v": 1}}],
  "lines": [
-  {{"text": "spoken line", "set": "street", "light": "day", "shot": "wide", "focus": "anna or crowd",
+  {{"text": "línea hablada en español", "set": "street", "light": "day", "shot": "wide", "focus": "anna or crowd",
     "on_screen": [{{"id": "anna", "act": "dance", "expr": "dazed"}}],
     "crowd": {{"size": "none", "act": "stand", "expr": "neutral"}},
     "props": [], "fx": "none", "caption": ""}}
  ]
 }}
 Sources you may cite: {json.dumps(sources[:6])}"""
-    out = llm.ask_json(prompt, system="You are a top YouTube Shorts writer and storyboard artist. Output only JSON.", temperature=0.85)
+    out = llm.ask_json(prompt, system="You are a top Spanish-language YouTube Shorts writer and storyboard artist. Output only JSON.", temperature=0.85)
     return validate(out)
 
 
@@ -199,7 +206,7 @@ def validate(s):
     print(f"[guionista] {len(lines)} líneas, {words} palabras: {s.get('title')}")
     return {
         "story_key": re.sub(r"[^a-z0-9-]", "", str(s.get("story_key", "")).lower().replace(" ", "-"))[:60] or "story",
-        "title": str(s.get("title", "A True Story"))[:90], "description": str(s.get("description", "")),
+        "title": str(s.get("title", "Una historia real"))[:90], "description": str(s.get("description", "")),
         "tags": [str(t)[:40] for t in s.get("tags", [])][:12], "mood": _pick(s.get("mood"), MOODS, "playful"),
         "cast": cast, "lines": lines,
     }
