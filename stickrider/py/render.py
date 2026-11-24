@@ -10,7 +10,7 @@ LEAD = 8        # el motor corre la línea de tiempo 8 cuadros (props.lead) para
 WARM = 4        # cuadros de calentamiento que se tiran
 CHUNK = 240     # tomas largas se parten en tramos de este largo
 GL = os.getenv("REMOTION_GL", "swangle")
-CHROME = os.getenv("CHROME_BIN", "/usr/bin/google-chrome")
+CHROME = os.getenv("CHROME_BIN") or "/usr/bin/google-chrome"
 CONC = os.getenv("REMOTION_CONCURRENCY", "")
 
 
@@ -53,7 +53,9 @@ def render(spec, wd, scale=1.0):
                 tmp = out + ".tmp.mp4"
                 cmd = ["npx", "remotion", "render", srv, "Short", tmp, f"--props={props}",
                        f"--frames={start - WARM + LEAD}-{end - 1 + LEAD}", f"--scale={scale}", "--codec=h264", "--crf=16",
-                       f"--browser-executable={CHROME}", f"--gl={GL}", "--log=error"]
+                       f"--gl={GL}", "--log=error"]
+                if CHROME and os.path.exists(CHROME):  # si no está, Remotion baja su propio Chrome headless
+                    cmd.append(f"--browser-executable={CHROME}")
                 if CONC:
                     cmd.append(f"--concurrency={CONC}")
                 _run(cmd, cwd=ENGINE)
