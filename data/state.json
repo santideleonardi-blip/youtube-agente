@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1130,
+      "views": 1131,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -289,7 +289,7 @@
       "analyzed": true,
       "avg_view_pct": 37.7,
       "subs_gained": 5,
-      "minutes_watched": 213
+      "minutes_watched": 214
     },
     {
       "job_id": "20261118_215055",
@@ -694,11 +694,11 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 31,
+      "views": 32,
       "likes": 0,
-      "avg_view_pct": 11.0,
+      "avg_view_pct": 16.8,
       "subs_gained": 0,
-      "minutes_watched": 1,
+      "minutes_watched": 3,
       "retention_end": 0.091,
       "drops": [
         {
@@ -802,7 +802,7 @@
       "publish_at": "2026-11-21T20:00:00+00:00",
       "publish_hour_et": 15,
       "first_comment": "Would you rather have pistol shrimp snaps or mantis shrimp punches? 👇",
-      "views": 4,
+      "views": 3,
       "likes": 0,
       "comment_id": "UgzCoq3Txz9QNe3ZTwN4AaABAg",
       "avg_view_pct": 25.3,
@@ -895,9 +895,9 @@
       "comment_id": "UgxSn6_zQMcyGRVr1zR4AaABAg",
       "views": 13,
       "likes": 1,
-      "avg_view_pct": 104.6,
+      "avg_view_pct": 47.0,
       "subs_gained": 0,
-      "minutes_watched": 0
+      "minutes_watched": 2
     },
     {
       "job_id": "20261122_182829",
@@ -933,7 +933,7 @@
       "publish_at": "2026-11-23T16:00:00+00:00",
       "publish_hour_et": 11,
       "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇",
-      "views": 0,
+      "views": 2,
       "likes": 0,
       "comment_id": "UgyN7CGnbcNjfJqPq894AaABAg"
     },
@@ -976,8 +976,11 @@
       "publish_hour_et": 19,
       "first_comment": "Would you take cheetah speed even if your shoes melted every time? 👇",
       "comment_id": "Ugw6bIuuEdnA6oaMEZp4AaABAg",
-      "views": 14,
-      "likes": 0
+      "views": 15,
+      "likes": 0,
+      "avg_view_pct": 31.2,
+      "subs_gained": 0,
+      "minutes_watched": 1
     },
     {
       "job_id": "20261123_223850",
@@ -1016,20 +1019,52 @@
       "uploaded_at": "2026-11-23T22:57:28.285520+00:00",
       "publish_at": "2026-11-24T20:00:00+00:00",
       "publish_hour_et": 15,
-      "first_comment": "Would you trade normal hands for gecko grip even if you got stuck to everything? 👇"
+      "first_comment": "Would you trade normal hands for gecko grip even if you got stuck to everything? 👇",
+      "comment_id": "Ugz-DVVOtO6758Cy8hN4AaABAg",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261124_210737",
+      "youtube_id": "TfrfOkVr1b4",
+      "title": "What Would Happen If Earth Stopped For 5 Seconds? #Earth #shorts",
+      "topic": "What would happen if Earth stopped spinning for 5 seconds?",
+      "format": "short",
+      "series": "classic",
+      "duration": 38.98,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If Earth suddenly froze for just five seconds, your cozy living room would instantly turn into a catapult!"
+        },
+        {
+          "start": 6.6,
+          "narration": "Everything not bolted to solid bedrock would launch sideways faster than a rifle bullet, including you!"
+        },
+        {
+          "start": 13.2,
+          "narration": "Oceans would instantly slam into continents as titanic walls of water, but that's not even the worst part."
+        },
+        {
+          "start": 20.0,
+          "narration": "Global atmospheric winds blowing with shockwave force would completely flatten entire cities in a single breath."
+        },
+        {
+          "start": 27.13,
+          "narration": "Then, five seconds later, Earth abruptly snaps back to spinning, slamming everything back down with unimaginable impact."
+        },
+        {
+          "start": 35.03,
+          "narration": "So be thankful the planet keeps rolling beneath your feet, because..."
+        }
+      ],
+      "uploaded_at": "2026-11-24T21:20:51.915287+00:00",
+      "publish_at": "2026-11-25T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "Do you think humanity could survive 5 seconds of Earth stopping? Yes or no? 🌍"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-15T17:41:47.979897+00:00",
-      "notes": [
-        "Hook viewers in the first 2 seconds by jumping directly into the hypothetical scenario without any intro, channel greeting, or logo animation.",
-        "Utilize open loops within the script by teasing a major consequence coming at the end of the video to minimize drop-off.",
-        "Incorporate visual or auditory pattern interrupts every 3-5 seconds to keep animated pacing energetic and re-engage viewers.",
-        "Avoid dense scientific jargon or slow setups; present dramatic, easily digestible consequences in rapid succession."
-      ],
-      "reason": "We currently have 0 long-form videos tested and 1 short. To evaluate both formats and maintain the target 33% long-form mix (1 long out of every 3 videos), the next video should be long to gather baseline performance data."
-    },
     {
       "date": "2026-11-15T19:42:32.035176+00:00",
       "notes": [
@@ -1218,12 +1253,22 @@
         "Double down on human body animal transformation concepts, which show the strongest replay value (e.g., Dung Beetle Strength achieved 104.6% retention)."
       ],
       "reason": "Shorts are driving 100% of subscriber gains and algorithmic reach (e.g., 'Chimp Muscles' at 1,130 views), whereas long-form videos currently average only 2 views and 3% retention. Prioritizing Shorts establishes the subscriber seed audience needed to validate long-form content later."
+    },
+    {
+      "date": "2026-11-24T21:08:35.535586+00:00",
+      "notes": [
+        "Deliver the primary hook within the first 2 seconds using an immediate visual impact or extreme question, bypassing setup or intro fluff.",
+        "Focus script structure around visceral physical mechanics (e.g., impact forces, bone density, muscle tearing) to maintain visual momentum.",
+        "Incorporate pattern interrupts every 3 to 5 seconds (rapid zooms, dynamic sound effects, unexpected visual transitions) to prevent drop-off.",
+        "Maintain open curiosity loops early in the video to incentivize completion rate past the 50% mark."
+      ],
+      "reason": "With 9 subscribers and long-form videos currently receiving near-zero algorithmic distribution (2 views average), short-form content is essential to acquire the initial subscriber base. Following the 80/20 target mix, producing another short leverages proven growth levers."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 13,
-      "avg_views": 234
+      "count": 14,
+      "avg_views": 218
     },
     "long": {
       "count": 2,
@@ -1234,42 +1279,42 @@
     15
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Chimp muscles', 'Dung beetle strength') remain the primary driver of channel growth and top retention, reaching up to 104.6% average view percentage.",
-    "Kinetic, high-impact physical transformations dramatically outperform passive survival scenarios or pop-culture hypotheticals ('GTA 6', 'Blue Whale'), which fail to gain algorithmic traction.",
-    "Extreme body-challenge hypotheticals ('Only Ate Sugar', '30 Days In Darkness') retain dedicated viewers (up to 88.6% retention) but require more aggressive, high-stakes visual hooks to match animal strength view counts."
+    "Biomechanical animal superpower hypotheticals ('Chimp Muscles', 'Electric Eel Power', 'Dung Beetle Strength') remain the channel's strongest growth driver and yield top retention (up to 65.1% avg view pct).",
+    "Gaming and pop-culture hypotheticals ('GTA 6') show decent short-form retention (63.4%) but struggle to generate broad impression reach compared to animal strength topics.",
+    "Long-form hypotheticals currently draw minimal algorithmic reach (averaging 2 views), confirming that short-form video must remain the main subscriber acquisition tool at this channel size."
   ],
   "strategy": {
     "daily_target": 1,
     "long_share": 0.2,
     "focus_notes": [
-      "Double down on the high-performing 'Human + Animal Abilities' series (e.g., Gecko Grip, Chameleon Camouflage, Axolotl Regeneration) for Shorts, as extreme body modifications drive nearly 100% of subscriber conversions and views.",
-      "Launch the first 8-10 minute long-form video using a progressive timeline structure ('24 Hours, 1 Week, 1 Month, 1 Year') on an extreme human body topic like 'What Would Happen If You Stopped Sleeping?' to start building watch hours.",
-      "Actively feature Max with distinct narrative situations and unique scientific explanations in every episode to vary script pacing and protect the channel from YouTube mass-produced/repetitive content flags.",
-      "Strictly avoid gaming topics (GTA 6) and obscure animal traits (Pistol Shrimp, Electric Eel), keeping topics focused on relatable human superpowers and extreme survival scenarios."
+      "Double down on the high-converting 'Human + Animal Superpowers' format (e.g., 'What Would Happen If You Had Axolotl Regeneration?' or 'What Would Happen If You Had Gorilla Density?') as animal-human capability tweaks drive 95%+ of views and all subscriber conversions.",
+      "Launch the first 8-10 minute long-form video using a progressive timeline structure ('1 Hour, 24 Hours, 1 Week, 1 Month') focused on extreme body survival ('What Would Happen If You Never Slept?') to start accumulating long-form watch hours.",
+      "Vary hook styles and Max's narrative situations (e.g., comedic visual mishaps vs. dramatic sci-fi scenarios) across every script to provide clear human added-value and avoid YouTube mass-production content flags.",
+      "Strictly avoid video game physics (GTA 6) and niche/obscure animal traits (Pistol Shrimp, Electric Eel), keeping all topic selection focused on highly relatable human body modifications."
     ],
     "cadence_changed_at": "2026-11-23T22:38:50.354424+00:00",
-    "cadence_reason": "baja a 1/día: las vistas por video cayeron fuerte (23 vs 270); conviene menos volumen y más calidad",
+    "cadence_reason": "se mantiene en 1/día (la próxima revisión es a los 7 días del último cambio)",
     "long_share_reason": "canal chico (9 suscriptores): 1 de cada 5 videos es largo; los Shorts traen los primeros suscriptores y los largos casi no se recomiendan todavía",
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 2993,
-      "total_views": 3006,
-      "video_count": 15,
+      "shorts_views_90d": 3034,
+      "total_views": 3047,
+      "video_count": 16,
       "long_minutes_28d": 0.0,
-      "shorts_views_28d": 2993
+      "shorts_views_28d": 3034
     },
     "pace": {
-      "views_day": 111.2,
+      "views_day": 112.7,
       "subs_day": 0.48,
       "long_hours_day": 0.0,
-      "shorts_views_day": 107,
+      "shorts_views_day": 108,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-23T22:38:50.354424+00:00",
-    "experiment": "Test a scenario-first narrative hook ('Max tried scaling a glass skyscraper using Gecko hands...') against the standard title question hook ('What would happen if you had Gecko hands?') across 5 Shorts to see if 100% retention at 5 seconds improves average view percentage above 45%.",
-    "summary_es": "El canal viene sumando vistas y suscriptores gracias a los Shorts de superpoderes de animales aplicados a humanos. Esta semana lanzamos el primer video largo con una línea de tiempo progresiva sobre el cuerpo humano para empezar a acumular horas de reproducción. Además, vamos a probar nuevos inicios en los videos para enganchar más rápido a la gente sin caer en contenido repetitivo."
+    "last_run": "2026-11-24T21:07:37.220748+00:00",
+    "experiment": "Test 'Visual Consequence Hooks' (e.g., showing Max accidentally destroying his house with mantis shrimp punch force in the first 3 seconds) against standard 'Question Hooks' on Shorts. Success will be measured by achieving an Average Percentage Viewed (APV) > 50% and over 500 views per Short within 48 hours.",
+    "summary_es": "El canal sigue sumando vistas y suscriptores principalmente gracias a los Shorts de superpoderes animales aplicados al cuerpo humano. Esta semana lanzaremos el primer video largo con estructura de línea de tiempo para empezar a juntar horas de visualización. Además, ajustaremos las narrativas del personaje Max para que el contenido sea 100% original y cumpla con las normas de monetización de YouTube."
   },
   "growth_history": [
     {
@@ -1361,6 +1406,15 @@
       "views_day": 111.2,
       "daily_target": 1,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-24",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3034,
+      "views_day": 112.7,
+      "daily_target": 1,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1375,22 +1429,22 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "images": 6,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
       "count": 2,
-      "avg_views": 16
+      "avg_views": 17
     },
     "challenge": {
-      "count": 1,
-      "avg_views": 24
+      "count": 2,
+      "avg_views": 14
     },
     "curiosity": {
-      "count": 1,
-      "avg_views": 4
+      "count": 2,
+      "avg_views": 8
     },
     "classic": {
       "count": 2,
