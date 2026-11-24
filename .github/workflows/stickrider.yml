@@ -60,6 +60,7 @@ jobs:
       - name: Producir el Short
         env:
           GEMINI_API_KEY: ${{ secrets.SR_GEMINI_API_KEY || secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_FALLBACK: ${{ secrets.GEMINI_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.SR_YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.SR_YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.SR_YT_REFRESH_TOKEN }}

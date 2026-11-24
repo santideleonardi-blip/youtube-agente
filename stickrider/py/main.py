@@ -59,10 +59,23 @@ def main():
     else:
         import writer
         ins = publish.insights(state)
-        notes, sources = writer.research(state, ins)
+        try:
+            notes, sources = writer.research(state, ins)
+            script = writer.write(notes, sources, ins)
+        except Exception as e:  # noqa: BLE001
+            # la clave de StickRider sin cupo: probar con la clave de respaldo (la del canal de Max)
+            fb = os.getenv("GEMINI_API_KEY_FALLBACK")
+            if not fb or fb == os.getenv("GEMINI_API_KEY") or not any(x in str(e) for x in ("429", "RESOURCE_EXHAUSTED", "quota", "Gemini no respondió")):
+                raise
+            print(f"[guionista] la clave de StickRider no tiene cupo ({str(e)[:120]}): uso la clave de respaldo")
+            from common import llm
+            os.environ["GEMINI_API_KEY"] = fb
+            llm._client, llm._models = None, None
+            llm._exhausted.clear()
+            notes, sources = writer.research(state, ins)
+            script = writer.write(notes, sources, ins)
         with open(os.path.join(wd, "research.txt"), "w") as f:
             f.write(notes + "\n\n" + json.dumps(sources, indent=1))
-        script = writer.write(notes, sources, ins)
     with open(sp, "w") as f:
         json.dump(script, f, indent=1, ensure_ascii=False)
     # ---- voz, director, sonido ----

@@ -85,7 +85,26 @@ def _grounded_text(prompt):
         except Exception as e:  # noqa: BLE001
             last = e
             print(f"[guionista] {model} sin búsqueda: {str(e)[:160]}")
-    raise RuntimeError(f"no pude investigar: {last}")
+    raise RuntimeError(f"no pude investigar con búsqueda: {last}")
+
+
+def _research_offline(prompt):
+    """Sin búsqueda web (el plan gratis de Gemini no la incluye): el modelo investiga con lo que sabe y solo elige
+    historias muy documentadas. Las fuentes se citan por nombre de obra/artículo, no con links inventados."""
+    out = llm.ask_json(prompt + """
+
+You have NO web access for this answer: choose only a story that is very well documented (it has its own
+Wikipedia/Britannica article and appears in museums, encyclopedias or major newspapers), use only facts you are
+sure of, and mark anything uncertain as disputed. Answer as JSON:
+{"notes": "the full plain-text answer with the sections above",
+ "sources": [{"title": "Wikipedia (English or Spanish) / Britannica article title or book", "uri": ""}]}""",
+                       system="You are a careful history researcher. Output only JSON.", temperature=0.7)
+    notes = str(out.get("notes", "")).strip()
+    if len(notes) < 200:
+        raise RuntimeError("investigación sin búsqueda demasiado corta")
+    srcs = [s for s in out.get("sources", []) if isinstance(s, dict) and s.get("title")][:4]
+    print(f"[guionista] investigación SIN búsqueda web ({len(srcs)} fuentes por nombre)")
+    return notes, srcs
 
 
 def research(state, insights):
@@ -106,7 +125,12 @@ WHAT HAPPENED (8-12 bullet facts with numbers, names, dates):
 THE TWIST:
 WHY IT HAPPENED (the real mechanism, simply):
 DISPUTED POINTS (what historians/sources disagree on):"""
-    return _grounded_text(prompt)
+    if os.getenv("SR_NO_SEARCH") != "1":
+        try:
+            return _grounded_text(prompt)
+        except Exception as e:  # noqa: BLE001
+            print(f"[guionista] la búsqueda web no está disponible ({str(e)[:120]}): sigo sin búsqueda")
+    return _research_offline(prompt)
 
 
 def write(notes, sources, insights=""):
@@ -150,7 +174,7 @@ Rules for beats:
 JSON format:
 {{
  "story_key": "slug-en-ingles", "title": "en español, máx. 70 caracteres, genera curiosidad, sin mentir, sin hashtags",
- "description": "2-3 oraciones en español + 'Fuentes:' con 1-3 URLs de la investigación",
+ "description": "2-3 oraciones en español + 'Fuentes:' con 1-3 fuentes de la investigación (la URL si la hay; si no, el nombre del artículo, p. ej. 'Wikipedia: Tulipomanía'). Nunca inventes URLs.",
  "tags": ["8-12 tags en español"], "mood": "jig",
  "cast": [{{"id": "anna", "look": "townswoman", "v": 1}}],
  "lines": [
