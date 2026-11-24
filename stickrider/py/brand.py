@@ -48,9 +48,20 @@ g = ban.copy(); gd = ImageDraw.Draw(g)
 gd.rectangle([507, 508, 2053, 931], outline=(255, 0, 0), width=6); gd.rectangle([0, 508, 2559, 931], outline=(0, 200, 255), width=4)
 g.resize((1280, 720)).save(os.path.join(out, "guia_banner.png"))
 
-# ---------- foto de perfil ----------
-av = panel("avatar")
+# ---------- foto de perfil: las mismas tres épocas que el banner, en franjas diagonales ----------
+S = 800
+pa, pm, pd = panel("av_ancient"), panel("av_medieval"), panel("av_modern")
+av = pm.copy()
+c1, c2, sl = 280, 520, 70
+ml = Image.new("L", (S, S), 0); ImageDraw.Draw(ml).polygon([(0, 0), (c1 + sl, 0), (c1 - sl, S), (0, S)], fill=255)
+mr = Image.new("L", (S, S), 0); ImageDraw.Draw(mr).polygon([(c2 + sl, 0), (S, 0), (S, S), (c2 - sl, S)], fill=255)
+av.paste(pa, (0, 0), ml); av.paste(pd, (0, 0), mr)
+ad = ImageDraw.Draw(av)
+for x0, x1 in ((c1 + sl, c1 - sl), (c2 + sl, c2 - sl)):
+    ad.line([(x0, 0), (x1, S)], fill=INK, width=12)
+    ad.line([(x0, 0), (x1, S)], fill=WHITE, width=5)
 av.save(os.path.join(out, "StickRider_perfil_800x800.png"))
-m = Image.new("L", av.size, 0); ImageDraw.Draw(m).ellipse([0, 0, 799, 799], fill=255)
+m = Image.new("L", av.size, 0); ImageDraw.Draw(m).ellipse([0, 0, S - 1, S - 1], fill=255)
 c = Image.new("RGB", av.size, WHITE); c.paste(av, (0, 0), m); c.resize((400, 400)).save(os.path.join(out, "guia_perfil.png"))
+c.resize((88, 88)).save(os.path.join(out, "guia_perfil_chico.png"))
 print("listo")

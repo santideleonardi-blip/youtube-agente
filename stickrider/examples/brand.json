@@ -203,5 +203,128 @@
     ]
    }
   ]
+ },
+ "av_ancient": {
+  "title": "desert",
+  "fps": 30,
+  "total": 20,
+  "shots": [
+   {
+    "a": 0,
+    "b": 20,
+    "set": "desert",
+    "light": "golden",
+    "cam": [
+     {
+      "f": 0,
+      "pos": [
+       0.6,
+       1.68,
+       2.7
+      ],
+      "look": [
+       0.6,
+       1.62,
+       0
+      ],
+      "fov": 40,
+      "cInf": 16
+     }
+    ],
+    "actors": [
+     {
+      "look": "king",
+      "v": 0,
+      "x": 0,
+      "z": 0,
+      "act": "stand",
+      "expr": "laugh",
+      "facing": 1
+     }
+    ]
+   }
+  ]
+ },
+ "av_medieval": {
+  "title": "square",
+  "fps": 30,
+  "total": 20,
+  "shots": [
+   {
+    "a": 0,
+    "b": 20,
+    "set": "square",
+    "light": "day",
+    "cam": [
+     {
+      "f": 0,
+      "pos": [
+       0.0,
+       1.68,
+       2.7
+      ],
+      "look": [
+       0.0,
+       1.62,
+       0
+      ],
+      "fov": 40,
+      "cInf": 16
+     }
+    ],
+    "actors": [
+     {
+      "look": "townswoman",
+      "v": 1,
+      "x": 0,
+      "z": 0,
+      "act": "wave",
+      "expr": "grin",
+      "facing": 0
+     }
+    ]
+   }
+  ]
+ },
+ "av_modern": {
+  "title": "city",
+  "fps": 30,
+  "total": 20,
+  "shots": [
+   {
+    "a": 0,
+    "b": 20,
+    "set": "city",
+    "light": "day",
+    "cam": [
+     {
+      "f": 0,
+      "pos": [
+       -0.6,
+       1.68,
+       2.7
+      ],
+      "look": [
+       -0.6,
+       1.62,
+       0
+      ],
+      "fov": 40,
+      "cInf": 16
+     }
+    ],
+    "actors": [
+     {
+      "look": "worker",
+      "v": 1,
+      "x": 0,
+      "z": 0,
+      "act": "stand",
+      "expr": "laugh",
+      "facing": -1
+     }
+    ]
+   }
+  ]
  }
 }
