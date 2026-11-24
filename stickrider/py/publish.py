@@ -7,11 +7,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, ROOT)
 
 ET = dt.timezone(dt.timedelta(hours=-5))
-PUBLISH_HOUR_ET = int(os.getenv("SR_PUBLISH_HOUR_ET") or "17")  # 17 ET = 19 Argentina = 16 México: tarde en toda Latinoamérica
+# Público hispanohablante: el grueso está en México (UTC-6) y Colombia/Perú (UTC-5); el pico de Shorts es a la noche.
+# 19 ET = 00 UTC = 18 México · 19 Colombia/Perú · 20 Venezuela/Chile · 21 Argentina (España queda de madrugada).
+PUBLISH_HOUR_ET = int(os.getenv("SR_PUBLISH_HOUR_ET") or "19")
 
 
 def next_slot(state, now=None):
-    """Próximo horario libre a las 15 ET (un video por día), con al menos 2 h de margen."""
+    """Próximo horario libre a la hora de publicación (un video por día), con al menos 2 h de margen."""
     now = now or dt.datetime.now(dt.timezone.utc)
     taken = {v.get("publish_at", "")[:10] for v in state.get("videos", []) if v.get("publish_at")}
     day = now.astimezone(ET).date()

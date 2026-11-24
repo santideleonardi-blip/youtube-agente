@@ -15,7 +15,7 @@ Todo se dibuja con código (three.js dentro de Remotion): sin IA de video, grati
 4. **Sonido** (`py/sound.py`): música original sintetizada según el clima + whooshes; -14 LUFS.
 5. **Render** (`py/render.py`): cada toma en su propio proceso de Remotion (si no, la memoria gráfica se agota),
    con 4 cuadros de calentamiento descartados; fundidos con ffmpeg.
-6. **Publicador** (`py/publish.py`): sube programado a las 17:00 ET (19:00 Argentina, 16:00 México) y guarda estadísticas en `data/state.json`;
+6. **Publicador** (`py/publish.py`): sube programado a las 19:00 ET (18 México, 19 Colombia/Perú, 21 Argentina; variable `SR_PUBLISH_HOUR_ET`) y guarda estadísticas en `data/state.json`;
    el guionista recibe qué historias/ganchos retuvieron más y cuáles no.
 
 ## Motor (`src/engine/`)
