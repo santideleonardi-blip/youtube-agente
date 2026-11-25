@@ -175,7 +175,7 @@ def build(script, timings, total_s):
                 fx.append({"kind": ln["fx"], "x": F[0], "y": yF + 1.95, "z": F[1] + 0.3, "at": rel(i) + 6, "size": 1.0})
             if ln["caption"]:
                 end = starts[i + 1] if i + 1 < len(starts) else total
-                captions.append({"a": starts[i] + 3, "b": end, "text": ln["caption"]})
+                captions.append({"a": max(starts[i] + 3, 27), "b": end, "text": ln["caption"]})  # después de la portada del comienzo
         shot = {"a": a, "b": b, "set": st, "light": sc["light"], "cam": keys, "actors": actors, "crowd": crowd, "props": props, "fx": fx}
         if any(a_["look"] == "musician" and (a_["act"] == "play" or any(x[1] == "play" for x in a_["actAt"])) for a_ in actors):
             shot["notes"] = True

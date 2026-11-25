@@ -132,6 +132,10 @@ def main():
         thumb = cover.make(video, script.get("cover") or script["title"], os.path.join(OUT, f"stickrider_{job}.jpg"),
                            cover.pick_time(script, spec))
         print(f"[portada] lista: {thumb}")
+        withc = video.replace(".mp4", ".c.mp4")
+        cover.burn_intro(video, script.get("cover") or script["title"], withc)
+        os.replace(withc, video)
+        print("[portada] puesta también al comienzo del video")
     except Exception as e:  # noqa: BLE001
         print(f"[portada] no pude hacerla: {str(e)[:200]}")
     # ---- subir ----
