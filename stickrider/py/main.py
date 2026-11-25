@@ -36,6 +36,28 @@ def save_state(st):
         json.dump(st, f, indent=1, ensure_ascii=False)
 
 
+OUTROS = [
+    "Si esta historia te voló la cabeza, dale like y síguenos para no perderte ninguna.",
+    "Dale like y síguenos: cada día hay una historia real que parece inventada.",
+    "Si te gustó, dale like y síguenos para no perderte la próxima historia.",
+]
+
+
+def add_outro(script):
+    """Cierre fijo después del remate: pedir like y seguir al canal (los personajes saludan a cámara)."""
+    if any("síguenos" in l["text"].lower() for l in script["lines"]):
+        return
+    last = script["lines"][-1]
+    on = [{"id": o["id"], "act": "wave", "expr": "smile", "enter": False} for o in last["on_screen"][:3]]
+    if not on and script["cast"]:
+        on = [{"id": script["cast"][0]["id"], "act": "wave", "expr": "smile", "enter": False}]
+    script["lines"].append({
+        "text": OUTROS[abs(hash(script["story_key"])) % len(OUTROS)], "set": last["set"], "light": last["light"],
+        "shot": "medium" if last["shot"] != "medium" else "wide", "focus": on[0]["id"] if on else "crowd",
+        "on_screen": on, "crowd": {"size": "none", "act": "stand", "expr": "neutral", "looks": []},
+        "props": [], "fx": "none", "caption": ""})
+
+
 def main():
     t0 = time.time()
     dry = os.getenv("DRY_RUN") == "1"
@@ -83,6 +105,7 @@ def main():
             script = writer.write(notes, sources, ins)
         with open(os.path.join(wd, "research.txt"), "w") as f:
             f.write(notes + "\n\n" + json.dumps(sources, indent=1))
+    add_outro(script)
     with open(sp, "w") as f:
         json.dump(script, f, indent=1, ensure_ascii=False)
     # ---- voz, director, sonido ----

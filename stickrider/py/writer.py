@@ -49,8 +49,8 @@ FÓRMULA DEL GUION
 4. MISTERIO (1 línea): la pregunta que el espectador ya se está haciendo ("¿Y por qué nadie lo detuvo?").
 5. GIRO: una línea que empieza con "Resulta que" y explica el mecanismo real con una analogía de la vida
    COTIDIANA ("Es como cuando...", "Piensa en la última vez que...").
-6. REMATE IRÓNICO (última 1-2 líneas): corto, cierra el giro. El video termina en la última palabra. Nada de
-   "suscríbete", nada de moraleja.
+6. REMATE IRÓNICO (última 1-2 líneas): corto, cierra el giro. Nada de moraleja ni de pedir likes: el pedido
+   de like y seguir al canal lo agrega el sistema solo, como línea final.
 - 110-160 palabras en total, 10-15 líneas, oraciones de ~8-16 palabras, español hablado y natural, sin tecnicismos.
 - Cada línea tiene que poder MOSTRARSE. Los datos tienen que ser verdaderos y coincidir con las fuentes; si los
   historiadores no se ponen de acuerdo en un número, di "algunos dicen" o usa la estimación moderna. Los diálogos
