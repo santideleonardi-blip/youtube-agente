@@ -9,7 +9,20 @@
    "seconds": 46.3,
    "youtube_id": "Qo3-Duqh-F0",
    "publish_at": "2026-11-25T00:14:00Z",
-   "published_manually": true
+   "published_manually": true,
+   "views": 47,
+   "likes": 1,
+   "comments": 0
+  },
+  {
+   "date": "2026-11-25",
+   "story_key": "guerra-de-los-pasteles-santa-anna",
+   "title": "¡La absurda guerra que empezó por unos pasteles y terminó en funeral!",
+   "hook": "En mil ochocientos treinta y ocho, Francia invadió México por culpa de unos pasteles.",
+   "mood": "playful",
+   "seconds": 45.9,
+   "youtube_id": "trH_paJJxzc",
+   "publish_at": "2026-11-26T00:00:00Z"
   }
  ]
 }
