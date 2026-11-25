@@ -82,6 +82,7 @@ jobs:
           name: stickrider-${{ github.run_id }}
           path: |
             output/stickrider/*.mp4
+            output/stickrider/*.jpg
             output/stickrider/*/script.json
             output/stickrider/*/research.txt
           retention-days: 7

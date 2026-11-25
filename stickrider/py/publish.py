@@ -25,7 +25,7 @@ def next_slot(state, now=None):
     return now + dt.timedelta(hours=3)
 
 
-def upload(video, script, state):
+def upload(video, script, state, thumb=None):
     from googleapiclient.http import MediaFileUpload
     from common.youtube_auth import youtube
     title = script["title"][:95]
@@ -45,6 +45,12 @@ def upload(video, script, state):
     while resp is None:
         _, resp = req.next_chunk()
     print(f"[publicador] subido https://youtu.be/{resp['id']} — se publica {t.astimezone(ET):%a %d %H:%M} ET")
+    if thumb and os.path.exists(thumb):
+        try:  # portada propia: requiere el canal verificado (youtube.com/verify)
+            youtube().thumbnails().set(videoId=resp["id"], media_body=MediaFileUpload(thumb, mimetype="image/jpeg")).execute()
+            print("[publicador] portada propia puesta")
+        except Exception as e:  # noqa: BLE001
+            print(f"[publicador] YouTube no aceptó la portada ({str(e)[:200]}): queda la que elige YouTube")
     return resp["id"], t.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 

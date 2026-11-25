@@ -185,7 +185,9 @@ Rules for beats:
 
 JSON format:
 {{
- "story_key": "slug-en-ingles", "title": "en español, máx. 70 caracteres, genera curiosidad, sin mentir, sin hashtags",
+ "story_key": "slug-en-ingles",
+ "cover": "TEXTO DE PORTADA en español: 2-5 palabras que den ganas de tocar el video (la paradoja, no el título repetido; ej.: 'CURARON EL BAILE... BAILANDO')",
+ "title": "en español, máx. 70 caracteres, genera curiosidad, sin mentir, sin hashtags",
  "description": "2-3 oraciones en español + 'Fuentes:' con 1-3 fuentes de la investigación (la URL si la hay; si no, el nombre del artículo, p. ej. 'Wikipedia: Tulipomanía'). Nunca inventes URLs.",
  "tags": ["8-12 tags en español"], "mood": "jig",
  "cast": [{{"id": "anna", "look": "townswoman", "v": 1}}],
@@ -231,7 +233,7 @@ Check it line by line and fix everything that fails:
    new characters "enter"; at most 4 sets and 3 light changes; 1-3 captions on key numbers.
 6. Title: makes people curious without lying, max 70 characters.
 Return the FULL improved short as JSON in exactly the same format as the draft: the SAME top-level keys
-(story_key, title, description, tags, mood, cast, lines), not wrapped inside another object."""
+(story_key, cover, title, description, tags, mood, cast, lines), not wrapped inside another object."""
 
 
 def _pick(v, allowed, default):
@@ -278,6 +280,7 @@ def validate(s):
     return {
         "story_key": re.sub(r"[^a-z0-9-]", "", str(s.get("story_key", "")).lower().replace(" ", "-"))[:60] or "story",
         "title": str(s.get("title", "Una historia real"))[:90], "description": str(s.get("description", "")),
+        "cover": " ".join(str(s.get("cover") or s.get("title") or "").split())[:48],
         "tags": [str(t)[:40] for t in s.get("tags", [])][:12], "mood": _pick(s.get("mood"), MOODS, "playful"),
         "cast": cast, "lines": lines,
     }

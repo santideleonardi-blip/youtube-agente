@@ -126,13 +126,21 @@ def main():
         if len(bad) > 3:
             raise RuntimeError("el video tiene cuadros vacíos: no se sube")
     print(f"[stickrider] video listo en {(time.time() - t0) / 60:.1f} min")
+    thumb = None
+    try:
+        import cover
+        thumb = cover.make(video, script.get("cover") or script["title"], os.path.join(OUT, f"stickrider_{job}.jpg"),
+                           cover.pick_time(script, spec))
+        print(f"[portada] lista: {thumb}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[portada] no pude hacerla: {str(e)[:200]}")
     # ---- subir ----
     rec = {"date": dt.date.today().isoformat(), "story_key": script["story_key"], "title": script["title"],
            "hook": script["lines"][0]["text"], "mood": script["mood"], "seconds": round(total_s, 1)}
     if dry or not os.getenv("YT_REFRESH_TOKEN"):
         print("[publicador] DRY_RUN o sin credenciales de StickRider: no subo")
         return
-    vid, at = publish.upload(video, script, state)
+    vid, at = publish.upload(video, script, state, thumb)
     rec.update(youtube_id=vid, publish_at=at)
     state["videos"].append(rec)
     save_state(state)
