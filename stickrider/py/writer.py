@@ -201,8 +201,11 @@ Sources you may cite: {json.dumps(sources[:6])}"""
     out = llm.ask_json(prompt, system=sysmsg, temperature=0.85)
     draft = validate(out)
     try:
-        better = validate(llm.ask_json(REVIEW.format(style=STYLE, notes=notes, draft=json.dumps(out, ensure_ascii=False)),
-                                       system=sysmsg, temperature=0.6))
+        rev = llm.ask_json(REVIEW.format(style=STYLE, notes=notes, draft=json.dumps(out, ensure_ascii=False)),
+                           system=sysmsg, temperature=0.6)
+        if isinstance(rev, dict) and "lines" not in rev:  # a veces lo devuelve envuelto: {"short": {...}}
+            rev = next((v for v in rev.values() if isinstance(v, dict) and "lines" in v), rev)
+        better = validate(rev)
         print("[guionista] guion revisado y mejorado")
         return better
     except Exception as e:  # noqa: BLE001
@@ -227,7 +230,8 @@ Check it line by line and fix everything that fails:
    shot variety (never the same shot 3 times in a row); fx on the 2-4 strongest moments; era-fitting crowd looks;
    new characters "enter"; at most 4 sets and 3 light changes; 1-3 captions on key numbers.
 6. Title: makes people curious without lying, max 70 characters.
-Return the FULL improved short as JSON in exactly the same format as the draft (same keys)."""
+Return the FULL improved short as JSON in exactly the same format as the draft: the SAME top-level keys
+(story_key, title, description, tags, mood, cast, lines), not wrapped inside another object."""
 
 
 def _pick(v, allowed, default):
