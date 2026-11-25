@@ -4,9 +4,9 @@ on:
   schedule:
     # 1 Short por día, programado para las 19:00 ET (21:00 Argentina). GitHub a veces atrasa horas los cron,
     # así que hay tres intentos; si ya hay un video esperando publicarse, los siguientes no hacen nada.
-    - cron: "17 8 * * *"    # 05:17 Argentina
-    - cron: "47 12 * * *"   # 09:47 Argentina
-    - cron: "17 16 * * *"   # 13:17 Argentina
+    - cron: "7 3 * * *"     # 00:07 Argentina (intento principal)
+    - cron: "17 8 * * *"    # 05:17 Argentina (respaldo)
+    - cron: "17 14 * * *"   # 11:17 Argentina (último respaldo; tarda ~2 h)
   workflow_dispatch:
     inputs:
       dry_run:

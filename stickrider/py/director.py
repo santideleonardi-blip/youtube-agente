@@ -9,6 +9,8 @@ FPS = 30
 LANE = {"street": 2.5, "city": 4.2, "sea": 3.4, "room": 5.0}     # media anchura útil de sets angostos
 Y0 = {"sea": 1.2}                                                 # altura del piso (cubierta del barco)
 CROWD_N = {"few": 8, "many": 40, "huge": 150}
+CROWD_LOOKS = {"city": ["suit", "woman", "worker"], "sea": ["sailor"], "snow": ["soldier", "townsman"]}
+ENTER = 40  # cuadros que tarda un personaje en entrar caminando
 DOF = {"close": 14, "medium": 8, "low": 6, "wide": 0, "crowd": 4, "aerial": 0}
 
 
@@ -80,6 +82,28 @@ def build(script, timings, total_s):
                     acts.append([f, o["act"]]); exprs.append([f, o["expr"]])
             x, z = pos[cid]
             a_spec = {"look": c["look"], "v": c["v"], "x": x, "z": z, "act": act0, "expr": expr0, "actAt": acts, "exprAt": exprs}
+            # mira hacia los otros personajes cuando comparte línea con alguien (diálogo), no a cámara
+            if n > 1 and x != 0 and any(len(lines[i]["on_screen"]) > 1 and any(o["id"] == cid for o in lines[i]["on_screen"]) for i in sc["lines"]):
+                a_spec["facing"] = 1 if x < 0 else -1
+            # entra caminando desde el costado en su primera línea
+            o_first = next(o for o in lines[first]["on_screen"] if o["id"] == cid)
+            if o_first.get("enter"):
+                f0 = max(0, rel(first) - 2)
+                side = -1 if x < 0 else 1
+                lim = LANE.get(st, 9.0) - 0.3
+                a_spec["to"] = [x, z]
+                a_spec["x"] = round(max(-lim, min(lim, x + side * 4.0)), 2)
+                a_spec["walk"] = [f0, f0 + ENTER]
+                after = a_spec["act"] if first == sc["lines"][0] else next((v for f, v in acts if f == f0), "stand")
+                if after == "walk":
+                    after = "stand"
+                if first == sc["lines"][0]:
+                    a_spec["act"] = "walk"
+                    a_spec["actAt"] = [[f0 + ENTER, after]] + acts
+                else:
+                    a_spec["actAt"] = [[f, v] for f, v in acts if f != f0] + [[f0, "walk"], [f0 + ENTER, after]]
+                    a_spec["actAt"].sort(key=lambda e: e[0])
+                a_spec["from"] = f0
             if y0:
                 a_spec["y0"] = y0
             if has_stage and c["look"] == "musician":
@@ -101,7 +125,9 @@ def build(script, timings, total_s):
                 hw = {8: 5, 40: 8.5, 150: 15}.get(size, 10)
                 xr, zr = [-hw, hw], [-2.2 - 1.3 * hw, -2.2]
             c0 = lines[cl[0]]["crowd"]
-            cr = {"n": size, "x": xr, "z": zr, "act": c0["act"], "expr": c0["expr"] if c0["expr"] != "neutral" else None, "seed": si + 1}
+            cr = {"n": size, "x": xr, "z": zr, "act": c0["act"], "expr": c0["expr"] if c0["expr"] != "neutral" else None, "seed": si + 1,
+                  "looks": next((lines[i]["crowd"].get("looks") for i in cl if lines[i]["crowd"].get("looks")), None)
+                  or CROWD_LOOKS.get(st, ["townsman", "townswoman"])}
             if cr["expr"] is None:
                 cr.pop("expr")
             if y0:

@@ -14,7 +14,8 @@ export type ActorSpec = {
   look: Look; v?: number;               // look preset + variant (colours / face)
   x: number; z: number;                 // feet position (metres, set-local)
   y0?: number;                          // standing height (e.g. 1.1 on the stage)
-  to?: [number, number];                // walk target (reached at the shot's end)
+  to?: [number, number];                // walk target (reached at the shot's end, or at walk[1])
+  walk?: [number, number];              // [start, end] frames of the walk to `to` (default: from → shot end)
   act?: Act; expr?: Expr;
   exprAt?: [number, Expr][];            // [frame within shot, expression] changes
   actAt?: [number, Act][];              // [frame within shot, action] changes

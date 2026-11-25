@@ -117,7 +117,11 @@ cartoon characters, and facts verifiable on reputable sites (Britannica, Smithso
 university or museum pages, major newspapers, also reputable Spanish-language sources).
 Avoid these stories already used: {json.dumps(used)}
 {insights}
+First brainstorm 5 candidate stories and score each 1-10 on: (a) how jaw-dropping the paradox is in ONE sentence,
+(b) how visual and funny it is with simple cartoon characters, (c) how solid the facts are. Pick the best total
+(never a story whose facts are shaky). Then research ONLY that one.
 Search the web, verify the key facts and numbers, then answer in plain text with:
+CANDIDATES (the 5, with scores, one line each):
 STORY KEY: a short unique slug
 TITLE IDEA:
 WHEN / WHERE:
@@ -170,6 +174,14 @@ Rules for beats:
 - "caption": optional 1-4 characters/words shown big on screen for a key number or year, written with digits
   (e.g. "1518", "400", "$2M"); at most 3 captions per video.
 - Cast: 1-4 recurring characters with ids, a look that fits the era and role, and v (0-9) to vary colours/face.
+- MAKE IT ALIVE: every line has at least one character with a NON-neutral expression that matches the words, and
+  the acts change during the video (walk, wave, cheer, fall, sit, dance), never a whole video of people standing.
+  Use "fx" on the 2-4 funniest or most surprising moments (burst = shock/impact, stars = dizzy/defeat,
+  puff = disappearing/failure, splash = water). Use era-fitting props to dress the place (1-2 per scene).
+- "enter": true on an on_screen member makes that character WALK INTO the frame on that line (use it when a new
+  person arrives in the story: 1-3 times per video).
+- "crowd.looks": 1-3 LOOKS for the crowd that fit the era and place (e.g. modern city: suit, woman, worker; ancient
+  or medieval: townsman, townswoman, farmer; ship: sailor; army: soldier). Never a medieval crowd in a modern story.
 
 JSON format:
 {{
@@ -179,14 +191,43 @@ JSON format:
  "cast": [{{"id": "anna", "look": "townswoman", "v": 1}}],
  "lines": [
   {{"text": "línea hablada en español", "set": "street", "light": "day", "shot": "wide", "focus": "anna or crowd",
-    "on_screen": [{{"id": "anna", "act": "dance", "expr": "dazed"}}],
-    "crowd": {{"size": "none", "act": "stand", "expr": "neutral"}},
+    "on_screen": [{{"id": "anna", "act": "dance", "expr": "dazed", "enter": false}}],
+    "crowd": {{"size": "none", "act": "stand", "expr": "neutral", "looks": ["townsman", "townswoman"]}},
     "props": [], "fx": "none", "caption": ""}}
  ]
 }}
 Sources you may cite: {json.dumps(sources[:6])}"""
-    out = llm.ask_json(prompt, system="You are a top Spanish-language YouTube Shorts writer and storyboard artist. Output only JSON.", temperature=0.85)
-    return validate(out)
+    sysmsg = "You are a top Spanish-language YouTube Shorts writer and storyboard artist. Output only JSON."
+    out = llm.ask_json(prompt, system=sysmsg, temperature=0.85)
+    draft = validate(out)
+    try:
+        better = validate(llm.ask_json(REVIEW.format(style=STYLE, notes=notes, draft=json.dumps(out, ensure_ascii=False)),
+                                       system=sysmsg, temperature=0.6))
+        print("[guionista] guion revisado y mejorado")
+        return better
+    except Exception as e:  # noqa: BLE001
+        print(f"[guionista] la revisión falló ({str(e)[:120]}): uso el primer borrador")
+        return draft
+
+
+REVIEW = """{style}
+
+RESEARCH NOTES (the only facts you may use):
+{notes}
+
+Here is a DRAFT short (JSON). You are now the strict editor whose only goal is that viewers watch to the LAST second.
+Check it line by line and fix everything that fails:
+1. HOOK: would a stranger scrolling stop on line 1? Write 5 alternative hooks in your head and keep the strongest
+   (shortest, most paradoxical, concrete; no question, no "sabías que").
+2. Every line adds something new or bigger; cut filler and repetitions; no line longer than 16 words.
+3. At least one short dialogue and one exaggeration joke in the escalation; the "Resulta que" line explains the real
+   mechanism with an everyday analogy; the last line is a short ironic punchline that ends the video.
+4. Facts match the notes exactly; numbers and years written in letters; neutral Latin American Spanish.
+5. Visual beats: every line can be SHOWN with the vocabulary; expressions and acts illustrate the words literally;
+   shot variety (never the same shot 3 times in a row); fx on the 2-4 strongest moments; era-fitting crowd looks;
+   new characters "enter"; at most 4 sets and 3 light changes; 1-3 captions on key numbers.
+6. Title: makes people curious without lying, max 70 characters.
+Return the FULL improved short as JSON in exactly the same format as the draft (same keys)."""
 
 
 def _pick(v, allowed, default):
@@ -212,7 +253,8 @@ def validate(s):
         for o in ln.get("on_screen", [])[:4]:
             oid = re.sub(r"[^a-z0-9_]", "", str(o.get("id", "")).lower())
             if oid in ids:
-                on.append({"id": oid, "act": _pick(o.get("act"), ACTS, "stand"), "expr": _pick(o.get("expr"), EXPRS, "neutral")})
+                on.append({"id": oid, "act": _pick(o.get("act"), ACTS, "stand"), "expr": _pick(o.get("expr"), EXPRS, "neutral"),
+                           "enter": bool(o.get("enter"))})
         cr = ln.get("crowd") or {}
         size = _pick(cr.get("size"), ["none", "few", "many", "huge"], "none")
         props = [p for p in (_pick(x, PROPS, "") for x in ln.get("props", [])[:2]) if p]
@@ -221,7 +263,8 @@ def validate(s):
             "text": text, "set": st, "light": _pick(ln.get("light"), ["day", "golden", "night"], "day"),
             "shot": _pick(ln.get("shot"), SHOTS, "medium"),
             "focus": focus if focus in ids or focus == "crowd" else (on[0]["id"] if on else "crowd"),
-            "on_screen": on, "crowd": {"size": size, "act": _pick(cr.get("act"), ACTS, "stand"), "expr": _pick(cr.get("expr"), EXPRS, "neutral")},
+            "on_screen": on, "crowd": {"size": size, "act": _pick(cr.get("act"), ACTS, "stand"), "expr": _pick(cr.get("expr"), EXPRS, "neutral"),
+                      "looks": [x for x in (_pick(v, LOOKS, "") for v in (cr.get("looks") or [])[:3]) if x]},
             "props": props, "fx": _pick(ln.get("fx"), FX, "none"), "caption": str(ln.get("caption", "") or "")[:8],
         })
     if len(lines) < 6:

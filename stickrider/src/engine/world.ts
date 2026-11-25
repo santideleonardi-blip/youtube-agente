@@ -220,7 +220,8 @@ export class World {
     };
     const person = (a: ActorSpec, idx: number, fx2: number) => {
       if (a.from !== undefined && fs < a.from) return;
-      const len = Math.max(1, s.b - s.a), u = a.to ? Math.min(1, Math.max(0, (fs - (a.from ?? 0)) / (len - (a.from ?? 0)))) : 0;
+      const len = Math.max(1, s.b - s.a), w0 = a.walk ? a.walk[0] : (a.from ?? 0), w1 = a.walk ? a.walk[1] : len;
+      const u = a.to ? Math.min(1, Math.max(0, (fs - w0) / Math.max(1, w1 - w0))) : 0;
       const lx = a.to ? a.x + (a.to[0] - a.x) * u : a.x, lz = a.to ? a.z + (a.to[1] - a.z) * u : a.z;
       const x = lx + ox, z = lz + oz, sc2 = a.scale ?? 1, y0 = a.y0 ?? 0;
       if (!this.frustum.intersectsSphere(this.sph.set(V(x, y0 + 1.1 * sc2, z), 3))) return;
