@@ -2,8 +2,11 @@ name: StickRider — producir y subir un Short
 
 on:
   schedule:
-    # 1 Short por día. Corre 12:37 UTC (09:37 Argentina); el video queda programado para las 15:00 ET.
-    - cron: "37 12 * * *"
+    # 1 Short por día, programado para las 19:00 ET (21:00 Argentina). GitHub a veces atrasa horas los cron,
+    # así que hay tres intentos; si ya hay un video esperando publicarse, los siguientes no hacen nada.
+    - cron: "17 8 * * *"    # 05:17 Argentina
+    - cron: "47 12 * * *"   # 09:47 Argentina
+    - cron: "17 16 * * *"   # 13:17 Argentina
   workflow_dispatch:
     inputs:
       dry_run:

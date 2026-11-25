@@ -40,6 +40,13 @@ def main():
     t0 = time.time()
     dry = os.getenv("DRY_RUN") == "1"
     state = load_state()
+    if os.getenv("GITHUB_EVENT_NAME") == "schedule" and not dry:
+        now = dt.datetime.now(dt.timezone.utc)
+        pend = [v for v in state.get("videos", []) if v.get("publish_at")
+                and dt.datetime.fromisoformat(v["publish_at"].replace("Z", "+00:00")) > now]
+        if pend:  # hay varias corridas programadas por día (por si GitHub atrasa una): si ya hay un video esperando, no hago otro
+            print(f"[stickrider] ya hay un video programado ({pend[-1]['publish_at']}): no hago otro")
+            return
     try:
         publish.refresh_stats(state)
     except Exception as e:  # noqa: BLE001

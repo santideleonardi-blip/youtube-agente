@@ -58,7 +58,15 @@ def render(spec, wd, scale=1.0):
                     cmd.append(f"--browser-executable={CHROME}")
                 if CONC:
                     cmd.append(f"--concurrency={CONC}")
-                _run(cmd, cwd=ENGINE)
+                cmd.append("--timeout=180000")  # con GPU por software el primer cuadro puede tardar más de 30 s
+                for intento in range(3):
+                    try:
+                        _run(cmd, cwd=ENGINE)
+                        break
+                    except subprocess.CalledProcessError:
+                        if intento == 2:
+                            raise
+                        print(f"[render] falló el tramo, reintento ({intento + 2}/3)", flush=True)
                 os.replace(tmp, out)
             segs.append((out, end - start, xin if first else 0))
             first = False
