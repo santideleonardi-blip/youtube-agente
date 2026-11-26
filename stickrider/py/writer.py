@@ -36,27 +36,43 @@ FX = ["none", "burst", "stars", "puff", "splash"]
 MOODS = ["jig", "playful", "mystery", "tense", "epic"]
 
 STYLE = """Escribes Shorts de YouTube de 40-55 segundos para el canal StickRider: HISTORIAS REALES contadas por un
-narrador masculino, rápido y parejo, sobre dibujos de personajes de palito. Todo en ESPAÑOL NEUTRO latinoamericano
-(tuteo, nada de voseo ni de modismos de un solo país; "ustedes", nunca "vosotros"). La fórmula de abajo se midió en
-20 shorts virales del género: síguela.
+narrador masculino sobre dibujos de personajes de palito. Todo en ESPAÑOL NEUTRO latinoamericano (tuteo, nada de
+voseo ni de modismos de un solo país; "ustedes", nunca "vosotros").
 
-FÓRMULA DEL GUION
-1. GANCHO (línea 1, 8-16 palabras): la paradoja dicha como un hecho, sin introducción, sin "¿sabías que...?",
-   sin pregunta. Ej.: "En mil quinientos dieciocho, una ciudad intentó curar una epidemia de baile... con más baile."
-2. ESCENA (1-2 líneas): en presente, concreta: año, lugar, una persona con nombre (o "un hombre llamado X"), un número.
-3. ESCALADA (3-5 líneas): cada momento más grande que el anterior. Incluye 1-2 diálogos CORTOS entre comillas
-   (ej.: 'Su jefe le dice: "Eso es imposible."') y 1 chiste de exageración.
+LO MÁS IMPORTANTE: QUE SE ENTIENDA A LA PRIMERA Y QUE FLUYA.
+El espectador escucha una sola vez, sin poder volver atrás, y no sabe NADA del tema. Cuéntalo como se lo contarías
+a un amigo en voz alta: una historia con principio, medio y final, no una lista de datos.
+- ORDEN: de principio a fin, en orden cronológico, causa → consecuencia. Nunca saltes adelante y atrás.
+- HILO: cada línea sigue a la anterior. Usa conectores naturales al comienzo de muchas líneas: "Entonces", "Pero",
+  "Así que", "El problema es que", "Para colmo", "Al final". Nada de frases sueltas o telegráficas
+  ("Julio. París. Un hombre." está PROHIBIDO): siempre oraciones completas, con sujeto y verbo.
+- UN PROTAGONISTA: presenta claro quién es (un cocinero francés, un soldado, un rey...) y síguelo. Máximo 2 nombres
+  propios en todo el video; a los demás llámalos por su rol ("el rey", "su esposa", "los soldados").
+- PALABRAS SIMPLES: las que entiende un chico de 12 años. Si aparece algo raro (un cargo, una moneda, un lugar),
+  explícalo en 3-5 palabras ("florines, la moneda holandesa"). Nada de tecnicismos ni de palabras rebuscadas.
+- POCOS NÚMEROS: máximo 3 números en todo el guion, y solo los que asombran. Redondea ("casi mil", "unos cuatrocientos").
+- SIN AMBIGÜEDADES: que nunca haya dudas de quién hace qué. Evita "él/ella/esto" si puede confundir: repite el rol.
+- DIÁLOGOS: di siempre quién habla antes de la frase: 'El general le grita al cocinero: "¡Esto es imposible!"'.
+- Oraciones de 6-15 palabras. Una idea por oración.
+
+FÓRMULA DEL GUION (medida en 20 shorts virales del género)
+1. GANCHO (línea 1, 8-15 palabras): la paradoja dicha como un hecho, que se entienda sola, sin introducción, sin
+   "¿sabías que...?", sin pregunta. Ej.: "En mil quinientos dieciocho, una ciudad intentó curar una epidemia de
+   baile... con más baile."
+2. ESCENA (1-2 líneas): cuándo, dónde y quién, en presente, con algo concreto que se pueda ver.
+3. ESCALADA (3-5 líneas): cada momento más grande que el anterior, conectados con "Pero", "Entonces", "Para colmo".
+   Incluye 1 diálogo corto y 1 chiste de exageración.
 4. MISTERIO (1 línea): la pregunta que el espectador ya se está haciendo ("¿Y por qué nadie lo detuvo?").
-5. GIRO: una línea que empieza con "Resulta que" y explica el mecanismo real con una analogía de la vida
-   COTIDIANA ("Es como cuando...", "Piensa en la última vez que...").
-6. REMATE IRÓNICO (última 1-2 líneas): corto, cierra el giro. Nada de moraleja ni de pedir likes: el pedido
-   de like y seguir al canal lo agrega el sistema solo, como línea final.
-- 110-160 palabras en total, 10-15 líneas, oraciones de ~8-16 palabras, español hablado y natural, sin tecnicismos.
+5. GIRO: una línea que empieza con "Resulta que" y explica el porqué real, simple, con una comparación de la vida
+   cotidiana ("Es como cuando...").
+6. REMATE (última línea): corto, cierra la historia con ironía y deja claro cómo terminó todo. Nada de moraleja ni
+   de pedir likes: el pedido de like y seguir al canal lo agrega el sistema solo, como línea final.
+- 105-145 palabras en total, 10-14 líneas.
 - Cada línea tiene que poder MOSTRARSE. Los datos tienen que ser verdaderos y coincidir con las fuentes; si los
   historiadores no se ponen de acuerdo en un número, di "algunos dicen" o usa la estimación moderna. Los diálogos
   son dramatizaciones: no inventes citas presentadas como reales.
 - Los números y años van con LETRAS, como se dicen ("cuatrocientos", "mil quinientos dieciocho"), para que la voz
-  los lea bien. Los nombres extranjeros, en su forma española si existe."""
+  los lea bien. Los nombres extranjeros, en su forma española si existe; si no, que sean fáciles de pronunciar."""
 
 
 def _grounded_text(prompt):
@@ -203,7 +219,9 @@ Sources you may cite: {json.dumps(sources[:6])}"""
     out = llm.ask_json(prompt, system=sysmsg, temperature=0.85)
     draft = validate(out)
     try:
-        rev = llm.ask_json(REVIEW.format(style=STYLE, notes=notes, draft=json.dumps(out, ensure_ascii=False)),
+        rev = llm.ask_json(REVIEW.format(style=STYLE, notes=notes, draft=json.dumps(out, ensure_ascii=False),
+                                         sets="|".join(SETS), shots="|".join(SHOTS), looks="|".join(LOOKS), acts="|".join(ACTS),
+                                         exprs="|".join(EXPRS), props="|".join(PROPS), fx="|".join(FX), moods="|".join(MOODS)),
                            system=sysmsg, temperature=0.6)
         if isinstance(rev, dict) and "lines" not in rev:  # a veces lo devuelve envuelto: {"short": {...}}
             rev = next((v for v in rev.values() if isinstance(v, dict) and "lines" in v), rev)
@@ -220,18 +238,33 @@ REVIEW = """{style}
 RESEARCH NOTES (the only facts you may use):
 {notes}
 
-Here is a DRAFT short (JSON). You are now the strict editor whose only goal is that viewers watch to the LAST second.
-Check it line by line and fix everything that fails:
-1. HOOK: would a stranger scrolling stop on line 1? Write 5 alternative hooks in your head and keep the strongest
-   (shortest, most paradoxical, concrete; no question, no "sabías que").
-2. Every line adds something new or bigger; cut filler and repetitions; no line longer than 16 words.
-3. At least one short dialogue and one exaggeration joke in the escalation; the "Resulta que" line explains the real
-   mechanism with an everyday analogy; the last line is a short ironic punchline that ends the video.
-4. Facts match the notes exactly; numbers and years written in letters; neutral Latin American Spanish.
-5. Visual beats: every line can be SHOWN with the vocabulary; expressions and acts illustrate the words literally;
+Here is a DRAFT short (JSON). You are now the strict editor. Two goals, in this order:
+(A) a viewer who knows NOTHING about the topic understands the whole story on ONE listen and could retell it;
+(B) they watch to the last second.
+Read the draft OUT LOUD in your head, line by line, as that viewer, and fix everything that fails:
+1. CLARITY: is it obvious who the protagonist is, where and when we are, and what happens? Any line that needs
+   context the viewer doesn't have, any weird word, any confusing "él/ella/esto", any unexplained place, title or
+   currency → rewrite it simply. Max 2 proper names, max 3 numbers in the whole script.
+2. FLOW: the story goes in chronological order, cause → consequence, and every line connects to the previous one
+   (use "Entonces", "Pero", "Así que", "Para colmo", "Al final"...). Rewrite telegraphic or choppy lines as full,
+   natural spoken sentences. Two lines in a row must never sound like separate facts from a list.
+3. HOOK: would a stranger scrolling stop on line 1, and understand it without context? Keep the strongest,
+   simplest paradox (no question, no "sabías que").
+4. Every line adds something new or bigger; cut filler and repetitions; 6-15 words per sentence.
+5. One short dialogue (saying who speaks) and one exaggeration joke in the escalation; the "Resulta que" line
+   explains the real reason simply with an everyday comparison; the last line is a short ironic ending that makes
+   clear how it all ended.
+6. Facts match the notes exactly; numbers and years written in letters; neutral Latin American Spanish.
+7. Visual beats: every line can be SHOWN with the vocabulary; expressions and acts illustrate the words literally;
    shot variety (never the same shot 3 times in a row); fx on the 2-4 strongest moments; era-fitting crowd looks;
    new characters "enter"; at most 4 sets and 3 light changes; 1-3 captions on key numbers.
-6. Title: makes people curious without lying, max 70 characters.
+8. Title: makes people curious without lying, max 70 characters.
+Allowed values for the beats (keep using ONLY these codes): sets {sets}; light day|golden|night;
+shot {shots}; looks {looks}; acts {acts}; expressions {exprs}; props {props}; fx {fx}; mood {moods}.
+
+DRAFT:
+{draft}
+
 Return the FULL improved short as JSON in exactly the same format as the draft: the SAME top-level keys
 (story_key, cover, title, description, tags, mood, cast, lines), not wrapped inside another object."""
 

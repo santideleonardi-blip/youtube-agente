@@ -126,6 +126,8 @@ export class World {
   private sky: THREE.Mesh; private skyMat: THREE.ShaderMaterial; private fog = new THREE.Fog("#bccbec", 25, 420);
   private clouds: THREE.Mesh[] = []; private cloudMaps: Record<"day" | "golden" | "night", THREE.Texture[]>;
   private props = new THREE.Group(); private propKey = "";
+  // StickRider 26/11: cielo de noche (estrellas + luna) y partículas de ambiente (nieve, arena, polvo dorado)
+  private stars!: THREE.Points; private moon!: THREE.Mesh; private parts!: THREE.Points; private partMat!: THREE.PointsMaterial;
   private sunDir = new THREE.Vector3(); private frustum = new THREE.Frustum(); private m4 = new THREE.Matrix4(); private sph = new THREE.Sphere();
 
   constructor(private spec: Spec) {
@@ -151,6 +153,19 @@ export class World {
     }
     buildSets(R);
     R.add(this.props);
+    const dot = (soft: number) => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d")!;
+      const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(soft, "rgba(255,255,255,0.9)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+      g.fillStyle = gr; g.fillRect(0, 0, 64, 64); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
+    { const n = 700, pos = new Float32Array(n * 3);
+      for (let i = 0; i < n; i++) { const a = hh(i, 1) * Math.PI * 2, e = 0.12 + hh(i, 2) * 1.35; pos.set([Math.cos(a) * Math.cos(e) * 1000, Math.sin(e) * 1000, Math.sin(a) * Math.cos(e) * 1000], i * 3); }
+      const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+      this.stars = new THREE.Points(g, new THREE.PointsMaterial({ map: dot(0.3), size: 3.2, sizeAttenuation: false, transparent: true, depthWrite: false, fog: false, color: "#fffbe8" }));
+      this.stars.layers.set(NOINK); this.stars.frustumCulled = false; this.stars.renderOrder = -0.5; R.add(this.stars);
+      this.moon = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: dot(0.82), color: "#fff6d8", transparent: true, depthWrite: false, fog: false }));
+      this.moon.layers.set(NOINK); this.moon.renderOrder = -0.5; R.add(this.moon); }
+    { const n = 420, g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+      this.partMat = new THREE.PointsMaterial({ map: dot(0.45), size: 0.07, transparent: true, depthWrite: false, fog: true });
+      this.parts = new THREE.Points(g, this.partMat); this.parts.layers.set(NOINK); this.parts.frustumCulled = false; R.add(this.parts); }
   }
 
   private actor(i: number) { while (this.actors.length <= i) this.actors.push(new Actor(this.root)); return this.actors[i]; }
@@ -187,6 +202,38 @@ export class World {
     const e = K.sky.e.map((deg) => THREE.MathUtils.degToRad(deg));
     su.e.value.set(e[1], e[2], e[3], e[4]);
     this.sky.position.copy(cam.position);
+    // ---- noche: estrellas y luna; ambiente: partículas según el lugar ----
+    const night = s.light === "night";
+    this.stars.visible = night; this.stars.position.copy(cam.position);
+    this.moon.visible = night;
+    if (night) {
+      const md = this.sunDir.clone().setY(0).normalize().multiplyScalar(-1).applyAxisAngle(V(0, 1, 0), 0.5);
+      this.moon.position.copy(cam.position).addScaledVector(md, 900).setY(cam.position.y + 330);
+      this.moon.scale.setScalar(70); this.moon.lookAt(cam.position);
+    }
+    {
+      const kind = s.set === "snow" ? "snow" : s.set === "desert" ? "sand" : (s.light === "golden" && s.set !== "room" && s.set !== "city") ? "dust" : night && s.set !== "room" ? "firefly" : "";
+      this.parts.visible = !!kind;
+      if (kind) {
+        const arr = (this.parts.geometry.getAttribute("position") as THREE.BufferAttribute).array as Float32Array;
+        const fw2 = V(0, 0, 0); cam.getWorldDirection(fw2); fw2.setY(0).normalize();
+        const cx = cam.position.x + fw2.x * 7, cz = cam.position.z + fw2.z * 7, n = arr.length / 3;
+        const BX = 16, BZ = 16, BY = kind === "sand" ? 2.2 : 9;
+        for (let i = 0; i < n; i++) {
+          let x = hh(i, 11) * BX, y = hh(i, 12) * BY, z = hh(i, 13) * BZ;
+          if (kind === "snow") { y -= t * (0.9 + 0.5 * hh(i, 14)); x += 0.35 * Math.sin(t * 0.9 + i); }
+          else if (kind === "sand") { x += t * (5 + 3 * hh(i, 14)); y += 0.2 * Math.sin(t * 2 + i); }
+          else if (kind === "dust") { x += 0.25 * Math.sin(t * 0.3 + i); y += t * 0.08 + 0.2 * Math.sin(t * 0.5 + i * 2); }
+          else { x += 0.6 * Math.sin(t * 0.7 + i); y = 0.4 + (y % 2.5) + 0.3 * Math.sin(t * 1.3 + i); }
+          const m = (v: number, L: number) => ((v % L) + L) % L;
+          arr[i * 3] = cx - BX / 2 + m(x, BX); arr[i * 3 + 1] = m(y, BY); arr[i * 3 + 2] = cz - BZ / 2 + m(z, BZ);
+        }
+        (this.parts.geometry.getAttribute("position") as THREE.BufferAttribute).needsUpdate = true;
+        this.partMat.size = kind === "snow" ? 0.09 : kind === "sand" ? 0.05 : kind === "dust" ? 0.045 : 0.08;
+        this.partMat.color.set(kind === "snow" ? "#ffffff" : kind === "sand" ? "#f3d9a0" : kind === "dust" ? "#ffe2a8" : "#fff27a");
+        this.partMat.opacity = kind === "sand" ? 0.55 : kind === "dust" ? 0.6 : 0.95;
+      }
+    }
     untone(L.fog, this.fog.color); this.fog.near = L.fogNear; this.fog.far = L.fogFar; scene.fog = this.fog; scene.background = null;
     for (const m of this.clouds) {
       const i = m.userData.k as number, a = (i / 10) * Math.PI * 2 + 0.3 + t * 0.004, d = 620 + (i % 3) * 60, w = 130 + (i % 4) * 30;

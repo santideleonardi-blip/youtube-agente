@@ -93,6 +93,118 @@ const mountain = (b: Batch, m: ReturnType<typeof M>, x: number, z: number, r: nu
 const hill = (b: Batch, m: ReturnType<typeof M>, x: number, z: number, rx: number, h: number) =>
   b.add(new THREE.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2).scale(rx, h, rx * 0.7).translate(x, -0.2, z), m.hill);
 
+
+// ---------- set dressing (StickRider 26/11: más detalle en cada lugar) ----------
+const stripes = (key: string, a: string, c: string) => lam(key, () => ({ map: ctex(key + "T", 256, 256, (g) => {
+  for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? c : a; g.fillRect(i * 32, 0, 32, 256); }
+}), side: THREE.DoubleSide }));
+const lampPost = (b: Batch, m: ReturnType<typeof M>, x: number, z: number, modern = false) => {
+  const iron = lam("iron", () => ({ color: "#3a3644" }));
+  b.add(new THREE.CylinderGeometry(0.07, 0.1, modern ? 5.2 : 3.4, 8).translate(x, (modern ? 5.2 : 3.4) / 2, z), iron);
+  if (modern) {
+    b.add(boxGeo(V(x - 0.05, 5.1, z - 0.05), V(x + 0.05, 5.2, z + 0.9)), iron);
+    b.add(boxGeo(V(x - 0.22, 4.95, z + 0.6), V(x + 0.22, 5.1, z + 1.05)), lam("lampGlass", () => ({ color: "#fff1b0", emissive: new THREE.Color("#6a5a20") })));
+  } else {
+    b.add(new THREE.CylinderGeometry(0.22, 0.14, 0.45, 6).translate(x, 3.62, z), lam("lampGlass", () => ({ color: "#fff1b0", emissive: new THREE.Color("#6a5a20") })));
+    b.add(new THREE.ConeGeometry(0.3, 0.3, 6).translate(x, 4.0, z), iron);
+  }
+};
+const stall = (b: Batch, m: ReturnType<typeof M>, x: number, z: number, yaw: number, k: number) => {
+  const g = new Batch();
+  const cols = [["#d84a3a", "#f6efe0"], ["#3a7ad8", "#f6efe0"], ["#3aa860", "#f6efe0"], ["#e0a030", "#f6efe0"]][k % 4];
+  g.add(boxGeo(V(-1.4, 0, -0.6), V(1.4, 1.0, 0.6), 1), m.woodL);
+  for (const sx of [-1.35, 1.35]) for (const sz of [-0.55, 0.55]) g.add(boxGeo(V(sx - 0.05, 0, sz - 0.05), V(sx + 0.05, 2.4, sz + 0.05)), m.wood);
+  g.add(new THREE.PlaneGeometry(3.1, 1.6).rotateX(-Math.PI / 2 + 0.35).translate(0, 2.45, 0.1), stripes(`awning${k % 4}`, cols[0], cols[1]));
+  for (let i = 0; i < 5; i++) g.add(new THREE.SphereGeometry(0.16, 10, 8).translate(-1.0 + i * 0.5, 1.12, 0.15), lam(`fruit${i % 3}`, () => ({ color: ["#e04a3a", "#f0c040", "#6ab04a"][i % 3] })));
+  const grp = new THREE.Group(); g.build(grp);
+  grp.rotation.y = yaw; grp.position.set(x, 0, z); grp.updateMatrixWorld(true);
+  grp.traverse((o) => { const mm = o as THREE.Mesh; if (mm.isMesh) b.add(mm.geometry.clone().applyMatrix4(mm.matrixWorld), mm.material as THREE.Material); });
+};
+const barrels = (b: Batch, m: ReturnType<typeof M>, x: number, z: number) => {
+  b.add(new THREE.CylinderGeometry(0.38, 0.38, 0.9, 12).translate(x, 0.45, z), m.woodL);
+  b.add(new THREE.CylinderGeometry(0.38, 0.38, 0.9, 12).translate(x + 0.8, 0.45, z + 0.1), m.woodL);
+  b.add(boxGeo(V(x + 0.15, 0, z - 0.95), V(x + 0.95, 0.8, z - 0.15), 1), m.planks);
+};
+const fence = (b: Batch, m: ReturnType<typeof M>, x: number, z0: number, z1: number) => {
+  for (let z = z0; z > z1; z -= 2.2) b.add(boxGeo(V(x - 0.07, 0, z - 0.07), V(x + 0.07, 1.1, z + 0.07)), m.wood);
+  for (const y of [0.45, 0.9]) b.add(boxGeo(V(x - 0.04, y, z1), V(x + 0.04, y + 0.1, z0)), m.woodL);
+};
+const haystack = (b: Batch, x: number, z: number, r: number) =>
+  b.add(new THREE.SphereGeometry(r, 14, 10, 0, Math.PI * 2, 0, Math.PI / 2).scale(1, 1.1, 1).translate(x, 0, z), lam("hay", () => ({ color: "#e0bb5a" })));
+const palm = (b: Batch, m: ReturnType<typeof M>, x: number, z: number, h: number) => {
+  b.add(new THREE.CylinderGeometry(0.16, 0.26, h, 8).translate(x, h / 2, z), lam("palmTrunk", () => ({ color: "#a07850" })));
+  for (let i = 0; i < 6; i++) b.add(new THREE.ConeGeometry(0.35, 2.6, 4).rotateZ(Math.PI / 2 - 0.5).translate(1.2, 0, 0).rotateY((i / 6) * Math.PI * 2).translate(x, h, z), m.leaf[i % 3]);
+};
+const fountain = (b: Batch, m: ReturnType<typeof M>, x: number, z: number) => {
+  b.add(new THREE.CylinderGeometry(2.2, 2.3, 0.7, 20).translate(x, 0.35, z), m.stone);
+  b.add(new THREE.CylinderGeometry(1.9, 1.9, 0.05, 20).translate(x, 0.66, z), m.water);
+  b.add(new THREE.CylinderGeometry(0.3, 0.4, 1.8, 10).translate(x, 1.2, z), m.stone);
+  b.add(new THREE.CylinderGeometry(0.9, 0.5, 0.3, 14).translate(x, 2.1, z), m.stone);
+};
+
+const dress = (b: Batch, m: ReturnType<typeof M>, r: () => number) => {
+  { // street: faroles, barriles y cajones junto a las puertas, un carro
+    const [ox, oz] = ORIGIN.street;
+    for (let z = 10; z > -80; z -= 11) { lampPost(b, m, ox - 3.0, oz + z); lampPost(b, m, ox + 3.0, oz + z - 5.5); }
+    for (const [x, z] of [[-2.6, -6], [2.4, -14], [-2.5, -24], [2.3, -33], [-2.6, -45]]) barrels(b, m, ox + x, oz + z);
+  }
+  { // square: puestos de mercado con toldos, fuente, faroles, árboles
+    const [ox, oz] = ORIGIN.square;
+    for (let k = 0; k < 4; k++) { stall(b, m, ox - 19, oz - 14 + k * 7, Math.PI / 2, k); stall(b, m, ox + 19, oz - 12 + k * 7, -Math.PI / 2, k + 1); }
+    fountain(b, m, ox - 11, oz - 17);
+    for (const [x, z] of [[-6, -20], [6, -20], [-14, 6], [14, 6], [-24, -24], [24, -24]]) lampPost(b, m, ox + x, oz + z);
+    for (const [x, z] of [[-23, 14], [23, 14], [-23, -26], [23, -26]]) tree(b, m, ox + x, oz + z, 7, Math.abs(x + z));
+    barrels(b, m, ox + 9, oz - 22);
+  }
+  { // road: cercas, fardos de heno
+    const [ox, oz] = ORIGIN.road;
+    fence(b, m, ox - 3.6, oz + 30, oz - 120); fence(b, m, ox + 3.6, oz + 30, oz - 120);
+    for (let k = 0; k < 10; k++) haystack(b, ox + (k % 2 ? 1 : -1) * (9 + r() * 20), oz + 10 - k * 14, 1.4 + r() * 0.8);
+  }
+  { // field: cerca, heno, una casita de campo
+    const [ox, oz] = ORIGIN.field;
+    fence(b, m, ox - 8, oz + 10, oz - 40);
+    for (let k = 0; k < 8; k++) haystack(b, ox + (r() - 0.5) * 50, oz - 10 - r() * 50, 1.3 + r() * 0.8);
+    house(b, ox + 16, oz - 30, -0.4, 7, 7, 5.5, 3);
+  }
+  { // desert: palmeras, tiendas
+    const [ox, oz] = ORIGIN.desert;
+    for (const [x, z, h] of [[-9, -10, 6], [-11, -14, 7.5], [10, -12, 6.5], [13, -18, 8], [-18, -30, 7], [20, -34, 6]]) palm(b, m, ox + x, oz + z, h);
+  }
+  { // snow: cabaña de troncos, cerca
+    const [ox, oz] = ORIGIN.snow;
+    house(b, ox - 14, oz - 18, 0.5, 7, 6, 4.5, 6);
+    fence(b, m, ox + 7, oz + 6, oz - 30);
+  }
+  { // sea: barriles y cajones en cubierta, un barco lejano
+    const [ox, oz] = ORIGIN.sea;
+    barrels(b, m, ox - 3.1, oz + 5.5);
+    b.add(boxGeo(V(ox + 2.4, 1.2, oz + 6.5), V(ox + 3.4, 2.1, oz + 7.5), 1), m.planks);
+    b.add(boxGeo(V(ox + 60, -2, oz - 160), V(ox + 76, 2, oz - 154)), m.hull);
+    b.add(boxGeo(V(ox + 67.8, 2, oz - 157.2), V(ox + 68.2, 14, oz - 156.8)), m.wood);
+    b.add(boxGeo(V(ox + 64, 5, oz - 157.1), V(ox + 72, 12, oz - 157)), m.sail);
+  }
+  { // room: alfombra, estante con libros, cuadro, lámpara, sillas
+    const [ox, oz] = ORIGIN.room;
+    b.add(boxGeo(V(ox - 2.2, 0.01, oz - 3.2), V(ox + 2.2, 0.03, oz - 0.6)), lam("rug", () => ({ map: stripes("rugT", "#8a3a3a", "#a85a3a").map ?? undefined, color: "#ffffff" })));
+    b.add(boxGeo(V(ox - 5.8, 0, oz - 5.9), V(ox - 3.6, 3.4, oz - 5.3), 1), m.wood);
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 7; j++)
+      b.add(boxGeo(V(ox - 5.7 + j * 0.3, 0.3 + i * 1.05, oz - 5.75), V(ox - 5.48 + j * 0.3, 1.0 + i * 1.05 - (j % 3) * 0.08, oz - 5.35)), lam(`book${(i + j) % 4}`, () => ({ color: ["#c8323a", "#3a6ab0", "#e0b040", "#3a9a5a"][(i + j) % 4] })));
+    b.add(boxGeo(V(ox + 3.2, 1.6, oz - 5.98), V(ox + 5.2, 3.0, oz - 5.9)), m.woodL);
+    b.add(boxGeo(V(ox + 3.35, 1.75, oz - 5.9), V(ox + 5.05, 2.85, oz - 5.86)), lam("painting", () => ({ map: ctex("paintingT", 256, 160, (g) => {
+      g.fillStyle = "#8fc0e0"; g.fillRect(0, 0, 256, 160); g.fillStyle = "#5a9a4a"; g.fillRect(0, 100, 256, 60);
+      g.fillStyle = "#f0d060"; g.beginPath(); g.arc(190, 45, 22, 0, 7); g.fill();
+    }) })));
+    b.add(new THREE.CylinderGeometry(0.05, 0.08, 1.7, 8).translate(ox + 4.8, 0.85, oz - 4.5), lam("iron", () => ({ color: "#3a3644" })));
+    b.add(new THREE.ConeGeometry(0.4, 0.45, 12, 1, true).translate(ox + 4.8, 1.85, oz - 4.5), lam("lampShade", () => ({ color: "#f0e0b0", side: THREE.DoubleSide })));
+  }
+  { // city: faroles, árboles en la vereda, autos estacionados
+    const [ox, oz] = ORIGIN.city;
+    for (let z = 30; z > -200; z -= 14) { lampPost(b, m, ox - 6.2, oz + z, true); lampPost(b, m, ox + 6.2, oz + z - 7, true); }
+    for (let z = 23; z > -200; z -= 14) { tree(b, m, ox - 7.4, oz + z, 5.5, Math.abs(z)); tree(b, m, ox + 7.4, oz + z - 7, 5.5, Math.abs(z) + 1); }
+  }
+};
+
 export const buildSets = (root: THREE.Object3D) => {
   const b = new Batch(), m = M(), r = rng(5);
   // ---------- street: a narrow cobbled lane between gabled houses (runs along z) ----------
@@ -215,6 +327,7 @@ export const buildSets = (root: THREE.Object3D) => {
       z -= w + 1; k++;
     }
   }
+  dress(b, m, r);
   b.build(root);
 };
 
