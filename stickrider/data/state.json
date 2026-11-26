@@ -10,9 +10,9 @@
    "youtube_id": "Qo3-Duqh-F0",
    "publish_at": "2026-11-25T00:14:00Z",
    "published_manually": true,
-   "views": 47,
-   "likes": 1,
-   "comments": 0
+   "views": 1196,
+   "likes": 27,
+   "comments": 2
   },
   {
    "date": "2026-11-25",
@@ -22,7 +22,20 @@
    "mood": "playful",
    "seconds": 45.9,
    "youtube_id": "trH_paJJxzc",
-   "publish_at": "2026-11-26T00:00:00Z"
+   "publish_at": "2026-11-26T00:00:00Z",
+   "views": 819,
+   "likes": 13,
+   "comments": 0
+  },
+  {
+   "date": "2026-11-26",
+   "story_key": "operacion-mincemeat-huelva-1943",
+   "title": "El plan secreto que ganó la guerra con un muerto",
+   "hook": "En mil novecientos cuarenta y tres, los Aliados necesitaban invadir Sicilia desesperadamente.",
+   "mood": "mystery",
+   "seconds": 59.9,
+   "youtube_id": "9ZXTcLATS3o",
+   "publish_at": "2026-11-27T00:00:00Z"
   }
  ]
 }
