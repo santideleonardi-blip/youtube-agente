@@ -155,7 +155,7 @@
       "uploaded_at": "2026-11-16T21:07:19.035931+00:00",
       "publish_at": "2026-11-17T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1247,
+      "views": 1248,
       "likes": 27,
       "retention_end": 0.165,
       "drops": [
@@ -266,7 +266,7 @@
       "uploaded_at": "2026-11-17T22:20:30.442942+00:00",
       "publish_at": "2026-11-18T20:00:00+00:00",
       "publish_hour_et": 15,
-      "views": 1131,
+      "views": 1134,
       "likes": 24,
       "retention_end": 0.169,
       "drops": [
@@ -981,7 +981,7 @@
       "comment_id": "Ugw6bIuuEdnA6oaMEZp4AaABAg",
       "views": 15,
       "likes": 0,
-      "avg_view_pct": 40.0,
+      "avg_view_pct": 38.2,
       "subs_gained": 0,
       "minutes_watched": 2
     },
@@ -1025,7 +1025,10 @@
       "first_comment": "Would you trade normal hands for gecko grip even if you got stuck to everything? 👇",
       "comment_id": "Ugz-DVVOtO6758Cy8hN4AaABAg",
       "views": 0,
-      "likes": 0
+      "likes": 0,
+      "avg_view_pct": 0.0,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261124_210737",
@@ -1066,7 +1069,7 @@
       "publish_hour_et": 15,
       "first_comment": "Do you think humanity could survive 5 seconds of Earth stopping? Yes or no? 🌍",
       "comment_id": "UgzGRNNx-z6i3us5WaJ4AaABAg",
-      "views": 0,
+      "views": 1,
       "likes": 0
     },
     {
@@ -1210,20 +1213,52 @@
       "uploaded_at": "2026-11-25T20:49:17.586203+00:00",
       "publish_at": "2026-11-26T20:00:00+00:00",
       "publish_hour_et": 15,
-      "first_comment": "Would you rather have a 41G chameleon tongue or mantis shrimp punch power? 👇"
+      "first_comment": "Would you rather have a 41G chameleon tongue or mantis shrimp punch power? 👇",
+      "comment_id": "Ugw7bwERb64fncRdzlp4AaABAg",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261126_200727",
+      "youtube_id": "miOu5JEu36k",
+      "title": "What Would Happen If You Stayed Underwater For 30 Days? #Underwater #shorts",
+      "topic": "What would happen if you stayed submerged in water for 30 days?",
+      "format": "short",
+      "series": "challenge",
+      "duration": 32.46,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If you stayed submerged in water for thirty days, your skin would start dissolving off your body!"
+        },
+        {
+          "start": 6.02,
+          "narration": "By day five, extreme maceration turns your hands into mush, but that is not even the worst part."
+        },
+        {
+          "start": 12.33,
+          "narration": "Day fifteen brings severe muscle atrophy as your limbs weaken, leaving you unable to swim."
+        },
+        {
+          "start": 18.46,
+          "narration": "By day twenty, horrific fungal infections eat through your entire body, turning your flesh green."
+        },
+        {
+          "start": 24.66,
+          "narration": "Will you survive this brutal aquatic nightmare?"
+        },
+        {
+          "start": 27.43,
+          "narration": "Only if you stay out of the bath long enough for skin that is dissolving off your body!"
+        }
+      ],
+      "uploaded_at": "2026-11-26T20:44:40.757755+00:00",
+      "publish_at": "2026-11-27T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "How long do you think you could survive soaking in a bathtub? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-15T22:49:13.928167+00:00",
-      "notes": [
-        "Hook viewers within the first 2 seconds by delivering the core hypothetical immediately—avoid introductions, channel names, or slow build-ups.",
-        "Use open loops mid-script (e.g., 'The final side effect changes everything...') to hold retention past the 30-second mark.",
-        "Implement pattern interrupts every 3-5 seconds (visual switches, sound cues, graphic overlays) to keep the animation visually stimulating.",
-        "Focus script flow on immediate sensory/visceral consequences before diving into deeper scientific or historical explanations."
-      ],
-      "reason": "With only 1 Short currently published and no Long videos yet, creating a second Short allows us to complete a 2 Shorts to 1 Long sequence (aiming for the 33% long-form mix on video 3) while establishing an initial baseline."
-    },
     {
       "date": "2026-11-16T01:57:58.368309+00:00",
       "notes": [
@@ -1412,6 +1447,16 @@
         "Introduce pattern interrupts (fast zooms, sound SFX, cutaways) every 3-4 seconds to maintain attention across both formats."
       ],
       "reason": "Following the growth strategist's target ratio of ~20% long-form (1 out of every 5 videos), a long video is due after a streak of 9 consecutive Shorts. To maximize its chances of algorithmic pickup, it should adapt the channel's highest-retaining theme: animal superpowers or biological survival."
+    },
+    {
+      "date": "2026-11-26T20:11:11.506637+00:00",
+      "notes": [
+        "Hook viewers in the first 2 seconds with immediate visual stakes rather than introductory explanations.",
+        "Capitalize on animal superpower and gaming physics topics, which sustain high retention (47% - 65%).",
+        "Use open loops mid-script to keep retention high past the 15-second mark on short-form videos.",
+        "Implement pattern interrupts (sound effects, visual switches) every 3-4 seconds to prevent steep drops seen in passive scenario scripts."
+      ],
+      "reason": "The most recent upload was long-form ('Chameleon Tongue'). Given the current strategy of roughly 1 long video for every 4-5 Shorts on a small channel (9 subscribers), the next video should be a Short to continue leveraging higher view averages (203 avg views) for subscriber acquisition."
     }
   ],
   "format_stats": {
@@ -1420,27 +1465,27 @@
       "avg_views": 203
     },
     "long": {
-      "count": 2,
-      "avg_views": 2
+      "count": 3,
+      "avg_views": 1
     }
   },
   "publish_slots_et": [
     15
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Electric Eel Power' at 65.1%, 'Dung Beetle Strength' at 47.0%, 'Cheetah' at 40.0%) consistently yield the channel's strongest retention and steady viewer interest.",
-    "Visceral survival scenarios ('Blue Whale Swallowed You') generate the highest initial click volume (32 views), but suffer from high drop-off (16.8% avg view pct) unless paired with immediate stakes.",
-    "Gaming/pop-culture hypotheticals ('GTA 6') achieve solid short-form retention (63.4%), proving effective as secondary interest hooks alongside animal superpowers.",
-    "Long-form content currently struggles with zero algorithmic push (averaging 2 views, ~3% retention), meaning long-form titles must strictly adapt proven, high-performing Short concepts (e.g., animal super-abilities)."
+    "Biomechanical animal superpower hypotheticals ('Electric Eel Power' at 65.1%, 'Dung Beetle Strength' at 47.0%, 'Cheetah' at 38.2%) consistently yield the channel's strongest retention.",
+    "Gaming and pop-culture hypotheticals ('GTA 6') achieve high short-form retention (63.4%), proving effective for top-of-funnel reach.",
+    "Visceral survival scenarios ('Blue Whale Swallowed You') generate higher click volume (32 views) but require tighter pacing to fix steep retention drop-off (16.8%).",
+    "Long-form videos currently receive minimal algorithmic push (averaging 1 view), reinforcing that Shorts remain the primary vehicle for acquiring new subscribers."
   ],
   "strategy": {
     "daily_target": 1,
     "long_share": 0.2,
     "focus_notes": [
-      "Double down on the high-performing 'Human Body + Extreme Animal Capabilities' niche (e.g., Anaconda Grip, Tardigrade Immunity, Chameleon Camouflage), as animal-trait modifications account for over 95% of total channel views and all subscriber conversions.",
-      "Produce and publish the first long-form (8-10 minute) video centered around human body limits ('What Would Happen If You Never Slept?') using a progressive timeline framework (24 Hours, 3 Days, 1 Week, 1 Month) to initiate watch hour accumulation.",
-      "Inject distinct storytelling variations and character-driven moments with Max in every script (e.g., alternating between comedic everyday mishaps and dramatic sci-fi survival scenarios) to prevent repetitive content patterns and comply with YouTube's authenticity policies.",
-      "Eliminate abstract pop-culture/gaming concepts (e.g., GTA 6) and low-relatability subjects, keeping 100% of upcoming topics focused on clear, visually dramatic body transformations."
+      "Doble click estricto en la interseccion 'Cuerpo humano + Animales extremos' (ej: mordida de anaconda, inmunidad de tardigrado), ya que los datos confirman que el 100% de las suscripciones vienen de ahi.",
+      "Prohibido usar conceptos abstractos, videojuegos o cultura pop (chau GTA 6), enfocandose un 100% en transformaciones fisicas directas y visuales.",
+      "Lanzar el primer video largo (8-10 mins) titulado 'What Would Happen If You Never Slept?' usando una linea de tiempo progresiva para arrancar con las horas de reproduccion.",
+      "Variar los ganchos iniciales y darle mas protagonismo a Max (el personaje) alternando entre torpezas cotidianas y supervivencia sci-fi para evitar penalizaciones por contenido repetitivo."
     ],
     "cadence_changed_at": "2026-11-23T22:38:50.354424+00:00",
     "cadence_reason": "se mantiene en 1/día (la próxima revisión es a los 7 días del último cambio)",
@@ -1448,23 +1493,23 @@
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 3042,
-      "total_views": 3049,
-      "video_count": 17,
+      "shorts_views_90d": 3045,
+      "total_views": 3054,
+      "video_count": 18,
       "long_minutes_28d": 0.0,
-      "shorts_views_28d": 3042
+      "shorts_views_28d": 3045
     },
     "pace": {
-      "views_day": 113.0,
+      "views_day": 113.1,
       "subs_day": 0.48,
       "long_hours_day": 0.0,
       "shorts_views_day": 109,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-25T20:28:50.279129+00:00",
-    "experiment": "Test a 'High-Stakes Challenge' hook style in Shorts ('What Would Happen If You Had Anaconda Constriction vs. A Steel Door?') against standard descriptive hooks to see if dramatic visual conflict increases Average Percentage Viewed (APV) past 45%. Success metric: APV > 45% and at least 3 subscribers per Short.",
-    "summary_es": "El canal viene teniendo muy buen enganche en los Shorts sobre superpoderes de animales aplicados al cuerpo humano, que son los que nos trajeron casi todos los suscriptores. El siguiente paso es lanzar nuestro primer video largo sobre límites del cuerpo humano para empezar a sumar horas de reproducción y mantener la variedad visual para evitar contenido repetitivo."
+    "last_run": "2026-11-26T20:07:27.852240+00:00",
+    "experiment": "Probar un gancho de pregunta invertida (ej: 'Could you survive if...') en lugar del tradicional 'What would happen if...' en los proximos 3 Shorts, y evaluar si mejora la retencion en los primeros 5 segundos en comparacion con el promedio actual del 36%.",
+    "summary_es": "Che, venimos re bien con los cortos de animales y fuerza sobrehumana, que son los que realmente suman subs, aunque tenemos que meterle pilas a los videos largos para juntar horas. El sistema va a descartar los temas de jueguitos y se va a concentrar un 100% en transformar el cuerpo humano con datos grosos y un cacho de humor."
   },
   "growth_history": [
     {
@@ -1574,6 +1619,15 @@
       "views_day": 113.0,
       "daily_target": 1,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-26",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3045,
+      "views_day": 113.1,
+      "daily_target": 1,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1588,8 +1642,8 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-25",
-    "images": 16,
+    "date": "2026-11-26",
+    "images": 6,
     "exhausted": false
   },
   "series_stats": {
@@ -1602,8 +1656,8 @@
       "avg_views": 14
     },
     "curiosity": {
-      "count": 2,
-      "avg_views": 8
+      "count": 3,
+      "avg_views": 5
     },
     "classic": {
       "count": 2,
