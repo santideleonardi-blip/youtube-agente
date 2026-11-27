@@ -10,8 +10,8 @@
    "youtube_id": "Qo3-Duqh-F0",
    "publish_at": "2026-11-25T00:14:00Z",
    "published_manually": true,
-   "views": 1196,
-   "likes": 27,
+   "views": 1206,
+   "likes": 28,
    "comments": 2
   },
   {
@@ -23,8 +23,8 @@
    "seconds": 45.9,
    "youtube_id": "trH_paJJxzc",
    "publish_at": "2026-11-26T00:00:00Z",
-   "views": 819,
-   "likes": 13,
+   "views": 1040,
+   "likes": 25,
    "comments": 0
   },
   {
@@ -35,7 +35,20 @@
    "mood": "mystery",
    "seconds": 59.9,
    "youtube_id": "9ZXTcLATS3o",
-   "publish_at": "2026-11-27T00:00:00Z"
+   "publish_at": "2026-11-27T00:00:00Z",
+   "views": 883,
+   "likes": 42,
+   "comments": 2
+  },
+  {
+   "date": "2026-11-27",
+   "story_key": "liechtenstein-ejercito-81-soldados-1866",
+   "title": "El único ejército que sufrió bajas negativas en una guerra",
+   "hook": "En mil ochocientos sesenta y seis, un ejército volvió de la guerra con más soldados.",
+   "mood": "jig",
+   "seconds": 48.2,
+   "youtube_id": "HsvYronXtEQ",
+   "publish_at": "2026-11-28T00:00:00Z"
   }
  ]
 }
