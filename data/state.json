@@ -847,7 +847,7 @@
       "publish_at": "2026-11-22T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
-      "views": 3,
+      "views": 4,
       "likes": 0,
       "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg",
       "avg_view_pct": 13.9,
@@ -1215,7 +1215,7 @@
       "publish_hour_et": 15,
       "first_comment": "Would you rather have a 41G chameleon tongue or mantis shrimp punch power? 👇",
       "comment_id": "Ugw7bwERb64fncRdzlp4AaABAg",
-      "views": 0,
+      "views": 2,
       "likes": 0
     },
     {
@@ -1255,20 +1255,164 @@
       "uploaded_at": "2026-11-26T20:44:40.757755+00:00",
       "publish_at": "2026-11-27T20:00:00+00:00",
       "publish_hour_et": 15,
-      "first_comment": "How long do you think you could survive soaking in a bathtub? 👇"
+      "first_comment": "How long do you think you could survive soaking in a bathtub? 👇",
+      "comment_id": "UgzQW259qUYuTOj_pYt4AaABAg",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261127_195458",
+      "youtube_id": "0nWO96lsI9c",
+      "title": "What Would Happen If Friction Disappeared For 24 Hours? #Friction",
+      "topic": "What would happen if friction disappeared for 24 hours?",
+      "format": "long",
+      "series": "curiosity",
+      "duration": 507.7,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If friction vanished right now, taking a single step would instantly send your legs flying out from under you like you stepped on ultra-greased ice! You’d slam hard into the ground, sliding uncontrollably down your hallway forever!"
+        },
+        {
+          "start": 13.64,
+          "narration": "Slipping on your living room rug is just the first second of this chaotic disaster. Right after you hit the floor, every tied knot on Earth instantly unravels, causing your shoelaces to snap wide open on their own!"
+        },
+        {
+          "start": 26.94,
+          "narration": "00:01 - Minute 1. You desperately reach out to grab the edge of your heavy wooden desk to stop yourself, but your fingertips slide right off the smooth finish. Holding onto any surface without friction gripping your skin is impossible!"
+        },
+        {
+          "start": 42.01,
+          "narration": "You grab for your smartphone to call for help, but it shoots straight out of your palm like a bar of wet soap. It rockets across the floor, crashing into the baseboard and bouncing back without losing a single drop of speed!"
+        },
+        {
+          "start": 54.91,
+          "narration": "00:05 - Minute 5. You slide right out your front door and onto the street, where complete highway mayhem has broken out. Every single moving vehicle has turned into an unstoppable, land-gliding projectile moving at relentless speed!"
+        },
+        {
+          "start": 70.64,
+          "narration": "Drivers stomp furiously on their brakes, but without friction between the rubber brake pads and metal rotors, the brakes do absolutely nothing! Cars spin sideways like air-hockey pucks, colliding smoothly while continuing to slide endlessly down the highway!"
+        },
+        {
+          "start": 86.16,
+          "narration": "Pedestrians who were out for a simple morning walk are now helpless gliders, spinning across intersections like bowling balls! But wait... what if you just lie totally flat on the concrete? Would you finally be safe from the chaos?"
+        },
+        {
+          "start": 100.1,
+          "narration": "Not even close! 01:00 - Hour 1. The world around you begins to literally untie itself. Millions of nails, screws, and bolts inside buildings are kept in place purely by static friction pressing against wood and metal strands."
+        },
+        {
+          "start": 115.83,
+          "narration": "Without friction holding them tight, screws back out on their own and nails glide effortlessly out of structural frames! Shelves collapse, doors drop from hinges, and wooden framing inside homes begins to split wide open around you!"
+        },
+        {
+          "start": 129.85,
+          "narration": "In high-rise skyscrapers, elevator emergency brakes fail completely as heavy steel cables slide completely uselessly through smooth clamping jaws! Meanwhile, out in wild nature, the animal kingdom is panicking just as hard as humanity!"
+        },
+        {
+          "start": 145.73,
+          "narration": "02:00 - Hour 2. Take a look at geckos! Geckos normally run up glass windows using microscopic van der Waals forces—a specialized atomic form of electromagnetic friction! Without it, every gecko instantly peels off ceilings and drops like heavy rain!"
+        },
+        {
+          "start": 163.6,
+          "narration": "Over on the African savannah, a cheetah tries to sprint after a gazelle. But as soon as its paws hit the dirt, its claws cut through the zero-friction soil like butter, sending its legs spinning wildly like a cartoon wheel!"
+        },
+        {
+          "start": 177.62,
+          "narration": "The mighty cheetah slides helplessly sideways into a thorn bush without moving forward an inch! But animal struggles are nothing compared to the terrifying anatomical nightmare taking place right now inside your very own body..."
+        },
+        {
+          "start": 191.76,
+          "narration": "04:00 - Hour 4. Have you ever wondered how your body moves food after lunch? Your digestive system relies on muscle contractions called peristalsis, using friction to grip and push meals through your stomach and long intestines!"
+        },
+        {
+          "start": 207.09,
+          "narration": "Without friction to hold back digested food, lunch glides straight through your entire gastrointestinal tract at warp speed! Meanwhile, your circulatory system experiences a dangerous surge as blood slides past smooth artery walls without fluid drag!"
+        },
+        {
+          "start": 223.76,
+          "narration": "Normally, blood drag creates wall shear stress that regulates pressure. Without fluid friction slowing it down, your heart pumps blood at dangerous velocities, causing your blood pressure to spike violently through your pulsing blood vessels!"
+        },
+        {
+          "start": 238.69,
+          "narration": "What about simply taking a breath? As you exhale, air shoots out of your mouth like a rocket nozzle! In a zero-friction world, every heavy exhale generates equal counter-thrust, pushing your upper body backward across the shiny floor!"
+        },
+        {
+          "start": 252.69,
+          "narration": "06:00 - Hour 6. Outside, Earth's weather systems transform into a global monster storm. Normally, mountain ranges, forests, and ground terrain create surface friction that slows down global wind currents and keeps atmospheric jet streams under control."
+        },
+        {
+          "start": 269.81,
+          "narration": "With land friction completely gone, wind currents accelerate faster than a firing bullet! Gentle afternoon breezes turn into roaring hyper-hurricanes, tearing across continents uninterrupted because there is no ground drag to ever slow the air masses down!"
+        },
+        {
+          "start": 286.08,
+          "narration": "09:00 - Hour 9. Ocean waves undergo a super strange physics transformation. Without surface friction between moving air and the water, passing wind can no longer grab surface water to create new ocean waves!"
+        },
+        {
+          "start": 301.41,
+          "narration": "However, existing ocean waves become indestructible forces! When giant waves travel toward the shore, they don't break, foam, or lose energy against the shallow sea floor. Instead, massive tsunamis glide miles inland over smooth ground like liquid ice!"
+        },
+        {
+          "start": 317.95,
+          "narration": "12:00 - Hour 12. Halfway through the ordeal, the global temperature plummets! Did you know a huge amount of Earth's heat comes from mechanical and molecular friction? Car engines, flowing rivers, moving air, and grinding rocks generate heat."
+        },
+        {
+          "start": 333.42,
+          "narration": "With all friction gone, kinetic energy stops converting into thermal energy. The planet begins freezing into a silent, icy world while you continue sliding helplessly along the ground! Is there ANY secret trick to finally control your movement?"
+        },
+        {
+          "start": 348.66,
+          "narration": "Yes! You have to tap into Sir Isaac Newton’s Third Law of Motion! For every action, there is an equal and opposite reaction! Since your shoes can't push off the floor, you must rely on rocket recoil propulsion!"
+        },
+        {
+          "start": 361.68,
+          "narration": "You grab heavy items like your shoes, water bottles, or books and hurl them forward in the direction you are drifting. Throwing a heavy boot out in front of you creates backwards thrust, slowing down your slide!"
+        },
+        {
+          "start": 374.19,
+          "narration": "16:00 - Hour 16. Deep under Earth's crust, tectonic plates are breaking free. Tectonic plates normally grind together extremely slowly because immense friction locks continental rocks in place along fault lines for hundreds of years."
+        },
+        {
+          "start": 389.93,
+          "narration": "Without friction holding those fault lines closed, centuries of built-up pressure release instantly! Entire massive continental plates slip smoothly past one another, triggering continuous global mega-earthquakes without the usual sound of grinding rock!"
+        },
+        {
+          "start": 405.68,
+          "narration": "20:00 - Hour 20. Modern human civilization comes to a absolute, dead stop. Power plants go black because generator turbines spin out of control on frictionless bearings, unable to transfer mechanical energy into electrical power grids!"
+        },
+        {
+          "start": 422.35,
+          "narration": "23:59 - Minute 1439. Only sixty seconds remain on this terrifying day. You’ve managed to survive by sliding into a curved fiberglass dome, spinning in circles like a marble inside a bowl while giant winds roar overhead!"
+        },
+        {
+          "start": 439.06,
+          "narration": "The clock strikes zero! 24:00 - Hour 24! Friction instantly vanishes no more—it bursts back into existence in a fraction of a microsecond! But here is the catastrophic secret physics was hiding from you the entire time..."
+        },
+        {
+          "start": 454.79,
+          "narration": "Every moving object on Earth—cars, ocean waves, air masses, and your body—is still traveling at high speed when friction returns! Suddenly, rubber tires, shoe soles, and water currents grab the ground with extreme, instantaneous braking force!"
+        },
+        {
+          "start": 470.27,
+          "narration": "The sudden stop converts massive momentum into instant, scorching heat! Sliding cars flip into violent explosive rolls, shoe soles melt on pavement, and screeching sounds echo across the globe as everything comes to a sudden halt!"
+        },
+        {
+          "start": 484.98,
+          "narration": "You tumble forward hard as your clothes grip the ground, skidding to a halt, scraped and dizzy but alive after surviving twenty-four whole hours in a world with zero friction!"
+        },
+        {
+          "start": 496.18,
+          "narration": "What would happen if gravity doubled overnight instead? Click the video on your screen right now to find out, and don't forget to hit that subscribe button so you never miss our next crazy scenario!"
+        }
+      ],
+      "uploaded_at": "2026-11-27T20:24:21.644952+00:00",
+      "publish_at": "2026-11-28T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "Where would you end up sliding if all friction vanished right now? 👇"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-16T01:57:58.368309+00:00",
-      "notes": [
-        "Hook the viewer within the first 2 seconds using a visceral visual and immediate question; avoid channel intros, logos, or throat-clearing preamble.",
-        "Plant an explicit open loop early (e.g., '...and by the third second, human bodies do something horrifying') so viewers stay through the mid-point.",
-        "Deploy visual or audio pattern interrupts every 3 to 4 seconds (camera punch-ins, sound effects, sudden motion) to reset viewer attention.",
-        "Ground abstract hypothetical physics in relatable human consequences (e.g., your bones collapsing vs. simple numerical mass calculations)."
-      ],
-      "reason": "Following the test mix target of ~33% long-form content (1 in every 3 videos), producing a second Short now sets up video 3 to be Long, completing the 2 Shorts to 1 Long cycle."
-    },
     {
       "date": "2026-11-16T13:33:44.321732+00:00",
       "notes": [
@@ -1457,35 +1601,45 @@
         "Implement pattern interrupts (sound effects, visual switches) every 3-4 seconds to prevent steep drops seen in passive scenario scripts."
       ],
       "reason": "The most recent upload was long-form ('Chameleon Tongue'). Given the current strategy of roughly 1 long video for every 4-5 Shorts on a small channel (9 subscribers), the next video should be a Short to continue leveraging higher view averages (203 avg views) for subscriber acquisition."
+    },
+    {
+      "date": "2026-11-27T20:01:31.015493+00:00",
+      "notes": [
+        "Hook viewers within the first 2 seconds with an immediate visceral question or high-stakes hypothetical—avoid slow intros or channel greetings.",
+        "Capitalize on animal superpower hypotheticals (e.g., Electric Eel, Dung Beetle) as they consistently yield strong retention above 45%.",
+        "Integrate visual pattern interrupts every 3-5 seconds (zoom-ins, sound effects, dynamic animation shifts) to keep retention high on survival topics.",
+        "Open curiosity loops in the first 5 seconds and delay the answer until the final 3 seconds to push completion rates above 60%."
+      ],
+      "reason": "With 3 long videos out of 19 total (15.8%), creating a long-form video next reaches the growth strategist's target mix of 20% (4 out of 20 videos)."
     }
   ],
   "format_stats": {
     "short": {
-      "count": 15,
-      "avg_views": 203
+      "count": 16,
+      "avg_views": 191
     },
     "long": {
       "count": 3,
-      "avg_views": 1
+      "avg_views": 2
     }
   },
   "publish_slots_et": [
     15
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Electric Eel Power' at 65.1%, 'Dung Beetle Strength' at 47.0%, 'Cheetah' at 38.2%) consistently yield the channel's strongest retention.",
-    "Gaming and pop-culture hypotheticals ('GTA 6') achieve high short-form retention (63.4%), proving effective for top-of-funnel reach.",
-    "Visceral survival scenarios ('Blue Whale Swallowed You') generate higher click volume (32 views) but require tighter pacing to fix steep retention drop-off (16.8%).",
-    "Long-form videos currently receive minimal algorithmic push (averaging 1 view), reinforcing that Shorts remain the primary vehicle for acquiring new subscribers."
+    "Biomechanical animal superpower hypotheticals ('Electric Eel Power' at 65.1% retention, 'Dung Beetle Strength' at 47.0%, 'Cheetah' at 38.2%) consistently yield the channel's strongest retention.",
+    "Visceral survival scenarios ('Blue Whale Swallowed You') generate higher click volume (32 views) but require tighter pacing to fix steep retention drop-offs (16.8%).",
+    "Challenge and adventure series outperform curiosity and classic series in average view count (15 and 12 views vs 5 and 4 views).",
+    "Long-form videos currently receive minimal algorithmic push (averaging 2 views vs 191 for Shorts), reinforcing that Shorts remain the primary vehicle for subscriber growth."
   ],
   "strategy": {
     "daily_target": 1,
     "long_share": 0.2,
     "focus_notes": [
-      "Doble click estricto en la interseccion 'Cuerpo humano + Animales extremos' (ej: mordida de anaconda, inmunidad de tardigrado), ya que los datos confirman que el 100% de las suscripciones vienen de ahi.",
-      "Prohibido usar conceptos abstractos, videojuegos o cultura pop (chau GTA 6), enfocandose un 100% en transformaciones fisicas directas y visuales.",
-      "Lanzar el primer video largo (8-10 mins) titulado 'What Would Happen If You Never Slept?' usando una linea de tiempo progresiva para arrancar con las horas de reproduccion.",
-      "Variar los ganchos iniciales y darle mas protagonismo a Max (el personaje) alternando entre torpezas cotidianas y supervivencia sci-fi para evitar penalizaciones por contenido repetitivo."
+      "Mantener el foco estricto en la temática 'Cuerpo Humano + Habilidades Animales Supremas' (ej. inmunidad de tardígrado, toxina de mamba negra), pero cambiando la estructura de los títulos para evitar penalizaciones por contenido repetitivo.",
+      "Utilizar activamente al personaje Max en el primer segundo del video (hook visual) mostrando una consecuencia cómica inmediata en lugar de una pregunta estática.",
+      "Estructurar los videos largos (20% de la producción) en formato de línea de tiempo ('Minuto 1', 'Hora 1', 'Día 30') para mantener la retención alta y empezar a acumular horas de reproducción reales.",
+      "Eliminar por completo cualquier concepto abstracto, gaming o cultura pop sin base biológica (ej. GTA 6), dado su nulo rendimiento en el canal."
     ],
     "cadence_changed_at": "2026-11-23T22:38:50.354424+00:00",
     "cadence_reason": "se mantiene en 1/día (la próxima revisión es a los 7 días del último cambio)",
@@ -1494,22 +1648,22 @@
       "subs": 9,
       "watch_hours_365d": 0.0,
       "shorts_views_90d": 3045,
-      "total_views": 3054,
+      "total_views": 3057,
       "video_count": 18,
       "long_minutes_28d": 0.0,
       "shorts_views_28d": 3045
     },
     "pace": {
-      "views_day": 113.1,
-      "subs_day": 0.48,
+      "views_day": 117.5,
+      "subs_day": 0.5,
       "long_hours_day": 0.0,
       "shorts_views_day": 109,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-26T20:07:27.852240+00:00",
-    "experiment": "Probar un gancho de pregunta invertida (ej: 'Could you survive if...') en lugar del tradicional 'What would happen if...' en los proximos 3 Shorts, y evaluar si mejora la retencion en los primeros 5 segundos en comparacion con el promedio actual del 36%.",
-    "summary_es": "Che, venimos re bien con los cortos de animales y fuerza sobrehumana, que son los que realmente suman subs, aunque tenemos que meterle pilas a los videos largos para juntar horas. El sistema va a descartar los temas de jueguitos y se va a concentrar un 100% en transformar el cuerpo humano con datos grosos y un cacho de humor."
+    "last_run": "2026-11-27T19:54:58.596255+00:00",
+    "experiment": "Probar en los próximos 3 Shorts un inicio de 'Línea de Tiempo Progresiva' con animación de Max (ej: '0 a 100% de fuerza en 5 segundos') contra el formato de pregunta directa tradicional, midiendo si el porcentaje promedio visto supera el threshold del 50%.",
+    "summary_es": "El canal viene teniendo tracción sostenida en Shorts cuando combinamos cuerpo humano con súper habilidades animales. En los próximos días vamos a dinamizar los guiones e incluir más interacción con Max para que YouTube no detecte el contenido como repetitivo, mientras lanzamos videos largos con línea de tiempo para empezar a sumar horas de reproducción."
   },
   "growth_history": [
     {
@@ -1628,6 +1782,15 @@
       "views_day": 113.1,
       "daily_target": 1,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-27",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3045,
+      "views_day": 117.5,
+      "daily_target": 1,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1642,8 +1805,8 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-26",
-    "images": 6,
+    "date": "2026-11-27",
+    "images": 17,
     "exhausted": false
   },
   "series_stats": {
@@ -1653,15 +1816,15 @@
     },
     "challenge": {
       "count": 3,
-      "avg_views": 14
+      "avg_views": 15
     },
     "curiosity": {
       "count": 3,
       "avg_views": 5
     },
     "classic": {
-      "count": 2,
-      "avg_views": 6
+      "count": 3,
+      "avg_views": 4
     }
   },
   "failures": [
