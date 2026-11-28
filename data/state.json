@@ -287,9 +287,9 @@
         }
       ],
       "analyzed": true,
-      "avg_view_pct": 37.8,
+      "avg_view_pct": 37.9,
       "subs_gained": 5,
-      "minutes_watched": 216
+      "minutes_watched": 217
     },
     {
       "job_id": "20261118_215055",
@@ -694,7 +694,7 @@
       "uploaded_at": "2026-11-19T22:22:05.509602+00:00",
       "publish_at": "2026-11-20T18:00:00+00:00",
       "publish_hour_et": 13,
-      "views": 32,
+      "views": 33,
       "likes": 0,
       "avg_view_pct": 16.8,
       "subs_gained": 0,
@@ -847,7 +847,7 @@
       "publish_at": "2026-11-22T00:00:00+00:00",
       "publish_hour_et": 19,
       "first_comment": "How many days do you think you could last in total darkness before panicking? 👇",
-      "views": 4,
+      "views": 6,
       "likes": 0,
       "comment_id": "UgxK_YSvQA6O2qTkcF54AaABAg",
       "avg_view_pct": 13.9,
@@ -933,7 +933,7 @@
       "publish_at": "2026-11-23T16:00:00+00:00",
       "publish_hour_et": 11,
       "first_comment": "Would you trade your normal eyesight for eagle zoom vision even if it hurt? 👇",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "comment_id": "UgyN7CGnbcNjfJqPq894AaABAg",
       "avg_view_pct": 0.0,
@@ -979,7 +979,7 @@
       "publish_hour_et": 19,
       "first_comment": "Would you take cheetah speed even if your shoes melted every time? 👇",
       "comment_id": "Ugw6bIuuEdnA6oaMEZp4AaABAg",
-      "views": 15,
+      "views": 16,
       "likes": 0,
       "avg_view_pct": 38.2,
       "subs_gained": 0,
@@ -1070,7 +1070,10 @@
       "first_comment": "Do you think humanity could survive 5 seconds of Earth stopping? Yes or no? 🌍",
       "comment_id": "UgzGRNNx-z6i3us5WaJ4AaABAg",
       "views": 1,
-      "likes": 0
+      "likes": 0,
+      "avg_view_pct": 0.0,
+      "subs_gained": 0,
+      "minutes_watched": 0
     },
     {
       "job_id": "20261125_202850",
@@ -1257,8 +1260,8 @@
       "publish_hour_et": 15,
       "first_comment": "How long do you think you could survive soaking in a bathtub? 👇",
       "comment_id": "UgzQW259qUYuTOj_pYt4AaABAg",
-      "views": 0,
-      "likes": 0
+      "views": 20,
+      "likes": 2
     },
     {
       "job_id": "20261127_195458",
@@ -1409,20 +1412,51 @@
       "uploaded_at": "2026-11-27T20:24:21.644952+00:00",
       "publish_at": "2026-11-28T20:00:00+00:00",
       "publish_hour_et": 15,
-      "first_comment": "Where would you end up sliding if all friction vanished right now? 👇"
+      "first_comment": "Where would you end up sliding if all friction vanished right now? 👇",
+      "views": 0,
+      "likes": 0
+    },
+    {
+      "job_id": "20261128_185336",
+      "youtube_id": "q-oUYHMYUEQ",
+      "title": "What Would Happen If You Had Tardigrade Toughness? #Tardigrade #shorts",
+      "topic": "What would happen if you had tardigrade toughness at the bottom of the Mariana Trench?",
+      "format": "short",
+      "series": "adventure",
+      "duration": 42.42,
+      "scenes": [
+        {
+          "start": 0.0,
+          "narration": "If you had tardigrade toughness, diving into the Mariana Trench would instantly turn your body into indestructible glass!"
+        },
+        {
+          "start": 7.6,
+          "narration": "As you plunge into the crushing dark, ocean pressure heavy enough to flatten a tank slams your chest."
+        },
+        {
+          "start": 13.48,
+          "narration": "Instead of imploding, your cells trigger cryptobiosis, replacing cellular water with an unbreakable biological armor."
+        },
+        {
+          "start": 21.38,
+          "narration": "Your heart completely stops, yet you don't die—you enter a state of near-immortal suspended animation."
+        },
+        {
+          "start": 27.68,
+          "narration": "Thirty-six thousand feet down, monstrous viperfish snap their fangs, shattering their teeth against your hardened face."
+        },
+        {
+          "start": 34.98,
+          "narration": "Rising back into sunlight, your glassy cells instantly rehydrate... tempting you to dive right back into the abyss!"
+        }
+      ],
+      "uploaded_at": "2026-11-28T19:02:07.096267+00:00",
+      "publish_at": "2026-11-29T20:00:00+00:00",
+      "publish_hour_et": 15,
+      "first_comment": "Would you visit the Mariana Trench floor if you were guaranteed to survive? Yes or no? 🌊"
     }
   ],
   "feedback": [
-    {
-      "date": "2026-11-16T13:33:44.321732+00:00",
-      "notes": [
-        "Deliver the core hypothetical hook within the first 2 seconds; eliminate channel intros or contextual setups entirely.",
-        "Introduce visual pattern interrupts or screen transitions every 3-5 seconds to hold retention in the animated format.",
-        "Open a compelling narrative loop in the first 10 seconds (e.g., 'Wait until second 4, when the atmosphere tears apart') to boost view duration.",
-        "Keep voiceover delivery crisp and high-energy with zero dead air between sentences."
-      ],
-      "reason": "We have published 2 Shorts and 0 long-form videos. Following the target mix of 33% long content (1 long video for every 3 total videos during testing), the next video must be long format."
-    },
     {
       "date": "2026-11-16T21:01:14.780600+00:00",
       "notes": [
@@ -1611,15 +1645,25 @@
         "Open curiosity loops in the first 5 seconds and delay the answer until the final 3 seconds to push completion rates above 60%."
       ],
       "reason": "With 3 long videos out of 19 total (15.8%), creating a long-form video next reaches the growth strategist's target mix of 20% (4 out of 20 videos)."
+    },
+    {
+      "date": "2026-11-28T18:54:01.116912+00:00",
+      "notes": [
+        "Hook within the first 1.5 seconds by showing the extreme physical consequence immediately (e.g. bones crushing or voltage discharging) rather than explaining the setup.",
+        "For high-concept survival scenarios ('Swallowed by a Blue Whale', '30 Days Underwater'), accelerate pacing and eliminate scientific preamble to prevent the steep drop-offs seen at 16.8% retention.",
+        "Double down on human vs. animal superpower comparisons ('Electric Eel', 'Dung Beetle') which prove to hold audience attention best (47% to 65% retention).",
+        "Incorporate audio-visual pattern interrupts every 3 to 4 seconds (sound effects, camera shakes, quick cuts) to combat mid-video viewer fatigue."
+      ],
+      "reason": "Long-form currently accounts for exactly 20% of catalog output (4 of 20 total videos) while averaging only 2 views. Sticking to Shorts is crucial for algorithmic discovery and gaining initial subscribers before expanding long-form frequency."
     }
   ],
   "format_stats": {
     "short": {
       "count": 16,
-      "avg_views": 191
+      "avg_views": 192
     },
     "long": {
-      "count": 3,
+      "count": 4,
       "avg_views": 2
     }
   },
@@ -1627,19 +1671,19 @@
     15
   ],
   "topic_insights": [
-    "Biomechanical animal superpower hypotheticals ('Electric Eel Power' at 65.1% retention, 'Dung Beetle Strength' at 47.0%, 'Cheetah' at 38.2%) consistently yield the channel's strongest retention.",
-    "Visceral survival scenarios ('Blue Whale Swallowed You') generate higher click volume (32 views) but require tighter pacing to fix steep retention drop-offs (16.8%).",
-    "Challenge and adventure series outperform curiosity and classic series in average view count (15 and 12 views vs 5 and 4 views).",
-    "Long-form videos currently receive minimal algorithmic push (averaging 2 views vs 191 for Shorts), reinforcing that Shorts remain the primary vehicle for subscriber growth."
+    "Biomechanical animal superpower hypotheticals ('Electric Eel' at 65.1% retention, 'Dung Beetle' at 47.0%, 'Cheetah' at 38.2%) consistently generate the channel's strongest retention.",
+    "Visceral survival and endurance scenarios ('Blue Whale' with 33 views, 'Underwater For 30 Days' with 20 views) yield the highest click volume, driving the Challenge (16 avg views) and Adventure (13 avg views) series ahead of Curiosity (5 avg views) and Classic (4 avg views).",
+    "Abstract planetary or environmental 'what ifs' ('Earth Stopped', 'Friction Disappeared') severely underperform compared to body-centric, direct human experience hypotheticals.",
+    "Long-form content remains algorithmically stalled (averaging 2 views vs 192 for Shorts), reaffirming that Shorts must remain the primary growth engine."
   ],
   "strategy": {
     "daily_target": 1,
     "long_share": 0.2,
     "focus_notes": [
-      "Mantener el foco estricto en la temática 'Cuerpo Humano + Habilidades Animales Supremas' (ej. inmunidad de tardígrado, toxina de mamba negra), pero cambiando la estructura de los títulos para evitar penalizaciones por contenido repetitivo.",
-      "Utilizar activamente al personaje Max en el primer segundo del video (hook visual) mostrando una consecuencia cómica inmediata en lugar de una pregunta estática.",
-      "Estructurar los videos largos (20% de la producción) en formato de línea de tiempo ('Minuto 1', 'Hora 1', 'Día 30') para mantener la retención alta y empezar a acumular horas de reproducción reales.",
-      "Eliminar por completo cualquier concepto abstracto, gaming o cultura pop sin base biológica (ej. GTA 6), dado su nulo rendimiento en el canal."
+      "Romper la repetición de títulos: aunque los poderes biológicos funcionan (Mantis Shrimp, Chimp Muscles), evitar la fórmula exacta 'What Would Happen If You Had [Animal] [Power]?' para no caer en 'contenido repetitivo/automatizado'. Variar verbos y situaciones: usar 'What would happen if your bones were made of spider silk?' o 'What would happen if you drank king cobra venom?'.",
+      "Elevar la retención de Shorts por encima del 50%: los videos con más visitas tienen apenas 36-38% de retención. Max debe sufrir la consecuencia cómica o el impacto en los primeros 1.5 segundos, eliminando introducciones narradas o preguntas leídas en voz alta.",
+      "Activar la producción de videos largos (long-form): las horas acumuladas están en 0.0. Lanzar videos largos de 3 a 5 minutos estructurados en fases cronológicas ('Segundo 1', 'Minuto 10', 'Día 1') con explicaciones científicas reales y cambios visuales progresivos en Max para construir tiempo de reproducción.",
+      "Probar la línea de 'Supervivencia Extrema / Dieta': el video de 'Only Ate Sugar' logró un 88.6% de retención. Explorar hypotheticals de privación o consumo extremo con respaldo biológico (ej. 'What would happen if you only drank salt water?')."
     ],
     "cadence_changed_at": "2026-11-23T22:38:50.354424+00:00",
     "cadence_reason": "se mantiene en 1/día (la próxima revisión es a los 7 días del último cambio)",
@@ -1647,23 +1691,23 @@
     "metrics": {
       "subs": 9,
       "watch_hours_365d": 0.0,
-      "shorts_views_90d": 3045,
-      "total_views": 3057,
-      "video_count": 18,
+      "shorts_views_90d": 3050,
+      "total_views": 3078,
+      "video_count": 19,
       "long_minutes_28d": 0.0,
-      "shorts_views_28d": 3045
+      "shorts_views_28d": 3050
     },
     "pace": {
-      "views_day": 117.5,
+      "views_day": 117.7,
       "subs_day": 0.5,
       "long_hours_day": 0.0,
       "shorts_views_day": 109,
       "long_path_fraction": 0.0,
       "shorts_path_fraction": 0.0
     },
-    "last_run": "2026-11-27T19:54:58.596255+00:00",
-    "experiment": "Probar en los próximos 3 Shorts un inicio de 'Línea de Tiempo Progresiva' con animación de Max (ej: '0 a 100% de fuerza en 5 segundos') contra el formato de pregunta directa tradicional, midiendo si el porcentaje promedio visto supera el threshold del 50%.",
-    "summary_es": "El canal viene teniendo tracción sostenida en Shorts cuando combinamos cuerpo humano con súper habilidades animales. En los próximos días vamos a dinamizar los guiones e incluir más interacción con Max para que YouTube no detecte el contenido como repetitivo, mientras lanzamos videos largos con línea de tiempo para empezar a sumar horas de reproducción."
+    "last_run": "2026-11-28T18:53:36.647092+00:00",
+    "experiment": "A/B Hook Test en Shorts: publicar 3 videos iniciando inmediatamente en el segundo 0 con Max experimentando el desastre o impacto visual (sin titular en audio), contra 3 videos con el hook tradicional de pregunta retórica. Medir si el formato de impacto directo supera el 50% de Average Percentage Viewed (AVD).",
+    "summary_es": "El canal sumó sus primeras visitas y suscriptores gracias a las habilidades animales extremas, pero nos estamos estancando por repetir siempre la misma estructura de título. Para que YouTube no marque el contenido como generado en masa y para levantar la retención (que ronda el 37%), vamos a meter a Max en acción directa desde el segundo uno y diversificar las temáticas hacia supervivencia y biología extrema. Además, largamos los primeros videos largos con formato minuto a minuto para empezar a sumar horas de visualización."
   },
   "growth_history": [
     {
@@ -1791,6 +1835,15 @@
       "views_day": 117.5,
       "daily_target": 1,
       "long_share": 0.2
+    },
+    {
+      "date": "2026-11-28",
+      "subs": 9,
+      "watch_hours_365d": 0.0,
+      "shorts_views_90d": 3050,
+      "views_day": 117.7,
+      "daily_target": 1,
+      "long_share": 0.2
     }
   ],
   "quota_hits": [
@@ -1805,18 +1858,18 @@
     "2026-11-19T22:22:05.507976+00:00"
   ],
   "cf_usage": {
-    "date": "2026-11-27",
-    "images": 17,
+    "date": "2026-11-28",
+    "images": 6,
     "exhausted": false
   },
   "series_stats": {
     "adventure": {
       "count": 3,
-      "avg_views": 12
+      "avg_views": 13
     },
     "challenge": {
       "count": 3,
-      "avg_views": 15
+      "avg_views": 16
     },
     "curiosity": {
       "count": 3,
