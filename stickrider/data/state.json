@@ -10,9 +10,11 @@
    "youtube_id": "Qo3-Duqh-F0",
    "publish_at": "2026-11-25T00:14:00Z",
    "published_manually": true,
-   "views": 1206,
-   "likes": 28,
-   "comments": 2
+   "views": 1210,
+   "likes": 29,
+   "comments": 2,
+   "avg_view_pct": 37.2,
+   "avg_view_s": 17.0
   },
   {
    "date": "2026-11-25",
@@ -23,8 +25,8 @@
    "seconds": 45.9,
    "youtube_id": "trH_paJJxzc",
    "publish_at": "2026-11-26T00:00:00Z",
-   "views": 1040,
-   "likes": 25,
+   "views": 1182,
+   "likes": 23,
    "comments": 0
   },
   {
@@ -36,8 +38,8 @@
    "seconds": 59.9,
    "youtube_id": "9ZXTcLATS3o",
    "publish_at": "2026-11-27T00:00:00Z",
-   "views": 883,
-   "likes": 42,
+   "views": 1257,
+   "likes": 57,
    "comments": 2
   },
   {
@@ -48,7 +50,20 @@
    "mood": "jig",
    "seconds": 48.2,
    "youtube_id": "HsvYronXtEQ",
-   "publish_at": "2026-11-28T00:00:00Z"
+   "publish_at": "2026-11-28T00:00:00Z",
+   "views": 1079,
+   "likes": 27,
+   "comments": 0
+  },
+  {
+   "date": "2026-11-28",
+   "story_key": "eclipse-colon-jamaica-1504",
+   "title": "El truco de Cristóbal Colón para 'apagar' la Luna y no morir de hambre",
+   "hook": "En mil quinientos cuatro, un marinero atrapado amenazó con robarse la Luna y lo logró.",
+   "mood": "playful",
+   "seconds": 52.6,
+   "youtube_id": "-sJwTz-EJM0",
+   "publish_at": "2026-11-29T00:00:00Z"
   }
  ]
 }
